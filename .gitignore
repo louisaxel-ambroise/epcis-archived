@@ -21,11 +21,10 @@ $RECYCLE.BIN/
 # =========================
 # CUSTOM FILES
 # =========================
-password.txt
-
 .DS_Store
 .AppleDouble
 .LSOverride
+.vs
 
 # Thumbnails
 ._*
