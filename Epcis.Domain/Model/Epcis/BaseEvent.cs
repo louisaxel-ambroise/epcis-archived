@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Epcis.Domain.Model.CoreBusinessVocabulary;
 
 namespace Epcis.Domain.Model.Epcis
@@ -15,7 +16,6 @@ namespace Epcis.Domain.Model.Epcis
         public virtual DateTime EventTime { get; set; }
         public virtual string EventTimeZoneOffset { get; set; }
         public virtual DateTime RecordTime { get; set; }
-        public virtual EventAction Action { get; set; }
         public virtual EventId EventId { get; set; }
 
         public virtual BusinessStep BusinessStep { get; set; }
@@ -24,7 +24,9 @@ namespace Epcis.Domain.Model.Epcis
         public virtual Disposition Disposition { get; set; }
         public virtual ErrorDeclaration ErrorDeclaration { get; set; }
         public virtual IList<BusinessTransaction> BusinessTransactions { get; set; }
+        public virtual IList<SourceDestination> Sources { get; set; }
+        public virtual IList<SourceDestination> Destinations { get; set; }
 
-        public virtual IDictionary<string, object> Extension { get; set; }
+        public virtual XDocument Extension { get; set; }
     }
 }

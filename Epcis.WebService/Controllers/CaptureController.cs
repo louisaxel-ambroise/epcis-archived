@@ -24,24 +24,11 @@ namespace Epcis.WebService.Controllers
             _documentProcessor = documentProcessor;
         }
 
-        public IHttpActionResult Get()
-        {
-            return Ok(new
-            {
-                Version = "1.2"
-            });
-        }
-
         public async Task<IHttpActionResult> Post()
-        {
-            return HandlePost(await Request.Content.ReadAsStringAsync());
-        }
-
-        private IHttpActionResult HandlePost(string body)
         {
             try
             {
-                var xmlBody = XDocument.Parse(body);
+                var xmlBody = XDocument.Parse(await Request.Content.ReadAsStringAsync());
                 _documentValidator.Validate(xmlBody);
                 _documentProcessor.Process(xmlBody);
 

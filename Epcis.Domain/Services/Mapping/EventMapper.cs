@@ -7,6 +7,7 @@ using Epcis.Domain.Model.Epcis;
 
 namespace Epcis.Domain.Services.Mapping
 {
+    // TODO: apply action validations here?
     public class EventMapper : IEventMapper
     {
         public BaseEvent MapEvent(EventParameters parameters)
@@ -54,8 +55,6 @@ namespace Epcis.Domain.Services.Mapping
         {
             var action = (EventAction)Enum.Parse(typeof(EventAction), parameters.Action);
 
-            //TODO: appropriate validations
-
             return new TransactionEvent
             {
                 Action = action,
@@ -72,7 +71,6 @@ namespace Epcis.Domain.Services.Mapping
         {
             var action = (EventAction)Enum.Parse(typeof(EventAction), parameters.Action);
 
-            //TODO: appropriate validations
             if((action == EventAction.ADD || action == EventAction.DELETE) && string.IsNullOrEmpty(parameters.ParentId))
                 throw new EventMapException("An AGGREGATION event with action ADD or DELETE must have the ParentId property set");
             if(!parameters.ChildEpcs.IsNullOrEmpty() && parameters.ChildQuantityList.IsNullOrEmpty())
@@ -92,19 +90,21 @@ namespace Epcis.Domain.Services.Mapping
 
         public TransformationEvent MapTransformationEvent(EventParameters parameters)
         {
-            var action = (EventAction)Enum.Parse(typeof(EventAction), parameters.Action);
-
-            //TODO: appropriate validations
+            if (parameters.InputEpcs.IsNullOrEmpty())
+                throw new EventMapException("A TRANSFORMATION event must contain at least one InputEpc");
+            if (parameters.OutputEpcs.IsNullOrEmpty())
+                throw new EventMapException("A TRANSFORMATION event must contain at least one OutputEpc");
 
             return new TransformationEvent
             {
-                Action = action,
                 EventTime = DateTime.Parse(parameters.EventTime),
                 EventTimeZoneOffset = parameters.EventTimezoneOffset,
                 BusinessLocation = parameters.BusinessLocation != null ? new BusinessLocation { Name = parameters.BusinessLocation } : null,
                 BusinessStep = parameters.BusinessStep != null ? new BusinessStep { Name = parameters.BusinessStep } : null,
                 Disposition = parameters.Disposition != null ? new Disposition { Name = parameters.Disposition } : null,
                 ReadPoint = parameters.ReadPoint != null ? new ReadPoint { Name = parameters.ReadPoint } : null,
+                InputEpcs = parameters.InputEpcs.Select(x => new Epc { Id = x }).ToArray(),
+                OutputEpcs = parameters.OutputEpcs.Select(x => new Epc { Id = x }).ToArray()
             };
         }
     }

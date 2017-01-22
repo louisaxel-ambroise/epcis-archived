@@ -17,6 +17,9 @@
             public static string ReadPoint = "ReadPoint";
             public static string Disposition = "Disposition";
             public static string Epc = "Epc";
+            public static string SourceDest = "SourceDest";
+            public static string EventToSource = "EventToSource";
+            public static string EventToDestination = "EventToDestination";
         }
     }
 }

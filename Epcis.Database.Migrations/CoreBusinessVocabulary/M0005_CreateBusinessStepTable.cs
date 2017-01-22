@@ -4,7 +4,7 @@ namespace Epcis.Database.Migrations.CoreBusinessVocabulary
 {
     [Migration(0005)]
     // ReSharper disable once InconsistentNaming
-    public class M0005_CreateBusinessStepTable : AutoReversingMigration
+    public class M0005_CreateDispositionTable : AutoReversingMigration
     {
         public override void Up()
         {

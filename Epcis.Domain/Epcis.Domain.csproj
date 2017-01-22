@@ -44,6 +44,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ArrayExtensions.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Infrastructure\ICommitTransactionInterceptor.cs" />
     <Compile Include="Model\CoreBusinessVocabulary\CoreBusinessEntity.cs" />
     <Compile Include="Model\CoreBusinessVocabulary\ErrorReason.cs" />
+    <Compile Include="Model\CoreBusinessVocabulary\SourceDestination.cs" />
     <Compile Include="Model\Epcis\AggregationEvent.cs" />
     <Compile Include="Model\Epcis\BaseEvent.cs" />
     <Compile Include="Model\CoreBusinessVocabulary\BusinessLocation.cs" />

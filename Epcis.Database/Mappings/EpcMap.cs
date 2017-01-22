@@ -1,5 +1,6 @@
 ﻿using Epcis.Domain.Model.Epcis;
 using FluentNHibernate.Mapping;
+using NHibernate.Type;
 
 namespace Epcis.Database.Mappings
 {
@@ -11,6 +12,10 @@ namespace Epcis.Database.Mappings
             Table(DatabaseConstants.Tables.Epc);
 
             Id(x => x.Id).Column("Id");
+            Map(x => x.IsActive).Column("Active").Not.Nullable();
+            Map(x => x.Ilmd).Column("Ilmd").CustomType<XDocType>().Nullable();
+
+            References(x => x.Parent).Column("ParentId").Nullable();
         }
     }
 }

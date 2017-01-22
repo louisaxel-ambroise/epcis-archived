@@ -29,5 +29,7 @@ namespace Epcis.Domain.Services.Mapping
         public string ParentId { get; set; }
         public string[] ChildEpcs { get; set; }
         public ChildQuantity[] ChildQuantityList { get; set; }
+        public string[] InputEpcs { get; set; }
+        public string[] OutputEpcs { get; set; }
     }
 }

@@ -43,10 +43,13 @@
     <Compile Include="CoreBusinessVocabulary\M0003_CreateBusinessStepTable.cs" />
     <Compile Include="CoreBusinessVocabulary\M0004_CreateReadPointTable.cs" />
     <Compile Include="CoreBusinessVocabulary\M0005_CreateBusinessStepTable.cs" />
+    <Compile Include="CoreBusinessVocabulary\M0006_CreateSourceDestTable.cs" />
     <Compile Include="Epcis\M1001_CreateEpcisSchema.cs" />
-    <Compile Include="Epcis\M1002_CreateEventTable.cs" />
-    <Compile Include="Epcis\M1003_CreateEpcTable.cs" />
+    <Compile Include="Epcis\M1003_CreateEventTable.cs" />
+    <Compile Include="Epcis\M1002_CreateEpcTable.cs" />
     <Compile Include="Epcis\M1004_CreateEventToEpcTable.cs" />
+    <Compile Include="Epcis\M1005_CreateEventToDestinationTable.cs" />
+    <Compile Include="Epcis\M1006_CreateEventToSourceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

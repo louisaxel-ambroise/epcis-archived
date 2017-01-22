@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Epcis.Domain.Model.Epcis
 {
@@ -9,7 +10,8 @@ namespace Epcis.Domain.Model.Epcis
             Epcs = new List<Epc>();
         }
 
+        public virtual EventAction Action { get; set; }
         public virtual IList<Epc> Epcs { get; set; }
-        public virtual object Ilmd { get; set; } // TODO: store ILMD as key-value?
+        public virtual XDocument Ilmd { get; set; } // TODO: store ILMD as key-value?
     }
 }

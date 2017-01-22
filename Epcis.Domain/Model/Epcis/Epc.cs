@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Xml.Linq;
 
 namespace Epcis.Domain.Model.Epcis
 {
     public class Epc
     {
         public virtual string Id { get; set; }
-        public virtual JObject Ilmd { get; set; }
+        public virtual Epc Parent { get; set; }
+        public virtual bool IsActive { get; set; }
+        public virtual XDocument Ilmd { get; set; }
     }
 }

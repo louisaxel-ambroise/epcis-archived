@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Formatting;
 using System.Web.Http;
-using Epcis.WebService.ServiceLocator;
 using Ninject.Web.WebApi;
 
 namespace Epcis.WebService
@@ -10,7 +9,9 @@ namespace Epcis.WebService
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+
+            // Map capture XML api route
+            config.Routes.MapHttpRoute("CaptureAPI", "api/v1_2/xml/capture", new { controller = "Capture" });
         }
 
         public static void Formatter(HttpConfiguration config)
@@ -21,7 +22,7 @@ namespace Epcis.WebService
 
         public static void SetDependencyResolver(HttpConfiguration config, string connectionString, string[] xsdValidationFiles)
         {
-            config.DependencyResolver = new NinjectDependencyResolver(ServiceProvider.CreateKernel(connectionString, xsdValidationFiles));
+            config.DependencyResolver = new NinjectDependencyResolver(WebServiceContainerProvider.CreateContainer(connectionString, xsdValidationFiles));
         }
     }
 }
