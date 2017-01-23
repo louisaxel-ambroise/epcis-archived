@@ -7,6 +7,5 @@ namespace Epcis.Domain.Model.Epcis
         public virtual string Id { get; set; }
         public virtual Epc Parent { get; set; }
         public virtual bool IsActive { get; set; }
-        public virtual XDocument Ilmd { get; set; }
     }
 }

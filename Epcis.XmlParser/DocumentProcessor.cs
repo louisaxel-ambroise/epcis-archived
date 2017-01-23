@@ -13,8 +13,8 @@ namespace Epcis.XmlParser
 
         public DocumentProcessor(IEventsCapturer eventsCapturer, IDocumentParser documentParser)
         {
-            if (eventsCapturer == null) throw new ArgumentNullException(nameof(eventsCapturer));
-            if (documentParser == null) throw new ArgumentNullException(nameof(documentParser));
+            if (eventsCapturer == null) throw new ArgumentNullException("eventsCapturer");
+            if (documentParser == null) throw new ArgumentNullException("documentParser");
 
             _eventsCapturer = eventsCapturer;
             _documentParser = documentParser;

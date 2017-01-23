@@ -14,7 +14,7 @@ namespace Epcis.XmlParser.Parsing
 
         public DocumentParser(IEventMapper eventMapper)
         {
-            if (eventMapper == null) throw new ArgumentNullException(nameof(eventMapper));
+            if (eventMapper == null) throw new ArgumentNullException("eventMapper");
 
             _eventMapper = eventMapper;
         }
@@ -58,7 +58,13 @@ namespace Epcis.XmlParser.Parsing
                         AddReadPoint(element, parameters);
                         break;
                     case "epclist":
-                        TryAddEpcs(element.Elements().ToArray(), parameters);
+                        AddEpcs(element.Elements().ToArray(), parameters);
+                        break;
+                    case "parentid":
+                        parameters.ParentId = element.Value;
+                        break;
+                    case "childepcs":
+                        AddChildEpcs(element.Elements().ToArray(), parameters);
                         break;
                     default:
                         TryAddCustomElement(element, parameters);
@@ -79,17 +85,21 @@ namespace Epcis.XmlParser.Parsing
             parameters.BusinessLocation = element.Element("id").Value;
         }
 
-        private void TryAddEpcs(XElement[] elements, EventParameters parameters)
+        private void AddEpcs(XElement[] elements, EventParameters parameters)
         {
             if (elements == null || !elements.Any()) return;
-
             parameters.Epcs = elements.Where(x => x.Name.LocalName.Equals("Epc", StringComparison.OrdinalIgnoreCase)).Select(x => x.Value).ToArray();
+        }
+
+        private void AddChildEpcs(XElement[] elements, EventParameters parameters)
+        {
+            if (elements == null || !elements.Any()) return;
+            parameters.ChildEpcs = elements.Where(x => x.Name.LocalName.Equals("Epc", StringComparison.OrdinalIgnoreCase)).Select(x => x.Value).ToArray();
         }
 
         private void TryAddCustomElement(XElement element, EventParameters parameters)
         {
             if(string.IsNullOrEmpty(element.Name.NamespaceName)) return;
-
             parameters.Extensions.Add(string.Join("#", element.Name.NamespaceName, element.Name.LocalName), element.Value);
         }
     }

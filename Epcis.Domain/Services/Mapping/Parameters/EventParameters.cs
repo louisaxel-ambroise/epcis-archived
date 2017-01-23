@@ -25,7 +25,7 @@ namespace Epcis.Domain.Services.Mapping
         public string[] Epcs { get; set; }
         public IDictionary<string, object> Ilmd { get; set; }
 
-        // TRANSFORMATION events fields
+        // AGGREGATION events fields
         public string ParentId { get; set; }
         public string[] ChildEpcs { get; set; }
         public ChildQuantity[] ChildQuantityList { get; set; }

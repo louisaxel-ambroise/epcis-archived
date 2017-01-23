@@ -7,11 +7,11 @@ namespace Epcis.Database.Infrastructure
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ITransaction _transaction;
-        public ISession Session { get; }
+        public ISession Session { get; private set; }
 
         public UnitOfWork(ISession session)
         {
-            if (session == null) throw new ArgumentNullException(nameof(session));
+            if (session == null) throw new ArgumentNullException("session");
 
             Session = session;
             _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);

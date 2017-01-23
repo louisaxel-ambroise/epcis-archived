@@ -13,8 +13,6 @@ namespace Epcis.Database.Mappings
 
             Id(x => x.Id).Column("Id");
             Map(x => x.IsActive).Column("Active").Not.Nullable();
-            Map(x => x.Ilmd).Column("Ilmd").CustomType<XDocType>().Nullable();
-
             References(x => x.Parent).Column("ParentId").Nullable();
         }
     }

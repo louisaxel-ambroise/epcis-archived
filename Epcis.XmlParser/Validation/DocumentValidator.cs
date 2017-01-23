@@ -10,8 +10,8 @@ namespace Epcis.XmlParser.Validation
 
         public DocumentValidator(params string[] xsdFiles)
         {
-            if (xsdFiles == null) throw new ArgumentNullException(nameof(xsdFiles));
-            if(xsdFiles.Length == 0) throw new ArgumentNullException(nameof(xsdFiles));
+            if (xsdFiles == null) throw new ArgumentNullException("xsdFiles");
+            if(xsdFiles.Length == 0) throw new ArgumentNullException("xsdFiles");
 
             _schemas = new XmlSchemaSet();
 

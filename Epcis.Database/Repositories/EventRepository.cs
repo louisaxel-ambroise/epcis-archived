@@ -13,7 +13,7 @@ namespace Epcis.Database.Repositories
 
         public EventRepository(ISession session)
         {
-            if (session == null) throw new ArgumentNullException(nameof(session));
+            if (session == null) throw new ArgumentNullException("session");
 
             _session = session;
         }

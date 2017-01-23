@@ -15,9 +15,9 @@ namespace Epcis.Domain.Services.Capture.Events
 
         public EventsCapturer(IEventRepository eventRepository, IEpcRepository epcRepository, ICoreBusinessEntityRepository cbvRepository)
         {
-            if (eventRepository == null) throw new ArgumentNullException(nameof(eventRepository));
-            if (epcRepository == null) throw new ArgumentNullException(nameof(epcRepository));
-            if (cbvRepository == null) throw new ArgumentNullException(nameof(cbvRepository));
+            if (eventRepository == null) throw new ArgumentNullException("eventRepository");
+            if (epcRepository == null) throw new ArgumentNullException("epcRepository");
+            if (cbvRepository == null) throw new ArgumentNullException("cbvRepository");
 
             _eventRepository = eventRepository;
             _epcRepository = epcRepository;
@@ -42,7 +42,6 @@ namespace Epcis.Domain.Services.Capture.Events
 
             if (@event is ObjectEvent) ProcessObjectEvent(@event as ObjectEvent);
             if (@event is AggregationEvent) ProcessAggregationEvent(@event as AggregationEvent);
-            if (@event is TransformationEvent) ProcessTransformationEvent(@event as TransformationEvent);
 
             _eventRepository.Store(@event);
         }
@@ -66,28 +65,18 @@ namespace Epcis.Domain.Services.Capture.Events
             }
         }
 
-        private void ProcessTransformationEvent(TransformationEvent transformationEvent)
-        {
-            
-        }
-
         private void ProcessObjectEvent(ObjectEvent objectEvent)
         {
             if (objectEvent.Action == EventAction.ADD)
             {
                 foreach (var epc in objectEvent.Epcs)
-                {
-                    epc.Ilmd = objectEvent.Ilmd;
                     _epcRepository.Store(epc);
-                }
             }
 
             if (objectEvent.Action == EventAction.DELETE)
             {
                 foreach (var storedEpc in objectEvent.Epcs.Select(epc => _epcRepository.Load(epc.Id)))
-                {
                     storedEpc.IsActive = false;
-                }
             }
         }
     }

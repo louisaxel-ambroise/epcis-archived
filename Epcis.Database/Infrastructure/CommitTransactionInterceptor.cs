@@ -10,7 +10,7 @@ namespace Epcis.Database.Infrastructure
 
         public CommitTransactionInterceptor(IUnitOfWork unitOfWork)
         {
-            if (unitOfWork == null) throw new ArgumentNullException(nameof(unitOfWork));
+            if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
 
             _unitOfWork = unitOfWork;
         }

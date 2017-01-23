@@ -73,7 +73,7 @@ namespace Epcis.Domain.Services.Mapping
 
             if((action == EventAction.ADD || action == EventAction.DELETE) && string.IsNullOrEmpty(parameters.ParentId))
                 throw new EventMapException("An AGGREGATION event with action ADD or DELETE must have the ParentId property set");
-            if(!parameters.ChildEpcs.IsNullOrEmpty() && parameters.ChildQuantityList.IsNullOrEmpty())
+            if(parameters.ChildEpcs.IsNullOrEmpty() && parameters.ChildQuantityList.IsNullOrEmpty())
                 throw new EventMapException("An AGGREGATION event must contain at least one ChildEpc or one ChildQuantityList");
 
             return new AggregationEvent
