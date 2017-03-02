@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Epcis.Api.Services.CaptureService" CodeBehind="CaptureService.svc.cs" Factory="Ninject.Extensions.Wcf.NinjectServiceHostFactory" %>
