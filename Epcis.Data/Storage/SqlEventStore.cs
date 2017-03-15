@@ -12,17 +12,15 @@ namespace Epcis.Data.Storage
 
         public SqlEventStore(IDbConnection connection, IDbTransaction transaction)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (transaction == null) throw new ArgumentNullException("transaction");
-
-            _connection = connection;
-            _transaction = transaction;
+            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            _transaction = transaction ?? throw new ArgumentNullException(nameof(transaction));
         }
 
         public void Store(EpcisEvent epcisEvent)
         {
             var eventId = StoreEvent(epcisEvent);
 
+            StoreEventExtensions(eventId, epcisEvent);
             StoreErrorDeclaration(eventId, epcisEvent);
             StoreEpcs(eventId, epcisEvent);
             StoreReadPoint(eventId, epcisEvent);
@@ -36,6 +34,13 @@ namespace Epcis.Data.Storage
             var eventId = _connection.QueryFirst<long>(StoreCommands.InsertEvent, epcisEvent.Map(), _transaction);
 
             return eventId;
+        }
+
+        private void StoreEventExtensions(long eventId, EpcisEvent epcisEvent)
+        {
+            if (epcisEvent.CustomFields == null) return;
+
+            _connection.Execute(StoreCommands.InsertExtensions, epcisEvent.CustomFields.Map(eventId), _transaction);
         }
 
         private void StoreErrorDeclaration(long eventId, EpcisEvent epcisEvent)

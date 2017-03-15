@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace Epcis.Model.Events
 {
+    // TODO: add ILMD
     public class EpcisEvent
     {
         public EpcisEvent()
@@ -11,6 +11,7 @@ namespace Epcis.Model.Events
             BusinessTransactions = new List<BusinessTransaction>();
             Epcs = new List<Epc>();
             SourcesDestinations = new List<SourceDestination>();
+            CustomFields = new List<CustomField>();
         }
 
         public long Id { get; set; }
@@ -22,10 +23,10 @@ namespace Epcis.Model.Events
         public string BusinessStep { get; set; }
         public string Disposition { get; set; }
         public string EventId { get; set; }
-        public XDocument Ilmd { get; set; }
+        // public XDocument Ilmd { get; set; }
         public string TransformationId { get; set; }
-        public XDocument CustomFields { get; set; }
 
+        public IList<CustomField> CustomFields { get; set; }
         public BusinessLocation BusinessLocation { get; set; }
         public IList<SourceDestination> SourcesDestinations { get; set; }
         public IList<BusinessTransaction> BusinessTransactions { get; set; }

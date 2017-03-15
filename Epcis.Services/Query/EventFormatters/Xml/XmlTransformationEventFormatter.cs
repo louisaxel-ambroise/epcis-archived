@@ -39,7 +39,7 @@ namespace Epcis.Services.Query.EventFormatters.Xml
         {
             if (epcisEvent.CustomFields == null) return;
 
-            foreach (var field in epcisEvent.CustomFields.Elements()) element.Add(field);
+            foreach (var field in epcisEvent.CustomFields) element.Add(new XElement(XName.Get(field.Namespace, field.Name), field.Value));
         }
 
         private static void AddEpcList(EpcisEvent epcisEvent, XContainer element)

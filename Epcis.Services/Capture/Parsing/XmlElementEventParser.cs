@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Epcis.Infrastructure.Aop.Log;
+using Epcis.Model;
 using Epcis.Model.Events;
 
 namespace Epcis.Services.Capture.Parsing
@@ -23,7 +24,7 @@ namespace Epcis.Services.Capture.Parsing
             {
                 var name = element.Name.LocalName;
 
-                if(name == "extension") events.AddRange(ParseEvents(element));
+                if(name == Field.Extension) events.AddRange(ParseEvents(element));
                 else events.Add(ParseEvent(element));
             }
 
@@ -45,64 +46,56 @@ namespace Epcis.Services.Capture.Parsing
             {
                 switch (innerElement.Name.LocalName)
                 {
-                    case "extension":
+                    case Field.Extension:
                         ParseAttributes(innerElement, epcisEvent); break;
-                    case "action":
+                    case Field.Action:
                         epcisEvent.Action = innerElement.ToEventAction(); break;
-                    case "eventTimeZoneOffset":
+                    case Field.EventTimeZoneOffset:
                         epcisEvent.EventTimezoneOffset = new TimeZoneOffset(innerElement.Value); break;
-                    case "eventTime":
+                    case Field.EventTime:
                         epcisEvent.EventTime = DateTime.Parse(innerElement.Value); break;
-                    case "epcList":
+                    case Field.EpcList:
                         innerElement.ParseEpcListInto(epcisEvent.Epcs); break;
-                    case "childEPCs":
+                    case Field.ChildEpcs:
                         innerElement.ParseChildEpcListInto(epcisEvent.Epcs); break;
-                    case "inputQuantityList":
+                    case Field.InputQuantityList:
                         innerElement.ParseQuantityListInto(epcisEvent.Epcs, true); break;
-                    case "inputEpcList":
+                    case Field.InputEpcList:
                         innerElement.ParseEpcListInto(epcisEvent.Epcs, true); break;
-                    case "outputQuantityList":
+                    case Field.OutputQuantityList:
                         innerElement.ParseQuantityListInto(epcisEvent.Epcs, false); break;
-                    case "outputEpcList":
+                    case Field.OutputEpcList:
                         innerElement.ParseEpcListInto(epcisEvent.Epcs, false); break;
-                    case "epcClass":
+                    case Field.EpcClass:
                         epcisEvent.Epcs.Add(new Epc { Type = EpcType.Quantity, Id = innerElement.Value, IsQuantity = true }); break;
-                    case "quantity":
+                    case Field.Quantity:
                         epcisEvent.Epcs.Single(x => x.Type == EpcType.Quantity).Quantity = float.Parse(innerElement.Value); break;
-                    case "bizStep":
+                    case Field.BusinessStep:
                         epcisEvent.BusinessStep = innerElement.Value; break;
-                    case "disposition":
+                    case Field.Disposition:
                         epcisEvent.Disposition = innerElement.Value; break;
-                    case "eventId":
+                    case Field.EventId:
                         epcisEvent.EventId = innerElement.Value; break;
-                    case "errorDeclaration":
+                    case Field.ErrorDeclaration:
                         epcisEvent.ErrorDeclaration = innerElement.ToErrorDeclaration(); break;
-                    case "transformationId":
+                    case Field.TransformationId:
                         epcisEvent.TransformationId = innerElement.Value; break;
-                    case "bizLocation":
+                    case Field.BusinessLocation:
                         epcisEvent.BusinessLocation = innerElement.ToBusinessLocation(); break;
-                    case "bizTransactionList":
+                    case Field.BusinessTransactions:
                         epcisEvent.BusinessTransactions = innerElement.ToBusinessTransactions(); break;
-                    case "readPoint":
+                    case Field.ReadPoint:
                         epcisEvent.ReadPoint = innerElement.ToReadPoint(); break;
-                    case "ilmd":
-                        epcisEvent.Ilmd = new XDocument(innerElement); break;
-                    case "parentID":
+                    case Field.Ilmd:
+                        /* TODO: parse ILMD */ break;
+                    case Field.ParentId:
                         epcisEvent.Epcs.Add(new Epc{ Id = innerElement.Value, Type = EpcType.ParentId }); break;
-                    case "recordTime": // We don't process record time as it will be overrided in any case..
+                    case Field.RecordTime: // We don't process record time as it will be overrided in any case..
                         break;
                     default:
-                        epcisEvent.CustomFields = AddToCustomFields(innerElement, epcisEvent.CustomFields); break;
+                        epcisEvent.CustomFields.Add(innerElement.ToCustomField()); break;
                 }
             }
-        }
-
-        private static XDocument AddToCustomFields(XElement innerElement, XDocument customFields)
-        {
-            if (customFields == null) customFields = new XDocument(new XElement("root"));
-            if (customFields.Root != null) customFields.Root.Add(innerElement);
-            
-            return customFields;
         }
     }
 }

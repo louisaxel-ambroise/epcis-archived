@@ -34,20 +34,6 @@ namespace Epcis.Services.Capture.Parsing
             foreach (var epc in element.Elements("epc")) destination.Add(new Epc { Type = type, Id = epc.Value });
         }
 
-        public static void ParseQuantityListInto(this XElement element, IList<Epc> destination, bool isInput)
-        {
-            foreach (var epc in element.Elements("quantityElement"))
-            {
-                destination.Add(new Epc { 
-                    Type = isInput ? EpcType.InputQuantity : EpcType.OutputQuantity, 
-                    Id = epc.Element("epcClass").Value, 
-                    IsQuantity = true, 
-                    Quantity = float.Parse(element.Element("Quantity").Value),
-                    UnitOfMeasure = element.Element("uom") != null ? element.Element("uom").Value : null
-                });
-            }
-        }
-
         public static void ParseChildEpcListInto(this XElement element, IList<Epc> destination)
         {
             foreach (var epc in element.Elements()) destination.Add(new Epc { Type = EpcType.ChildEpc, Id = epc.Value });
@@ -60,37 +46,37 @@ namespace Epcis.Services.Capture.Parsing
 
         public static BusinessLocation ToBusinessLocation(this XElement element)
         {
-            return new BusinessLocation
-            {
-                Id = element.Element("id").Value,
-                CustomFields = element.ParseCustomFieldsExcept("id")
-            };
+            return new BusinessLocation { Id = element.Element("id").Value };
         }
 
         public static ReadPoint ToReadPoint(this XElement element)
         {
-            return new ReadPoint
-            {
-                Id = element.Element("id").Value,
-                CustomFields = element.ParseCustomFieldsExcept("id")
-            };
+            return new ReadPoint { Id = element.Element("id").Value };
         }
 
         public static ErrorDeclaration ToErrorDeclaration(this XElement element)
         {
-            return new ErrorDeclaration
-            {
-                DeclarationTime = DateTime.Parse(element.Element("declarationTime").Value),
-                Reason = element.Element("reason").Value,
-                CustomFields = element.ParseCustomFieldsExcept("id", "corrective" )
-            };
+            return new ErrorDeclaration{ DeclarationTime = DateTime.Parse(element.Element("declarationTime").Value), Reason = element.Element("reason").Value };
         }
 
-        public static XDocument ParseCustomFieldsExcept(this XElement element, params string[] except)
+        public static CustomField ToCustomField(this XElement element)
         {
-            var document = new XDocument(new XElement("root", element.Elements().Where(x => !except.Contains(x.Name.LocalName))));
+            return new CustomField { Namespace = element.Name.NamespaceName, Name = element.Name.LocalName, Value = element.Value };
+        }
 
-            return document.Root.HasElements ? document : null;
+        public static void ParseQuantityListInto(this XElement element, IList<Epc> destination, bool isInput)
+        {
+            foreach (var epc in element.Elements("quantityElement"))
+            {
+                destination.Add(new Epc
+                {
+                    Type = isInput ? EpcType.InputQuantity : EpcType.OutputQuantity,
+                    Id = epc.Element("epcClass").Value,
+                    IsQuantity = true,
+                    Quantity = float.Parse(element.Element("Quantity").Value),
+                    UnitOfMeasure = element.Element("uom") != null ? element.Element("uom").Value : null
+                });
+            }
         }
     }
 }

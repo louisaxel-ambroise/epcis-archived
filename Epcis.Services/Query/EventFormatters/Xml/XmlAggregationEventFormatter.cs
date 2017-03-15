@@ -54,9 +54,8 @@ namespace Epcis.Services.Query.EventFormatters.Xml
         private static void AddCustomFields(EpcisEvent epcisEvent, XElement element)
         {
             if (epcisEvent.CustomFields == null) return;
-            if (epcisEvent.CustomFields.Root == null) return;
 
-            foreach (var field in epcisEvent.CustomFields.Root.Elements()) element.Add(field);
+            foreach (var field in epcisEvent.CustomFields) element.Add(new XElement(XName.Get(field.Namespace, field.Name), field.Value));
         }
 
         private void AddParentId(EpcisEvent epcisEvent, XElement element)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Epcis.Model.Events;
 
 namespace Epcis.Data.Storage
@@ -20,10 +21,21 @@ namespace Epcis.Data.Storage
                 epcisEvent.BusinessStep,
                 epcisEvent.Disposition,
                 epcisEvent.EventId,
-                epcisEvent.Ilmd,
+                Ilmd = default(XDocument), // TODO: add ILMD
                 epcisEvent.TransformationId,
                 epcisEvent.CustomFields
             };
+        }
+
+        public static IEnumerable<object> Map(this IEnumerable<CustomField> customFields, long eventId)
+        {
+            return customFields.Select(x => new
+            {
+                EventId = eventId,
+                x.Namespace,
+                x.Name,
+                x.Value
+            });
         }
 
         public static IEnumerable<object> Map(this IEnumerable<Epc> epcs, long eventId)
@@ -64,8 +76,7 @@ namespace Epcis.Data.Storage
             return new
             {
                 EventId = eventId,
-                ReadPointId = readPoint.Id,
-                readPoint.CustomFields
+                ReadPointId = readPoint.Id
             };
         }
 

@@ -52,12 +52,11 @@ namespace Epcis.Services.Query.EventFormatters.Xml
             element.Add(transactions);
         }
 
-        private static void AddCustomFields(EpcisEvent epcisEvent, XElement element)
+        private static void AddCustomFields(EpcisEvent epcisEvent, XContainer element)
         {
             if (epcisEvent.CustomFields == null) return;
-            if(epcisEvent.CustomFields.Root == null) return;
 
-            foreach (var field in epcisEvent.CustomFields.Root.Elements()) element.Add(field);
+            foreach (var field in epcisEvent.CustomFields) element.Add(new XElement(XName.Get(field.Namespace, field.Name), field.Value));
         }
 
         private static void AddEpcList(EpcisEvent epcisEvent, XContainer element)

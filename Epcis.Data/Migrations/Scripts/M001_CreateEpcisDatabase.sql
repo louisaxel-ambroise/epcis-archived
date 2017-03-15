@@ -11,10 +11,16 @@ CREATE TABLE [epcis].[Event](
 	[BusinessStep] [nvarchar](128) NULL,
 	[Disposition] [nvarchar](128) NULL,
 	[EventId] [nvarchar](128) NULL,
-	[Ilmd] [xml] NULL,
 	[TransformationId] [nvarchar](128) NULL,
-	[CustomFields] [xml] NULL,
-	CONSTRAINT [PK_EPCIS] PRIMARY KEY CLUSTERED ([Id] ASC)
+	CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [epcis].[EventExtension](
+	[EventId] [bigint] NOT NULL,
+	[Namespace] [nvarchar](128) NOT NULL,
+	[Name] [nvarchar](128) NOT NULL,
+	[Value] [nvarchar](128) NOT NULL
+	CONSTRAINT [PK_EventExtension] PRIMARY KEY CLUSTERED ([EventId] ASC, [Namespace] ASC, [Name] ASC)
 );
 
 CREATE TABLE [epcis].[ErrorDeclarationEventId](
@@ -72,6 +78,7 @@ CREATE TABLE [epcis].[BusinessLocation](
 );
 
 ALTER TABLE [epcis].[Event] ADD CONSTRAINT [DF_EpcisEvent_CaptureTime]  DEFAULT (getutcdate()) FOR [CaptureTime];
+ALTER TABLE [epcis].[EventExtension]  WITH CHECK ADD CONSTRAINT [FK_EXTENSION_EVENT] FOREIGN KEY([EventId]) REFERENCES [epcis].[Event] ([Id]);
 ALTER TABLE [epcis].[BusinessLocation]  WITH CHECK ADD CONSTRAINT [FK_BIZLOC_EVENT] FOREIGN KEY([EventId]) REFERENCES [epcis].[Event] ([Id]);
 ALTER TABLE [epcis].[BusinessTransaction]  WITH CHECK ADD CONSTRAINT [FK_BIZTRANS_EVENT] FOREIGN KEY([EventId]) REFERENCES [epcis].[Event] ([Id]);
 ALTER TABLE [epcis].[Epc]  WITH CHECK ADD CONSTRAINT [FK_EPC_EVENT] FOREIGN KEY([EventId]) REFERENCES [epcis].[Event] ([Id]);
