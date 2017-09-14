@@ -1,0 +1,94 @@
+﻿@model FasTnT.Web.Models.Account.AuthenticationModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Resources.ApplicationName</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="~/Content/images/Logo.ico" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+    <body>
+        <div class="section"></div>
+        <main>
+            <center>
+                <img alt="@Resources.ApplicationName" title="@Resources.ApplicationName" style="width:300px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiICBoZWlnaHQ9IjYwIiB3aWR0aD0iMTcwIj4NCjxkZWZzPg0KIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwIiB4Mj0iMCIgeTE9IjAiIHkyPSIxIj4NCiAgPHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iIzAwOWFmMyIvPg0KICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzAwN2FjMCIvPg0KIDwvbGluZWFyR3JhZGllbnQ+DQogPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4NCiAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNCA0IiByZXN1bHQ9InNoYWRvdyIvPg0KICA8ZmVPZmZzZXQgZHg9IjAiIGR5PSIwIi8+DQogPC9maWx0ZXI+DQo8L2RlZnM+DQoJPHJlY3QgeD0iMTAiIHk9IjEwIiByeD0iMTYiIHJ5PSIxNiIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI0MCIgc3R5bGU9ImZpbGw6dXJsKCNncmFkaWVudCk7c3Ryb2tlOiMwMDZkYWIiIC8+DQoJPHRleHQgeD0iMzMiIHk9IjM5IiBmaWxsPSIjNjY2IiBzdHlsZT0iZmlsdGVyOiB1cmwoI3NoYWRvdyk7Ij5GYXNUJmFtcDtUPC90ZXh0Pg0KCTx0ZXh0IHg9IjMzIiB5PSIzOSIgZmlsbD0id2hpdGUiPkZhc1QmYW1wO1Q8L3RleHQ+DQoJPHN0eWxlPjwhW0NEQVRBW3RleHR7Zm9udDogMjVweCBWZXJkYW5hLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmO2xldHRlci1zcGFjaW5nOjJweDt9XV0+PC9zdHlsZT4NCjwvc3ZnPg==" />
+                <h3>@Resources.EpcisRepository</h3>
+                <div class="section"></div>
+
+                <div class="container">
+                    <div class="z-depth-1 grey lighten-4 row" style="width:400px; display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                        <form class="col s12" method="post" action="@Url.Content("~/Account/LogOn")">
+                            @Html.AntiForgeryToken()
+                            <div class='row'>
+                                <div class='col s12'>
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.AuthenticationError))
+                            {
+
+                                <div class='row'>
+                                    <div class='col s12 red-text'>
+                                        @Html.LocalizeLabel(Model.AuthenticationError)
+                                    </div>
+                                </div>
+                            }
+
+                            <div class='row'>
+                                <div class='input-field col s12'>
+                                    @Html.TextBoxFor(x => x.UserName, new { id = "email", type = "email", name = "email", @class="validate" })
+                                    <label for='email'>@Resources.Label_EnterYourEmail</label>
+                                </div>
+                            </div>
+
+                            <div class='row'>
+                                <div class='input-field col s12'>
+                                    @Html.PasswordFor(x => x.Password, new { id = "password", name = "password", @class = "validate" })
+                                    <label for='password'>@Resources.Label_EnterYourPassword</label>
+                                </div>
+                            </div>
+
+                            <br />
+                            <center>
+                                <div class='row'>
+                                    <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>@Resources.Label_Login</button>
+                                </div>
+                                <div class="row">
+                                    <ul id="language-selection" class="dropdown-content">
+                                        <li><a href="~/Account/SetLanguage?language=en&redirectTo=@Request.Url.AbsolutePath">EN</a></li>
+                                        <li><a href="~/Account/SetLanguage?language=fr&redirectTo=@Request.Url.AbsolutePath">FR</a></li>
+                                    </ul>
+                                    <button class="dropdown-button col s12 btn" href="#!" data-activates="language-selection">@Resources.Menu_Language<i class="material-icons right">arrow_drop_down</i></button>
+                                </div>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </center>
+            <div class="section"></div>
+            <div class="section"></div>
+        </main>
+        <footer class="page-footer center-align">
+            <div class="footer-copyright">
+                <div class="container">@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year)</div>
+            </div>
+        </footer>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".dropdown-button").dropdown();
+            });
+        </script>
+    </body>
+</html>

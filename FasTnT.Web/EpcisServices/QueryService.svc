@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FasTnT.Web.Services.QueryService" CodeBehind="QueryService.svc.cs" Factory="Ninject.Extensions.Wcf.NinjectServiceHostFactory" %>

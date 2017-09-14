@@ -1,0 +1,201 @@
+﻿@using FasTnT.Web.Helpers
+
+@{
+    ViewBag.Title = Resources.Menu_Dashboard;
+}
+
+<div class="row">
+    <h3>@Resources.Menu_Dashboard</h3>
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-content">
+                <h5>@Resources.Label_EventsCaptured</h5>
+                <div id="events-captured-graph" style="max-height:200px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-content">
+                <h5>@Resources.Label_QueriesPerformed</h5>
+                <div id="queries-graph" style="max-height:200px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-content">
+                <h5>@Resources.Label_TotalEvents</h5>
+                <div id="total-events-graph" style="max-height:200px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-content row">
+                <h5>@Resources.Label_ServerHealth</h5>
+                <div class="col s6">
+                    <div id="server-health-graph" style="max-height:200px;"></div>
+                </div>
+                <div class="col s6">
+                    <div id="server-disk-graph" style="max-height:200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col m12">
+        <div class="card">
+            <div class="card-content">
+                <h5>@Resources.Label_LatestErrors</h5>
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>@Resources.Grid_Date</th>
+                            <th>@Resources.Grid_User</th>
+                            <th>@Resources.Grid_Action</th>
+                            <th>@Resources.Grid_Description</th>
+                            <th>@Resources.Grid_Status</th>
+                            <th>@Resources.Grid_Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>05-09-2017 08:15</td>
+                            <td><a href="#!">rp_2105</a></td>
+                            <td>@Html.LocalizeLabel("Capture")</td>
+                            <td>@string.Format(Html.LocalizeFormat("QuerySucceedTooLong"), 15)</td>
+                            <td><i class="material-icons" style="color:#af2401;">timer</i></td>
+                            <td><a href="#!"><i class="material-icons">link</i></a></td>
+                        </tr>
+                        <tr>
+                            <td>05-09-2017 09:34</td>
+                            <td><a href="#!">John Smith</a></td>
+                            <td>@Html.LocalizeLabel("Query")</td>
+                            <td>@string.Format(Html.LocalizeFormat("QueryFailedWithReason"), Html.LocalizeLabel("QueryTooComplex"))</td>
+                            <td><i class="material-icons" style="color:#af2401;">error</i></td>
+                            <td><a href="#!"><i class="material-icons">link</i></a></td>
+                        </tr>
+                        <tr>
+                            <td>05-09-2017 14:18</td>
+                            <td></td>
+                            <td>@Html.LocalizeLabel("Capture")</td>
+                            <td>@Html.LocalizeLabel("CaptureEventFailed")</td>
+                            <td><i class="material-icons" style="color:#af2401;">error</i></td>
+                            <td><a href="#!"><i class="material-icons">link</i></a></td>
+                        </tr>
+                        <tr>
+                            <td>05-09-2017 16:21</td>
+                            <td><a href="#!">John Smith</a></td>
+                            <td>@Html.LocalizeLabel("Query")</td>
+                            <td>@string.Format(Html.LocalizeFormat("QuerySucceedTooLong"), 10)</td>
+                            <td><i class="material-icons" style="color:#af2401;">timer</i></td>
+                            <td><a href="#!"><i class="material-icons">link</i></a></td>
+                        </tr>
+                        <tr>
+                            <td>05-09-2017 20:41</td>
+                            <td></td>
+                            <td>@Html.LocalizeLabel("Subscription")</td>
+                            <td>@string.Format(Html.LocalizeFormat("SubscriptionCallbackFailed"), 500)</td>
+                            <td><i class="material-icons" style="color:#af2401;">error</i></td>
+                            <td><a href="#!"><i class="material-icons">link</i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="right">@string.Format(Resources.Format_DisplayingXOutOfNItems, 5, 253)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select').material_select();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 3, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            close: 'Ok',
+            closeOnSelect: true // Close upon selecting a date,
+        });
+
+        // Setup Graphs
+        new Morris.Line({
+            element: 'events-captured-graph',
+            data: [
+                { time: '14:10', events: 57, errors: 0 },
+                { time: '14:15', events: 68, errors: 0 },
+                { time: '14:20', events: 59, errors: 1 },
+                { time: '14:25', events: 48, errors: 0 },
+                { time: '14:30', events: 51, errors: 0 }
+            ],
+            parseTime: false,
+            xkey: 'time',
+            ykeys: ['events', 'errors'],
+            labels: ['Events', 'Errors'],
+            lineColors: ['#222', '#f00']
+        });
+        new Morris.Line({
+            element: 'queries-graph',
+            data: [
+                { time: '14:10', subscriptions: 0, queries: 12, errors: 0 },
+                { time: '14:15', subscriptions: 0, queries: 0, errors: 0 },
+                { time: '14:20', subscriptions: 0, queries: 0, errors: 0 },
+                { time: '14:25', subscriptions: 0, queries: 5, errors: 0 },
+                { time: '14:30', subscriptions: 2, queries: 0, errors: 0 }
+            ],
+            parseTime: false,
+            xkey: 'time',
+            ykeys: ['subscriptions', 'queries', 'errors'],
+            labels: ['Subscriptions', 'Queries', 'Errors'],
+            lineColors: ['#666', '#222', '#f00']
+        });
+
+        new Morris.Line({
+            element: 'total-events-graph',
+            data: [
+                { time: '29/08', events: 38950 },
+                { time: '30/08', events: 42015 },
+                { time: '31/08', events: 46787 },
+                { time: '01/09', events: 50420 },
+                { time: '02/09', events: 51205 },
+                { time: '03/09', events: 52957 },
+                { time: '04/09', events: 54235 }
+            ],
+            parseTime: false,
+            xkey: 'time',
+            ykeys: ['events'],
+            labels: ['Events'],
+            lineColors: ['#222']
+        });
+
+        Morris.Donut({
+            element: 'server-health-graph',
+            data: [
+                { value: 82, label: '@Html.LocalizeChart("CPUFree")'},
+			{value: 18, label: ''}
+			],
+			labelColor: '#060',
+			colors: [
+			'#060',
+			'#FFF'
+			],
+			formatter: function (x) { return x + "%"}
+		});
+
+		Morris.Donut({
+			element: 'server-disk-graph',
+			data: [
+			{value: 57, label: '@Html.LocalizeChart("FreeSpace")'},
+			{value: 43, label: ''}
+			],
+            labelColor: '#FF9500',
+			colors: [
+			'#FF9500',
+			'#FFF'
+			],
+			formatter: function (x) { return x + "%"}
+		});
+	});
+</script>

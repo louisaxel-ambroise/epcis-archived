@@ -1,0 +1,24 @@
+﻿@model IEnumerable<FasTnT.Web.Models.Users.UserViewModel>
+
+<table class="striped">
+    <thead>
+        <tr>
+            <th>@Resources.Grid_UserName</th>
+            <th>@Resources.Grid_Role</th>
+            <th>@Resources.Grid_LastLogon</th>
+            <th>@Resources.Grid_Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@Html.LocalizeGrid(user.Type)</td>
+                <td>@(user.LastLogon?.ToString("dd/MM/yyyy HH:mm"))</td>
+                <td><a href="~/Users/Details/@user.Id"><i class="material-icons">link</i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p class="pad-top-10">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Count(), Model.Count())</p>

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Resources.ApplicationName</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <div class="section"></div>
+    <main>
+        <center>
+            <div class="section"></div>
+            <h3>@Resources.ApplicationName - @Resources.EpcisRepository</h3>
+            <h4>@Resources.Label_Error</h4>
+        </center>
+    </main>
+</body>
+</html>

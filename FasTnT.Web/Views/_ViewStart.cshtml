@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var loadingBar = "<div class='progress' style='width:50%;margin-left:25%'><div class='indeterminate'></div></div>";
+
+    $(document).ready(function () {
+        var url = window.location;
+
+        var activeLink = $('ul.side-nav a').filter(function () { return this.href == url; });
+        if (activeLink) {
+            activeLink.parent().addClass('active');
+            activeLink.parents('div.collapsible-body').css('display', 'block');
+            activeLink.parents('div.collapsible-body').siblings('.collapsible-header').addClass('active');
+        }
+    });
+</script>

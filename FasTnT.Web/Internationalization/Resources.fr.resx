@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>FasT&amp;T</value>
+  </data>
+  <data name="Chart_CPUFree" xml:space="preserve">
+    <value>CPU libre</value>
+  </data>
+  <data name="Chart_FreeSpace" xml:space="preserve">
+    <value>Espace Libre</value>
+  </data>
+  <data name="EpcisRepository" xml:space="preserve">
+    <value>Dépôt EPCIS</value>
+  </data>
+  <data name="Format_CaptureEventFailedWithReason" xml:space="preserve">
+    <value>La capture de l'événement a échoué: {0}</value>
+  </data>
+  <data name="Format_Copyright" xml:space="preserve">
+    <value>© {0} Louis-Axel Ambroise, Tous droits réservés.</value>
+  </data>
+  <data name="Format_DetailsOfEvent" xml:space="preserve">
+    <value>Détails de l'événement {0}</value>
+  </data>
+  <data name="Format_DisplayingXOutOfNItems" xml:space="preserve">
+    <value>{0:N0} éléments sur {1:N0} affichés</value>
+  </data>
+  <data name="Format_QueryFailedWithReason" xml:space="preserve">
+    <value>La requête a échoué. Cause : {0}</value>
+  </data>
+  <data name="Format_QuerySucceedTooLong" xml:space="preserve">
+    <value>La requête a réussi en {0} secondes</value>
+  </data>
+  <data name="Format_SubscriptionCallbackFailed" xml:space="preserve">
+    <value>La réponse de l'abonnement a échoué avec le code HTTP {0}</value>
+  </data>
+  <data name="Grid_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Grid_ApiUser" xml:space="preserve">
+    <value>Utilisateur de l'API</value>
+  </data>
+  <data name="Grid_ApiUser_DashboardUser" xml:space="preserve">
+    <value>Utilisateur de l'API et du panneau de contrôle</value>
+  </data>
+  <data name="Grid_Captured" xml:space="preserve">
+    <value>Capturé le</value>
+  </data>
+  <data name="Grid_DashboardUser" xml:space="preserve">
+    <value>Utilisateur du panneau de contrôle</value>
+  </data>
+  <data name="Grid_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Grid_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Grid_Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="Grid_LastLogon" xml:space="preserve">
+    <value>Dernière connexion</value>
+  </data>
+  <data name="Grid_Location" xml:space="preserve">
+    <value>Lieu</value>
+  </data>
+  <data name="Grid_ReadPoint" xml:space="preserve">
+    <value>Point de lecture</value>
+  </data>
+  <data name="Grid_Role" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="Grid_Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Grid_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Grid_User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="Grid_UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Label_AccessDenied" xml:space="preserve">
+    <value>L'accès à cette page est interdit</value>
+  </data>
+  <data name="Label_Capture" xml:space="preserve">
+    <value>Capture</value>
+  </data>
+  <data name="Label_CaptureEventFailed" xml:space="preserve">
+    <value>La capture de l'événement a échoué</value>
+  </data>
+  <data name="Label_EnterYourEmail" xml:space="preserve">
+    <value>Adresse mail</value>
+  </data>
+  <data name="Label_EnterYourPassword" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Label_Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="Label_Events" xml:space="preserve">
+    <value>Événements</value>
+  </data>
+  <data name="Label_EventsCaptured" xml:space="preserve">
+    <value>Événements capturés</value>
+  </data>
+  <data name="Label_Github" xml:space="preserve">
+    <value>Github</value>
+  </data>
+  <data name="Label_LatestErrors" xml:space="preserve">
+    <value>Dernières erreurs</value>
+  </data>
+  <data name="Label_LatestEvents" xml:space="preserve">
+    <value>Derniers événements</value>
+  </data>
+  <data name="Label_Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="Label_QueriesPerformed" xml:space="preserve">
+    <value>Requêtes éxecutées</value>
+  </data>
+  <data name="Label_Query" xml:space="preserve">
+    <value>Requête</value>
+  </data>
+  <data name="Label_QueryTooComplex" xml:space="preserve">
+    <value>Requête trop complexe</value>
+  </data>
+  <data name="Label_SearchEPC" xml:space="preserve">
+    <value>Chercher EPC</value>
+  </data>
+  <data name="Label_SearchResult" xml:space="preserve">
+    <value>Résultat de la recherche</value>
+  </data>
+  <data name="Label_SearchUser" xml:space="preserve">
+    <value>Chercher utilisateur</value>
+  </data>
+  <data name="Label_ServerHealth" xml:space="preserve">
+    <value>Santé du serveur</value>
+  </data>
+  <data name="Label_Subscription" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="Label_TotalEvents" xml:space="preserve">
+    <value>Total d'événements</value>
+  </data>
+  <data name="Label_UnknownError" xml:space="preserve">
+    <value>Une erreur inconnue est survenue. Si cela persiste, veuillez contacter l'administrateur du système.</value>
+  </data>
+  <data name="Label_UnknownUser" xml:space="preserve">
+    <value>Le nom d'utilisateur est inconnu</value>
+  </data>
+  <data name="Label_Users" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="Label_WrongPassword" xml:space="preserve">
+    <value>Le mot de passe est incorrect</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>À Propos</value>
+  </data>
+  <data name="Menu_AccessRight" xml:space="preserve">
+    <value>Gestion des droits</value>
+  </data>
+  <data name="Menu_Alerts" xml:space="preserve">
+    <value>Alertes</value>
+  </data>
+  <data name="Menu_BusinessLocations" xml:space="preserve">
+    <value>Lieux d'affaire</value>
+  </data>
+  <data name="Menu_BusinessSteps" xml:space="preserve">
+    <value>Étapes commerciales</value>
+  </data>
+  <data name="Menu_BusinessTransactions" xml:space="preserve">
+    <value>Opérations commerciales</value>
+  </data>
+  <data name="Menu_Dashboard" xml:space="preserve">
+    <value>Panneau de Contrôle</value>
+  </data>
+  <data name="Menu_EpcisServer" xml:space="preserve">
+    <value>Serveur EPCIS</value>
+  </data>
+  <data name="Menu_Events" xml:space="preserve">
+    <value>Événements</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="Menu_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Menu_MasterData" xml:space="preserve">
+    <value>Données de base</value>
+  </data>
+  <data name="Menu_Monitoring" xml:space="preserve">
+    <value>Gestion</value>
+  </data>
+  <data name="Menu_ReadPoints" xml:space="preserve">
+    <value>Points de lecture</value>
+  </data>
+  <data name="Menu_Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Menu_Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="Menu_Subscriptions" xml:space="preserve">
+    <value>Abonnements</value>
+  </data>
+  <data name="Menu_UserList" xml:space="preserve">
+    <value>Liste d'utilisateurs</value>
+  </data>
+  <data name="Menu_UserManagement" xml:space="preserve">
+    <value>Gestion des utilisateurs</value>
+  </data>
+  <data name="Page_About_Author" xml:space="preserve">
+    <value>{0} est un dépôt EPCIS compatible avec la version 1.2 du standard EPCIS de GS1. Il est développé en C# et maintenu par Louis-Axel Ambroise depuis 2017.</value>
+  </data>
+  <data name="Page_About_SourceCode" xml:space="preserve">
+    <value>Le code source de ce projet peut être téléchargé gratuitement sur {0}</value>
+  </data>
+</root>

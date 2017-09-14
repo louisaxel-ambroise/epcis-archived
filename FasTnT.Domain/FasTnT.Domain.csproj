@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67D36368-6C89-43AC-9C29-86C639953CA8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FasTnT.Domain</RootNamespace>
+    <AssemblyName>FasTnT.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\EpcisException.cs" />
+    <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Model\Events\CustomField.cs" />
+    <Compile Include="Model\Events\Epc.cs" />
+    <Compile Include="Model\Events\EpcisEvent.cs" />
+    <Compile Include="Model\Events\EpcType.cs" />
+    <Compile Include="Model\Events\ErrorDeclaration.cs" />
+    <Compile Include="Model\Events\EventAction.cs" />
+    <Compile Include="Model\Events\EventType.cs" />
+    <Compile Include="Model\Events\MasterData\BusinessLocation.cs" />
+    <Compile Include="Model\Events\MasterData\BusinessStep.cs" />
+    <Compile Include="Model\Events\MasterData\BusinessTransaction.cs" />
+    <Compile Include="Model\Events\MasterData\Disposition.cs" />
+    <Compile Include="Model\Events\MasterData\ReadPoint.cs" />
+    <Compile Include="Model\Events\MasterData\SourceDestination.cs" />
+    <Compile Include="Model\Events\MasterData\SourceDestinationType.cs" />
+    <Compile Include="Model\Events\TimeZoneOffset.cs" />
+    <Compile Include="Model\Queries\QueryParam.cs" />
+    <Compile Include="Model\Queries\QueryParams.cs" />
+    <Compile Include="Model\Queries\Subscription.cs" />
+    <Compile Include="Model\Queries\SubscriptionControls.cs" />
+    <Compile Include="Model\Users\User.cs" />
+    <Compile Include="Model\Users\UserLog.cs" />
+    <Compile Include="Model\Users\UserLogType.cs" />
+    <Compile Include="Model\Users\UserType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Services\Dashboard\IWebUserAuthenticator.cs" />
+    <Compile Include="Services\Dashboard\WebUserAuthenticator.cs" />
+    <Compile Include="Services\EventCapture\DocumentParser.cs" />
+    <Compile Include="Services\EventCapture\EventCapturer.cs" />
+    <Compile Include="Services\EventCapture\IDocumentParser.cs" />
+    <Compile Include="Services\EventCapture\IEventCapturer.cs" />
+    <Compile Include="Extensions\XElementExtensions.cs" />
+    <Compile Include="Services\EventQuery\IQuery.cs" />
+    <Compile Include="Services\EventQuery\IQueryPerformer.cs" />
+    <Compile Include="Services\EventQuery\QueryPerformer.cs" />
+    <Compile Include="Services\EventQuery\SimpleEventQuery.cs" />
+    <Compile Include="Services\Formatting\IResponseFormatter.cs" />
+    <Compile Include="Services\Formatting\ResponseFormatter.cs" />
+    <Compile Include="Services\Subscriptions\ISubscriptionManager.cs" />
+    <Compile Include="Services\Subscriptions\SubscriptionManager.cs" />
+    <Compile Include="Utils\Clock.cs" />
+    <Compile Include="Utils\IClock.cs" />
+    <Compile Include="Utils\Security\BCrypt.cs" />
+    <Compile Include="Utils\SystemContext.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
