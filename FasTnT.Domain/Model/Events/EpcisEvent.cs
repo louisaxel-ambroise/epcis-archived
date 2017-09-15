@@ -8,30 +8,29 @@ namespace FasTnT.Domain.Model.Events
     {
         public EpcisEvent()
         {
-            CustomFields = new List<CustomField>();
             Epcs = new List<Epc>();
             BusinessTransactions = new List<BusinessTransaction>();
             SourcesDestinations = new List<SourceDestination>();
             CustomFields = new List<CustomField>();
         }
 
-        public Guid Id { get; set; }
-        public string RequestId { get; set; }
-        public string EventId { get; set; }
-        public EventType EventType { get; set; }
-        public DateTime CaptureTime { get; set; }
-        public DateTime EventTime { get; set; }
-        public TimeZoneOffset EventTimezoneOffset { get; set; }
-        public EventAction Action { get; set; }
-        public string TransformationId { get; set; }
-        public ReadPoint ReadPoint { get; set; }
-        public BusinessStep BusinessStep { get; set; }
-        public BusinessLocation BusinessLocation { get; internal set; }
-        public Disposition Disposition { get; set; }
-        public IList<Epc> Epcs { get; set; }
-        public IList<BusinessTransaction> BusinessTransactions { get; set; }
-        public IList<SourceDestination> SourcesDestinations { get; set; }
-        public IList<CustomField> CustomFields { get; set; }
-        public ErrorDeclaration ErrorDeclaration { get; set; }
+        public virtual Guid Id { get; set; }
+        public virtual string RequestId { get; set; }
+        public virtual string EventId { get; set; }
+        public virtual EventType EventType { get; set; }
+        public virtual DateTime CaptureTime { get; set; }
+        public virtual DateTime EventTime { get; set; }
+        public virtual TimeZoneOffset EventTimezoneOffset { get; set; }
+        public virtual EventAction Action { get; set; }
+        public virtual string TransformationId { get; set; }
+        public virtual ReadPoint ReadPoint { get; set; }
+        public virtual BusinessStep BusinessStep { get; set; }
+        public virtual BusinessLocation BusinessLocation { get; set; }
+        public virtual Disposition Disposition { get; set; }
+        public virtual IList<Epc> Epcs { get; set; }
+        public virtual IList<BusinessTransaction> BusinessTransactions { get; set; }
+        public virtual IList<SourceDestination> SourcesDestinations { get; set; }
+        public virtual IList<CustomField> CustomFields { get; set; }
+        public virtual ErrorDeclaration ErrorDeclaration { get; set; }
     }
 }

@@ -9,7 +9,7 @@
         var url = window.location;
 
         var activeLink = $('ul.side-nav a').filter(function () { return this.href == url; });
-        if (activeLink) {
+        if (activeLink && !activeLink.hasClass("brand-logo")) {
             activeLink.parent().addClass('active');
             activeLink.parents('div.collapsible-body').css('display', 'block');
             activeLink.parents('div.collapsible-body').siblings('.collapsible-header').addClass('active');

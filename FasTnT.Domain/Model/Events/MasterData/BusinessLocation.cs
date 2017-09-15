@@ -2,6 +2,6 @@
 {
     public class BusinessLocation
     {
-        public string Id { get; set; }
+        public virtual string Id { get; set; }
     }
 }

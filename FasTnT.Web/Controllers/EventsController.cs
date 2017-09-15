@@ -1,4 +1,7 @@
-﻿using FasTnT.Web.Models.Events;
+﻿using FasTnT.Domain.Repositories;
+using FasTnT.Web.Models.Events;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace FasTnT.Web.Controllers
@@ -6,17 +9,31 @@ namespace FasTnT.Web.Controllers
     [Authorize]
     public class EventsController : Controller
     {
+        private readonly IEventRepository _eventRepository;
+
+        public EventsController(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository ?? throw new ArgumentException(nameof(eventRepository));
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Details(string eventId)
+        public ActionResult Read_LatestEvents()
         {
-            return PartialView(new EventDetail
-            {
-                EventId = eventId
-            });
+            var latestEvents = _eventRepository.Query().Take(5).MapToEventSummary();
+            var totalEvents = _eventRepository.Query().Count();
+
+            return PartialView("_LatestEvents", new LatestEventsViewModel { Events = latestEvents.ToArray(), Total = totalEvents });
+        }
+
+        public ActionResult Details(Guid eventId)
+        {
+            var @event = _eventRepository.LoadById(eventId).MapToEventDetail();
+
+            return View(@event);
         }
     }
 }

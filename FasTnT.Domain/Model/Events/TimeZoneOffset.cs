@@ -4,39 +4,27 @@ namespace FasTnT.Domain.Model.Events
 {
     public class TimeZoneOffset
     {
-        public string Representation { get; private set; }
-        public int Value { get; private set; }
+        private int _value;
 
-        public TimeZoneOffset(string representation)
-        {
-            Representation = representation;
+        public virtual string Representation { get { return ComputeRepresentation(_value); } set { _value = ComputeValue(value); } }
+        public virtual int Value { get { return _value; } set { _value = value; } }
 
-            ComputeValue();
-        }
-
-        public TimeZoneOffset(int value)
-        {
-            Value = value;
-
-            ComputeRepresentation();
-        }
-
-        private void ComputeRepresentation()
+        private string ComputeRepresentation(int value)
         {
             var sign = Value >= 0 ? "+" : "-";
             var hours = (Math.Abs(Value) / 60).ToString("D2");
             var minutes = (Math.Abs(Value % 60)).ToString("D2");
 
-            Representation = string.Format("{0}{1}:{2}", sign, hours, minutes);
+            return string.Format("{0}{1}:{2}", sign, hours, minutes);
         }
 
-        private void ComputeValue()
+        private int ComputeValue(string value)
         {
             var sign = (Representation[0] == '-') ? -1 : +1;
             var representation = Representation.TrimStart('-', '+');
             var parts = representation.Split(':');
 
-            Value = sign * (int.Parse(parts[0]) * 60 + int.Parse(parts[1]));
+            return sign * (int.Parse(parts[0]) * 60 + int.Parse(parts[1]));
         }
     }
 }

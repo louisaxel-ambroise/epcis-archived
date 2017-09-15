@@ -45,6 +45,7 @@
     <Compile Include="Model\Events\ErrorDeclaration.cs" />
     <Compile Include="Model\Events\EventAction.cs" />
     <Compile Include="Model\Events\EventType.cs" />
+    <Compile Include="Model\Events\FieldType.cs" />
     <Compile Include="Model\Events\MasterData\BusinessLocation.cs" />
     <Compile Include="Model\Events\MasterData\BusinessStep.cs" />
     <Compile Include="Model\Events\MasterData\BusinessTransaction.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Model\Users\UserLogType.cs" />
     <Compile Include="Model\Users\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Services\Dashboard\IWebUserAuthenticator.cs" />
     <Compile Include="Services\Dashboard\WebUserAuthenticator.cs" />

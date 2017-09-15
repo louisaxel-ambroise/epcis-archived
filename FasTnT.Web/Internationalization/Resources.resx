@@ -126,6 +126,9 @@
   <data name="Chart_FreeSpace" xml:space="preserve">
     <value>Free Space</value>
   </data>
+  <data name="DateFormat_Detailed" xml:space="preserve">
+    <value>dd/MM/yyyy HH:mm</value>
+  </data>
   <data name="EpcisRepository" xml:space="preserve">
     <value>EPCIS Repository</value>
   </data>

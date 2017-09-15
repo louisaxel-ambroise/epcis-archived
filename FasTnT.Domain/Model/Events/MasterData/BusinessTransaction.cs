@@ -2,7 +2,7 @@
 {
     public class BusinessTransaction
     {
-        public string Type { get; set; }
-        public string Id { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Id { get; set; }
     }
 }

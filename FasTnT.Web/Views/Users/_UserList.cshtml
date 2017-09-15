@@ -15,7 +15,7 @@
             <tr>
                 <td>@user.Name</td>
                 <td>@Html.LocalizeGrid(user.Type)</td>
-                <td>@(user.LastLogon?.ToString("dd/MM/yyyy HH:mm"))</td>
+                <td>@(user.LastLogon?.ToString(Resources.DateFormat_Detailed))</td>
                 <td><a href="~/Users/Details/@user.Id"><i class="material-icons">link</i></a></td>
             </tr>
         }

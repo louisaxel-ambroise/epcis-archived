@@ -54,9 +54,17 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\UserLogMap.cs" />
-    <Compile Include="Mappings\UserMap.cs" />
-    <Compile Include="Mappings\UserTypeMap.cs" />
+    <Compile Include="Mappings\Events\CustomFieldMap.cs" />
+    <Compile Include="Mappings\Events\EpcMap.cs" />
+    <Compile Include="Mappings\MasterData\BusinessLocationMap.cs" />
+    <Compile Include="Mappings\Events\EpcisEventMap.cs" />
+    <Compile Include="Mappings\MasterData\BusinessStepMap.cs" />
+    <Compile Include="Mappings\MasterData\BusinessTransactionMap.cs" />
+    <Compile Include="Mappings\MasterData\DispositionMap.cs" />
+    <Compile Include="Mappings\MasterData\ReadPointMap.cs" />
+    <Compile Include="Mappings\Users\UserLogMap.cs" />
+    <Compile Include="Mappings\Users\UserMap.cs" />
+    <Compile Include="Mappings\Users\UserTypeMap.cs" />
     <Compile Include="Migrations\M000_CreateUsersSchema.cs" />
     <Compile Include="Migrations\M001_CreateUserTypeTable.cs" />
     <Compile Include="Migrations\M002_CreateApplicationUserTable.cs" />
@@ -72,14 +80,21 @@
     <Compile Include="Migrations\M106_CreateSourceDestinationTable.cs" />
     <Compile Include="Migrations\M107_CreateInstanceLotMasterDataTable.cs" />
     <Compile Include="Migrations\M200_CreateCbvSchema.cs" />
+    <Compile Include="Migrations\M201_CreateBusinessLocationTable.cs" />
+    <Compile Include="Migrations\M202_CreateBusinessTransactionTable.cs" />
+    <Compile Include="Migrations\M203_CreateBusinessStepTable.cs" />
+    <Compile Include="Migrations\M204_CreateDispositionTable.cs" />
+    <Compile Include="Migrations\M205_CreateReadPointTable.cs" />
     <Compile Include="Migrations\M300_InsertDetaultData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\connectionStrings.shared.config">
       <Link>connectionStrings.shared.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
     <None Include="packages.config" />

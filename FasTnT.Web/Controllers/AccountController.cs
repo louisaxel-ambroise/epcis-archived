@@ -26,7 +26,7 @@ namespace FasTnT.Web.Controllers
         {
             if (Request.LogonUserIdentity.IsAuthenticated)
             {
-                return Redirect("~/");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(new AuthenticationModel());

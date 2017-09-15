@@ -1,0 +1,32 @@
+﻿@model FasTnT.Web.Models.Events.LatestEventsViewModel
+
+<table class="striped">
+    <thead>
+        <tr>
+            <th>@Resources.Grid_Captured</th>
+            <th>@Resources.Grid_Date</th>
+            <th>@Resources.Grid_User</th>
+            <th>@Resources.Grid_Type</th>
+            <th>@Resources.Grid_Action</th>
+            <th>@Resources.Grid_Location</th>
+            <th>@Resources.Grid_ReadPoint</th>
+            <th>@Resources.Grid_Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var detail in Model.Events)
+        {
+            <tr>
+                <td>@detail.CaptureTime.ToString(Resources.DateFormat_Detailed)</td>
+                <td>@detail.RecordTime.ToString(Resources.DateFormat_Detailed)</td>
+                <td>@detail.UserName</td>
+                <td>@detail.Type</td>
+                <td>@detail.Action</td>
+                <td>@detail.Location</td>
+                <td>@detail.ReadPoint</td>
+                <td><a href="~/Events/Details/@detail.Id"><i class="material-icons">link</i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p class="pad-top-10">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Events.Count(), Model.Total)</p>

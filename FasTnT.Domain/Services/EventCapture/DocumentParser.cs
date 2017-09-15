@@ -58,7 +58,7 @@ namespace FasTnT.Domain.Services.EventCapture
                     case "action":
                         epcisEvent.Action = innerElement.ToEventAction(); break;
                     case "eventTimeZoneOffset":
-                        epcisEvent.EventTimezoneOffset = new TimeZoneOffset(innerElement.Value); break;
+                        epcisEvent.EventTimezoneOffset = new TimeZoneOffset { Representation = innerElement.Value }; break;
                     case "eventTime":
                         epcisEvent.EventTime = DateTime.Parse(innerElement.Value); break;
                     case "epcList":

@@ -1,7 +1,7 @@
 ﻿using FasTnT.Domain.Model.Users;
 using FluentNHibernate.Mapping;
 
-namespace FasTnT.Data.Mappings
+namespace FasTnT.Data.Mappings.Users
 {
     public class UserMap : ClassMap<User>
     {

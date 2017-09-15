@@ -112,6 +112,7 @@
 
             $("#search").keyup(function (e) {
                 if ($(this).val().length >= 3) {
+                    $("#search-results").html(loadingBar);
                     $.ajax({
                         method: "GET",
                         url: basePath + "Search/Inline?input=" + $(this).val(),
@@ -127,6 +128,15 @@
                     $("#search-results").html("");
                 }
             });
+
+            $(".search-wrapper i").on("click", function ()
+            {
+                var searchValue = $("#search").val();
+
+                if (searchValue.length > 0) {
+                    window.location = basePath + "Search?input=" + searchValue;
+                }
+            })
         });
     </script>
 </body>

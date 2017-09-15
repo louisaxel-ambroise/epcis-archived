@@ -146,7 +146,7 @@
     <Compile Include="App_Start\DependencyInjection\RequestScope.cs" />
     <Compile Include="App_Start\DependencyInjection\Scopes.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\DependencyInjection\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -195,7 +195,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\Account\AuthenticationModel.cs" />
-    <Compile Include="Models\Events\EventDetail.cs" />
+    <Compile Include="Models\Events\EventDetailViewModel.cs" />
+    <Compile Include="Models\Events\EventSummaryViewModel.cs" />
+    <Compile Include="Models\Events\LatestEventsViewModel.cs" />
+    <Compile Include="Models\Events\Mappings.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -268,6 +271,7 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\_UserList.cshtml" />
+    <Content Include="Views\Events\_LatestEvents.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -27,6 +27,9 @@ namespace FasTnT.DependencyInjection
             #endif
 
             Bind<IUserRepository>().To<UserRepository>();
+            Bind<IEventRepository>().To<EventRepository>();
+
+            // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).UsingScope(Scope);
         }

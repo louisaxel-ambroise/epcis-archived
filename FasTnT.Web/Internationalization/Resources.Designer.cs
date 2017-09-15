@@ -88,6 +88,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dd/MM/yyyy HH:mm.
+        /// </summary>
+        public static string DateFormat_Detailed {
+            get {
+                return ResourceManager.GetString("DateFormat_Detailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EPCIS Repository.
         /// </summary>
         public static string EpcisRepository {
