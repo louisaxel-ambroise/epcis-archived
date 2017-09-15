@@ -35,7 +35,7 @@ namespace FasTnT.Data.Repositories
             if (@event.Disposition != null) @event.Disposition = _session.Load<Disposition>(@event.Disposition.Id);
             if (@event.ReadPoint != null) @event.ReadPoint = _session.Load<ReadPoint>(@event.ReadPoint.Id);
 
-            _session.Save(@event);
+            _session.Persist(@event);
         }
     }
 }

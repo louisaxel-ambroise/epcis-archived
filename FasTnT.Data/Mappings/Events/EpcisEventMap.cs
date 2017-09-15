@@ -25,9 +25,9 @@ namespace FasTnT.Data.Mappings.Events
             References(x => x.Disposition).Column("disposition").NotFound.Ignore();
             References(x => x.ReadPoint).Column("read_point").NotFound.Ignore();
 
-            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.AllDeleteOrphan();
-            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.AllDeleteOrphan();
-            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.AllDeleteOrphan();
+            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist();
+            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist();
+            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.Persist();
         }
     }
 }
