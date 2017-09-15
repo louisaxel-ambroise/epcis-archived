@@ -12,6 +12,5 @@ namespace FasTnT.Web.Models.Events
         public string Type { get; set; }
         public string Action { get; set; }
         public string Location { get; set; }
-        public string ReadPoint { get; set; }
     }
 }

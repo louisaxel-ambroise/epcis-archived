@@ -12,12 +12,11 @@ namespace FasTnT.Web.Models.Events
             return events.Select(e => new EventSummaryViewModel
             {
                 Id = e.Id,
-                Type = e.EventType.ToString(),
-                Action = e.Action.ToString(),
+                Type = e.EventType.ToString("F"),
+                Action = e.Action.ToString("F"),
                 CaptureTime = e.CaptureTime,
                 RecordTime = e.EventTime,
-                Location = e.BusinessLocation.Id,
-                ReadPoint = e.ReadPoint.Id,
+                Location = e.BusinessLocation.Name ?? e.BusinessLocation.Id,
                 UserId = default(Guid),
                 UserName = null
             });
