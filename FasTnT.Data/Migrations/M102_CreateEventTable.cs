@@ -11,7 +11,7 @@ namespace FasTnT.Data.Migrations
                 .WithColumn("id").AsGuid().PrimaryKey()
                 .WithColumn("request_id").AsGuid().NotNullable()
                 .WithColumn("user_id").AsGuid().Nullable()
-                .WithColumn("capture_time").AsDateTime().NotNullable()
+                .WithColumn("capture_time").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentUTCDateTime)
                 .WithColumn("record_time").AsDateTime().NotNullable()
                 .WithColumn("action").AsInt16().Nullable()
                 .WithColumn("event_type").AsInt16().NotNullable().ForeignKey("FK_EVENT_EVENTTYPE", "epcis", "event_type", "id")

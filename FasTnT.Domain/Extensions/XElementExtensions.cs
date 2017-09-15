@@ -21,24 +21,25 @@ namespace FasTnT.Domain.Extensions
             return (EventAction)Enum.Parse(typeof(EventAction), element.Value, true);
         }
 
-        public static void ParseEpcListInto(this XElement element, IList<Epc> destination)
+        public static void ParseEpcListInto(this XElement element, EpcisEvent destination)
         {
-            foreach (var epc in element.Elements()) destination.Add(new Epc { Type = EpcType.List, Id = epc.Value });
+            foreach (var epc in element.Elements()) destination.Epcs.Add(new Epc { Event = destination, Type = EpcType.List, Id = epc.Value });
         }
 
-        public static void ParseEpcListInto(this XElement element, IList<Epc> destination, bool isInput)
+        public static void ParseEpcListInto(this XElement element, EpcisEvent destination, bool isInput)
         {
             var type = isInput ? EpcType.InputEpc : EpcType.OutputEpc;
 
-            foreach (var epc in element.Elements("epc")) destination.Add(new Epc { Type = type, Id = epc.Value });
+            foreach (var epc in element.Elements("epc")) destination.Epcs.Add(new Epc { Event = destination, Type = type, Id = epc.Value });
         }
 
-        public static void ParseQuantityListInto(this XElement element, IList<Epc> destination, bool isInput)
+        public static void ParseQuantityListInto(this XElement element, EpcisEvent destination, bool isInput)
         {
             foreach (var epc in element.Elements("quantityElement"))
             {
-                destination.Add(new Epc
+                destination.Epcs.Add(new Epc
                 {
+                    Event = destination,
                     Type = isInput ? EpcType.InputQuantity : EpcType.OutputQuantity,
                     Id = epc.Element("epcClass").Value,
                     IsQuantity = true,
@@ -48,9 +49,9 @@ namespace FasTnT.Domain.Extensions
             }
         }
 
-        public static void ParseChildEpcListInto(this XElement element, IList<Epc> destination)
+        public static void ParseChildEpcListInto(this XElement element, EpcisEvent destination)
         {
-            foreach (var epc in element.Elements()) destination.Add(new Epc { Type = EpcType.ChildEpc, Id = epc.Value });
+            foreach (var epc in element.Elements()) destination.Epcs.Add(new Epc { Event = destination, Type = EpcType.ChildEpc, Id = epc.Value });
         }
 
         public static IList<BusinessTransaction> ToBusinessTransactions(this XElement element)

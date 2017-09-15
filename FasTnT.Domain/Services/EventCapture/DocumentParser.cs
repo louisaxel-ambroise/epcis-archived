@@ -26,21 +26,22 @@ namespace FasTnT.Domain.Services.EventCapture
         private static IEnumerable<EpcisEvent> ParseEvents(XContainer input)
         {
             var events = new List<EpcisEvent>();
+            var requestId = Guid.NewGuid();
 
             foreach (var element in input.Elements())
             {
                 var name = element.Name.LocalName;
 
                 if (name == "extension") events.AddRange(ParseEvents(element));
-                else events.Add(ParseEvent(element));
+                else events.Add(ParseEvent(element, requestId));
             }
 
             return events;
         }
 
-        private static EpcisEvent ParseEvent(XElement element)
+        private static EpcisEvent ParseEvent(XElement element, Guid requestId)
         {
-            var epcisEvent = new EpcisEvent { EventType = element.ToEventType() };
+            var epcisEvent = new EpcisEvent { EventType = element.ToEventType(), RequestId = requestId, Id = Guid.NewGuid() };
 
             ParseAttributes(element, epcisEvent);
 
@@ -62,19 +63,19 @@ namespace FasTnT.Domain.Services.EventCapture
                     case "eventTime":
                         epcisEvent.EventTime = DateTime.Parse(innerElement.Value); break;
                     case "epcList":
-                        innerElement.ParseEpcListInto(epcisEvent.Epcs); break;
+                        innerElement.ParseEpcListInto(epcisEvent); break;
                     case "childEPCs":
-                        innerElement.ParseChildEpcListInto(epcisEvent.Epcs); break;
+                        innerElement.ParseChildEpcListInto(epcisEvent); break;
                     case "inputQuantityList":
-                        innerElement.ParseQuantityListInto(epcisEvent.Epcs, true); break;
+                        innerElement.ParseQuantityListInto(epcisEvent, true); break;
                     case "inputEpcList":
-                        innerElement.ParseEpcListInto(epcisEvent.Epcs, true); break;
+                        innerElement.ParseEpcListInto(epcisEvent, true); break;
                     case "outputQuantityList":
-                        innerElement.ParseQuantityListInto(epcisEvent.Epcs, false); break;
+                        innerElement.ParseQuantityListInto(epcisEvent, false); break;
                     case "outputEpcList":
-                        innerElement.ParseEpcListInto(epcisEvent.Epcs, false); break;
+                        innerElement.ParseEpcListInto(epcisEvent, false); break;
                     case "epcClass":
-                        epcisEvent.Epcs.Add(new Epc { Type = EpcType.Quantity, Id = innerElement.Value, IsQuantity = true }); break;
+                        epcisEvent.Epcs.Add(new Epc { Event = epcisEvent, Type = EpcType.Quantity, Id = innerElement.Value, IsQuantity = true }); break;
                     case "quantity":
                         epcisEvent.Epcs.Single(x => x.Type == EpcType.Quantity).Quantity = float.Parse(innerElement.Value); break;
                     case "bizStep":
@@ -100,7 +101,7 @@ namespace FasTnT.Domain.Services.EventCapture
                     case "ilmd":
                         innerElement.ParseIlmd(epcisEvent); break;
                     case "parentID":
-                        epcisEvent.Epcs.Add(new Epc { Id = innerElement.Value, Type = EpcType.ParentId }); break;
+                        epcisEvent.Epcs.Add(new Epc { Event = epcisEvent, Id = innerElement.Value, Type = EpcType.ParentId }); break;
                     case "recordTime": // We don't process record time as it will be overrided in any case..
                         break;
                     default:
@@ -118,6 +119,7 @@ namespace FasTnT.Domain.Services.EventCapture
 
             var field = new CustomField
             {
+                Event = epcisEvent,
                 Type = FieldType.EventExtension,
                 Name = element.Name.LocalName,
                 Namespace = element.Name.NamespaceName,

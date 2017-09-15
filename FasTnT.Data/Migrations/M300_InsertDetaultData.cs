@@ -9,8 +9,6 @@ namespace FasTnT.Data.Migrations
     {
         public override void Down()
         {
-            Delete.FromTable("event_type").InSchema("epcis")
-                .AllRows();
         }
 
         public override void Up()

@@ -4,6 +4,8 @@ using FasTnT.Data.Repositories;
 using NHibernate;
 using FasTnT.Data;
 using Ninject;
+using FasTnT.Domain.Utils.Aspects;
+using FasTnT.Data.Interceptors;
 
 namespace FasTnT.DependencyInjection
 {
@@ -32,6 +34,9 @@ namespace FasTnT.DependencyInjection
             // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).UsingScope(Scope);
+            Bind<ITransaction>().ToMethod(ctx => ctx.Kernel.Get<ISession>().BeginTransaction()).UsingScope(Scope);
+
+            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>();
         }
     }
 }

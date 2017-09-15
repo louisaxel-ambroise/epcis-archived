@@ -1,4 +1,6 @@
 ﻿using FasTnT.Domain.Model.Events;
+using FasTnT.Domain.Repositories;
+using FasTnT.Domain.Utils.Aspects;
 using System;
 using System.Collections.Generic;
 
@@ -6,9 +8,22 @@ namespace FasTnT.Domain.Services.EventCapture
 {
     public class EventCapturer : IEventCapturer
     {
-        public IEnumerable<Guid> Capture(IEnumerable<EpcisEvent> events)
+        private readonly IEventRepository _eventRepository;
+
+        public EventCapturer(IEventRepository eventRepository)
         {
-            throw new NotImplementedException("Not Implemented Yet");
+            _eventRepository = eventRepository ?? throw new ArgumentException(nameof(eventRepository));
+        }
+
+        [CommitTransaction]
+        public virtual IEnumerable<Guid> Capture(IEnumerable<EpcisEvent> events)
+        {
+            foreach(var @event in events)
+            {
+                _eventRepository.Insert(@event);
+            }
+
+            return null; // TODO.
         }
     }
 }

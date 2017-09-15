@@ -8,5 +8,6 @@ namespace FasTnT.Domain.Repositories
     {
         IQueryable<EpcisEvent> Query();
         EpcisEvent LoadById(Guid eventId);
+        void Insert(EpcisEvent @event);
     }
 }
