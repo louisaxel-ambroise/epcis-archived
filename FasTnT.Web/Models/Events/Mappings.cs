@@ -16,7 +16,7 @@ namespace FasTnT.Web.Models.Events
                 Action = e.Action.ToString("F"),
                 CaptureTime = e.CaptureTime,
                 RecordTime = e.EventTime,
-                Location = e.BusinessLocation.Name ?? e.BusinessLocation.Id,
+                Location = e.BusinessLocation,
                 UserId = default(Guid),
                 UserName = null
             });

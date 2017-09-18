@@ -61,7 +61,7 @@ namespace FasTnT.Domain.Extensions
 
         public static void ParseReadPoint(this XElement element, EpcisEvent epcisEvent)
         {
-            epcisEvent.ReadPoint = new ReadPoint { Id = element.Element("id").Value };
+            epcisEvent.ReadPoint = element.Element("id").Value;
 
             foreach (var innerElement in element.Elements().Where(x => x.Name.Namespace != XNamespace.None))
             {
@@ -122,7 +122,7 @@ namespace FasTnT.Domain.Extensions
                 });
             }
 
-            epcisEvent.BusinessLocation = new BusinessLocation { Id = element.Element("id").Value };
+            epcisEvent.BusinessLocation = element.Element("id").Value;
         }
 
         public static ErrorDeclaration ToErrorDeclaration(this XElement element, EpcisEvent epcisEvent)

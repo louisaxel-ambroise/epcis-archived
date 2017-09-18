@@ -15,10 +15,10 @@ namespace FasTnT.Domain.Model.Events
         public virtual TimeZoneOffset EventTimezoneOffset { get; set; }
         public virtual EventAction Action { get; set; }
         public virtual string TransformationId { get; set; }
-        public virtual ReadPoint ReadPoint { get; set; }
-        public virtual BusinessStep BusinessStep { get; set; }
-        public virtual BusinessLocation BusinessLocation { get; set; }
-        public virtual Disposition Disposition { get; set; }
+        public virtual string ReadPoint { get; set; }
+        public virtual string BusinessStep { get; set; }
+        public virtual string BusinessLocation { get; set; }
+        public virtual string Disposition { get; set; }
         public virtual IList<Epc> Epcs { get; set; } = new List<Epc>();
         public virtual IList<BusinessTransaction> BusinessTransactions { get; set; } = new List<BusinessTransaction>();
         public virtual IList<SourceDestination> SourcesDestinations { get; set; } = new List<SourceDestination>();

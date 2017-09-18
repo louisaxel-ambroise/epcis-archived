@@ -79,9 +79,9 @@ namespace FasTnT.Domain.Services.EventCapture
                     case "quantity":
                         epcisEvent.Epcs.Single(x => x.Type == EpcType.Quantity).Quantity = float.Parse(innerElement.Value); break;
                     case "bizStep":
-                        epcisEvent.BusinessStep = new BusinessStep { Id = innerElement.Value }; break;
+                        epcisEvent.BusinessStep = innerElement.Value; break;
                     case "disposition":
-                        epcisEvent.Disposition = new Disposition { Id = innerElement.Value }; break;
+                        epcisEvent.Disposition = innerElement.Value; break;
                     case "eventID":
                         epcisEvent.EventId = innerElement.Value; break;
                     case "errorDeclaration":

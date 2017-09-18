@@ -1,11 +1,11 @@
 ﻿using FasTnT.Domain.Model.MasterData;
 using FluentNHibernate.Mapping;
 
-namespace FasTnT.Data.Mappings.Events
+namespace FasTnT.Data.Mappings.MasterData
 {
-    public class BusinessTransactionMap : ClassMap<BusinessTransaction>
+    public class MasterBusinessTransactionMap : ClassMap<MasterBusinessTransaction>
     {
-        public BusinessTransactionMap()
+        public MasterBusinessTransactionMap()
         {
             Table("business_transaction");
             Schema("cbv");

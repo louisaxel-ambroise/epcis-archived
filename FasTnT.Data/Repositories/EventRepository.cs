@@ -29,12 +29,6 @@ namespace FasTnT.Data.Repositories
 
         public void Insert(EpcisEvent @event)
         {
-            //Load referenced object to avoir database trip
-            if (@event.BusinessLocation != null) @event.BusinessLocation = _session.Load<BusinessLocation>(@event.BusinessLocation.Id);
-            if (@event.BusinessStep != null) @event.BusinessStep = _session.Load<BusinessStep>(@event.BusinessStep.Id);
-            if (@event.Disposition != null) @event.Disposition = _session.Load<Disposition>(@event.Disposition.Id);
-            if (@event.ReadPoint != null) @event.ReadPoint = _session.Load<ReadPoint>(@event.ReadPoint.Id);
-
             _session.Persist(@event);
         }
     }

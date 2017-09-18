@@ -6,6 +6,6 @@ namespace FasTnT.Domain.Services.Formatting
 {
     public interface IResponseFormatter
     {
-        XDocument FormatResponse(IEnumerable<EpcisEvent> events);
+        XDocument FormatPollResponse(string queryName, IEnumerable<EpcisEvent> events);
     }
 }

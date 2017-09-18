@@ -2,6 +2,8 @@
 using FasTnT.Domain.Services.Dashboard;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Services.Formatting;
+using FasTnT.Domain.Services.Queries;
+using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Utils.Aspects;
 using Ninject.Modules;
 using System.Diagnostics;
@@ -14,9 +16,14 @@ namespace FasTnT.DependencyInjection
         {
             Bind<IWebUserAuthenticator>().To<WebUserAuthenticator>();
             Bind<IEventCapturer>().To<EventCapturer>();
-            Bind<IResponseFormatter>().To<ResponseFormatter>();
+            Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();
+            Bind<IEventFormatter>().To<EventFormatter>().InSingletonScope();
+            Bind<ISubscriptionManager>().To<SubscriptionManager>();
+            Bind<IQueryPerformer>().To<QueryPerformer>();
             Bind<IDocumentParser>().To<DocumentParser>();
 
+            // Queries
+            Bind<IQuery>().To<SimpleEventQuery>();
 
             // Logging EventLog
             string appSource = "FasTnT";
@@ -28,6 +35,7 @@ namespace FasTnT.DependencyInjection
             }
 
             Bind<ICaptureLogInterceptor>().To<CaptureLogInterceptor>().WithConstructorArgument("eventSource", appSource);
+            Bind<IQueryLogInterceptor>().To<QueryLogInterceptor>().WithConstructorArgument("eventSource", appSource);
         }
     }
 }

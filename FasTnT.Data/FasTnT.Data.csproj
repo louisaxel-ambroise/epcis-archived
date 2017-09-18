@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,8 @@
     <AssemblyName>FasTnT.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,13 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interceptors\CommitTransactionInterceptor.cs" />
+    <Compile Include="Mappings\Events\BusinessTransactionMap.cs" />
     <Compile Include="Mappings\Events\CustomFieldMap.cs" />
     <Compile Include="Mappings\Events\EpcMap.cs" />
     <Compile Include="Mappings\MasterData\BusinessLocationMap.cs" />
     <Compile Include="Mappings\Events\EpcisEventMap.cs" />
     <Compile Include="Mappings\MasterData\BusinessStepMap.cs" />
-    <Compile Include="Mappings\MasterData\BusinessTransactionMap.cs" />
     <Compile Include="Mappings\MasterData\DispositionMap.cs" />
+    <Compile Include="Mappings\MasterData\MasterBusinessTransactionMap.cs" />
     <Compile Include="Mappings\MasterData\ReadPointMap.cs" />
     <Compile Include="Mappings\Users\UserLogMap.cs" />
     <Compile Include="Mappings\Users\UserMap.cs" />
@@ -85,7 +89,7 @@
     <Compile Include="Migrations\M104_CreateBusinessTransactionTable.cs" />
     <Compile Include="Migrations\M105_CreateBusinessLocationTable.cs" />
     <Compile Include="Migrations\M106_CreateSourceDestinationTable.cs" />
-    <Compile Include="Migrations\M107_CreateInstanceLotMasterDataTable.cs" />
+    <Compile Include="Migrations\M107_CreateCustomFieldTable.cs" />
     <Compile Include="Migrations\M200_CreateCbvSchema.cs" />
     <Compile Include="Migrations\M201_CreateBusinessLocationTable.cs" />
     <Compile Include="Migrations\M202_CreateBusinessTransactionTable.cs" />
@@ -113,4 +117,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
 </Project>

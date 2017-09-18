@@ -1,8 +1,7 @@
 ﻿namespace FasTnT.Domain.Model.MasterData
 {
-    public class BusinessTransaction
+    public class MasterBusinessTransaction
     {
-        public virtual string Type { get; set; }
         public virtual string Id { get; set; }
     }
 }

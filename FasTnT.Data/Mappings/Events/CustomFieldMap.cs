@@ -7,6 +7,9 @@ namespace FasTnT.Data.Mappings.Events
     {
         public CustomFieldMap()
         {
+            Table("custom_field");
+            Schema("epcis");
+
             CompositeId()
                 .KeyProperty(x => x.Namespace, "namespace")
                 .KeyProperty(x => x.Name, "name")

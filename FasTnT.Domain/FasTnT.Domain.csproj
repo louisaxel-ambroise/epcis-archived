@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,8 @@
     <AssemblyName>FasTnT.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +48,7 @@
     <Compile Include="Exceptions\EpcisException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
     <Compile Include="Log\CaptureLogInterceptor.cs" />
+    <Compile Include="Log\QueryLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
     <Compile Include="Model\Events\Epc.cs" />
     <Compile Include="Model\Events\EpcisEvent.cs" />
@@ -55,8 +59,9 @@
     <Compile Include="Model\Events\FieldType.cs" />
     <Compile Include="Model\Events\MasterData\BusinessLocation.cs" />
     <Compile Include="Model\Events\MasterData\BusinessStep.cs" />
-    <Compile Include="Model\Events\MasterData\BusinessTransaction.cs" />
+    <Compile Include="Model\Events\BusinessTransaction.cs" />
     <Compile Include="Model\Events\MasterData\Disposition.cs" />
+    <Compile Include="Model\Events\MasterData\MasterBusinessTransaction.cs" />
     <Compile Include="Model\Events\MasterData\ReadPoint.cs" />
     <Compile Include="Model\Events\MasterData\SourceDestination.cs" />
     <Compile Include="Model\Events\MasterData\SourceDestinationType.cs" />
@@ -83,14 +88,18 @@
     <Compile Include="Services\EventQuery\IQueryPerformer.cs" />
     <Compile Include="Services\EventQuery\QueryPerformer.cs" />
     <Compile Include="Services\EventQuery\SimpleEventQuery.cs" />
+    <Compile Include="Services\Formatting\EventFormatter.cs" />
+    <Compile Include="Services\Formatting\IEventFormatter.cs" />
     <Compile Include="Services\Formatting\IResponseFormatter.cs" />
     <Compile Include="Services\Formatting\ResponseFormatter.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionManager.cs" />
     <Compile Include="Services\Subscriptions\SubscriptionManager.cs" />
+    <Compile Include="Utils\Aspects\CaptureLogAttribute.cs" />
     <Compile Include="Utils\Aspects\CommitTransactionAttribute.cs" />
-    <Compile Include="Utils\Aspects\ICaptureLog.cs" />
     <Compile Include="Utils\Aspects\ICaptureLogInterceptor.cs" />
     <Compile Include="Utils\Aspects\ICommitTransactionInterceptor.cs" />
+    <Compile Include="Utils\Aspects\IQueryLogInterceptor.cs" />
+    <Compile Include="Utils\Aspects\QueryLogAttribute.cs" />
     <Compile Include="Utils\Clock.cs" />
     <Compile Include="Utils\IClock.cs" />
     <Compile Include="Utils\Security\BCrypt.cs" />
@@ -100,4 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
 </Project>

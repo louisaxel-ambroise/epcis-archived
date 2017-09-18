@@ -20,14 +20,14 @@ namespace FasTnT.Data.Mappings.Events
             Map(x => x.TransformationId).Column("transformation_id");
             Component(x => x.EventTimezoneOffset, m => m.Map(x => x.Value).Column("event_timezone_offset"));
 
-            References(x => x.BusinessLocation).Column("business_location").Fetch.Join().NotFound.Ignore().Cascade.None();
-            References(x => x.BusinessStep).Column("business_step").Fetch.Join().NotFound.Ignore().Cascade.None();
-            References(x => x.Disposition).Column("disposition").Fetch.Join().NotFound.Ignore().Cascade.None();
-            References(x => x.ReadPoint).Column("read_point").Fetch.Join().NotFound.Ignore().Cascade.None();
+            Map(x => x.BusinessLocation).Column("business_location");
+            Map(x => x.BusinessStep).Column("business_step");
+            Map(x => x.Disposition).Column("disposition");
+            Map(x => x.ReadPoint).Column("read_point");
 
-            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist();
-            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist();
-            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.Persist();
+            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
+            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
+            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
         }
     }
 }

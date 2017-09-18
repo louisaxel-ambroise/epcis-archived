@@ -72,7 +72,7 @@ namespace FasTnT.Web.EpcisServices
             {
                 var pollRequest = PollRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
                 var results = _queryPerformer.ExecuteQuery(pollRequest.Name, pollRequest.Parameters);
-                var formattedResponse = _responseFormatter.FormatResponse(results);
+                var formattedResponse = _responseFormatter.FormatPollResponse(pollRequest.Name, results);
 
                 return MessageResponse.CreatePollResponse(formattedResponse.Root);
             }
