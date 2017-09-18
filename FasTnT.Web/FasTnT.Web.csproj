@@ -72,7 +72,7 @@
       <HintPath>..\packages\Ninject.Extensions.Wcf.3.2.2.0\lib\net45-full\Ninject.Extensions.Wcf.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=3.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.3.2.5\lib\net451\Npgsql.dll</HintPath>
@@ -85,8 +85,8 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -276,7 +276,7 @@
     <Content Include="Views\EpcisServer\Index.cshtml" />
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Events\Detail.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\_UserList.cshtml" />

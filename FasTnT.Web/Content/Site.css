@@ -14,9 +14,6 @@ li.logo{
     margin-bottom:125px;
     text-align:center;
 }
-    li.logo #logo-container img{
-        height:120px;
-    }
 
 li.search {
     position: absolute;

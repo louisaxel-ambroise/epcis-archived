@@ -2,6 +2,7 @@
 using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Utils;
+using FasTnT.Domain.Utils.Aspects;
 
 namespace FasTnT.Domain.Services.Dashboard
 {
@@ -14,34 +15,34 @@ namespace FasTnT.Domain.Services.Dashboard
             _userRepository = userRepository;
         }
 
-        public User Authenticate(string username, string password)
+        [CommitTransaction]
+        public virtual User Authenticate(string username, string password)
         {
-            User user;
-
             try
             {
-                user = _userRepository.GetByUsername(username);
+                var user = _userRepository.GetByUsername(username);
+
+                if(user == null)
+                {
+                    throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownUser);
+                }
+                if (!user.Roles.Contains(UserType.DashboardUser))
+                {
+                    throw new UserAuthenticationException(UserAuthenticationException.Failure.AccessDenied);
+                }
+                if(!user.VerifyPassword(password))
+                {
+                    throw new UserAuthenticationException(UserAuthenticationException.Failure.WrongPassword);
+                }
+
+                user.LastLogOn = SystemContext.Clock.Now;
+
+                return user;
             }
             catch
             {
                 throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownError);
             }
-
-            if(user == null)
-            {
-                throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownUser);
-            }
-            if (!user.Roles.Contains(UserType.DashboardUser))
-            {
-                throw new UserAuthenticationException(UserAuthenticationException.Failure.AccessDenied);
-            }
-            if(!user.VerifyPassword(password))
-            {
-                throw new UserAuthenticationException(UserAuthenticationException.Failure.WrongPassword);
-            }
-
-            user.LastLogOn = SystemContext.Clock.Now;
-            return user;
         }
     }
 }

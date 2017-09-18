@@ -28,15 +28,15 @@ namespace FasTnT.DependencyInjection
             requestLogger = new SQLDebugOutput();
             #endif
 
-            Bind<IUserRepository>().To<UserRepository>();
-            Bind<IEventRepository>().To<EventRepository>();
+            Bind<IUserRepository>().To<UserRepository>().UsingScope(Scope);
+            Bind<IEventRepository>().To<EventRepository>().UsingScope(Scope);
 
             // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).UsingScope(Scope);
             Bind<ITransaction>().ToMethod(ctx => ctx.Kernel.Get<ISession>().BeginTransaction()).UsingScope(Scope);
 
-            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>();
+            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>().UsingScope(Scope);
         }
     }
 }

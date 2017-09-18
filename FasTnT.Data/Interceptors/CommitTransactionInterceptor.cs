@@ -7,16 +7,13 @@ namespace FasTnT.Data.Interceptors
 {
     public class CommitTransactionInterceptor : ICommitTransactionInterceptor
     {
+        private readonly ISession _session;
         private readonly ITransaction _transaction;
 
-        public CommitTransactionInterceptor(ITransaction transaction)
+        public CommitTransactionInterceptor(ISession session)
         {
-            if(transaction == null || transaction.WasCommitted ||transaction.WasRolledBack || !transaction.IsActive)
-            {
-                throw new ArgumentException(nameof(transaction));
-            }
-
-            _transaction = transaction ?? throw new ArgumentException(nameof(transaction));
+            _session = session ?? throw new ArgumentException(nameof(session));
+            _transaction = session.BeginTransaction();
         }
 
         public void Intercept(IInvocation invocation)

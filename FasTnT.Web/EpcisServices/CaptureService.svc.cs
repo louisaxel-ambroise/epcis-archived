@@ -3,6 +3,7 @@ using System.ServiceModel;
 using System.Xml.Linq;
 using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
+using FasTnT.Domain.Utils.Aspects;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -18,7 +19,8 @@ namespace FasTnT.Web.EpcisServices
             _eventCapturer = eventCapturer ?? throw new ArgumentNullException(nameof(eventCapturer));
         }
 
-        public string Capture()
+        [CaptureLog]
+        public virtual string Capture()
         {
             try
             {

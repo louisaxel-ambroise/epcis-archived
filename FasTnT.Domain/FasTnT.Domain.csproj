@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Extensions.Interception, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Extensions.Interception.3.2.0.0\lib\net45-full\Ninject.Extensions.Interception.dll</HintPath>
@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\EpcisException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Log\CaptureLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
     <Compile Include="Model\Events\Epc.cs" />
     <Compile Include="Model\Events\EpcisEvent.cs" />
@@ -86,7 +87,10 @@
     <Compile Include="Services\Formatting\ResponseFormatter.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionManager.cs" />
     <Compile Include="Services\Subscriptions\SubscriptionManager.cs" />
-    <Compile Include="Utils\Aspects\ICommitTransaction.cs" />
+    <Compile Include="Utils\Aspects\CommitTransactionAttribute.cs" />
+    <Compile Include="Utils\Aspects\ICaptureLog.cs" />
+    <Compile Include="Utils\Aspects\ICaptureLogInterceptor.cs" />
+    <Compile Include="Utils\Aspects\ICommitTransactionInterceptor.cs" />
     <Compile Include="Utils\Clock.cs" />
     <Compile Include="Utils\IClock.cs" />
     <Compile Include="Utils\Security\BCrypt.cs" />

@@ -26,7 +26,10 @@ namespace FasTnT.Web.Models.Events
         {
             return new EventDetailViewModel
             {
-                Id = @event.Id
+                Id = @event.Id,
+                CapturedOn = @event.CaptureTime,
+                EventTime = @event.EventTime,
+                EventTimeZoneOffset = @event.EventTimezoneOffset.Representation
             };
         }
     }

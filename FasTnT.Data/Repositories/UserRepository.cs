@@ -22,7 +22,7 @@ namespace FasTnT.Data.Repositories
 
         public User GetByUsername(string username)
         {
-            return _session.Query<User>().SingleOrDefault(x => x.Name == username || x.Mail == username);
+            return _session.Query<User>().Where(x => x.Mail == username).SingleOrDefault();
         }
     }
 }

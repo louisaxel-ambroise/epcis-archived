@@ -12,8 +12,4 @@ namespace FasTnT.Domain.Utils.Aspects
             return request.Kernel.Get<ICommitTransactionInterceptor>();
         }
     }
-
-    public interface ICommitTransactionInterceptor : IInterceptor
-    {
-    }
 }
