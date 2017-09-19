@@ -63,7 +63,7 @@ namespace FasTnT.Web
             kernel.Load
             (
                 new DataModule(Scopes.WebRequestScope, connectionString),
-                new DomainModule(Directory.GetFiles(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data"), "*.xsd"))
+                new DomainModule(Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data"), "*.xsd"))
             );
         }
     }
