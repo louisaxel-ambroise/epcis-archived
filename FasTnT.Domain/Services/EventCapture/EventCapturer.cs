@@ -3,6 +3,7 @@ using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Utils.Aspects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FasTnT.Domain.Services.EventCapture
 {
@@ -23,7 +24,7 @@ namespace FasTnT.Domain.Services.EventCapture
                 _eventRepository.Insert(@event);
             }
 
-            return null; // TODO.
+            return events.Select(e => e.Id);
         }
     }
 }

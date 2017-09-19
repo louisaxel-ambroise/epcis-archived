@@ -22,7 +22,7 @@ namespace FasTnT.DependencyInjection
 
         public override void Load()
         {
-            var requestLogger = default(IInterceptor);
+            var requestLogger = new EmptyInterceptor();
 
             #if DEBUG
             requestLogger = new SQLDebugOutput();

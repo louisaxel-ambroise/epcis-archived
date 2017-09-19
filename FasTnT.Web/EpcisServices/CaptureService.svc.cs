@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
+using System.Collections.Generic;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -20,7 +21,7 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [CaptureLog]
-        public virtual string Capture()
+        public virtual IEnumerable<Guid> Capture()
         {
             try
             {
@@ -30,7 +31,7 @@ namespace FasTnT.Web.EpcisServices
                 var events = _documentParser.Parse(document.Root);
                 var eventIds = _eventCapturer.Capture(events);
 
-                return "OK";
+                return eventIds;
             }
             catch (Exception ex)
             {

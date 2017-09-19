@@ -46,9 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\EpcisException.cs" />
+    <Compile Include="Exceptions\ImplementationException.cs" />
+    <Compile Include="Exceptions\QueryParameterException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
-    <Compile Include="Log\CaptureLogInterceptor.cs" />
-    <Compile Include="Log\QueryLogInterceptor.cs" />
+    <Compile Include="Services\EventQuery\SimpleEventQueryParameters.cs" />
+    <Compile Include="Utils\Log\CaptureLogInterceptor.cs" />
+    <Compile Include="Utils\Log\QueryLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
     <Compile Include="Model\Events\Epc.cs" />
     <Compile Include="Model\Events\EpcisEvent.cs" />
@@ -83,7 +86,7 @@
     <Compile Include="Services\EventCapture\EventCapturer.cs" />
     <Compile Include="Services\EventCapture\IDocumentParser.cs" />
     <Compile Include="Services\EventCapture\IEventCapturer.cs" />
-    <Compile Include="Extensions\XElementExtensions.cs" />
+    <Compile Include="Utils\Extensions\XElementExtensions.cs" />
     <Compile Include="Services\EventQuery\IQuery.cs" />
     <Compile Include="Services\EventQuery\IQueryPerformer.cs" />
     <Compile Include="Services\EventQuery\QueryPerformer.cs" />

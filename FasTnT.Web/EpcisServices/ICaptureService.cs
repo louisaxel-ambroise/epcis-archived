@@ -1,4 +1,6 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace FasTnT.Web.EpcisServices
@@ -12,9 +14,9 @@ namespace FasTnT.Web.EpcisServices
         /// <summary>
         /// Captures the EPCISDocument given in the request's body.
         /// </summary>
-        /// <returns>OK if the capture succeed, exception if it failed.</returns>
+        /// <returns>ID of captured events if the capture succeed, exception if it failed.</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/")]
-        string Capture();
+        IEnumerable<Guid> Capture();
     }
 }

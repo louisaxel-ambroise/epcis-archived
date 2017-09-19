@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FasTnT.Domain.Model.Queries
 {
@@ -6,5 +7,7 @@ namespace FasTnT.Domain.Model.Queries
     {
         public string Name { get; set; }
         public IEnumerable<string> Values { get; set; }
+
+        public string Value => Values.Single();
     }
 }
