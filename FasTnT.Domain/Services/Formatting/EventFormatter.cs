@@ -14,11 +14,15 @@ namespace FasTnT.Domain.Services.Formatting
         {
             switch (@event.EventType)
             {
-                case EventType.Object:
+                case EventType.ObjectEvent:
                     return FormatObjectEvent(@event);
-                case EventType.Transaction:
+                case EventType.QuantityEvent:
+                    return FormatQuantityEvent(@event);
+                case EventType.AggregationEvent:
+                    return FormatAggregationEvent(@event);
+                case EventType.TransactionEvent:
                     return FormatTransactionEvent(@event);
-                case EventType.Transformation:
+                case EventType.TransformationEvent:
                     return FormatTransformationEvent(@event);
             }
 
@@ -28,6 +32,56 @@ namespace FasTnT.Domain.Services.Formatting
         private XElement FormatObjectEvent(EpcisEvent @event)
         {
             var element = new XElement("ObjectEvent");
+
+            element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
+
+            AddEpcList(@event, element);
+
+            element.Add(new XElement("action", @event.Action.ToString().ToUpper()));
+
+            if (!string.IsNullOrEmpty(@event.BusinessStep)) element.Add(new XElement("bizStep", @event.BusinessStep));
+            if (!string.IsNullOrEmpty(@event.Disposition)) element.Add(new XElement("disposition", @event.Disposition));
+
+            AddReadPoint(@event, element);
+            AddBusinessLocation(@event, element);
+            AddBusinessTransactions(@event, element);
+            AddIlmd(@event, element);
+            AddSourceDest(@event, element);
+            AddCustomFields(@event, element);
+
+            return element;
+        }
+
+        private XElement FormatQuantityEvent(EpcisEvent @event)
+        {
+            var element = new XElement("QuantityEvent");
+
+            element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
+
+            AddEpcList(@event, element);
+
+            element.Add(new XElement("action", @event.Action.ToString().ToUpper()));
+
+            if (!string.IsNullOrEmpty(@event.BusinessStep)) element.Add(new XElement("bizStep", @event.BusinessStep));
+            if (!string.IsNullOrEmpty(@event.Disposition)) element.Add(new XElement("disposition", @event.Disposition));
+
+            AddReadPoint(@event, element);
+            AddBusinessLocation(@event, element);
+            AddBusinessTransactions(@event, element);
+            AddIlmd(@event, element);
+            AddSourceDest(@event, element);
+            AddCustomFields(@event, element);
+
+            return element;
+        }
+
+        private XElement FormatAggregationEvent(EpcisEvent @event)
+        {
+            var element = new XElement("AggregationEvent");
 
             element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
             element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));

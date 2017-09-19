@@ -11,9 +11,7 @@ namespace FasTnT.Domain.Extensions
     {
         public static EventType ToEventType(this XElement element)
         {
-            var elementName = element.Name.LocalName.Remove(element.Name.LocalName.Length - 5);
-
-            return (EventType)Enum.Parse(typeof(EventType), elementName, true);
+            return (EventType)Enum.Parse(typeof(EventType), element.Name.LocalName, true);
         }
 
         public static EventAction ToEventAction(this XElement element)

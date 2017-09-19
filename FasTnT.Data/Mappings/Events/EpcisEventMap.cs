@@ -10,7 +10,7 @@ namespace FasTnT.Data.Mappings.Events
             Table("event");
             Schema("epcis");
 
-            Id(x => x.Id).Column("id").GeneratedBy.Assigned();
+            Id(x => x.Id).Column("id").GeneratedBy.GuidComb();
 
             Map(x => x.RequestId).Column("request_id").Not.Nullable();
             Map(x => x.Action).Column("action").CustomType<EventAction>();

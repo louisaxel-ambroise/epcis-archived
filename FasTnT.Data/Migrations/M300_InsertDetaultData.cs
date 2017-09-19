@@ -14,11 +14,11 @@ namespace FasTnT.Data.Migrations
         public override void Up()
         {
             Insert.IntoTable("event_type").InSchema("epcis")
-                .Row(new { id = (int)EventType.Object, name = "OBJECT", is_deprecated = false })
-                .Row(new { id = (int)EventType.Aggregation, name = "AGGREGATION", is_deprecated = false })
-                .Row(new { id = (int)EventType.Transaction, name = "TRANSACTION", is_deprecated = false })
-                .Row(new { id = (int)EventType.Transformation, name = "TRANSFORMATION", is_deprecated = false })
-                .Row(new { id = (int)EventType.Quantity, name = "QUANTITY", is_deprecated = true });
+                .Row(new { id = (int)EventType.ObjectEvent, name = "OBJECT", is_deprecated = false })
+                .Row(new { id = (int)EventType.AggregationEvent, name = "AGGREGATION", is_deprecated = false })
+                .Row(new { id = (int)EventType.TransactionEvent, name = "TRANSACTION", is_deprecated = false })
+                .Row(new { id = (int)EventType.TransformationEvent, name = "TRANSFORMATION", is_deprecated = false })
+                .Row(new { id = (int)EventType.QuantityEvent, name = "QUANTITY", is_deprecated = true });
         }
     }
 }

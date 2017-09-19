@@ -7,6 +7,7 @@ using Ninject.Extensions.Wcf;
 using Ninject.Web.Common;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -62,7 +63,7 @@ namespace FasTnT.Web
             kernel.Load
             (
                 new DataModule(Scopes.WebRequestScope, connectionString),
-                new DomainModule()
+                new DomainModule(Directory.GetFiles(Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data"), "*.xsd"))
             );
         }
     }

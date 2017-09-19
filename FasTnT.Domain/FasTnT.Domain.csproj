@@ -49,7 +49,12 @@
     <Compile Include="Exceptions\ImplementationException.cs" />
     <Compile Include="Exceptions\QueryParameterException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Services\EventCapture\EventCapturer.cs" />
+    <Compile Include="Services\EventCapture\EventPersister.cs" />
+    <Compile Include="Services\EventCapture\IEventCapturer.cs" />
+    <Compile Include="Services\EventCapture\IEventPersister.cs" />
     <Compile Include="Services\EventQuery\SimpleEventQueryParameters.cs" />
+    <Compile Include="Services\Validation\XmlDocumentValidator.cs" />
     <Compile Include="Utils\Log\CaptureLogInterceptor.cs" />
     <Compile Include="Utils\Log\QueryLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
@@ -83,9 +88,7 @@
     <Compile Include="Services\Dashboard\IWebUserAuthenticator.cs" />
     <Compile Include="Services\Dashboard\WebUserAuthenticator.cs" />
     <Compile Include="Services\EventCapture\DocumentParser.cs" />
-    <Compile Include="Services\EventCapture\EventCapturer.cs" />
     <Compile Include="Services\EventCapture\IDocumentParser.cs" />
-    <Compile Include="Services\EventCapture\IEventCapturer.cs" />
     <Compile Include="Utils\Extensions\XElementExtensions.cs" />
     <Compile Include="Services\EventQuery\IQuery.cs" />
     <Compile Include="Services\EventQuery\IQueryPerformer.cs" />

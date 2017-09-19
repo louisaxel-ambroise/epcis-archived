@@ -1,11 +1,11 @@
-﻿using FasTnT.Domain.Model.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace FasTnT.Domain.Services.EventCapture
 {
     public interface IEventCapturer
     {
-        IEnumerable<Guid> Capture(IEnumerable<EpcisEvent> events);
+        IEnumerable<Guid> Capture(XDocument xmlDocument);
     }
 }

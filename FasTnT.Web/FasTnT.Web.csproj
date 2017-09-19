@@ -223,6 +223,36 @@
       <Link>connectionStrings.shared.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="App_Data\BasicTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\BusinessScope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\DocumentIdentification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\EPCglobal-epcis-1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\EPCglobal-epcis-masterdata-1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\EPCglobal-epcis-query-1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\EPCglobal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\Manifest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\Partner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Data\StandardBusinessDocumentHeader.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

@@ -11,12 +11,10 @@ namespace FasTnT.Web.EpcisServices
     [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)] 
     public class CaptureService : ICaptureService
     {
-        private readonly IDocumentParser _documentParser;
         private readonly IEventCapturer _eventCapturer;
 
         public CaptureService(IDocumentParser documentParser, IEventCapturer eventCapturer)
         {
-            _documentParser = documentParser ?? throw new ArgumentNullException(nameof(documentParser));
             _eventCapturer = eventCapturer ?? throw new ArgumentNullException(nameof(eventCapturer));
         }
 
@@ -28,8 +26,7 @@ namespace FasTnT.Web.EpcisServices
                 var request = OperationContext.Current.RequestContext.RequestMessage.ToString() ?? "";
                 var document = XDocument.Parse(request);
 
-                var events = _documentParser.Parse(document.Root);
-                var eventIds = _eventCapturer.Capture(events);
+                var eventIds = _eventCapturer.Capture(document);
 
                 return eventIds;
             }

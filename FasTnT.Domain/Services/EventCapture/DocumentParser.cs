@@ -12,8 +12,7 @@ namespace FasTnT.Domain.Services.EventCapture
     public class DocumentParser : IDocumentParser
     {
         const string EpcisNamespace = "urn:epcglobal:epcis:xsd:1";
-
-        //[LogMethodCall]
+        
         public virtual IEnumerable<EpcisEvent> Parse(XElement input)
         {
             if(input.Name.Equals(XName.Get("EPCISDocument", EpcisNamespace)))
@@ -41,7 +40,7 @@ namespace FasTnT.Domain.Services.EventCapture
 
         private static EpcisEvent ParseEvent(XElement element, Guid requestId)
         {
-            var epcisEvent = new EpcisEvent { EventType = element.ToEventType(), RequestId = requestId, Id = Guid.NewGuid() };
+            var epcisEvent = new EpcisEvent { EventType = element.ToEventType(), RequestId = requestId };
 
             ParseAttributes(element, epcisEvent);
 
