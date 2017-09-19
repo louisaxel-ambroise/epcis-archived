@@ -11,7 +11,9 @@ namespace FasTnT.Domain.Services.Queries
 
         public IQueryable<EpcisEvent> ApplyFilter(IQueryable<EpcisEvent> events, QueryParams parameters)
         {
-            foreach(var parameter in parameters.Parameters) events = SimpleEventQueryParameters.ApplyParameter(events, parameter);
+            if(parameters != null && parameters.Parameters != null) { 
+                foreach (var parameter in parameters.Parameters) events = SimpleEventQueryParameters.ApplyParameter(events, parameter);
+            }
 
             return events;
         }
