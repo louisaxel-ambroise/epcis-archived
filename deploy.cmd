@@ -60,12 +60,6 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 :MsbuildPathDefined
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: Create EventLog source 
-:: -------------------------------------------
-echo Create Application EventLog
-call :ExecuteCmd EventCreate /L Application /T Information /ID 100 /SO "FasTnT" /D "Created FasTnT source for logging events"
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment 
 :: -------------------------------------------
 

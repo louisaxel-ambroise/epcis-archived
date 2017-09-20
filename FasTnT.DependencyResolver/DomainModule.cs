@@ -36,6 +36,7 @@ namespace FasTnT.DependencyInjection
             Bind<IQuery>().To<SimpleEventQuery>();
 
             // Logging EventLog
+#if EVENT_LOG
             string appSource = "FasTnT";
             string appLog = "Application";
 
@@ -46,6 +47,10 @@ namespace FasTnT.DependencyInjection
 
             Bind<ICaptureLogInterceptor>().To<CaptureLogInterceptor>().WithConstructorArgument("eventSource", appSource);
             Bind<IQueryLogInterceptor>().To<QueryLogInterceptor>().WithConstructorArgument("eventSource", appSource);
+#else
+            Bind<ICaptureLogInterceptor>().To<EmptyCaptureLogInterceptor>();
+            Bind<IQueryLogInterceptor>().To<EmptyQueryLogInterceptor>();
+#endif
         }
     }
 }
