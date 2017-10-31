@@ -4,6 +4,8 @@ using System;
 using FasTnT.Domain.Model.Events;
 using System.Linq;
 using FasTnT.Domain.Model.MasterData;
+using FasTnT.Domain.Services.Formatting;
+using FasTnT.Domain.Services.EventCapture;
 
 namespace FasTnT.Domain.Extensions
 {
@@ -99,25 +101,11 @@ namespace FasTnT.Domain.Extensions
             }
         }
 
-        public static void ParseIlmd(this XElement element, EpcisEvent epcisEvent)
-        {
-            foreach (var inner in element.Elements())
-            {
-                epcisEvent.CustomFields.Add(new CustomField { Type = FieldType.Ilmd, Namespace = inner.Name.NamespaceName, Name = inner.Name.LocalName, Value = inner.Value });
-            }
-        }
-
         public static void ParseBusinessLocation(this XElement element, EpcisEvent epcisEvent)
         {
             foreach (var innerElement in element.Elements().Where(x => !new[] { "id", "corrective" }.Contains(x.Name.LocalName)))
             {
-                epcisEvent.CustomFields.Add(new CustomField
-                {
-                    Type = FieldType.BusinessLocationExtension,
-                    Namespace = innerElement.Name.NamespaceName,
-                    Name = innerElement.Name.LocalName,
-                    Value = innerElement.Value
-                });
+                epcisEvent.CustomFields.Add(DocumentParser.ParseCustomField(innerElement, epcisEvent, FieldType.BusinessLocationExtension));
             }
 
             epcisEvent.BusinessLocation = element.Element("id").Value;
@@ -127,13 +115,7 @@ namespace FasTnT.Domain.Extensions
         {
             foreach (var innerElement in element.Elements().Where(x => !new[] { "id", "corrective" }.Contains(x.Name.LocalName)))
             {
-                epcisEvent.CustomFields.Add(new CustomField
-                {
-                    Type = FieldType.ErrorDeclarationExtension,
-                    Namespace = innerElement.Name.NamespaceName,
-                    Name = innerElement.Name.LocalName,
-                    Value = innerElement.Value
-                });
+                epcisEvent.CustomFields.Add(DocumentParser.ParseCustomField(innerElement, epcisEvent, FieldType.ErrorDeclarationExtension));
             }
 
             var declarationTime = DateTime.Parse(element.Element("declarationTime").Value);

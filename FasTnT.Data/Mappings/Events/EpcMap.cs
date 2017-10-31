@@ -9,7 +9,6 @@ namespace FasTnT.Data.Mappings.Events
         {
             Table("epc");
             Schema("epcis");
-            ReadOnly();
 
             CompositeId()
                 .KeyReference(x => x.Event, "event_id")

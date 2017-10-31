@@ -93,12 +93,12 @@ namespace FasTnT.Domain.Services.EventQuery
 
         private static IQueryable<EpcisEvent> ApplyFieldNameQuery(IQueryable<EpcisEvent> query, QueryParam param)
         {
-            if (param.Name.StartsWith("EQ_INNER_ILMD")) throw new ImplementationException(param.Name);
+            if (param.Name.StartsWith("EQ_INNER_ILMD")) query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.Parent != null && f.Value == param.Value));
             if (param.Name.StartsWith("GT_INNER_ILMD")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("GE_INNER_ILMD")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LT_INNER_ILMD")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LE_INNER_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("EQ_INNER_")) throw new ImplementationException(param.Name);
+            if (param.Name.StartsWith("EQ_INNER_")) query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Parent != null && f.Value == param.Value));
             if (param.Name.StartsWith("GT_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("GE_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LT_INNER_")) throw new ImplementationException(param.Name);

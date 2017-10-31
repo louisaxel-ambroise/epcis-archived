@@ -1,12 +1,17 @@
-﻿namespace FasTnT.Domain.Model.Events
+﻿using System.Collections.Generic;
+
+namespace FasTnT.Domain.Model.Events
 {
     public class CustomField
     {
+        public virtual int Id { get; set; }
         public virtual FieldType Type { get; set; }
         public virtual string Name { get; set; }
         public virtual string Namespace { get; set; }
         public virtual string Value { get; set; }
         public virtual EpcisEvent Event { get; set; }
+        public virtual CustomField Parent { get; set; }
+        public virtual IList<CustomField> Children { get; set; } = new List<CustomField>();
 
         public override bool Equals(object obj)
         {

@@ -4,8 +4,9 @@
     {
         Ilmd,
         EventExtension,
-        BusinessLocationExtension,
         ErrorDeclarationExtension,
-        ReadPointExtension
+        ReadPointExtension,
+        Attribute,
+        BusinessLocationExtension
     }
 }
