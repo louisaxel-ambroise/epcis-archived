@@ -103,20 +103,20 @@ namespace FasTnT.Domain.Services.EventQuery
             if (param.Name.StartsWith("LT_ILMD")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LE_ILMD")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("EQ_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_INNER_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("GE_INNER_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LT_INNER_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LE_INNER_ILMD")) throw new ImplementationException(param.Name);
+            if (param.Name.StartsWith("GT_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) > int.Parse(param.Value)));
+            if (param.Name.StartsWith("GE_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) >= int.Parse(param.Value)));
+            if (param.Name.StartsWith("LT_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) < int.Parse(param.Value)));
+            if (param.Name.StartsWith("LE_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) <= int.Parse(param.Value)));
             if (param.Name.StartsWith("EQ_INNER_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Value == param.Value));
             if (param.Name.StartsWith("GT_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("GE_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LT_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("LE_INNER_")) throw new ImplementationException(param.Name);
             if (param.Name.StartsWith("EQ_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("GE_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LT_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LE_")) throw new ImplementationException(param.Name);
+            if (param.Name.StartsWith("GT_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) > int.Parse(param.Value)));
+            if (param.Name.StartsWith("GE_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) >= int.Parse(param.Value)));
+            if (param.Name.StartsWith("LT_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) < int.Parse(param.Value)));
+            if (param.Name.StartsWith("LE_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) <= int.Parse(param.Value)));
 
             throw new QueryParameterException(param.Name);
         }

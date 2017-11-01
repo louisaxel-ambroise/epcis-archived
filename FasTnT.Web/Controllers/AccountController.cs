@@ -80,8 +80,7 @@ namespace FasTnT.Web.Controllers
             // Set language cookie if needed
             if (!string.IsNullOrEmpty(user.PreferredLanguage))
             {
-                var langCookie = new HttpCookie(Constants.PreferredLanguage, user.PreferredLanguage);
-                langCookie.Expires = SystemContext.Clock.Now.AddYears(1);
+                var langCookie = new HttpCookie(Constants.PreferredLanguage, user.PreferredLanguage) { Expires = SystemContext.Clock.Now.AddYears(1) };
 
                 Response.Cookies.Add(langCookie);
                 Session[Constants.PreferredLanguage] = user.PreferredLanguage;
@@ -92,10 +91,9 @@ namespace FasTnT.Web.Controllers
 
         private void DeleteCookie()
         {
-            var cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
-            cookie1.Expires = DateTime.Now.AddYears(-1);
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, "") { Expires = DateTime.Now.AddYears(-1) };
 
-            Response.Cookies.Add(cookie1);
+            Response.Cookies.Add(cookie);
         }
     }
 }
