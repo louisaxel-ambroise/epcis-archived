@@ -18,6 +18,7 @@ namespace FasTnT.Data.Mappings.Events
             Map(x => x.Namespace).Column("namespace");
             Map(x => x.Value).Column("value");
             Map(x => x.Type).Column("type").CustomType<FieldType>();
+            Map(x => x.ParentId).Column("parent_id");
 
             HasMany(x => x.Children).KeyColumns.Add("event_id", "parent_id").Cascade.Persist();
         }

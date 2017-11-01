@@ -115,7 +115,7 @@ namespace FasTnT.Domain.Services.EventCapture
         {
             foreach(var children in element.Elements())
             {
-                epcisEvent.CustomFields.Add(ParseCustomField(children, epcisEvent, FieldType.Ilmd)); break;
+                epcisEvent.CustomFields.Add(ParseCustomField(children, epcisEvent, FieldType.Ilmd));
             }
         }
 
@@ -146,7 +146,7 @@ namespace FasTnT.Domain.Services.EventCapture
                 var attributeField = new CustomField
                 {
                     Id = NextCustomId++,
-                    Parent = field,
+                    ParentId = field.Id,
                     Event = epcisEvent,
                     Type = FieldType.Attribute,
                     Name = attribute.Name.LocalName,
