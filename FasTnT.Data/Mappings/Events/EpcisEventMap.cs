@@ -25,9 +25,10 @@ namespace FasTnT.Data.Mappings.Events
             Map(x => x.Disposition).Column("disposition");
             Map(x => x.ReadPoint).Column("read_point");
 
-            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
-            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
-            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore();
+            HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();
+            HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();
+            HasMany(x => x.BusinessTransactions).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();
+            HasMany(x => x.SourcesDestinations).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();
         }
     }
 }

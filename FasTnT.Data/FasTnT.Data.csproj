@@ -63,10 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Interceptors\CommitTransactionInterceptor.cs" />
     <Compile Include="Mappings\Events\BusinessTransactionMap.cs" />
     <Compile Include="Mappings\Events\CustomFieldMap.cs" />
     <Compile Include="Mappings\Events\EpcMap.cs" />
+    <Compile Include="Mappings\Events\SourceDestinationMap.cs" />
     <Compile Include="Mappings\MasterData\BusinessLocationMap.cs" />
     <Compile Include="Mappings\Events\EpcisEventMap.cs" />
     <Compile Include="Mappings\MasterData\BusinessStepMap.cs" />

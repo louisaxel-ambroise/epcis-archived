@@ -14,7 +14,9 @@ namespace FasTnT.Data.Migrations
                 .WithColumn("namespace").AsString(128).NotNullable()
                 .WithColumn("name").AsString(128).NotNullable()
                 .WithColumn("type").AsInt16().NotNullable()
-                .WithColumn("value").AsString(128).Nullable();
+                .WithColumn("text_value").AsString(128).Nullable()
+                .WithColumn("numeric_value").AsDouble().Nullable()
+                .WithColumn("date_value").AsDateTime().Nullable();
 
             Create.PrimaryKey("PK_EVENT_CUSTOMFIELD").OnTable("custom_field").WithSchema("epcis").Columns("event_id", "field_id");
         }

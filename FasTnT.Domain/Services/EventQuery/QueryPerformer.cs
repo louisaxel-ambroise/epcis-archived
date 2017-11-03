@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using FasTnT.Domain.Model.Queries;
 using System.Linq;
-using FasTnT.Domain.Model.Events;
 using FasTnT.Domain.Repositories;
+using FasTnT.Domain.Exceptions;
 
 namespace FasTnT.Domain.Services.Queries
 {
@@ -18,11 +18,21 @@ namespace FasTnT.Domain.Services.Queries
             _queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
-        public IEnumerable<EpcisEvent> ExecuteQuery(string queryName, QueryParams parameters)
+        public QueryEventResponse ExecuteQuery(string queryName, QueryParams parameters)
         {
-            var query = _queries.Single(q => q.Name.Equals(queryName));
+            var query = _queries.SingleOrDefault(q => q.Name.Equals(queryName)) ?? throw new NoSuchNameException($"Query '{queryName}' does not exist.");
+            var events = query.ApplyFilter(_eventRepository.Query(), parameters).ToList();
 
-            return query.ApplyFilter(_eventRepository.Query(), parameters);
+            query.PerformValidation(events, parameters);
+
+            return new QueryEventResponse
+            {
+                Events = events,
+                BusinessTransactions = _eventRepository.LoadBusinessTransactions(events),
+                Epcs = _eventRepository.LoadEpcs(events),
+                CustomFields = _eventRepository.LoadCustomFields(events),
+                SourcesDestinations = _eventRepository.LoadSourceDestinations(events)
+            };
         }
 
         public IEnumerable<string> ListQueryNames()

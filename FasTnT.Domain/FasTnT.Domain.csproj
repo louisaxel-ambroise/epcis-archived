@@ -45,10 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Exceptions\EpcisException.cs" />
     <Compile Include="Exceptions\ImplementationException.cs" />
+    <Compile Include="Exceptions\NoSuchNameException.cs" />
     <Compile Include="Exceptions\QueryParameterException.cs" />
+    <Compile Include="Exceptions\QueryTooComplexException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Model\Queries\QueryEventResponse.cs" />
     <Compile Include="Services\EventCapture\EventCapturer.cs" />
     <Compile Include="Services\EventCapture\EventPersister.cs" />
     <Compile Include="Services\EventCapture\IEventCapturer.cs" />
@@ -73,8 +79,8 @@
     <Compile Include="Model\Events\MasterData\Disposition.cs" />
     <Compile Include="Model\Events\MasterData\MasterBusinessTransaction.cs" />
     <Compile Include="Model\Events\MasterData\ReadPoint.cs" />
-    <Compile Include="Model\Events\MasterData\SourceDestination.cs" />
-    <Compile Include="Model\Events\MasterData\SourceDestinationType.cs" />
+    <Compile Include="Model\Events\SourceDestination.cs" />
+    <Compile Include="Model\Events\SourceDestinationType.cs" />
     <Compile Include="Model\Events\TimeZoneOffset.cs" />
     <Compile Include="Model\Queries\QueryParam.cs" />
     <Compile Include="Model\Queries\QueryParams.cs" />

@@ -16,9 +16,12 @@ namespace FasTnT.Data.Mappings.Events
 
             Map(x => x.Name).Column("name");
             Map(x => x.Namespace).Column("namespace");
-            Map(x => x.Value).Column("value");
             Map(x => x.Type).Column("type").CustomType<FieldType>();
             Map(x => x.ParentId).Column("parent_id");
+
+            Map(x => x.TextValue).Column("text_value");
+            Map(x => x.NumericValue).Column("numeric_value");
+            Map(x => x.DateValue).Column("date_value");
 
             HasMany(x => x.Children).KeyColumns.Add("event_id", "parent_id").Cascade.Persist();
         }

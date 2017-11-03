@@ -1,5 +1,4 @@
-﻿using FasTnT.Domain.Model.MasterData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace FasTnT.Domain.Model.Events
@@ -24,5 +23,18 @@ namespace FasTnT.Domain.Model.Events
         public virtual IList<SourceDestination> SourcesDestinations { get; set; } = new List<SourceDestination>();
         public virtual IList<CustomField> CustomFields { get; set; } = new List<CustomField>();
         public virtual ErrorDeclaration ErrorDeclaration { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as EpcisEvent;
+
+            if (other == null) return false;
+            return Id.Equals(other.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

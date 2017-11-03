@@ -1,6 +1,6 @@
 ﻿using FasTnT.Domain.Exceptions;
+using FasTnT.Domain.Model;
 using FasTnT.Domain.Model.Events;
-using FasTnT.Domain.Model.MasterData;
 using FasTnT.Domain.Model.Queries;
 using System;
 using System.Linq;
@@ -81,42 +81,62 @@ namespace FasTnT.Domain.Services.EventQuery
                 // Limits and take
                 case "eventCountLimit":
                     return query.Take(int.Parse(param.Value));
+                case "maxEventCount":
+                    return query.Take(int.Parse(param.Value) + 1); // Don't try to load the entire DB. If number = this max value, then throw an exception
                 case "orderBy":
                 case "orderDirection":
-                case "maxEventCount":
                     throw new ImplementationException(param.Name);
                 default:
                     return ApplyFieldNameQuery(query, param);
             }
-
         }
 
+        // Custom Fields query can be of 3 types: text (can contain multiple values, return if any matches), numeric and DateTime.
         private static IQueryable<EpcisEvent> ApplyFieldNameQuery(IQueryable<EpcisEvent> query, QueryParam param)
         {
             var fieldName = param.Name.Split('_').Last().Split('#');
             var nameSpace = fieldName[0];
             var name = fieldName[1];
 
-            if (param.Name.StartsWith("EQ_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("GE_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LT_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LE_ILMD")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("EQ_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) > int.Parse(param.Value)));
-            if (param.Name.StartsWith("GE_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) >= int.Parse(param.Value)));
-            if (param.Name.StartsWith("LT_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) < int.Parse(param.Value)));
-            if (param.Name.StartsWith("LE_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) <= int.Parse(param.Value)));
-            if (param.Name.StartsWith("EQ_INNER_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_INNER_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("GE_INNER_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LT_INNER_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("LE_INNER_")) throw new ImplementationException(param.Name);
-            if (param.Name.StartsWith("EQ_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && f.Value == param.Value));
-            if (param.Name.StartsWith("GT_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) > int.Parse(param.Value)));
-            if (param.Name.StartsWith("GE_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) >= int.Parse(param.Value)));
-            if (param.Name.StartsWith("LT_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) < int.Parse(param.Value)));
-            if (param.Name.StartsWith("LE_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.Namespace == nameSpace && f.Name == name && int.Parse(f.Value) <= int.Parse(param.Value)));
+            if (param.Name.StartsWith("EQ_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
+
+            if (param.Name.StartsWith("EQ_INNER_ILMD")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_INNER_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_INNER_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_INNER_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_INNER_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_INNER_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_INNER_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_INNER_ILMD") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_INNER_ILMD") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
+
+            if (param.Name.StartsWith("EQ_INNER_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
+
+            if (param.Name.StartsWith("EQ_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.EventExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
 
             throw new QueryParameterException(param.Name);
         }

@@ -3,9 +3,8 @@ using System.Xml.Linq;
 using System;
 using FasTnT.Domain.Model.Events;
 using System.Linq;
-using FasTnT.Domain.Model.MasterData;
-using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Services.EventCapture;
+using FasTnT.Domain.Model;
 
 namespace FasTnT.Domain.Extensions
 {
@@ -65,13 +64,7 @@ namespace FasTnT.Domain.Extensions
 
             foreach (var innerElement in element.Elements().Where(x => x.Name.Namespace != XNamespace.None))
             {
-                epcisEvent.CustomFields.Add(new CustomField
-                {
-                    Type = FieldType.ReadPointExtension,
-                    Namespace = innerElement.Name.NamespaceName,
-                    Name = innerElement.Name.LocalName,
-                    Value = innerElement.Value
-                });
+                epcisEvent.CustomFields.Add(DocumentParser.ParseCustomField(innerElement, epcisEvent, FieldType.ReadPointExtension));
             }
         }
 

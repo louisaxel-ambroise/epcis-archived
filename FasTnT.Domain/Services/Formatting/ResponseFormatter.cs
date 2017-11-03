@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using System;
-using FasTnT.Domain.Model.Events;
 using System.Linq;
+using FasTnT.Domain.Model.Queries;
 
 namespace FasTnT.Domain.Services.Formatting
 {
@@ -15,10 +14,10 @@ namespace FasTnT.Domain.Services.Formatting
             _eventFormatter = eventFormatter ?? throw new ArgumentException(nameof(eventFormatter));
         }
 
-        public XDocument FormatPollResponse(string queryName, IEnumerable<EpcisEvent> events)
+        public XDocument FormatPollResponse(string queryName, QueryEventResponse events)
         {
             var epcisQueryNamespace = XNamespace.Get("urn:epcglobal:epcis-query:xsd:1");
-            var formatted = events.Select(e => _eventFormatter.Format(e));
+            var formatted = _eventFormatter.Format(events);
 
             return new XDocument(new XDeclaration("1.0", "UTF-8", "yes"),
                 new XElement(epcisQueryNamespace + "QueryResult",

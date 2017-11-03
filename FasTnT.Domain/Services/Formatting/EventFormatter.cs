@@ -1,8 +1,10 @@
 ﻿using System.Xml.Linq;
 using FasTnT.Domain.Model.Events;
 using System;
-using FasTnT.Domain.Model.MasterData;
 using System.Linq;
+using FasTnT.Domain.Model;
+using FasTnT.Domain.Model.Queries;
+using System.Collections.Generic;
 
 namespace FasTnT.Domain.Services.Formatting
 {
@@ -10,7 +12,20 @@ namespace FasTnT.Domain.Services.Formatting
     {
         public static string DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
 
-        public XElement Format(EpcisEvent @event)
+        public IEnumerable<XElement> Format(QueryEventResponse eventResponse)
+        {
+            foreach(var @event in eventResponse.Events)
+            {
+                @event.Epcs = eventResponse.Epcs.Where(epc => epc.Event == @event).ToList();
+                @event.CustomFields = eventResponse.CustomFields.Where(field => field.Event == @event).ToList();
+                @event.BusinessTransactions = eventResponse.BusinessTransactions.Where(tx => tx.Event == @event).ToList();
+                @event.SourcesDestinations = eventResponse.SourcesDestinations.Where(tx => tx.Event == @event).ToList();
+
+                yield return Format(@event);
+            }
+        }
+
+        private XElement Format(EpcisEvent @event)
         {
             switch (@event.EventType)
             {
@@ -49,7 +64,7 @@ namespace FasTnT.Domain.Services.Formatting
             AddBusinessTransactions(@event, element);
             AddIlmd(@event, element);
             AddSourceDest(@event, element);
-            AddCustomFields(@event, element);
+            AddCustomFields(@event, element, FieldType.EventExtension);
 
             return element;
         }
@@ -74,7 +89,7 @@ namespace FasTnT.Domain.Services.Formatting
             AddBusinessTransactions(@event, element);
             AddIlmd(@event, element);
             AddSourceDest(@event, element);
-            AddCustomFields(@event, element);
+            AddCustomFields(@event, element, FieldType.EventExtension);
 
             return element;
         }
@@ -97,9 +112,8 @@ namespace FasTnT.Domain.Services.Formatting
             AddReadPoint(@event, element);
             AddBusinessLocation(@event, element);
             AddBusinessTransactions(@event, element);
-            AddIlmd(@event, element);
             AddSourceDest(@event, element);
-            AddCustomFields(@event, element);
+            AddCustomFields(@event, element, FieldType.EventExtension);
 
             return element;
         }
@@ -122,9 +136,8 @@ namespace FasTnT.Domain.Services.Formatting
             AddReadPoint(@event, element);
             AddBusinessLocation(@event, element);
             AddBusinessTransactions(@event, element);
-            AddIlmd(@event, element);
             AddSourceDest(@event, element);
-            AddCustomFields(@event, element);
+            AddCustomFields(@event, element, FieldType.EventExtension);
 
             return element;
         }
@@ -147,7 +160,7 @@ namespace FasTnT.Domain.Services.Formatting
 
             AddReadPoint(epcisEvent, element);
             AddBusinessLocation(epcisEvent, element);
-            AddCustomFields(epcisEvent, element);
+            AddCustomFields(epcisEvent, element, FieldType.EventExtension);
 
             return element;
         }
@@ -185,16 +198,43 @@ namespace FasTnT.Domain.Services.Formatting
 
         private static void AddIlmd(EpcisEvent epcisEvent, XContainer element)
         {
-            var elts = epcisEvent.CustomFields.Where(x => x.Type == FieldType.Ilmd).Select(i => new XElement(XName.Get(i.Name, i.Namespace), i.Value));
+            var ilmdElement = new XElement("ilmd");
 
-            if (elts.Any()) AddInExtension(element, new XElement("ilmd", elts));
+            AddCustomFields(epcisEvent, ilmdElement, FieldType.Ilmd);
+
+            if(ilmdElement.HasAttributes || ilmdElement.HasElements) AddInExtension(element, ilmdElement);
         }
 
-
-        private static void AddCustomFields(EpcisEvent epcisEvent, XContainer element)
+        private static void AddCustomFields(EpcisEvent epcisEvent, XContainer element, FieldType type)
         {
-            foreach (var field in epcisEvent.CustomFields.Where(x => x.Type == FieldType.EventExtension))
-                element.Add(new XElement(XName.Get(field.Name, field.Namespace), field.Value));
+            foreach (var rootField in epcisEvent.CustomFields.Where(x => x.Type == type && x.ParentId == null))
+            {
+                var xmlElement = new XElement(XName.Get(rootField.Name, rootField.Namespace), rootField.TextValue);
+
+                AddInnerCustomFields(epcisEvent, xmlElement, type, rootField.Id);
+                foreach (var attribute in epcisEvent.CustomFields.Where(x => x.Type == FieldType.Attribute && x.ParentId == rootField.Id))
+                {
+                    xmlElement.Add(new XAttribute(XName.Get(attribute.Name, attribute.Namespace), attribute.TextValue));
+                }
+
+                element.Add(xmlElement);
+            }
+        }
+
+        private static void AddInnerCustomFields(EpcisEvent epcisEvent, XContainer element, FieldType type, int parentId)
+        {
+            foreach (var field in epcisEvent.CustomFields.Where(x => x.Type == type && x.ParentId == parentId))
+            {
+                var xmlElement = new XElement(XName.Get(field.Name, field.Namespace), field.TextValue);
+
+                AddInnerCustomFields(epcisEvent, xmlElement, type, field.Id);
+                foreach (var attribute in epcisEvent.CustomFields.Where(x => x.Type == FieldType.Attribute && x.ParentId == field.Id))
+                {
+                    xmlElement.Add(new XAttribute(XName.Get(attribute.Name, attribute.Namespace), attribute.TextValue));
+                }
+
+                element.Add(xmlElement);
+            }
         }
 
         // TODO: reformat to match all event types.
@@ -224,7 +264,7 @@ namespace FasTnT.Domain.Services.Formatting
             var readPoint = new XElement("readPoint", new XElement("id", epcisEvent.ReadPoint));
 
             foreach (var ext in epcisEvent.CustomFields.Where(x => x.Type == FieldType.ReadPointExtension))
-                readPoint.Add(new XElement(XName.Get(ext.Name, ext.Namespace), ext.Value));
+                readPoint.Add(new XElement(XName.Get(ext.Name, ext.Namespace), ext.TextValue));
 
             element.Add(readPoint);
         }
@@ -233,7 +273,7 @@ namespace FasTnT.Domain.Services.Formatting
         {
             if (string.IsNullOrEmpty(epcisEvent.BusinessLocation)) return;
 
-            var custom = epcisEvent.CustomFields.Where(x => x.Type == FieldType.BusinessLocationExtension).Select(field => new XElement(XName.Get(field.Name, field.Namespace), field.Value));
+            var custom = epcisEvent.CustomFields.Where(x => x.Type == FieldType.BusinessLocationExtension).Select(field => new XElement(XName.Get(field.Name, field.Namespace), field.TextValue));
             element.Add(new XElement("bizLocation", new XElement("id", epcisEvent.BusinessLocation), custom));
         }
 

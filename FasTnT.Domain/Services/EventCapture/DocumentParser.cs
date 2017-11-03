@@ -55,8 +55,6 @@ namespace FasTnT.Domain.Services.EventCapture
             {
                 switch (innerElement.Name.LocalName)
                 {
-                    case "extension":
-                        ParseAttributes(innerElement, epcisEvent); break;
                     case "action":
                         epcisEvent.Action = innerElement.ToEventAction(); break;
                     case "eventTimeZoneOffset":
@@ -105,10 +103,20 @@ namespace FasTnT.Domain.Services.EventCapture
                         epcisEvent.Epcs.Add(new Epc { Event = epcisEvent, Id = innerElement.Value, Type = EpcType.ParentId }); break;
                     case "recordTime": // We don't process record time as it will be overrided in any case..
                         break;
+                    case "extension":
+                        ParseExtensionElement(innerElement, epcisEvent); break;
                     default:
                         epcisEvent.CustomFields.Add(ParseCustomField(innerElement, epcisEvent)); break;
                 }
             }
+        }
+
+        private static void ParseExtensionElement(XElement innerElement, EpcisEvent epcisEvent)
+        {
+            if (innerElement.Name.Namespace == XNamespace.None || innerElement.Name.Namespace == XNamespace.Xmlns || innerElement.Name.NamespaceName == EpcisNamespace)
+                ParseAttributes(innerElement, epcisEvent);
+            else
+                epcisEvent.CustomFields.Add(ParseCustomField(innerElement, epcisEvent));
         }
 
         private static void ParseIlmd(XElement element, EpcisEvent epcisEvent)
@@ -125,7 +133,7 @@ namespace FasTnT.Domain.Services.EventCapture
             {
                 throw new EpcisException($"Element '{element.Name.LocalName}' with namespace '{element.Name.NamespaceName}' not expected here.");
             }
-
+            
             var field = new CustomField
             {
                 Id = NextCustomId++,
@@ -133,7 +141,9 @@ namespace FasTnT.Domain.Services.EventCapture
                 Type = type,
                 Name = element.Name.LocalName,
                 Namespace = element.Name.NamespaceName,
-                Value = element.HasElements ? null : element.Value
+                TextValue = element.HasElements ? null : element.Value,
+                NumericValue = element.HasElements ? null : double.TryParse(element.Value, out double doubleValue) ? doubleValue : default(double?),
+                DateValue = element.HasElements ? null : DateTime.TryParse(element.Value, out DateTime dateValue) ? dateValue : default(DateTime?),
             };
 
             if (element.HasElements)
@@ -151,7 +161,9 @@ namespace FasTnT.Domain.Services.EventCapture
                     Type = FieldType.Attribute,
                     Name = attribute.Name.LocalName,
                     Namespace = attribute.Name.Namespace.NamespaceName,
-                    Value = attribute.Value
+                    TextValue = attribute.Value,
+                    NumericValue = element.HasElements ? null : double.TryParse(element.Value, out double doubleVal) ? doubleVal : default(double?),
+                    DateValue = element.HasElements ? null : DateTime.TryParse(element.Value, out DateTime dateVal) ? dateVal : default(DateTime?),
                 };
 
                 field.Children.Add(attributeField);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FasTnT.Domain.Model.Events
 {
@@ -8,7 +9,9 @@ namespace FasTnT.Domain.Model.Events
         public virtual FieldType Type { get; set; }
         public virtual string Name { get; set; }
         public virtual string Namespace { get; set; }
-        public virtual string Value { get; set; }
+        public virtual string TextValue { get; set; }
+        public virtual double? NumericValue { get; set; }
+        public virtual DateTime? DateValue { get; set; }
         public virtual EpcisEvent Event { get; set; }
         public virtual int? ParentId { get; set; }
         public virtual IList<CustomField> Children { get; set; } = new List<CustomField>();
