@@ -7,7 +7,7 @@
         public string Destination { get; set; }
         public string QueryName { get; set; }
         public string Id { get; set; }
-        public QueryParams Parameters { get; set; }
+        public QueryParam[] Parameters { get; set; }
         public SubscriptionControls Controls { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace FasTnT.Domain.Model.Queries
 
         public string Value => Values.Single();
 
-        public Type ComparableType => (double.TryParse(Value, out double doubleValue)) ? typeof(double) : (DateTime.TryParse(Value, out DateTime dateValue)) ? typeof(DateTime) : throw new QueryParameterException($"Parameter '{Name}' has invalid comparison value: '{Value}'");
+        public Type ComparableType => (double.TryParse(Value, out double doubleValue)) ? typeof(double) : (DateTime.TryParse(Value, out DateTime dateValue)) ? typeof(DateTime) : null;
         public object ComparableValue => Convert.ChangeType(Value, ComparableType);
     }
 }

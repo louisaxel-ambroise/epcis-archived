@@ -7,6 +7,6 @@ namespace FasTnT.Domain.Services.Queries
     public interface IQueryPerformer
     {
         IEnumerable<string> ListQueryNames();
-        QueryEventResponse ExecuteQuery(string queryName, QueryParams parameters);
+        QueryEventResponse ExecuteQuery(string queryName, QueryParam[] parameters);
     }
 }

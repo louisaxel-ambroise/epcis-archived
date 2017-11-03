@@ -101,6 +101,8 @@
     <Compile Include="Migrations\M204_CreateDispositionTable.cs" />
     <Compile Include="Migrations\M205_CreateReadPointTable.cs" />
     <Compile Include="Migrations\M300_InsertDetaultData.cs" />
+    <Compile Include="Migrations\M400_CreateSubscriptionSchema.cs" />
+    <Compile Include="Migrations\M401_CreateSubscriptionTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

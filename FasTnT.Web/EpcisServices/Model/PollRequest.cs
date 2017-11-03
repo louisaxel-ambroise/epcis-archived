@@ -8,7 +8,7 @@ namespace FasTnT.Web.EpcisServices.Model
     public class PollRequest
     {
         public string Name { get; set; }
-        public QueryParams Parameters { get; set; }
+        public QueryParam[] Parameters { get; set; }
 
         public static PollRequest Parse(XElement xmlRequest)
         {
@@ -23,7 +23,7 @@ namespace FasTnT.Web.EpcisServices.Model
             return poll;
         }
 
-        public static QueryParams ParseParameters(XElement element)
+        public static QueryParam[] ParseParameters(XElement element)
         {
             var parameters = new List<QueryParam>();
 
@@ -40,7 +40,7 @@ namespace FasTnT.Web.EpcisServices.Model
                 parameters.Add(param);
             }
 
-            return new QueryParams { Parameters = parameters.ToArray() };
+            return parameters.ToArray();
         }
 
         private static string[] ParseValues(XElement element)

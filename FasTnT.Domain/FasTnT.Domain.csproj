@@ -83,7 +83,6 @@
     <Compile Include="Model\Events\SourceDestinationType.cs" />
     <Compile Include="Model\Events\TimeZoneOffset.cs" />
     <Compile Include="Model\Queries\QueryParam.cs" />
-    <Compile Include="Model\Queries\QueryParams.cs" />
     <Compile Include="Model\Queries\Subscription.cs" />
     <Compile Include="Model\Queries\SubscriptionControls.cs" />
     <Compile Include="Model\Users\User.cs" />

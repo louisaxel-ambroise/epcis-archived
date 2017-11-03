@@ -2,13 +2,11 @@
 
 namespace FasTnT.Domain.Exceptions
 {
-    public class QueryParameterException : Exception
+    [Serializable]
+    public class QueryParameterException : EpcisException
     {
-        public string ParameterName { get; set; }
-
         public QueryParameterException(string parameterName) : base($"Unknown parameter name: '{parameterName}'")
         {
-            ParameterName = parameterName;
         }
     }
 }

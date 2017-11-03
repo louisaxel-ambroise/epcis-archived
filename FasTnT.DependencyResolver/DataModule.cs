@@ -25,7 +25,7 @@ namespace FasTnT.DependencyInjection
             var requestLogger = new EmptyInterceptor();
 
             #if DEBUG
-            requestLogger = new SQLDebugOutput();
+            requestLogger = new SQLDebugOutputInterceptor();
             #endif
 
             Bind<IUserRepository>().To<UserRepository>().UsingScope(Scope);

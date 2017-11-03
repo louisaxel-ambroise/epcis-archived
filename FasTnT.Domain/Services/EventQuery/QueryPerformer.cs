@@ -18,7 +18,7 @@ namespace FasTnT.Domain.Services.Queries
             _queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
-        public QueryEventResponse ExecuteQuery(string queryName, QueryParams parameters)
+        public QueryEventResponse ExecuteQuery(string queryName, QueryParam[] parameters)
         {
             var query = _queries.SingleOrDefault(q => q.Name.Equals(queryName)) ?? throw new NoSuchNameException($"Query '{queryName}' does not exist.");
             var events = query.ApplyFilter(_eventRepository.Query(), parameters).ToList();
