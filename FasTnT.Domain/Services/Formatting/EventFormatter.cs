@@ -102,7 +102,8 @@ namespace FasTnT.Domain.Services.Formatting
             element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
 
-            AddEpcList(@event, element);
+            AddParentId(@event, element);
+            AddChildEpcs(@event, element);
 
             element.Add(new XElement("action", @event.Action.ToString().ToUpper()));
 
@@ -237,7 +238,6 @@ namespace FasTnT.Domain.Services.Formatting
             }
         }
 
-        // TODO: reformat to match all event types.
         private static void AddEpcList(EpcisEvent epcisEvent, XContainer element)
         {
             var epcList = new XElement("epcList");
@@ -255,6 +255,18 @@ namespace FasTnT.Domain.Services.Formatting
 
             if (epcList.HasElements) element.Add(epcList);
             if (epcQuantity.HasElements) AddInExtension(element, epcQuantity);
+        }
+
+        private void AddParentId(EpcisEvent @event, XElement element)
+        {
+            var parentId = @event.Epcs.SingleOrDefault(e => e.Type == EpcType.ParentId);
+            if (parentId != null) element.Add(new XElement("parentID", parentId.Id));
+        }
+
+        private void AddChildEpcs(EpcisEvent @event, XElement element)
+        {
+            var childEpcs = @event.Epcs.Where(e => e.Type == EpcType.ChildEpc);
+            if (childEpcs.Any()) element.Add(new XElement("childEPCs", childEpcs.Select(x => new XElement("epc", x.Id))));
         }
 
         private static void AddReadPoint(EpcisEvent epcisEvent, XContainer element)
