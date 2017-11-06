@@ -1,14 +1,13 @@
-﻿using FasTnT.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FasTnT.Domain.Model.Queries
 {
     public class QueryParam
     {
         public string Name { get; set; }
-        public IEnumerable<string> Values { get; set; }
+        public IList<string> Values { get; set; } = new List<string>();
 
         public string Value => Values.Single();
 

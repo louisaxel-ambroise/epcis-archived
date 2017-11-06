@@ -14,7 +14,8 @@ namespace FasTnT.Domain.Services.EventQuery
             switch (param.Name)
             {
                 case "eventType":
-                    return query.Where(e => e.EventType == (EventType)Enum.Parse(typeof(EventType), param.Value));
+                    var types = param.Values.Select(v => (EventType)Enum.Parse(typeof(EventType), v, true)).ToArray();
+                    return query.Where(e => types.Contains(e.EventType));
                 case "GE_eventTime":
                     return query.Where(e => e.EventTime >= DateTime.Parse(param.Value));
                 case "LT_eventTime":
@@ -24,7 +25,8 @@ namespace FasTnT.Domain.Services.EventQuery
                 case "LT_recordTime":
                     return query.Where(e => e.CaptureTime < DateTime.Parse(param.Value));
                 case "EQ_action":
-                    return query.Where(e => e.Action == (EventAction)Enum.Parse(typeof(EventAction), param.Value));
+                    var actions = param.Values.Select(v => (EventAction)Enum.Parse(typeof(EventAction), v, true)).ToArray();
+                    return query.Where(e => actions.Contains(e.Action));
                 case "EQ_bizStep":
                     return query.Where(e => param.Values.Contains(e.BusinessStep));
                 case "EQ_disposition":
@@ -33,6 +35,9 @@ namespace FasTnT.Domain.Services.EventQuery
                     return query.Where(e => param.Values.Contains(e.ReadPoint));
                 case "EQ_bizLocation":
                     return query.Where(e => param.Values.Contains(e.BusinessLocation));
+                case "WD_readPoint":
+                case "WD_bizLocation":
+                    throw new ImplementationException($"{param.Name} parameter is not implemented yet.");
                 case "EQ_bizTransaction_type":
                     return query.Where(e => e.BusinessTransactions.Any(tx => param.Values.Contains(tx.Type)));
                 case "EQ_source_type":
@@ -69,7 +74,6 @@ namespace FasTnT.Domain.Services.EventQuery
                     return query.Where(e => e.Epcs.Any(epc => epc.Type == EpcType.Quantity && epc.Quantity < int.Parse(param.Value)));
                 case "LE_quantity":
                     return query.Where(e => e.Epcs.Any(epc => epc.Type == EpcType.Quantity && epc.Quantity <= int.Parse(param.Value)));
-                // TODO: a number of parameters are missing. Specification 1.2 29/09/2016 pp. 74-79
                 case "EXISTS_errorDeclaration":
                     return query.Where(e => e.ErrorDeclaration != null);
                 case "GE_errorDeclaration_Time":
@@ -79,12 +83,12 @@ namespace FasTnT.Domain.Services.EventQuery
                 case "EQ_errorReason":
                     return query.Where(e => e.ErrorDeclaration != null && param.Values.Contains(e.ErrorDeclaration.Reason));
                 case "EQ_correctiveEventID":
-                    throw new ImplementationException(param.Name);
+                    throw new ImplementationException($"{param.Name} parameter is not implemented yet");
                 // Limits and take
                 case "eventCountLimit":
                     return query.Take(int.Parse(param.Value));
                 case "maxEventCount":
-                    return query.Take(int.Parse(param.Value) + 1); // Don't try to load the entire DB. If number = this max value, then throw an exception
+                    return query.Take(int.Parse(param.Value) + 1); // Don't try to load the entire DB. If number = max value, then throw an exception
                 case "orderBy":
                 case "orderDirection":
                     throw new ImplementationException("orderBy and orderDirection are not implemented yet.");
@@ -99,6 +103,28 @@ namespace FasTnT.Domain.Services.EventQuery
             var fieldName = param.Name.Split('_').Last().Split('#');
             var nameSpace = fieldName[0];
             var name = fieldName[1];
+
+            if (param.Name.StartsWith("EXISTS_ERROR_DECLARATION_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name));
+            if (param.Name.StartsWith("EQ_ERROR_DECLARATION_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
+
+            if (param.Name.StartsWith("EXISTS_INNER_ERROR_DECLARATION_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name));
+            if (param.Name.StartsWith("EQ_INNER_ERROR_DECLARATION_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId == null && f.Namespace == nameSpace && f.Name != name && param.Values.Contains(f.TextValue)));
+            if (param.Name.StartsWith("GT_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue > (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GT_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue > (double)param.ComparableValue));
+            if (param.Name.StartsWith("GE_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue >= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("GE_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue >= (double)param.ComparableValue));
+            if (param.Name.StartsWith("LT_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue < (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LT_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue < (double)param.ComparableValue));
+            if (param.Name.StartsWith("LE_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(DateTime)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.DateValue <= (DateTime)param.ComparableValue));
+            if (param.Name.StartsWith("LE_INNER_ERROR_DECLARATION_") && param.ComparableType == typeof(double)) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.ErrorDeclarationExtension && f.ParentId != null && f.Namespace == nameSpace && f.Name == name && f.NumericValue <= (double)param.ComparableValue));
 
             if (param.Name.StartsWith("EXISTS_ILMD_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name));
             if (param.Name.StartsWith("EQ_ILMD_")) return query.Where(e => e.CustomFields.Any(f => f.Type == FieldType.Ilmd && f.ParentId == null && f.Namespace == nameSpace && f.Name == name && param.Values.Contains(f.TextValue)));

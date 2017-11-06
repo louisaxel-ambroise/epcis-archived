@@ -17,7 +17,8 @@ namespace FasTnT.Web.EpcisServices.Model
             foreach (var element in xmlRequest.Elements())
             {
                 if (element.Name.LocalName == "name") poll.Name = element.Value;
-                if (element.Name.LocalName == "params") poll.Parameters = ParseParameters(element);
+                else if (element.Name.LocalName == "params") poll.Parameters = ParseParameters(element);
+                else throw new System.Exception($"Element '{element.Name.LocalName}' is not expected here.");
             }
 
             return poll;
@@ -34,23 +35,14 @@ namespace FasTnT.Web.EpcisServices.Model
                 foreach (var elt in parameter.Elements())
                 {
                     if (elt.Name.LocalName == "name") param.Name = elt.Value;
-                    if (elt.Name.LocalName == "value") param.Values = ParseValues(elt);
+                    else if (elt.Name.LocalName == "value") param.Values.Add(elt.Value);
+                    else throw new System.Exception($"Element '{elt.Name.LocalName}' is not expected here.");
                 }
 
                 parameters.Add(param);
             }
 
             return parameters.ToArray();
-        }
-
-        private static string[] ParseValues(XElement element)
-        {
-            if (element.HasElements)
-            {
-                return element.Elements().Select(x => x.Value).ToArray();
-            }
-
-            return new[] {element.Value};
         }
     }
 }
