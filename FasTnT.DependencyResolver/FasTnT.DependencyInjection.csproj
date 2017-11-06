@@ -56,12 +56,12 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Debug\SQLDebugOutputInterceptor.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
     <Compile Include="DataModule.cs" />
     <Compile Include="Extensions\IScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Debug\SQLDebugOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
