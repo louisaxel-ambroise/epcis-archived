@@ -1,9 +1,11 @@
 ﻿using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Services.Dashboard;
+using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Utils;
 using FasTnT.Web.Helpers;
 using FasTnT.Web.Models.Account;
+using FasTnT.Web.Models.Users;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -15,10 +17,12 @@ namespace FasTnT.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IWebUserAuthenticator _userAuthenticator;
+        private readonly IUserService _userService;
 
-        public AccountController(IWebUserAuthenticator userAuthenticator)
+        public AccountController(IWebUserAuthenticator userAuthenticator, IUserService userService)
         {
             _userAuthenticator = userAuthenticator;
+            _userService = userService;
         }
 
         [AllowAnonymous]
@@ -69,6 +73,15 @@ namespace FasTnT.Web.Controllers
             DeleteCookie();
 
             return RedirectToAction("LogOn");
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            var userName = HttpContext.User.Identity.Name;
+            var userDetails = _userService.GetDetails(userName);
+
+            return View(userDetails.MapToViewModel());
         }
 
         private void GenerateAndStoreCookies(User user)

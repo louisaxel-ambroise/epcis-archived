@@ -1,6 +1,6 @@
 @media screen and (min-width: 1060px) {
 	*{ margin:0; padding:0; }
-	html{ background:#fafafa url('images/bg.jpg') repeat-x;}
+	html{ background:#fafafa url('../images/bg.jpg') repeat-x;}
     html, body { height: 100%; }
     body {
 		max-width:1500px;
@@ -14,10 +14,7 @@
 		font-size:0.9em;
 	}
 	
-	aside{
-		min-width:240px;
-		background: #333;
-	}
+	aside{ min-width:240px; background: #333; }
 	aside h2{
 		color: #222;
 		text-align:center;
@@ -57,12 +54,7 @@
 		box-sizing: border-box;
 	}
 	
-	div#main-section{
-		webkit-box-flex: 1;
-	    -ms-flex: 1;
-		flex: 1;
-	}
-	
+	div#main-section{ webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
 	div#main-section nav{
 		background: #fff;
 		width:100%;
@@ -103,16 +95,14 @@
 		font-weight: bold;
 		font-size:85%;
 	}
-	
-	div#main-section section{
-		margin:5px 10px 5px 30px;
-	}
+    div#main-section nav ul li.search button:hover { color: #0A9; }	
+
+    /* PAGE CONTENT */
+	div#main-section section{ margin:5px 10px 5px 30px; }
     div#main-section section a{ color:#0A9;}
-	div#main-section section h1{
-		font-size:180%;
-		margin-bottom:15px;
-	}
+	div#main-section section h1{ font-size:180%; margin-bottom:15px; }
 	
+    /* FOOTER */
 	footer{
 		width:50%;
 		margin: 20px auto;
@@ -122,5 +112,7 @@
 		font-size:80%;
 		text-align:center;
 	}
+    footer p { margin:5px 0;}
     footer a{ color:#0A9; }
+    footer p a.language{ margin:0 5px;}
 }

@@ -1,5 +1,6 @@
 ﻿using FasTnT.Domain.Log;
 using FasTnT.Domain.Services.Dashboard;
+using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Services.Queries;
@@ -22,7 +23,11 @@ namespace FasTnT.DependencyInjection
 
         public override void Load()
         {
+            // Dashboard Bindings
             Bind<IWebUserAuthenticator>().To<WebUserAuthenticator>();
+            Bind<IUserService>().To<UserService>();
+
+            // EPCIS Service Bindings
             Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();
             Bind<IEventFormatter>().To<EventFormatter>().InSingletonScope();
             Bind<ISubscriptionManager>().To<SubscriptionManager>();

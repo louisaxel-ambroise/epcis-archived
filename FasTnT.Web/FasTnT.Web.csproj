@@ -209,15 +209,19 @@
     <Compile Include="Models\Events\LatestEventsViewModel.cs" />
     <Compile Include="Models\Events\Mappings.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
+    <Compile Include="Models\Users\UserDetailsViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\desktop.css" />
-    <Content Include="Content\desktop_table.css" />
+    <Content Include="Content\desktop\main.css" />
+    <Content Include="Content\desktop\list.css" />
+    <Content Include="Content\desktop\table.css" />
     <Content Include="Content\images\bg.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\images\flag_EN.jpg" />
+    <Content Include="Content\images\flag_FR.jpg" />
     <Content Include="Content\images\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -312,6 +316,7 @@
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\_UserList.cshtml" />
     <Content Include="Views\Events\_LatestEvents.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

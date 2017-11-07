@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@Resources.ApplicationName</title>
+    <title>@Resources.Label_Login - @Resources.ApplicationName</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" href="~/Content/images/icon.ico" />
 
@@ -16,6 +16,10 @@
     <body>
         <h1>FasT&amp;T</h1>
         <div id="logon">
+            @if (!string.IsNullOrEmpty(Model.AuthenticationError))
+            {
+                <p class="error">@Html.LocalizeLabel(Model.AuthenticationError)</p>
+            }
             <form method="post" action="@Url.Content("~/Account/LogOn")">
                 @Html.AntiForgeryToken()
                 <div class="input">
@@ -33,6 +37,10 @@
         </div>
         <footer>
             <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year)</p>
+            <p>
+                <a class="language" href="~/Account/SetLanguage?language=en&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_EN.jpg" alt="EN" /></a>
+                <a class="language" href="~/Account/SetLanguage?language=fr&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_FR.jpg" alt="FR" /></a>
+            </p>
         </footer>
     </body>
 </html>

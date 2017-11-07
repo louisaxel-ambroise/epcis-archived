@@ -210,6 +210,9 @@
   <data name="Label_CaptureEventFailed" xml:space="preserve">
     <value>La capture de l'événement a échoué</value>
   </data>
+  <data name="Label_ChangePassword" xml:space="preserve">
+    <value>Changer de mot de passe</value>
+  </data>
   <data name="Label_EnterYourEmail" xml:space="preserve">
     <value>Adresse mail</value>
   </data>
@@ -239,6 +242,9 @@
   </data>
   <data name="Label_Login" xml:space="preserve">
     <value>Connexion</value>
+  </data>
+  <data name="Label_MyAccount" xml:space="preserve">
+    <value>Mon Compte</value>
   </data>
   <data name="Label_QueriesPerformed" xml:space="preserve">
     <value>Requêtes éxecutées</value>

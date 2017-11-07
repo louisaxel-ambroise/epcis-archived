@@ -7,7 +7,7 @@ namespace FasTnT.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             // Style bundles
-            bundles.Add(new StyleBundle("~/Content/insite_css").Include("~/Content/desktop.css", "~/Content/desktop_table.css"));
+            bundles.Add(new StyleBundle("~/Content/insite_css").Include("~/Content/desktop/*.css"));
             bundles.Add(new StyleBundle("~/Content/logon_css").Include("~/Content/logon.css"));
 
             // Script bundles

@@ -54,7 +54,10 @@
     <Compile Include="Exceptions\QueryParameterException.cs" />
     <Compile Include="Exceptions\QueryTooComplexException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Model\Dashboard\UserDetail.cs" />
     <Compile Include="Model\Queries\QueryEventResponse.cs" />
+    <Compile Include="Services\Dashboard\Users\IUserService.cs" />
+    <Compile Include="Services\Dashboard\Users\UserService.cs" />
     <Compile Include="Services\EventCapture\EventCapturer.cs" />
     <Compile Include="Services\EventCapture\EventPersister.cs" />
     <Compile Include="Services\EventCapture\IEventCapturer.cs" />

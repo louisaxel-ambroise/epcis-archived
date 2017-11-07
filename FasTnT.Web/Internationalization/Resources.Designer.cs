@@ -340,6 +340,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string Label_ChangePassword {
+            get {
+                return ResourceManager.GetString("Label_ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your email.
         /// </summary>
         public static string Label_EnterYourEmail {
@@ -426,6 +435,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_Login {
             get {
                 return ResourceManager.GetString("Label_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Account.
+        /// </summary>
+        public static string Label_MyAccount {
+            get {
+                return ResourceManager.GetString("Label_MyAccount", resourceCulture);
             }
         }
         
@@ -741,6 +759,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Page_About_SourceCode {
             get {
                 return ResourceManager.GetString("Page_About_SourceCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }
