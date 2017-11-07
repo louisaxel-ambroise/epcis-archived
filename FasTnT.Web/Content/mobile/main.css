@@ -1,4 +1,4 @@
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1060px) {
 	*{ margin:0; padding:0; }
 	html{ background:#fafafa url('../images/bg.jpg') repeat-x;}
     html, body { height: 100%; }
@@ -14,7 +14,7 @@
 		font-size:0.9em;
 	}
 	
-	aside{ min-width:240px; background: #333; }
+	aside{ display:none; }
 	aside h2{
 		color: #222;
 		text-align:center;
