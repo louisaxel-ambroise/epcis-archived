@@ -3,7 +3,7 @@
 # FasTnT
 FasTnT is a C# implementation of GS1 EPCIS 1.2 standard. [https://www.gs1.org/epcis](https://www.gs1.org/epcis)
 
-##Setup
+## Setup
 
 1. Install PostGreSQL if needed and create a new user/database for FasTnT;
 2. Update the `connectionStrings.shared.config` file with your connection string;
