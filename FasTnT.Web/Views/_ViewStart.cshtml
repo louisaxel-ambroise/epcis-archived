@@ -6,16 +6,19 @@
     document.addEventListener("DOMContentLoaded", function () {
         var url = window.location.pathname;
         var links = document.querySelectorAll('aside nav a');
-        var found = false;
+        var closest = 0;
 
         for (var i = 0; i < links.length; i++) {
             if (links[i].getAttribute("href") == url) {
-                found = true;
                 links[i].classList.add("active");
+                return;
             }
-            else links[i].classList.remove("active");
+            else {
+                links[i].classList.remove("active");
+                if (url.lastIndexOf(links[i].getAttribute("href"), 0) === 0) closest = i;
+            }
         }
 
-        if (!found) links[0].classList.add("active");
+        links[closest].classList.add("active");
     });
 </script>
