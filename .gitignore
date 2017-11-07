@@ -46,3 +46,4 @@ obj
 *.dll
 packages
 *.suo
+*.user
