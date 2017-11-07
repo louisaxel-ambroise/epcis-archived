@@ -36,11 +36,12 @@
             </ul>
         </nav>
         <section>
-                    @RenderBody()
+            @RenderBody()
         </section>
         <footer>
             <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year) <a class="grey-text text-lighten-4 right" href="#">Github</a> </p>
         </footer>
     </div>
+    @Scripts.Render("~/Scripts/fastnt")
 </body>
 </html>

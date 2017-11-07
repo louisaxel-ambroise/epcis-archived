@@ -30,8 +30,8 @@ namespace FasTnT.Web.Models.Events
                 CapturedOn = @event.CaptureTime,
                 EventTime = @event.EventTime,
                 EventTimeZoneOffset = @event.EventTimezoneOffset.Representation,
-                EventType = @event.EventType.ToString(),
-                Action = @event.Action.ToString(),
+                EventType = @event.EventType.ToString("F"),
+                Action = @event.Action.ToString("F"),
                 BizLocation = @event.BusinessLocation,
                 BizStep = @event.BusinessStep
             };

@@ -7,10 +7,6 @@
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        loadPartial("@Url.Content("~/Users/Read_Users")", function (data) {
-            document.getElementById("usersTable").innerHTML = data;
-        }, function () {
-            document.getElementById("usersTable").innerHTML = "<p>Error</p>";
-        })
+        fastnt.loadPartial("@Url.Content("~/Users/Read_Users")", "usersTable");
     });
 </script>

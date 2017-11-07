@@ -18,3 +18,7 @@ table.data-table tbody{
 table.data-table tbody tr:nth-child(even){
   background-color: #efefef;
 }
+table.data-table .material-icons{
+    text-align:center;
+    width:100%;
+}
