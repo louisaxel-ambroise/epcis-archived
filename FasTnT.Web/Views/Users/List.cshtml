@@ -2,22 +2,15 @@
     ViewBag.Title = @Resources.Label_Users;
 }
 
-
-<div class="row">
-    <h3>@Resources.Label_Users</h3>
-    <div class="col m12">
-        <div class="card">
-            <div class="card-content">
-                <h5>@Resources.Label_Users</h5>
-                <div id="usersTable"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<h1>@Resources.Label_Users</h1>
+<div id="usersTable"></div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#usersTable").html(loadingBar);
-        $("#usersTable").load("@Url.Content("~/Users/Read_Users")");
-    })
+    document.addEventListener("DOMContentLoaded", function () {
+        loadPartial("@Url.Content("~/Users/Read_Users")", function (data) {
+            document.getElementById("usersTable").innerHTML = data;
+        }, function () {
+            document.getElementById("usersTable").innerHTML = "<p>Error</p>";
+        })
+    });
 </script>

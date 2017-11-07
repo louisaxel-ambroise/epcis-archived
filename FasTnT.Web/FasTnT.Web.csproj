@@ -213,12 +213,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\images\Logo.ico" />
-    <Content Include="Content\materialize.css" />
+    <Content Include="Content\desktop.css" />
+    <Content Include="Content\desktop_table.css" />
+    <Content Include="Content\images\bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\logon.css" />
     <Content Include="EpcisServices\CaptureService.svc" />
     <Content Include="EpcisServices\QueryService.svc" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="..\connectionStrings.shared.config">
       <Link>connectionStrings.shared.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -263,15 +269,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\materialize.js" />
     <Content Include="fonts\roboto\Roboto-Bold.woff" />
     <Content Include="fonts\roboto\Roboto-Bold.woff2" />
     <Content Include="fonts\roboto\Roboto-Light.woff" />
@@ -282,13 +279,6 @@
     <Content Include="fonts\roboto\Roboto-Regular.woff2" />
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\morris.min.js" />
-    <Content Include="Scripts\raphael.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />

@@ -1,9 +1,15 @@
 ﻿@model FasTnT.Web.Models.Events.EventDetailViewModel
 
-<h2>@string.Format(Resources.Format_DetailsOfEvent, Model.Id.ToString().Substring(0, 8))</h2>
+<h1>@string.Format(Resources.Format_DetailsOfEvent, Model.Id.ToString().Substring(0, 8))</h1>
 
 <ul>
     <li><strong>Id:</strong> @Model.Id</li>
+    <li><strong>Event Type:</strong> @Model.EventType</li>
     <li><strong>Captured On:</strong> @Model.CapturedOn.ToString(Resources.DateFormat_Detailed)</li>
     <li><strong>Event Time:</strong> @Model.EventTime.ToString(Resources.DateFormat_Detailed) @Model.EventTimeZoneOffset</li>
+    <li><strong>Action:</strong> @Model.Action</li>
+    <li><strong>Location:</strong> @Model.BizLocation</li>
+    <li><strong>Step:</strong> @Model.BizStep</li>
 </ul>
+
+<p><a href="~/Events">@Resources.Link_LatestEventsList</a></p>

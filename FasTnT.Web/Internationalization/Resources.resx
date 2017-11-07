@@ -216,6 +216,9 @@
   <data name="Label_EnterYourPassword" xml:space="preserve">
     <value>Enter your password</value>
   </data>
+  <data name="Label_EpcisServerManagement" xml:space="preserve">
+    <value>EPCIS Server</value>
+  </data>
   <data name="Label_Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -275,6 +278,9 @@
   </data>
   <data name="Label_WrongPassword" xml:space="preserve">
     <value>The password provided is incorrect</value>
+  </data>
+  <data name="Link_LatestEventsList" xml:space="preserve">
+    <value>Go to latest events list</value>
   </data>
   <data name="Menu_About" xml:space="preserve">
     <value>About</value>

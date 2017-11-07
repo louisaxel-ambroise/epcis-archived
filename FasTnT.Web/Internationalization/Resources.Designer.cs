@@ -358,6 +358,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EPCIS Server.
+        /// </summary>
+        public static string Label_EpcisServerManagement {
+            get {
+                return ResourceManager.GetString("Label_EpcisServerManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Label_Error {
@@ -534,6 +543,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_WrongPassword {
             get {
                 return ResourceManager.GetString("Label_WrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to latest events list.
+        /// </summary>
+        public static string Link_LatestEventsList {
+            get {
+                return ResourceManager.GetString("Link_LatestEventsList", resourceCulture);
             }
         }
         

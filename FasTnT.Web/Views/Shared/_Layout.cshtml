@@ -12,132 +12,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - @Resources.ApplicationName</title>
 
-    <link rel="icon" href="~/Content/images/Logo.ico" />
+    <link rel="icon" href="~/Content/images/icon.ico" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/insite_css")
 </head>
 <body>
-    <header>
+    <aside>
+        <h2 id="logo">@Resources.ApplicationName</h2>
         <nav>
-            <ul id="language-selection" class="dropdown-content">
-                <li><a href="~/Account/SetLanguage?language=en&redirectTo=@Request.Url.AbsolutePath">EN</a></li>
-                <li><a href="~/Account/SetLanguage?language=fr&redirectTo=@Request.Url.AbsolutePath">FR</a></li>
-            </ul>
-            <div class="nav-wrapper">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a class="dropdown-button" href="#!" data-activates="language-selection">@Resources.Menu_Language<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="~/Account/Edit">@userName</a></li>
-                    <li><a href="~/Account/LogOff">@Resources.Menu_Exit</a></li>
-                </ul>
-            </div>
+            <a href="~/Dashboard" class="active">@Resources.Menu_Dashboard</a>
+            <a href="~/Events">@Resources.Menu_Events</a>
+            <a href="~/MasterData">@Resources.Menu_MasterData</a>
+            <a href="~/Users/List">@Resources.Menu_UserManagement</a>
+            <a href="~/EpcisServer">@Resources.Menu_EpcisServer <span class="bubble">15</span></a>
         </nav>
-        <ul class="side-nav fixed">
-            <li class="logo">
-                <a id="logo-container" href="~/" class="brand-logo">
-                    <img alt="@Resources.ApplicationName" title="@Resources.ApplicationName" style="width:250px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiICBoZWlnaHQ9IjYwIiB3aWR0aD0iMTcwIj4NCjxkZWZzPg0KIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwIiB4Mj0iMCIgeTE9IjAiIHkyPSIxIj4NCiAgPHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iIzAwOWFmMyIvPg0KICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzAwN2FjMCIvPg0KIDwvbGluZWFyR3JhZGllbnQ+DQogPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4NCiAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNCA0IiByZXN1bHQ9InNoYWRvdyIvPg0KICA8ZmVPZmZzZXQgZHg9IjAiIGR5PSIwIi8+DQogPC9maWx0ZXI+DQo8L2RlZnM+DQoJPHJlY3QgeD0iMTAiIHk9IjEwIiByeD0iMTYiIHJ5PSIxNiIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI0MCIgc3R5bGU9ImZpbGw6dXJsKCNncmFkaWVudCk7c3Ryb2tlOiMwMDZkYWIiIC8+DQoJPHRleHQgeD0iMzMiIHk9IjM5IiBmaWxsPSIjNjY2IiBzdHlsZT0iZmlsdGVyOiB1cmwoI3NoYWRvdyk7Ij5GYXNUJmFtcDtUPC90ZXh0Pg0KCTx0ZXh0IHg9IjMzIiB5PSIzOSIgZmlsbD0id2hpdGUiPkZhc1QmYW1wO1Q8L3RleHQ+DQoJPHN0eWxlPjwhW0NEQVRBW3RleHR7Zm9udDogMjVweCBWZXJkYW5hLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmO2xldHRlci1zcGFjaW5nOjJweDt9XV0+PC9zdHlsZT4NCjwvc3ZnPg==" />
-                </a>
-            </li>
-            <li class="search">
-                <div class="search-wrapper card">
-                    <input id="search" /><i class="material-icons">search</i>
-                    <div id="search-results"></div>
-                </div>
-            </li>
-            <li><div class="divider"></div></li>
-            <li><a href="~/Dashboard">@Resources.Menu_Dashboard <i class="material-icons">multiline_chart</i></a></li>
-            <li><div class="divider"></div></li>
-            <li><a href="~/Events">@Resources.Menu_Events <i class="material-icons">mail</i></a></li>
-            <li><div class="divider"></div></li>
-            <li>
-                <ul class="collapsible collapsible-accordion">
-                    <li>
-                        <a class="collapsible-header">@Resources.Menu_MasterData <i class="material-icons">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="~/MasterData/Transactions">@Resources.Menu_BusinessTransactions <i class="material-icons">linear_scale</i></a></li>
-                                <li><a href="~/MasterData/Locations">@Resources.Menu_BusinessLocations <i class="material-icons">place</i></a></li>
-                                <li><a href="~/MasterData/Steps">@Resources.Menu_BusinessSteps <i class="material-icons">redo</i></a></li>
-                                <li><a href="~/MasterData/ReadPoints">@Resources.Menu_ReadPoints <i class="material-icons">wifi_tethering</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><div class="divider"></div></li>
-                    <li>
-                        <a class="collapsible-header">@Resources.Menu_UserManagement<i class="material-icons">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="~/Users/List">@Resources.Menu_UserList <i class="material-icons">people</i></a></li>
-                                <li><a href="~/Users/AccessRights">@Resources.Menu_AccessRight <i class="material-icons">lock</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><div class="divider"></div></li>
-                    <li>
-                        <a class="collapsible-header">@Resources.Menu_EpcisServer<i class="material-icons">arrow_drop_down</i> <span class="badge alert">99+</span></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="~/EpcisServer/Statistics">@Resources.Menu_Statistics <i class="material-icons">timeline</i></a></li>
-                                <li><a href="~/EpcisServer/Subscriptions">@Resources.Menu_Subscriptions <i class="material-icons">subscriptions</i></a></li>
-                                <li><a href="~/EpcisServer/Monitoring">@Resources.Menu_Monitoring <i class="material-icons">loupe</i><span class="badge alert">99+</span></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><div class="divider"></div></li>
-                    <li><a href="~/About">@Resources.Menu_About</a></li>
-                </ul>
-            </li>
-        </ul>
-    </header>
-    <main class="page-content">
-        <div class="container">
-            @RenderBody()
-        </div>
-    </main>
-    <footer class="page-footer center-align">
-        <div class="footer-copyright">
-            <div class="container">@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year) <a class="grey-text text-lighten-4 right" href="#">Github</a> </div>
-        </div>
-    </footer>
-
-    @Scripts.Render("~/bundles/materialize")
-    @Scripts.Render("~/bundles/morrisjs")
-    @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        var basePath = '@VirtualPathUtility.ToAbsolute("~/")';
-
-        $(document).ready(function () {
-            $(".dropdown-button").dropdown();
-
-            $("#search").keyup(function (e) {
-                if ($(this).val().length >= 3) {
-                    $("#search-results").html(loadingBar);
-                    $.ajax({
-                        method: "GET",
-                        url: basePath + "Search/Inline?input=" + $(this).val(),
-                        success: function (data) {
-                            $("#search-results").html(data);
-                        },
-                        error: function () {
-                            $("#search-results").html("");
-                        }
-                    });
-                }
-                else {
-                    $("#search-results").html("");
-                }
-            });
-
-            $(".search-wrapper i").on("click", function ()
-            {
-                var searchValue = $("#search").val();
-
-                if (searchValue.length > 0) {
-                    window.location = basePath + "Search?input=" + searchValue;
-                }
-            })
-        });
-    </script>
+    </aside>
+    <div id="main-section">
+        <nav>
+            <ul>
+                <li class="search"><input type="text" id="search_input" placeholder="Search" /><button id="search_btn">GO</button> </li>
+                <li>Logged as <a href="~/Account/Edit">@userName</a></li>
+                <li><a href="~/Account/LogOff">@Resources.Menu_Exit</a></li>
+            </ul>
+        </nav>
+        <section>
+                    @RenderBody()
+        </section>
+        <footer>
+            <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year) <a class="grey-text text-lighten-4 right" href="#">Github</a> </p>
+        </footer>
+    </div>
 </body>
 </html>

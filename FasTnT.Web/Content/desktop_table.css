@@ -1,0 +1,20 @@
+table.data-table{
+	width:auto;
+	min-width:740px;
+	margin:auto;
+	border-collapse:collapse;
+	border:1px solid #ddd;
+}
+table.data-table thead tr{
+	border-bottom:1px solid #ddd;
+	background:#fff;
+}
+table.data-table th, table.data-table td{
+	padding:6px 15px;
+}
+table.data-table tbody{
+	text-align:left;
+}
+table.data-table tbody tr:nth-child(even){
+  background-color: #efefef;
+}

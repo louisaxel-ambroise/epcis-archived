@@ -3,16 +3,32 @@
 }
 
 <script type="text/javascript">
-    var loadingBar = "<div class='progress' style='width:50%;margin-left:25%'><div class='indeterminate'></div></div>";
+    document.addEventListener("DOMContentLoaded", function () {
+        var url = window.location.pathname;
+        var links = document.querySelectorAll('aside nav a');
+        var found = false;
 
-    $(document).ready(function () {
-        var url = window.location;
-
-        var activeLink = $('ul.side-nav a').filter(function () { return this.href == url; });
-        if (activeLink && !activeLink.hasClass("brand-logo")) {
-            activeLink.parent().addClass('active');
-            activeLink.parents('div.collapsible-body').css('display', 'block');
-            activeLink.parents('div.collapsible-body').siblings('.collapsible-header').addClass('active');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].getAttribute("href") == url) {
+                found = true;
+                links[i].classList.add("active");
+            }
+            else links[i].classList.remove("active");
         }
+
+        if (!found) links[0].classList.add("active");
     });
+
+    function loadPartial(url, success, error) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (this.status >= 200 && this.status < 400) success(this.response);
+            else error();
+        };
+
+        request.onerror = error;
+        request.send();
+    }
 </script>

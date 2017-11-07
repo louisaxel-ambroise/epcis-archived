@@ -3,20 +3,22 @@
 }
 
 <div class="row">
-    <h3>@Resources.Label_Events</h3>
+    <h1>@Resources.Label_LatestEvents</h1>
     <div class="col m12">
         <div class="card">
             <div class="card-content">
-                <h5>@Resources.Label_LatestEvents</h5>
-                <div id="eventsTable"></div>
+                <div id="eventsTable">Loading...</div>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#eventsTable").html(loadingBar);
-        $("#eventsTable").load("@Url.Content("~/Events/Read_LatestEvents")");
-    })
+    document.addEventListener("DOMContentLoaded", function () {
+        loadPartial("@Url.Content("~/Events/Read_LatestEvents")", function (data) {
+            document.getElementById("eventsTable").innerHTML = data;
+        }, function () {
+            document.getElementById("eventsTable").innerHTML = "<p>Error</p>";
+        })
+    });
 </script>
