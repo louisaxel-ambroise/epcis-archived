@@ -1,6 +1,8 @@
 ﻿using FasTnT.DependencyInjection;
+using FasTnT.Domain.Services.Users;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Web;
+using FasTnT.Web.Helpers.Users;
 using Ninject.Modules;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -18,7 +20,9 @@ namespace FasTnT.Web
 
         public override void Load()
         {
-            Bind<IBasicAuthorizationInterceptor>().To<BasicAuthorizationInterceptor>().InScope(_scope.Value);
+            Bind<IAuthenticateUserInterceptor>().To<AuthenticateUserInterceptor>().InScope(_scope.Value);
+            Bind<IUserSetter>().To<HttpUserContainer>().InScope(_scope.Value);
+            Bind<IUserProvider>().To<HttpUserContainer>().InScope(_scope.Value);
         }
     }
 }

@@ -2,16 +2,14 @@
 
 namespace FasTnT.Data.Migrations
 {
-    [Migration(102)]
-    public class M102_CreateEventTable : AutoReversingMigration
+    [Migration(103)]
+    public class M103_CreateEventTable : AutoReversingMigration
     {
         public override void Up()
         {
             Create.Table("event").InSchema("epcis")
                 .WithColumn("id").AsGuid().PrimaryKey()
-                .WithColumn("request_id").AsGuid().NotNullable()
-                .WithColumn("user_id").AsGuid().Nullable()
-                .WithColumn("capture_time").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentUTCDateTime)
+                .WithColumn("request_id").AsGuid().NotNullable().ForeignKey("FK_EVENT_REQUEST", "epcis", "request", "id")
                 .WithColumn("record_time").AsDateTime().NotNullable()
                 .WithColumn("action").AsInt16().Nullable()
                 .WithColumn("event_type").AsInt16().NotNullable().ForeignKey("FK_EVENT_EVENTTYPE", "epcis", "event_type", "id")

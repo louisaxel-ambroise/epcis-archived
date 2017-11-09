@@ -12,7 +12,6 @@ namespace FasTnT.Data.Mappings.Events
 
             Id(x => x.Id).Column("id").GeneratedBy.GuidComb();
 
-            Map(x => x.RequestId).Column("request_id").Not.Nullable();
             Map(x => x.Action).Column("action").CustomType<EventAction>();
             Map(x => x.EventType).Column("event_type").CustomType<EventType>();
             Map(x => x.CaptureTime).Column("capture_time").Not.Insert();
@@ -24,6 +23,8 @@ namespace FasTnT.Data.Mappings.Events
             Map(x => x.BusinessStep).Column("business_step");
             Map(x => x.Disposition).Column("disposition");
             Map(x => x.ReadPoint).Column("read_point");
+
+            References(x => x.Request).Column("request_id").Not.Nullable();
 
             HasMany(x => x.Epcs).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();
             HasMany(x => x.CustomFields).KeyColumn("event_id").Inverse().Cascade.Persist().NotFound.Ignore().LazyLoad();

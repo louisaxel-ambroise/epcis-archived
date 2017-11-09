@@ -28,11 +28,6 @@ namespace FasTnT.Data.Repositories
             return _session.Query<EpcisEvent>();
         }
 
-        public void Insert(EpcisEvent @event)
-        {
-            _session.Persist(@event);
-        }
-
         public IEnumerable<BusinessTransaction> LoadBusinessTransactions(IEnumerable<EpcisEvent> events)
         {
             return _session.Query<BusinessTransaction>().Where(x => events.Contains(x.Event)).ToFuture();

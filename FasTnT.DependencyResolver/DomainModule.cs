@@ -35,7 +35,7 @@ namespace FasTnT.DependencyInjection
             Bind<ISubscriptionManager>().To<SubscriptionManager>().InScope(_scope.Value);
             Bind<IEventCapturer>().To<EventCapturer>().InScope(_scope.Value);
             Bind<IQueryPerformer>().To<QueryPerformer>().InScope(_scope.Value);
-            Bind<IEventPersister>().To<EventPersister>().InScope(_scope.Value);
+            Bind<IRequestPersister>().To<RequestPersister>().InScope(_scope.Value);
             Bind<IDocumentValidator>().To<XmlDocumentValidator>().WithConstructorArgument("files", _xsdFiles);
             Bind<IDocumentParser>().To<DocumentParser>();
 

@@ -1,4 +1,7 @@
-﻿using FasTnT.Domain.Services.Validation;
+﻿using FasTnT.Domain.Model.Events;
+using FasTnT.Domain.Services.Users;
+using FasTnT.Domain.Services.Validation;
+using FasTnT.Domain.Utils;
 using FasTnT.Domain.Utils.Aspects;
 using System;
 using System.Collections.Generic;
@@ -11,13 +14,15 @@ namespace FasTnT.Domain.Services.EventCapture
     {
         private readonly IDocumentValidator _documentValidator;
         private readonly IDocumentParser _documentParser;
-        private readonly IEventPersister _eventPersister;
+        private readonly IRequestPersister _requestPersister;
+        private readonly IUserProvider _userProvider;
 
-        public EventCapturer(IDocumentValidator documentValidator, IDocumentParser documentParser, IEventPersister eventPersister)
+        public EventCapturer(IDocumentValidator documentValidator, IDocumentParser documentParser, IRequestPersister requestPersister, IUserProvider userProvider)
         {
             _documentValidator = documentValidator ?? throw new ArgumentException(nameof(documentValidator));
             _documentParser = documentParser ?? throw new ArgumentException(nameof(documentParser));
-            _eventPersister = eventPersister ?? throw new ArgumentException(nameof(eventPersister));
+            _requestPersister = requestPersister ?? throw new ArgumentException(nameof(requestPersister));
+            _userProvider = userProvider ?? throw new ArgumentException(nameof(userProvider));
         }
 
         [CommitTransaction]
@@ -26,13 +31,20 @@ namespace FasTnT.Domain.Services.EventCapture
             _documentValidator.Validate(xmlDocument);
 
             var events = _documentParser.Parse(xmlDocument.Root);
+            var currentUser = _userProvider.GetCurrentUser();
 
-            foreach(var @event in events)
+            var request = new EpcisRequest
             {
-                _eventPersister.Persist(@event);
-            }
+                RecordTime = SystemContext.Clock.Now,
+                DocumentTime = DateTime.Parse(xmlDocument.Root.Attribute("creationDate").Value),
+                User = currentUser
+            };
 
-            return events.Select(e => e.Id);
+            foreach(var @event in events) request.AddEvent(@event);
+
+            _requestPersister.Persist(request);
+
+            return request.Events.Select(e => e.Id);
         }
     }
 }

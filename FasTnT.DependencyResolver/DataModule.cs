@@ -30,6 +30,7 @@ namespace FasTnT.DependencyInjection
 
             Bind<IUserRepository>().To<UserRepository>().UsingScope(Scope);
             Bind<IEventRepository>().To<EventRepository>().UsingScope(Scope);
+            Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>().UsingScope(Scope);
 
             // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();

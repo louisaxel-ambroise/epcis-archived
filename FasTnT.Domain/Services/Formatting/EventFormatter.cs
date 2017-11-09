@@ -49,7 +49,7 @@ namespace FasTnT.Domain.Services.Formatting
             var element = new XElement("ObjectEvent");
 
             element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
-            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.Request.RecordTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
 
             AddEpcList(@event, element);
@@ -74,7 +74,7 @@ namespace FasTnT.Domain.Services.Formatting
             var element = new XElement("QuantityEvent");
 
             element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
-            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.Request.RecordTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
 
             AddEpcList(@event, element);
@@ -99,7 +99,7 @@ namespace FasTnT.Domain.Services.Formatting
             var element = new XElement("AggregationEvent");
 
             element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
-            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.Request.RecordTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
 
             AddParentId(@event, element);
@@ -124,7 +124,7 @@ namespace FasTnT.Domain.Services.Formatting
             var element = new XElement("TransactionEvent");
 
             element.Add(new XElement("eventTime", @event.EventTime.ToString(DateTimeFormat)));
-            element.Add(new XElement("recordTime", @event.CaptureTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", @event.Request.RecordTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", @event.EventTimezoneOffset.Representation));
 
             AddEpcList(@event, element);
@@ -147,8 +147,8 @@ namespace FasTnT.Domain.Services.Formatting
         {
             var element = new XElement("TransformationEvent");
 
-            element.Add(new XElement("eventTime", epcisEvent.EventTime));
-            element.Add(new XElement("recordTime", epcisEvent.CaptureTime));
+            element.Add(new XElement("eventTime", epcisEvent.EventTime.ToString(DateTimeFormat)));
+            element.Add(new XElement("recordTime", epcisEvent.Request.RecordTime.ToString(DateTimeFormat)));
             element.Add(new XElement("eventTimeZoneOffset", epcisEvent.EventTimezoneOffset.Representation));
 
             AddEpcList(epcisEvent, element);

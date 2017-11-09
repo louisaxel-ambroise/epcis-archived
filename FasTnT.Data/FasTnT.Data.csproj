@@ -69,6 +69,7 @@
     <Compile Include="Interceptors\CommitTransactionInterceptor.cs" />
     <Compile Include="Mappings\Events\BusinessTransactionMap.cs" />
     <Compile Include="Mappings\Events\CustomFieldMap.cs" />
+    <Compile Include="Mappings\Events\EpcisRequestMap.cs" />
     <Compile Include="Mappings\Events\EpcMap.cs" />
     <Compile Include="Mappings\Events\SourceDestinationMap.cs" />
     <Compile Include="Mappings\MasterData\BusinessLocationMap.cs" />
@@ -88,12 +89,13 @@
     <Compile Include="Migrations\M005_CreateDefaultUser.cs" />
     <Compile Include="Migrations\M100_CreateEpcisSchema.cs" />
     <Compile Include="Migrations\M101_CreateEventTypeTable.cs" />
-    <Compile Include="Migrations\M102_CreateEventTable.cs" />
-    <Compile Include="Migrations\M103_CreateEpcTable.cs" />
-    <Compile Include="Migrations\M104_CreateBusinessTransactionTable.cs" />
-    <Compile Include="Migrations\M105_CreateBusinessLocationTable.cs" />
-    <Compile Include="Migrations\M106_CreateSourceDestinationTable.cs" />
-    <Compile Include="Migrations\M107_CreateCustomFieldTable.cs" />
+    <Compile Include="Migrations\M102_CreateRequestTable.cs" />
+    <Compile Include="Migrations\M103_CreateEventTable.cs" />
+    <Compile Include="Migrations\M104_CreateEpcTable.cs" />
+    <Compile Include="Migrations\M105_CreateBusinessTransactionTable.cs" />
+    <Compile Include="Migrations\M106_CreateBusinessLocationTable.cs" />
+    <Compile Include="Migrations\M107_CreateSourceDestinationTable.cs" />
+    <Compile Include="Migrations\M108_CreateCustomFieldTable.cs" />
     <Compile Include="Migrations\M200_CreateCbvSchema.cs" />
     <Compile Include="Migrations\M201_CreateBusinessLocationTable.cs" />
     <Compile Include="Migrations\M202_CreateBusinessTransactionTable.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Migrations\M400_CreateSubscriptionSchema.cs" />
     <Compile Include="Migrations\M401_CreateSubscriptionTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EpcisRequestRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionProvider.cs" />

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using FasTnT.Domain.Model.Users;
 
 namespace FasTnT.Domain.Model.Events
 {
     public class EpcisEvent
     {
         public virtual Guid Id { get; set; }
-        public virtual Guid RequestId { get; set; }
+        public virtual EpcisRequest Request { get; set; }
         public virtual string EventId { get; set; }
         public virtual EventType EventType { get; set; }
         public virtual DateTime CaptureTime { get; set; }
@@ -23,6 +24,7 @@ namespace FasTnT.Domain.Model.Events
         public virtual IList<SourceDestination> SourcesDestinations { get; set; } = new List<SourceDestination>();
         public virtual IList<CustomField> CustomFields { get; set; } = new List<CustomField>();
         public virtual ErrorDeclaration ErrorDeclaration { get; set; }
+        public virtual User User { get; set; }
 
         public override bool Equals(object obj)
         {

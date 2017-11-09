@@ -27,23 +27,22 @@ namespace FasTnT.Domain.Services.EventCapture
         private static IEnumerable<EpcisEvent> ParseEvents(XContainer input)
         {
             var events = new List<EpcisEvent>();
-            var requestId = Guid.NewGuid();
 
             foreach (var element in input.Elements())
             {
                 var name = element.Name.LocalName;
 
                 if (name == "extension") events.AddRange(ParseEvents(element));
-                else events.Add(ParseEvent(element, requestId));
+                else events.Add(ParseEvent(element));
             }
 
             return events;
         }
 
-        private static EpcisEvent ParseEvent(XElement element, Guid requestId)
+        private static EpcisEvent ParseEvent(XElement element)
         {
             NextCustomId = 1;
-            var epcisEvent = new EpcisEvent { EventType = element.ToEventType(), RequestId = requestId };
+            var epcisEvent = new EpcisEvent { EventType = element.ToEventType() };
             ParseAttributes(element, epcisEvent);
 
             return epcisEvent;

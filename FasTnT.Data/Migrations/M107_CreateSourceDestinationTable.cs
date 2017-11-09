@@ -2,8 +2,8 @@
 
 namespace FasTnT.Data.Migrations
 {
-    [Migration(106)]
-    public class M106_CreateSourceDestinationTable : AutoReversingMigration
+    [Migration(107)]
+    public class M107_CreateSourceDestinationTable : AutoReversingMigration
     {
         public override void Up()
         {

@@ -29,7 +29,7 @@ namespace FasTnT.Web.EpcisServices
             _responseFormatter = responseFormatter;
         }
 
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual string[] GetQueryNames()
         {
             try
@@ -42,7 +42,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual void Subscribe(Message request)
         {
             try
@@ -58,7 +58,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual void Unsubscribe(string name)
         {
             try
@@ -71,7 +71,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual Message Poll(Message request)
         {
             try 
@@ -88,7 +88,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual string[] GetSubscriptionIDs()
         {
             try

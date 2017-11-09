@@ -5,6 +5,8 @@ using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
 using System.Collections.Generic;
+using System.Web;
+using System.Security.Principal;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -19,7 +21,7 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [CaptureLog]
-        [BasicAuthorization]
+        [AuthenticateUser]
         public virtual IEnumerable<Guid> Capture()
         {
             try

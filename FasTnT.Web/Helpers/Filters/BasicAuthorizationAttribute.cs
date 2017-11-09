@@ -6,11 +6,11 @@ using Ninject;
 
 namespace FasTnT.Domain.Utils.Aspects
 {
-    public class BasicAuthorizationAttribute : InterceptAttribute
+    public class AuthenticateUserAttribute : InterceptAttribute
     {
         public override IInterceptor CreateInterceptor(IProxyRequest request)
         {
-            return request.Kernel.Get<IBasicAuthorizationInterceptor>();
+            return request.Kernel.Get<IAuthenticateUserInterceptor>();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace FasTnT.Domain.Repositories
     {
         IQueryable<EpcisEvent> Query();
         EpcisEvent LoadById(Guid eventId);
-        void Insert(EpcisEvent @event);
         IEnumerable<BusinessTransaction> LoadBusinessTransactions(IEnumerable<EpcisEvent> events);
         IEnumerable<Epc> LoadEpcs(IEnumerable<EpcisEvent> events);
         IEnumerable<CustomField> LoadCustomFields(IEnumerable<EpcisEvent> events);

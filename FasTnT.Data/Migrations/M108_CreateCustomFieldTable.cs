@@ -2,8 +2,8 @@
 
 namespace FasTnT.Data.Migrations
 {
-    [Migration(107)]
-    public class M107_CreateCustomFieldTable : AutoReversingMigration
+    [Migration(108)]
+    public class M108_CreateCustomFieldTable : AutoReversingMigration
     {
         public override void Up()
         {

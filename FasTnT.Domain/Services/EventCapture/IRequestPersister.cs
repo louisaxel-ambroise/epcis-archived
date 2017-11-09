@@ -2,8 +2,8 @@
 
 namespace FasTnT.Domain.Services.EventCapture
 {
-    public interface IEventPersister
+    public interface IRequestPersister
     {
-        void Persist(EpcisEvent @event);
+        void Persist(EpcisRequest request);
     }
 }

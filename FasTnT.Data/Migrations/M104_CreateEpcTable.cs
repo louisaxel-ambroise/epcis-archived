@@ -2,8 +2,8 @@
 
 namespace FasTnT.Data.Migrations
 {
-    [Migration(103)]
-    public class M103_CreateEpcTable : AutoReversingMigration
+    [Migration(104)]
+    public class M104_CreateEpcTable : AutoReversingMigration
     {
         public override void Up()
         {

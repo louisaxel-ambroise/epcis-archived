@@ -2,8 +2,8 @@
 
 namespace FasTnT.Data.Migrations
 {
-    [Migration(105)]
-    public class M105_CreateBusinessLocationTable : AutoReversingMigration
+    [Migration(106)]
+    public class M106_CreateBusinessLocationTable : AutoReversingMigration
     {
         public override void Up()
         {

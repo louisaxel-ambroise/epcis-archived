@@ -2,7 +2,7 @@
 
 namespace FasTnT.Domain.Utils.Aspects
 {
-    public interface IBasicAuthorizationInterceptor : IInterceptor
+    public interface IAuthenticateUserInterceptor : IInterceptor
     {
     }
 }
