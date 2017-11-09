@@ -6,11 +6,11 @@ using FasTnT.Domain.Utils.Aspects;
 
 namespace FasTnT.Domain.Services.Dashboard
 {
-    public class WebUserAuthenticator : IWebUserAuthenticator
+    public class UserAuthenticator : IUserAuthenticator
     {
         private readonly IUserRepository _userRepository;
 
-        public WebUserAuthenticator(IUserRepository userRepository)
+        public UserAuthenticator(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

@@ -3,6 +3,7 @@ using FasTnT.Domain.Repositories;
 using NHibernate;
 using NHibernate.Linq;
 using System.Linq;
+using System;
 
 namespace FasTnT.Data.Repositories
 {
@@ -13,6 +14,11 @@ namespace FasTnT.Data.Repositories
         public UserRepository(ISession session)
         {
             _session = session;
+        }
+
+        public User Load(Guid id)
+        {
+            return _session.Get<User>(id);
         }
 
         public IQueryable<User> Query()

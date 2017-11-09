@@ -1,4 +1,7 @@
 ﻿@model FasTnT.Web.Models.Events.EventDetailViewModel
+@{
+    ViewBag.Title = Resources.Label_EventDetails;
+}
 
 <h1>@string.Format(Resources.Format_DetailsOfEvent, Model.Id.ToString().Substring(0, 8))</h1>
 

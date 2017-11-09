@@ -15,25 +15,27 @@ namespace FasTnT.DependencyInjection
     public class DomainModule : NinjectModule
     {
         private string[] _xsdFiles;
+        private IScope _scope;
 
-        public DomainModule(params string[] xsdFiles)
+        public DomainModule(IScope scope, params string[] xsdFiles)
         {
+            _scope = scope;
             _xsdFiles = xsdFiles;
         }
 
         public override void Load()
         {
             // Dashboard Bindings
-            Bind<IWebUserAuthenticator>().To<WebUserAuthenticator>();
-            Bind<IUserService>().To<UserService>();
+            Bind<IUserAuthenticator>().To<UserAuthenticator>().InScope(_scope.Value);
+            Bind<IUserService>().To<UserService>().InScope(_scope.Value);
 
             // EPCIS Service Bindings
             Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();
             Bind<IEventFormatter>().To<EventFormatter>().InSingletonScope();
-            Bind<ISubscriptionManager>().To<SubscriptionManager>();
-            Bind<IEventCapturer>().To<EventCapturer>();
-            Bind<IQueryPerformer>().To<QueryPerformer>();
-            Bind<IEventPersister>().To<EventPersister>();
+            Bind<ISubscriptionManager>().To<SubscriptionManager>().InScope(_scope.Value);
+            Bind<IEventCapturer>().To<EventCapturer>().InScope(_scope.Value);
+            Bind<IQueryPerformer>().To<QueryPerformer>().InScope(_scope.Value);
+            Bind<IEventPersister>().To<EventPersister>().InScope(_scope.Value);
             Bind<IDocumentValidator>().To<XmlDocumentValidator>().WithConstructorArgument("files", _xsdFiles);
             Bind<IDocumentParser>().To<DocumentParser>();
 

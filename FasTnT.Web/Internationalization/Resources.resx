@@ -159,14 +159,14 @@
   <data name="Grid_ApiUser" xml:space="preserve">
     <value>API User</value>
   </data>
-  <data name="Grid_ApiUser_DashboardUser" xml:space="preserve">
-    <value>API and Dashboard User</value>
-  </data>
   <data name="Grid_Captured" xml:space="preserve">
     <value>Captured</value>
   </data>
   <data name="Grid_DashboardUser" xml:space="preserve">
     <value>Dashboard User</value>
+  </data>
+  <data name="Grid_DashboardUser_ApiUser" xml:space="preserve">
+    <value>API and Dashboard User</value>
   </data>
   <data name="Grid_Date" xml:space="preserve">
     <value>Date</value>
@@ -225,6 +225,9 @@
   <data name="Label_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Label_EventDetails" xml:space="preserve">
+    <value>Event Details</value>
+  </data>
   <data name="Label_Events" xml:space="preserve">
     <value>Events</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="Label_QueryTooComplex" xml:space="preserve">
     <value>Query too complex</value>
+  </data>
+  <data name="Label_Search" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="Label_SearchEPC" xml:space="preserve">
     <value>Search EPC</value>
@@ -350,8 +356,5 @@
   </data>
   <data name="Page_About_SourceCode" xml:space="preserve">
     <value>The source code of this project can be downloaded on {0}</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
 </root>

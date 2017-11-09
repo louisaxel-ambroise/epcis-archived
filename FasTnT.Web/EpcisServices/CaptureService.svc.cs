@@ -19,6 +19,7 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [CaptureLog]
+        [BasicAuthorization]
         public virtual IEnumerable<Guid> Capture()
         {
             try

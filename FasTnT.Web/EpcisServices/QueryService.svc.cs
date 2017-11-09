@@ -8,6 +8,8 @@ using FasTnT.Web.EpcisServices.Model;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Formatting;
+using FasTnT.Domain.Utils.Aspects;
+using FasTnT.Domain.Exceptions;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -27,19 +29,21 @@ namespace FasTnT.Web.EpcisServices
             _responseFormatter = responseFormatter;
         }
 
-        public string[] GetQueryNames()
+        [BasicAuthorization]
+        public virtual string[] GetQueryNames()
         {
             try
             {
                 return _queryPerformer.ListQueryNames().ToArray();
             }
-            catch (Exception ex)
+            catch (EpcisException ex)
             {
                 throw EpcisFault.Create(ex);
             }
         }
 
-        public void Subscribe(Message request)
+        [BasicAuthorization]
+        public virtual void Subscribe(Message request)
         {
             try
             {
@@ -48,25 +52,27 @@ namespace FasTnT.Web.EpcisServices
                 //TODO: store subscription
                 //_subscriptionManager.Subscribe(subscription);
             }
-            catch (Exception ex)
+            catch (EpcisException ex)
             {
                 throw EpcisFault.Create(ex);
             }
         }
 
-        public void Unsubscribe(string name)
+        [BasicAuthorization]
+        public virtual void Unsubscribe(string name)
         {
             try
             {
                 //TODO: remove subscription
             }
-            catch (Exception ex)
+            catch (EpcisException ex)
             {
                 throw EpcisFault.Create(ex);
             }
         }
 
-        public Message Poll(Message request)
+        [BasicAuthorization]
+        public virtual Message Poll(Message request)
         {
             try 
             {
@@ -76,19 +82,20 @@ namespace FasTnT.Web.EpcisServices
 
                 return MessageResponse.CreatePollResponse(formattedResponse.Root);
             }
-            catch (Exception ex)
+            catch (EpcisException ex)
             {
                 throw EpcisFault.Create(ex);
             }
         }
 
-        public string[] GetSubscriptionIDs()
+        [BasicAuthorization]
+        public virtual string[] GetSubscriptionIDs()
         {
             try
             {
                 return _subscriptionManager.ListAllSubscriptions().Select(x => x.Name).ToArray();
             }
-            catch (Exception ex)
+            catch (EpcisException ex)
             {
                 throw EpcisFault.Create(ex);
             }

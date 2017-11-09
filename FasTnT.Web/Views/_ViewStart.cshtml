@@ -13,10 +13,7 @@
                 links[i].classList.add("active");
                 return;
             }
-            else {
-                links[i].classList.remove("active");
-                if (url.lastIndexOf(links[i].getAttribute("href"), 0) === 0) closest = i;
-            }
+            if (url.lastIndexOf(links[i].getAttribute("href"), 0) === 0) closest = i;
         }
 
         links[closest].classList.add("active");

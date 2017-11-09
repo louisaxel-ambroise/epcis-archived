@@ -40,7 +40,7 @@ namespace FasTnT.Web.Helpers
             var culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
             var entry = rm.GetResourceSet(culture, true, true).OfType<DictionaryEntry>().FirstOrDefault(e => e.Key.ToString() == key);
 
-            return MvcHtmlString.Create(entry.Value.ToString());
+            return MvcHtmlString.Create(entry.Value?.ToString() ?? key);
         }
     }
 }

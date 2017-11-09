@@ -187,15 +187,6 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to API and Dashboard User.
-        /// </summary>
-        public static string Grid_ApiUser_DashboardUser {
-            get {
-                return ResourceManager.GetString("Grid_ApiUser_DashboardUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Captured.
         /// </summary>
         public static string Grid_Captured {
@@ -210,6 +201,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Grid_DashboardUser {
             get {
                 return ResourceManager.GetString("Grid_DashboardUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API and Dashboard User.
+        /// </summary>
+        public static string Grid_DashboardUser_ApiUser {
+            get {
+                return ResourceManager.GetString("Grid_DashboardUser_ApiUser", resourceCulture);
             }
         }
         
@@ -385,6 +385,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event Details.
+        /// </summary>
+        public static string Label_EventDetails {
+            get {
+                return ResourceManager.GetString("Label_EventDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events.
         /// </summary>
         public static string Label_Events {
@@ -471,6 +480,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_QueryTooComplex {
             get {
                 return ResourceManager.GetString("Label_QueryTooComplex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Label_Search {
+            get {
+                return ResourceManager.GetString("Label_Search", resourceCulture);
             }
         }
         
@@ -759,15 +777,6 @@ namespace FasTnT.Web.Internationalization {
         public static string Page_About_SourceCode {
             get {
                 return ResourceManager.GetString("Page_About_SourceCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

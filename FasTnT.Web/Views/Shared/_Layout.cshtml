@@ -20,7 +20,7 @@
     <aside>
         <h2 id="logo">@Resources.ApplicationName</h2>
         <nav>
-            <a href="~/Dashboard" class="active">@Resources.Menu_Dashboard</a>
+            <a href="~/Dashboard">@Resources.Menu_Dashboard</a>
             <a href="~/Events">@Resources.Menu_Events</a>
             <a href="~/MasterData">@Resources.Menu_MasterData</a>
             <a href="~/Users/List">@Resources.Menu_UserManagement</a>
@@ -30,8 +30,8 @@
     <div id="main-section">
         <nav>
             <ul>
-                <li class="search"><input type="text" id="search_input" placeholder="Search" /><button id="search_btn">GO</button> </li>
-                <li>Logged as <a href="~/Account/Edit">@userName</a></li>
+                <li class="search"><input type="text" id="search_input" placeholder="@Resources.Label_Search" /><button id="search_btn">GO</button> </li>
+                <li><a href="~/Account/Edit">@userName</a></li>
                 <li><a href="~/Account/LogOff">@Resources.Menu_Exit</a></li>
             </ul>
         </nav>

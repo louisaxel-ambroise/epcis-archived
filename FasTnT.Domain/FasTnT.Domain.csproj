@@ -56,6 +56,8 @@
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
     <Compile Include="Model\Dashboard\UserDetail.cs" />
     <Compile Include="Model\Queries\QueryEventResponse.cs" />
+    <Compile Include="Services\Dashboard\IUserAuthenticator.cs" />
+    <Compile Include="Services\Dashboard\UserAuthenticator.cs" />
     <Compile Include="Services\Dashboard\Users\IUserService.cs" />
     <Compile Include="Services\Dashboard\Users\UserService.cs" />
     <Compile Include="Services\EventCapture\EventCapturer.cs" />
@@ -95,8 +97,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
-    <Compile Include="Services\Dashboard\IWebUserAuthenticator.cs" />
-    <Compile Include="Services\Dashboard\WebUserAuthenticator.cs" />
     <Compile Include="Services\EventCapture\DocumentParser.cs" />
     <Compile Include="Services\EventCapture\IDocumentParser.cs" />
     <Compile Include="Utils\Extensions\XElementExtensions.cs" />

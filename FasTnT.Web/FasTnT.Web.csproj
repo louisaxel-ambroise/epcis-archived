@@ -154,6 +154,7 @@
     <Compile Include="App_Start\DependencyInjection\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\DependencyInjection\RequestScope.cs" />
     <Compile Include="App_Start\DependencyInjection\Scopes.cs" />
+    <Compile Include="App_Start\DependencyInjection\WebModule.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\DependencyInjection\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -187,7 +188,10 @@
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Filters\InternationalizationFilterAttribute.cs" />
+    <Compile Include="Helpers\Filters\BasicAuthorizationAttribute.cs" />
+    <Compile Include="Helpers\Filters\BasicAuthorizationInterceptor.cs" />
+    <Compile Include="Helpers\Filters\IBasicAuthorizationInterceptor.cs" />
+    <Compile Include="Helpers\Filters\InternationalizationFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,7 +215,9 @@
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\UserDetailsViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
+    <Compile Include="Models\Users\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\Session\UserSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\desktop\main.css" />
@@ -226,6 +232,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\logon.css" />
+    <Content Include="Content\mobile\list.css" />
+    <Content Include="Content\mobile\main.css" />
+    <Content Include="Content\mobile\table.css" />
     <Content Include="EpcisServices\CaptureService.svc" />
     <Content Include="EpcisServices\QueryService.svc" />
     <Content Include="Global.asax" />
@@ -273,16 +282,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="fonts\roboto\Roboto-Bold.woff" />
-    <Content Include="fonts\roboto\Roboto-Bold.woff2" />
-    <Content Include="fonts\roboto\Roboto-Light.woff" />
-    <Content Include="fonts\roboto\Roboto-Light.woff2" />
-    <Content Include="fonts\roboto\Roboto-Medium.woff" />
-    <Content Include="fonts\roboto\Roboto-Medium.woff2" />
-    <Content Include="fonts\roboto\Roboto-Regular.woff" />
-    <Content Include="fonts\roboto\Roboto-Regular.woff2" />
-    <Content Include="fonts\roboto\Roboto-Thin.woff" />
-    <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="Scripts\fastnt.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

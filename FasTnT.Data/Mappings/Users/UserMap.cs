@@ -9,6 +9,7 @@ namespace FasTnT.Data.Mappings.Users
         {
             Table("application_user");
             Schema("users");
+            DynamicUpdate();
 
             Id(x => x.Id).Column("id");
             Map(x => x.Name).Column("name").Unique().Not.Nullable();

@@ -159,14 +159,14 @@
   <data name="Grid_ApiUser" xml:space="preserve">
     <value>Utilisateur de l'API</value>
   </data>
-  <data name="Grid_ApiUser_DashboardUser" xml:space="preserve">
-    <value>Utilisateur de l'API et du panneau de contrôle</value>
-  </data>
   <data name="Grid_Captured" xml:space="preserve">
     <value>Capturé le</value>
   </data>
   <data name="Grid_DashboardUser" xml:space="preserve">
     <value>Utilisateur du panneau de contrôle</value>
+  </data>
+  <data name="Grid_DashboardUser_ApiUser" xml:space="preserve">
+    <value>Utilisateur de l'API et du panneau de contrôle</value>
   </data>
   <data name="Grid_Date" xml:space="preserve">
     <value>Date</value>
@@ -225,6 +225,9 @@
   <data name="Label_Error" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="Label_EventDetails" xml:space="preserve">
+    <value>Détails de l'événement</value>
+  </data>
   <data name="Label_Events" xml:space="preserve">
     <value>Événements</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="Label_QueryTooComplex" xml:space="preserve">
     <value>Requête trop complexe</value>
+  </data>
+  <data name="Label_Search" xml:space="preserve">
+    <value>Chercher</value>
   </data>
   <data name="Label_SearchEPC" xml:space="preserve">
     <value>Chercher EPC</value>

@@ -1,5 +1,6 @@
 ﻿using FasTnT.Domain.Model.Dashboard;
 using FasTnT.Domain.Repositories;
+using FasTnT.Domain.Utils.Aspects;
 using System;
 using System.Linq;
 
@@ -21,9 +22,18 @@ namespace FasTnT.Domain.Services.Dashboard.Users
             return new UserDetail { Name = user.Name, LastLogOn = user.LastLogOn.Value };
         }
 
-        public void SetPassword(string userName, string previous, string updated)
+        [CommitTransaction]
+        public virtual void SetPassword(Guid userId, string previous, string updated)
         {
+            //TODO: set user password (salt/hash)
             throw new NotImplementedException();
+        }
+
+        [CommitTransaction]
+        public virtual void SetPreferredLanguage(Guid userId, string language)
+        {
+            var user = _userRepository.Load(userId);
+            user.PreferredLanguage = language;
         }
     }
 }

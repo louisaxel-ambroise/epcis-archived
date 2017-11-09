@@ -2,7 +2,7 @@
 
 namespace FasTnT.Domain.Services.Dashboard
 {
-    public interface IWebUserAuthenticator
+    public interface IUserAuthenticator
     {
         User Authenticate(string username, string password);
     }

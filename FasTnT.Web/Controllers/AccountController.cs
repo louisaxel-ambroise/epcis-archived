@@ -1,11 +1,13 @@
 ﻿using FasTnT.Domain.Exceptions;
-using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Services.Dashboard;
 using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Utils;
+using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Web.Helpers;
 using FasTnT.Web.Models.Account;
 using FasTnT.Web.Models.Users;
+using FasTnT.Web.Session;
+using Newtonsoft.Json;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -16,10 +18,10 @@ namespace FasTnT.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IWebUserAuthenticator _userAuthenticator;
+        private readonly IUserAuthenticator _userAuthenticator;
         private readonly IUserService _userService;
 
-        public AccountController(IWebUserAuthenticator userAuthenticator, IUserService userService)
+        public AccountController(IUserAuthenticator userAuthenticator, IUserService userService)
         {
             _userAuthenticator = userAuthenticator;
             _userService = userService;
@@ -28,7 +30,7 @@ namespace FasTnT.Web.Controllers
         [AllowAnonymous]
         public ActionResult LogOn()
         {
-            if (Request.LogonUserIdentity.IsAuthenticated)
+            if (UserSession.IsAuthenticated())
             {
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -44,7 +46,10 @@ namespace FasTnT.Web.Controllers
             try
             {
                 var user = _userAuthenticator.Authenticate(credentials.UserName, credentials.Password);
-                GenerateAndStoreCookies(user);
+                var webUser = WebUser.Create(user);
+
+                GenerateAndStoreCookies(webUser);
+                UserSession.Current = webUser;
 
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -60,6 +65,11 @@ namespace FasTnT.Web.Controllers
         [AllowAnonymous]
         public ActionResult SetLanguage(string language, string redirectTo)
         {
+            if (Request.LogonUserIdentity.IsAuthenticated)
+            {
+                _userService.SetPreferredLanguage(UserSession.Current.Id, language);
+            }
+
             Session[Constants.PreferredLanguage] = language;
             Response.Cookies.Set(new HttpCookie(Constants.PreferredLanguage, language));
 
@@ -84,10 +94,10 @@ namespace FasTnT.Web.Controllers
             return View(userDetails.MapToViewModel());
         }
 
-        private void GenerateAndStoreCookies(User user)
+        private void GenerateAndStoreCookies(WebUser user)
         {
             // Set authorization cookie
-            var ticket = new FormsAuthenticationTicket(1, user.Name, SystemContext.Clock.Now, SystemContext.Clock.Now.AddMinutes(30), false, user.Name, FormsAuthentication.FormsCookiePath);
+            var ticket = new FormsAuthenticationTicket(1, user.Name, SystemContext.Clock.Now, SystemContext.Clock.Now.AddMinutes(30), false, JsonConvert.SerializeObject(user), FormsAuthentication.FormsCookiePath);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket)) { HttpOnly = true };
 
             // Set language cookie if needed
