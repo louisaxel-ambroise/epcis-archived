@@ -20,7 +20,7 @@ That's it. You should now have a full EPCIS repository working on your computer.
 - Event capture: `http://localhost:12008/Services/1.2/EpcisCapture/` 
 - Queries : `http://localhost:12008/Services/1.2/EpcisQuery/`
 
-The file `EPCIS_Samples.postman_collection.json` contains sample of HTTP queries that you can perform on FasTnT (import and run in [PostMan](https://www.getpostman.com/))
+The file `tools\EPCIS_Samples.postman_collection.json` contains sample of HTTP queries that you can perform on FasTnT (import and run in [PostMan](https://www.getpostman.com/))
 
 ### Web Dashboard
 
