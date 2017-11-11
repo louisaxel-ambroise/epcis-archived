@@ -68,6 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\src\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MappingTests\EpcisRequestMapTests.cs" />
     <Compile Include="InMemoryDatabaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

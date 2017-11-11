@@ -24,7 +24,7 @@
                 @Html.AntiForgeryToken()
                 <div class="input">
                     <label for="username">@Resources.Label_EnterYourEmail</label>
-                    @Html.TextBoxFor(x => x.UserName, new { id = "email", type = "email", name = "email" })
+                    @Html.TextBoxFor(x => x.UserName, new { id = "username", name="username" })
                 </div>
                 <div class="input">
                     <label for="password">@Resources.Label_EnterYourPassword</label>

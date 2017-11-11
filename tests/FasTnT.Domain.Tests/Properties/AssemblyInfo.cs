@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("FasTnT.Data.Tests")]
+[assembly: AssemblyTitle("FasTnT.Domain.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("40c4aa0f-8a3c-433c-9e43-bc9741184d30")]
+[assembly: Guid("8ed390a8-d783-4895-9cad-fe565f6ce73f")]
