@@ -10,7 +10,6 @@ namespace FasTnT.Domain.Model.Events
         public virtual EpcisRequest Request { get; set; }
         public virtual string EventId { get; set; }
         public virtual EventType EventType { get; set; }
-        public virtual DateTime CaptureTime { get; set; }
         public virtual DateTime EventTime { get; set; }
         public virtual TimeZoneOffset EventTimezoneOffset { get; set; }
         public virtual EventAction Action { get; set; }

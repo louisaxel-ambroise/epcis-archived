@@ -14,7 +14,6 @@ namespace FasTnT.Data.Mappings.Events
 
             Map(x => x.Action).Column("action").CustomType<EventAction>();
             Map(x => x.EventType).Column("event_type").CustomType<EventType>();
-            Map(x => x.CaptureTime).Column("capture_time").Not.Insert();
             Map(x => x.EventTime).Column("record_time");
             Map(x => x.TransformationId).Column("transformation_id");
             Component(x => x.EventTimezoneOffset, m => m.Map(x => x.Value).Column("event_timezone_offset"));

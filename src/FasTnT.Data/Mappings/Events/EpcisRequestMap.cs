@@ -12,7 +12,7 @@ namespace FasTnT.Data.Mappings.Events
 
             Id(x => x.Id).Column("id").GeneratedBy.GuidComb();
 
-            Map(x => x.RecordTime).Column("capture_time");
+            Map(x => x.RecordTime).Column("record_time");
             Map(x => x.DocumentTime).Column("document_time");
             References(x => x.User).Column("user_id");
 

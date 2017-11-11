@@ -28,7 +28,7 @@ namespace FasTnT.Data.Repositories
 
         public User GetByUsername(string username)
         {
-            return _session.Query<User>().Where(x => x.Mail == username).SingleOrDefault();
+            return _session.Query<User>().Where(x => x.Name == username).SingleOrDefault();
         }
     }
 }

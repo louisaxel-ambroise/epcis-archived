@@ -21,9 +21,9 @@ namespace FasTnT.Domain.Services.EventQuery
                 case "LT_eventTime":
                     return query.Where(e => e.EventTime < DateTime.Parse(param.Value));
                 case "GE_recordTime":
-                    return query.Where(e => e.CaptureTime >= DateTime.Parse(param.Value));
+                    return query.Where(e => e.Request.RecordTime >= DateTime.Parse(param.Value));
                 case "LT_recordTime":
-                    return query.Where(e => e.CaptureTime < DateTime.Parse(param.Value));
+                    return query.Where(e => e.Request.RecordTime < DateTime.Parse(param.Value));
                 case "EQ_action":
                     var actions = param.Values.Select(v => (EventAction)Enum.Parse(typeof(EventAction), v, true)).ToArray();
                     return query.Where(e => actions.Contains(e.Action));

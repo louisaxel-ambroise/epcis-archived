@@ -14,7 +14,7 @@ namespace FasTnT.Web.Models.Events
                 Id = e.Id,
                 Type = e.EventType.ToString("F"),
                 Action = e.Action.ToString("F"),
-                CaptureTime = e.CaptureTime,
+                CaptureTime = e.Request.RecordTime,
                 RecordTime = e.EventTime,
                 Location = e.BusinessLocation,
                 UserId = default(Guid),
@@ -27,7 +27,7 @@ namespace FasTnT.Web.Models.Events
             return new EventDetailViewModel
             {
                 Id = @event.Id,
-                CapturedOn = @event.CaptureTime,
+                CaptureTime = @event.Request.RecordTime,
                 EventTime = @event.EventTime,
                 EventTimeZoneOffset = @event.EventTimezoneOffset.Representation,
                 EventType = @event.EventType.ToString("F"),

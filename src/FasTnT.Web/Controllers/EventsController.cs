@@ -23,7 +23,7 @@ namespace FasTnT.Web.Controllers
 
         public ActionResult Read_LatestEvents()
         {
-            var latestEvents = _eventRepository.Query().OrderByDescending(e => e.CaptureTime).Take(5).MapToEventSummary();
+            var latestEvents = _eventRepository.Query().OrderByDescending(e => e.Request.RecordTime).Take(5).MapToEventSummary();
             var totalEvents = _eventRepository.Query().Count();
 
             return PartialView("_LatestEvents", new LatestEventsViewModel { Events = latestEvents.ToArray(), Total = totalEvents });

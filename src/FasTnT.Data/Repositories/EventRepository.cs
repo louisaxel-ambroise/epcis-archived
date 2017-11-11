@@ -25,7 +25,7 @@ namespace FasTnT.Data.Repositories
 
         public IQueryable<EpcisEvent> Query()
         {
-            return _session.Query<EpcisEvent>();
+            return _session.Query<EpcisEvent>().Fetch(evt => evt.Request);
         }
 
         public IEnumerable<BusinessTransaction> LoadBusinessTransactions(IEnumerable<EpcisEvent> events)
