@@ -2,7 +2,6 @@
 using System.Linq;
 using FasTnT.Domain.Model.Events;
 using FasTnT.Domain.Model.Queries;
-using FasTnT.Domain.Services.EventQuery;
 using FasTnT.Domain.Exceptions;
 
 namespace FasTnT.Domain.Services.Queries

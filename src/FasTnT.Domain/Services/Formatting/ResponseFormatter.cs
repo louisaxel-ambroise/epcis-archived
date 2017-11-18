@@ -27,5 +27,20 @@ namespace FasTnT.Domain.Services.Formatting
                 )
             );
         }
+
+        public XDocument FormatSubscriptionResponse(string queryName, string subscriptionName, QueryEventResponse events)
+        {
+            var epcisQueryNamespace = XNamespace.Get("urn:epcglobal:epcis-query:xsd:1");
+            var formatted = _eventFormatter.Format(events);
+
+            return new XDocument(new XDeclaration("1.0", "UTF-8", "yes"),
+                new XElement(epcisQueryNamespace + "QueryResult",
+                    new XAttribute(XNamespace.Xmlns + "a", epcisQueryNamespace),
+                    new XElement("queryName", queryName),
+                    new XElement("subscriptionName", subscriptionName),
+                    new XElement("resultBody", new XElement("EventList", formatted.ToArray<object>()))
+                )
+            );
+        }
     }
 }

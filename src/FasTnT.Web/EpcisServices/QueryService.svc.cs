@@ -5,11 +5,12 @@ using System.ServiceModel.Channels;
 using System.Xml.Linq;
 using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Web.EpcisServices.Model;
-using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Exceptions;
+using FasTnT.Domain.Services.Queries.Performers;
+using FasTnT.Domain.Services.Queries;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -18,13 +19,15 @@ namespace FasTnT.Web.EpcisServices
     /// </summary>
     public class QueryService : IQueryService
     {
+        private readonly IQueryManager _queryManager;
         private readonly IQueryPerformer _queryPerformer;
         private readonly ISubscriptionManager _subscriptionManager;
         private readonly IResponseFormatter _responseFormatter;
 
-        public QueryService(ISubscriptionManager subscriptionManager, IQueryPerformer queryPerformer, IResponseFormatter responseFormatter)
+        public QueryService(ISubscriptionManager subscriptionManager, IQueryManager queryManager, IQueryPerformer queryPerformer, IResponseFormatter responseFormatter)
         {
             _subscriptionManager = subscriptionManager ?? throw new ArgumentNullException(nameof(subscriptionManager));
+            _queryManager = queryManager ?? throw new ArgumentNullException(nameof(queryManager));
             _queryPerformer = queryPerformer ?? throw new ArgumentNullException(nameof(queryPerformer));
             _responseFormatter = responseFormatter;
         }
@@ -34,7 +37,7 @@ namespace FasTnT.Web.EpcisServices
         {
             try
             {
-                return _queryPerformer.ListQueryNames().ToArray();
+                return _queryManager.ListQueryNames().ToArray();
             }
             catch (EpcisException ex)
             {
@@ -77,7 +80,7 @@ namespace FasTnT.Web.EpcisServices
             try 
             {
                 var pollRequest = PollRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
-                var results = _queryPerformer.ExecuteQuery(pollRequest.Name, pollRequest.Parameters);
+                var results = _queryPerformer.ExecutePollQuery(pollRequest.Name, pollRequest.Parameters);
                 var formattedResponse = _responseFormatter.FormatPollResponse(pollRequest.Name, results);
 
                 return MessageResponse.CreatePollResponse(formattedResponse.Root);

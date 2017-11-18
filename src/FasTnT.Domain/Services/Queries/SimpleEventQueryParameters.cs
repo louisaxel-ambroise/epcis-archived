@@ -5,7 +5,7 @@ using FasTnT.Domain.Model.Queries;
 using System;
 using System.Linq;
 
-namespace FasTnT.Domain.Services.EventQuery
+namespace FasTnT.Domain.Services.Queries
 {
     public static class SimpleEventQueryParameters
     {

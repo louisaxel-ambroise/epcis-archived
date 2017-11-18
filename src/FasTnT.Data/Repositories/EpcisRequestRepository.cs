@@ -16,7 +16,7 @@ namespace FasTnT.Data.Repositories
 
         public void Insert(EpcisRequest request)
         {
-            _session.Persist(request);
+            _session.Save(request);
         }
     }
 }

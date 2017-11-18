@@ -4,11 +4,11 @@ using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Services.Queries;
+using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Validation;
 using FasTnT.Domain.Utils.Aspects;
 using Ninject.Modules;
-using System.Diagnostics;
 
 namespace FasTnT.DependencyInjection
 {
@@ -26,21 +26,25 @@ namespace FasTnT.DependencyInjection
         public override void Load()
         {
             // Dashboard Bindings
-            Bind<IUserAuthenticator>().To<UserAuthenticator>().InScope(_scope.Value);
-            Bind<IUserService>().To<UserService>().InScope(_scope.Value);
+            Bind<IUserAuthenticator>().To<UserAuthenticator>();
+            Bind<IUserService>().To<UserService>();
 
             // EPCIS Service Bindings
             Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();
             Bind<IEventFormatter>().To<EventFormatter>().InSingletonScope();
-            Bind<ISubscriptionManager>().To<SubscriptionManager>().InScope(_scope.Value);
-            Bind<IEventCapturer>().To<EventCapturer>().InScope(_scope.Value);
-            Bind<IQueryPerformer>().To<QueryPerformer>().InScope(_scope.Value);
-            Bind<IRequestPersister>().To<RequestPersister>().InScope(_scope.Value);
+            Bind<ISubscriptionManager>().To<SubscriptionManager>();
+            Bind<IEventCapturer>().To<EventCapturer>();
+            Bind<IQueryManager>().To<QueryManager>();
+            Bind<IQueryPerformer>().To<QueryPerformer>();
+            Bind<IRequestPersister>().To<RequestPersister>();
             Bind<IDocumentValidator>().To<XmlDocumentValidator>().WithConstructorArgument("files", _xsdFiles);
             Bind<IDocumentParser>().To<DocumentParser>();
 
             // Queries
             Bind<IQuery>().To<SimpleEventQuery>();
+
+            // Subscriptions
+            Bind<ISubscriptionRunner>().To<SubscriptionRunner>();
 
             // Logging EventLog
 #if EVENT_LOG

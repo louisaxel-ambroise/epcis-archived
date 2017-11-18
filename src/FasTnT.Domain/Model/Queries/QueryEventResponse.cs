@@ -1,6 +1,5 @@
 ﻿using FasTnT.Domain.Model.Events;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FasTnT.Domain.Model.Queries
 {

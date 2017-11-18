@@ -79,6 +79,11 @@
     <Compile Include="Mappings\MasterData\DispositionMap.cs" />
     <Compile Include="Mappings\MasterData\MasterBusinessTransactionMap.cs" />
     <Compile Include="Mappings\MasterData\ReadPointMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionControlsMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionParameterMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionParameterValueMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionScheduleMap.cs" />
     <Compile Include="Mappings\Users\UserLogMap.cs" />
     <Compile Include="Mappings\Users\UserMap.cs" />
     <Compile Include="Mappings\Users\UserTypeMap.cs" />
@@ -105,10 +110,14 @@
     <Compile Include="Migrations\M205_CreateReadPointTable.cs" />
     <Compile Include="Migrations\M300_InsertDetaultData.cs" />
     <Compile Include="Migrations\M400_CreateSubscriptionSchema.cs" />
-    <Compile Include="Migrations\M401_CreateSubscriptionTable.cs" />
+    <Compile Include="Migrations\M401_CreateSubscriptionScheduleTable.cs" />
+    <Compile Include="Migrations\M402_CreateSubscriptionTable.cs" />
+    <Compile Include="Migrations\M403_CreateSubscriptionParameterTable.cs" />
+    <Compile Include="Migrations\M404_CreateSubscriptionParameterValueTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EpcisRequestRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionProvider.cs" />
   </ItemGroup>

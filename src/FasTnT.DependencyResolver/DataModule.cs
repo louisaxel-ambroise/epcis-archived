@@ -6,6 +6,7 @@ using FasTnT.Data;
 using Ninject;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Data.Interceptors;
+using FasTnT.Domain.Services.Subscriptions;
 
 namespace FasTnT.DependencyInjection
 {
@@ -24,20 +25,24 @@ namespace FasTnT.DependencyInjection
         {
             var requestLogger = new EmptyInterceptor();
 
-            #if DEBUG
+#if DEBUG
             requestLogger = new SQLDebugOutputInterceptor();
-            #endif
+#endif
 
-            Bind<IUserRepository>().To<UserRepository>().UsingScope(Scope);
-            Bind<IEventRepository>().To<EventRepository>().UsingScope(Scope);
-            Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>().UsingScope(Scope);
+            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IEventRepository>().To<EventRepository>();
+            Bind<ISubscriptionRepository>().To<SubscriptionRepository>();
+            Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>();
 
             // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).UsingScope(Scope);
             Bind<ITransaction>().ToMethod(ctx => ctx.Kernel.Get<ISession>().BeginTransaction()).UsingScope(Scope);
 
-            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>().UsingScope(Scope);
+            // Bindings for subscription runners
+            Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).WhenInjectedInto<ISubscriptionRunner>();
+
+            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>();
         }
     }
 }

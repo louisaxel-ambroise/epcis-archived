@@ -1,7 +1,9 @@
 ﻿using FasTnT.DependencyInjection;
+using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Users;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Web;
+using FasTnT.Web.BackgroundTasks;
 using FasTnT.Web.Helpers.Users;
 using Ninject.Modules;
 
@@ -20,9 +22,11 @@ namespace FasTnT.Web
 
         public override void Load()
         {
-            Bind<IAuthenticateUserInterceptor>().To<AuthenticateUserInterceptor>().InScope(_scope.Value);
-            Bind<IUserSetter>().To<HttpUserContainer>().InScope(_scope.Value);
-            Bind<IUserProvider>().To<HttpUserContainer>().InScope(_scope.Value);
+            Bind<IAuthenticateUserInterceptor>().To<AuthenticateUserInterceptor>();
+            Bind<IUserSetter>().To<HttpUserContainer>();
+            Bind<IUserProvider>().To<HttpUserContainer>();
+
+            Bind<ISubscriptionScheduler>().To<WebSubscriptionScheduler>().InSingletonScope();
         }
     }
 }
