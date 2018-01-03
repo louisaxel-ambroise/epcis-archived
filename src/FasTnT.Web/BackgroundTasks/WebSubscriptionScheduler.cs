@@ -8,6 +8,7 @@ using FasTnT.Domain.Model.Subscriptions;
 using System.Linq;
 using Ninject;
 using System.Web.Hosting;
+using FasTnT.Domain.Utils;
 
 namespace FasTnT.Web.BackgroundTasks
 {
@@ -39,15 +40,15 @@ namespace FasTnT.Web.BackgroundTasks
             _thread = Task.Run(async () =>
             {
                 // Compute next executions at startup
-                foreach (var subscription in _subscriptions) _scheduledExecutions.TryAdd(subscription, subscription.Schedule.GetNextOccurence(DateTime.UtcNow));
+                foreach (var subscription in _subscriptions) _scheduledExecutions.TryAdd(subscription, subscription.Schedule.GetNextOccurence(SystemContext.Clock.Now));
 
                 while (!_cancellationToken.IsCancellationRequested)
                 {
                     WaitTillNextExecutionOrNotification();
 
-                    foreach (var entry in _scheduledExecutions.Where(x => x.Value <= DateTime.UtcNow))
+                    foreach (var entry in _scheduledExecutions.Where(x => x.Value <= SystemContext.Clock.Now))
                     {
-                        _scheduledExecutions.TryUpdate(entry.Key, entry.Key.Schedule.GetNextOccurence(DateTime.UtcNow), entry.Value);
+                        _scheduledExecutions.TryUpdate(entry.Key, entry.Key.Schedule.GetNextOccurence(SystemContext.Clock.Now), entry.Value);
                         await Run(entry.Key).ConfigureAwait(false);
                     }
                 }
@@ -62,7 +63,7 @@ namespace FasTnT.Web.BackgroundTasks
                 _subscriptions.Add(subscription);
                 if (IsRunning)
                 {
-                    _scheduledExecutions.TryAdd(subscription, subscription.Schedule.GetNextOccurence(DateTime.UtcNow));
+                    _scheduledExecutions.TryAdd(subscription, subscription.Schedule.GetNextOccurence(SystemContext.Clock.Now));
                 }
 
                 Monitor.Pulse(_monitor);
@@ -80,8 +81,8 @@ namespace FasTnT.Web.BackgroundTasks
         {
             lock (_monitor)
             {
-                var nextExecution = _scheduledExecutions.Any() ? _scheduledExecutions.Values.Min() : DateTime.UtcNow.AddSeconds(30);
-                var timeUntilTrigger = nextExecution - DateTime.UtcNow;
+                var nextExecution = _scheduledExecutions.Any() ? _scheduledExecutions.Values.Min() : SystemContext.Clock.Now.AddSeconds(30);
+                var timeUntilTrigger = nextExecution - SystemContext.Clock.Now;
 
                 if (timeUntilTrigger > TimeSpan.Zero)
                 {

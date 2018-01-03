@@ -1,4 +1,5 @@
 ﻿@using FasTnT.Web.Helpers
+@using FasTnT.Domain.Utils
 @using FasTnT.Web.Internationalization
 
 @{ 
@@ -39,7 +40,7 @@
             @RenderBody()
         </section>
         <footer>
-            <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year) <a class="grey-text text-lighten-4 right" href="#">Github</a> </p>
+            <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @SystemContext.Clock.Now.Year) <a class="grey-text text-lighten-4 right" href="#">Github</a> </p>
             <p>
                 <a class="language" href="~/Account/SetLanguage?language=en&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_EN.jpg" alt="EN" /></a>
                 <a class="language" href="~/Account/SetLanguage?language=fr&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_FR.jpg" alt="FR" /></a>
