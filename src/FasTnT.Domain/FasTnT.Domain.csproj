@@ -70,7 +70,7 @@
     <Compile Include="Services\EventCapture\RequestPersister.cs" />
     <Compile Include="Services\Formatting\ResponseFormatter.cs" />
     <Compile Include="Services\Queries\IQueryManager.cs" />
-    <Compile Include="Services\Queries\Performers\SubscriptionQueryPerformer.cs" />
+    <Compile Include="Services\Queries\Performers\QueryPerformer.cs" />
     <Compile Include="Services\Queries\QueryManager.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionRunner.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionScheduler.cs" />
