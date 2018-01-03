@@ -18,31 +18,33 @@ namespace FasTnT.Domain.Services.Dashboard
         [CommitTransaction]
         public virtual User Authenticate(string username, string password)
         {
+            User user;
+
             try
             {
-                var user = _userRepository.GetByUsername(username);
-
-                if(user == null)
-                {
-                    throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownUser);
-                }
-                if (!user.Roles.Contains(UserType.DashboardUser))
-                {
-                    throw new UserAuthenticationException(UserAuthenticationException.Failure.AccessDenied);
-                }
-                if(!user.VerifyPassword(password))
-                {
-                    throw new UserAuthenticationException(UserAuthenticationException.Failure.WrongPassword);
-                }
-
-                user.LastLogOn = SystemContext.Clock.Now;
-
-                return user;
+                user = _userRepository.GetByUsername(username);
             }
             catch
             {
                 throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownError);
             }
+
+            if (user == null)
+            {
+                throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownUser);
+            }
+            if (!user.Roles.Contains(UserType.DashboardUser))
+            {
+                throw new UserAuthenticationException(UserAuthenticationException.Failure.AccessDenied);
+            }
+            if(!user.VerifyPassword(password))
+            {
+                throw new UserAuthenticationException(UserAuthenticationException.Failure.WrongPassword);
+            }
+
+            user.LastLogOn = SystemContext.Clock.Now;
+
+            return user;
         }
     }
 }
