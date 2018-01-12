@@ -1,5 +1,4 @@
-﻿using System;
-using Ninject.Extensions.Interception;
+﻿using Ninject.Extensions.Interception;
 using Ninject.Extensions.Interception.Request;
 using Ninject.Extensions.Interception.Attributes;
 using Ninject;

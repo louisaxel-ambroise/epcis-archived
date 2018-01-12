@@ -67,7 +67,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Interceptors\CommitTransactionInterceptor.cs" />
+    <Compile Include="Interceptors\NHibernateCommitTransactionInterceptor.cs" />
     <Compile Include="Mappings\Events\BusinessTransactionMap.cs" />
     <Compile Include="Mappings\Events\CustomFieldMap.cs" />
     <Compile Include="Mappings\Events\EpcisRequestMap.cs" />

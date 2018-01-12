@@ -5,18 +5,20 @@ using System.Text;
 using System.Linq;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Model.Users;
-using System.Net;
-using System.ServiceModel.Web;
 using FasTnT.Domain.Services.Users;
+using System.ServiceModel.Web;
+using System.Net;
 
 namespace FasTnT.Domain.Utils.Aspects
 {
-    public class AuthenticateUserInterceptor : IAuthenticateUserInterceptor
+    public class UserAuthenticationInterceptor : IAuthenticateUserInterceptor
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserSetter _userSetter;
 
-        public AuthenticateUserInterceptor(IUserRepository userRepository, IUserSetter userSetter)
+        protected virtual Func<Exception> UnauthorizedException => () => new WebFaultException(HttpStatusCode.Unauthorized);
+
+        public UserAuthenticationInterceptor(IUserRepository userRepository, IUserSetter userSetter)
         {
             _userRepository = userRepository;
             _userSetter = userSetter;
@@ -30,7 +32,7 @@ namespace FasTnT.Domain.Utils.Aspects
             }
             else
             {
-                throw new WebFaultException(HttpStatusCode.Unauthorized);
+                throw UnauthorizedException();
             }
         }
 

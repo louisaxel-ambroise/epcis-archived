@@ -1,4 +1,4 @@
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1200px) {
     section ul.detail{ margin-left:32px; }
     section ul.detail li{ margin:5px 0; list-style-type: none;}
     section ul.detail li:before{ content:"- ";}

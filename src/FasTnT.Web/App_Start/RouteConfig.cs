@@ -1,7 +1,6 @@
 ﻿using FasTnT.Web.App_Start;
 using FasTnT.Web.EpcisServices;
 using Ninject.Extensions.Wcf;
-using System.ServiceModel.Activation;
 using System.Web.Mvc;
 using System.Web.Routing;
 

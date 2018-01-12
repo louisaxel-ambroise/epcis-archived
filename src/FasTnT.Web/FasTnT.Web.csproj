@@ -182,14 +182,14 @@
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Filters\AuthenticateUserInterceptor.cs" />
-    <Compile Include="Helpers\Filters\BasicAuthorizationAttribute.cs" />
+    <Compile Include="Helpers\Filters\AuthenticateUserAttribute.cs" />
     <Compile Include="Helpers\Filters\IAuthenticateUserInterceptor.cs" />
     <Compile Include="Helpers\Filters\InternationalizationFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Filters\UserAuthenticationInterceptor.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Users\HttpUserContainer.cs" />
     <Compile Include="Internationalization\Resources.Designer.cs">

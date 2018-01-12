@@ -204,6 +204,9 @@
   <data name="Label_AccessDenied" xml:space="preserve">
     <value>L'accès à cette page est interdit</value>
   </data>
+  <data name="Label_BusinessLocations" xml:space="preserve">
+    <value>Lieux d'Affaire</value>
+  </data>
   <data name="Label_Capture" xml:space="preserve">
     <value>Capture</value>
   </data>
@@ -356,5 +359,8 @@
   </data>
   <data name="Page_About_SourceCode" xml:space="preserve">
     <value>Le code source de ce projet peut être téléchargé gratuitement sur {0}</value>
+  </data>
+  <data name="Page_MasterData_ManageMasterData" xml:space="preserve">
+    <value>Cette page vous permet de gérer les différentes données de base de dépôt EPCIS.</value>
   </data>
 </root>

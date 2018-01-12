@@ -1,5 +1,4 @@
-﻿using System;
-using FluentMigrator;
+﻿using FluentMigrator;
 
 namespace FasTnT.Data.Migrations
 {

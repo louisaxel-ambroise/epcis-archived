@@ -42,7 +42,7 @@ namespace FasTnT.DependencyInjection
             // Bindings for subscription runners
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).WhenInjectedInto<ISubscriptionRunner>();
 
-            Bind<ICommitTransactionInterceptor>().To<CommitTransactionInterceptor>();
+            Bind<ICommitTransactionInterceptor>().To<NHibernateCommitTransactionInterceptor>();
         }
     }
 }

@@ -5,12 +5,12 @@ using NHibernate;
 
 namespace FasTnT.Data.Interceptors
 {
-    public class CommitTransactionInterceptor : ICommitTransactionInterceptor
+    public class NHibernateCommitTransactionInterceptor : ICommitTransactionInterceptor
     {
         private readonly ISession _session;
         private readonly ITransaction _transaction;
 
-        public CommitTransactionInterceptor(ISession session)
+        public NHibernateCommitTransactionInterceptor(ISession session)
         {
             _session = session ?? throw new ArgumentException(nameof(session));
             _transaction = session.BeginTransaction();

@@ -204,6 +204,9 @@
   <data name="Label_AccessDenied" xml:space="preserve">
     <value>The access to this page has been denied.</value>
   </data>
+  <data name="Label_BusinessLocations" xml:space="preserve">
+    <value>Business Locations</value>
+  </data>
   <data name="Label_Capture" xml:space="preserve">
     <value>Capture</value>
   </data>
@@ -356,5 +359,8 @@
   </data>
   <data name="Page_About_SourceCode" xml:space="preserve">
     <value>The source code of this project can be downloaded on {0}</value>
+  </data>
+  <data name="Page_MasterData_ManageMasterData" xml:space="preserve">
+    <value>This page allows you to manage the different Master Data of this EPCIS repository</value>
   </data>
 </root>

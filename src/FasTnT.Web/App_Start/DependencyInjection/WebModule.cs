@@ -2,13 +2,10 @@
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Users;
 using FasTnT.Domain.Utils.Aspects;
-using FasTnT.Web;
 using FasTnT.Web.BackgroundTasks;
 using FasTnT.Web.Helpers.Users;
 using Ninject.Modules;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
 namespace FasTnT.Web
 {
     public class WebModule : NinjectModule
@@ -22,7 +19,7 @@ namespace FasTnT.Web
 
         public override void Load()
         {
-            Bind<IAuthenticateUserInterceptor>().To<AuthenticateUserInterceptor>();
+            Bind<IAuthenticateUserInterceptor>().To<UserAuthenticationInterceptor>();
             Bind<IUserSetter>().To<HttpUserContainer>();
             Bind<IUserProvider>().To<HttpUserContainer>();
 

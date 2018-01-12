@@ -322,6 +322,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Business Locations.
+        /// </summary>
+        public static string Label_BusinessLocations {
+            get {
+                return ResourceManager.GetString("Label_BusinessLocations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capture.
         /// </summary>
         public static string Label_Capture {
@@ -777,6 +786,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Page_About_SourceCode {
             get {
                 return ResourceManager.GetString("Page_About_SourceCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This page allows you to manage the different Master Data of this EPCIS repository.
+        /// </summary>
+        public static string Page_MasterData_ManageMasterData {
+            get {
+                return ResourceManager.GetString("Page_MasterData_ManageMasterData", resourceCulture);
             }
         }
     }
