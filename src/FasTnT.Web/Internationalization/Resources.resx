@@ -207,11 +207,17 @@
   <data name="Label_BusinessLocations" xml:space="preserve">
     <value>Business Locations</value>
   </data>
+  <data name="Label_BusinessStep" xml:space="preserve">
+    <value>Step</value>
+  </data>
   <data name="Label_Capture" xml:space="preserve">
     <value>Capture</value>
   </data>
   <data name="Label_CaptureEventFailed" xml:space="preserve">
     <value>Capture event failed</value>
+  </data>
+  <data name="Label_CaptureTime" xml:space="preserve">
+    <value>Captured On</value>
   </data>
   <data name="Label_ChangePassword" xml:space="preserve">
     <value>Change Password</value>
@@ -228,14 +234,26 @@
   <data name="Label_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Label_EventAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
   <data name="Label_EventDetails" xml:space="preserve">
     <value>Event Details</value>
+  </data>
+  <data name="Label_EventId" xml:space="preserve">
+    <value>Event ID</value>
   </data>
   <data name="Label_Events" xml:space="preserve">
     <value>Events</value>
   </data>
   <data name="Label_EventsCaptured" xml:space="preserve">
     <value>Events Captured</value>
+  </data>
+  <data name="Label_EventTime" xml:space="preserve">
+    <value>Event Time</value>
+  </data>
+  <data name="Label_EventType" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Label_Github" xml:space="preserve">
     <value>Github</value>
@@ -245,6 +263,9 @@
   </data>
   <data name="Label_LatestEvents" xml:space="preserve">
     <value>Latest Events</value>
+  </data>
+  <data name="Label_Location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="Label_Login" xml:space="preserve">
     <value>Login</value>

@@ -6,13 +6,13 @@
 <h1>@string.Format(Resources.Format_DetailsOfEvent, Model.Id.ToString().Substring(0, 8))</h1>
 
 <ul class="detail">
-    <li><strong>Id:</strong> @Model.Id</li>
-    <li><strong>Event Type:</strong> @Model.EventType</li>
-    <li><strong>Captured On:</strong> @Model.CaptureTime.ToString(Resources.DateFormat_Detailed)</li>
-    <li><strong>Event Time:</strong> @Model.EventTime.ToString(Resources.DateFormat_Detailed) @Model.EventTimeZoneOffset</li>
-    <li><strong>Action:</strong> @Model.Action</li>
-    <li><strong>Location:</strong> @Model.BizLocation</li>
-    <li><strong>Step:</strong> @Model.BizStep</li>
+    <li><strong>@Resources.Label_EventId:</strong> @Model.Id</li>
+    <li><strong>@Resources.Label_EventType:</strong> @Model.EventType</li>
+    <li><strong>@Resources.Label_CaptureTime:</strong> @Model.CaptureTime.ToString(Resources.DateFormat_Detailed)</li>
+    <li><strong>@Resources.Label_EventTime:</strong> @Model.EventTime.ToString(Resources.DateFormat_Detailed) @Model.EventTimeZoneOffset</li>
+    <li><strong>@Resources.Label_EventAction:</strong> @Model.Action</li>
+    <li><strong>@Resources.Label_Location:</strong> @Model.BizLocation</li>
+    <li><strong>@Resources.Label_BusinessStep:</strong> @Model.BizStep</li>
 </ul>
 
 <p><a href="~/Events">@Resources.Link_LatestEventsList</a></p>

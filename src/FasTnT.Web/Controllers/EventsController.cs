@@ -29,9 +29,10 @@ namespace FasTnT.Web.Controllers
             return PartialView("_LatestEvents", new LatestEventsViewModel { Events = latestEvents.ToArray(), Total = totalEvents });
         }
 
-        public ActionResult Details(Guid id)
+        public ActionResult Details(Guid? id)
         {
-            var @event = _eventRepository.LoadById(id).MapToEventDetail();
+            if (id == null) return RedirectToAction("Index");
+            var @event = _eventRepository.LoadById(id.Value).MapToEventDetail();
 
             return View(@event);
         }
