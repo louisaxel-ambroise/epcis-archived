@@ -10,7 +10,8 @@ namespace FasTnT.Data.Migrations
         public override void Down()
         {
             Delete.FromTable("user_to_user_type").InSchema("users")
-                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.DashboardUser.Id });
+                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.DashboardUser.Id })
+                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.ApiUser.Id });
 
             Delete.FromTable("application_user").InSchema("users")
                 .Row(new { id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70") });
@@ -32,7 +33,8 @@ namespace FasTnT.Data.Migrations
                 });
 
             Insert.IntoTable("user_to_user_type").InSchema("users")
-                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.DashboardUser.Id });
+                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.DashboardUser.Id })
+                .Row(new { user_id = Guid.Parse("a68281f1-e2f3-4d12-ad08-d7bc541a9c70"), user_type_id = UserType.ApiUser.Id });
         }
     }
 }
