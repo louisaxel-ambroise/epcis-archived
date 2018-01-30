@@ -12,6 +12,7 @@ namespace FasTnT.Web
 
             // Script bundles
             bundles.Add(new ScriptBundle("~/Scripts/fastnt").Include("~/Scripts/fastnt.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/constants").Include("~/Scripts/constants.js"));
         }
     }
 }

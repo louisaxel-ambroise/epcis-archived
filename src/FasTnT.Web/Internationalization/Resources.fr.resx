@@ -384,4 +384,7 @@
   <data name="Page_MasterData_ManageMasterData" xml:space="preserve">
     <value>Cette page vous permet de gérer les différentes données de base de dépôt EPCIS.</value>
   </data>
+  <data name="Label_Loading" xml:space="preserve">
+    <value>Chargement...</value>
+  </data>
 </root>

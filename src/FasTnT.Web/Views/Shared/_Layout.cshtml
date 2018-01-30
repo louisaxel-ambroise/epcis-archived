@@ -16,6 +16,12 @@
     <link rel="icon" href="~/Content/images/icon.ico" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Styles.Render("~/Content/insite_css")
+
+    @Scripts.Render("~/Scripts/constants")
+    <script type="text/javascript">
+        constants.loadingDefault = "@Resources.Label_Loading";
+        constants.errorDefault = "@Resources.Label_Error";
+    </script>
 </head>
 <body>
     <aside>

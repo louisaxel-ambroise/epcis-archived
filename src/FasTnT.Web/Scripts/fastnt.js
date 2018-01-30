@@ -12,8 +12,11 @@
         request.send();
     }
 
-    function loadPartial(url, container) {
-        load(url, function (data) { document.getElementById(container).innerHTML = data; }, function () { document.getElementById(container).innerHTML = "<p>Error...</p>"; })
+    function loadPartial(url, container, loadingValue = constants.loadingDefault, errorValue = constants.errorDefault) {
+        var domContainer = document.getElementById(container);
+
+        domContainer.innerHTML = loadingValue;
+        load(url, function (data) { domContainer.innerHTML = data; }, function () { domContainer.innerHTML = errorDefault; })
     }
 
     return {
