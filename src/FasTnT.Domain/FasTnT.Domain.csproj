@@ -90,9 +90,7 @@
     <Compile Include="Services\Queries\SimpleEventQueryParameters.cs" />
     <Compile Include="Services\Validation\XmlDocumentValidator.cs" />
     <Compile Include="Utils\Log\CaptureLogInterceptor.cs" />
-    <Compile Include="Utils\Log\EmptyQueryLogInterceptor.cs" />
     <Compile Include="Utils\Log\ILogStore.cs" />
-    <Compile Include="Utils\Log\QueryLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
     <Compile Include="Model\Events\Epc.cs" />
     <Compile Include="Model\Events\EpcisEvent.cs" />
@@ -137,6 +135,7 @@
     <Compile Include="Utils\Aspects\QueryLogAttribute.cs" />
     <Compile Include="Utils\Clock.cs" />
     <Compile Include="Utils\IClock.cs" />
+    <Compile Include="Utils\Log\QueryLogInterceptor.cs" />
     <Compile Include="Utils\Security\BCrypt.cs" />
     <Compile Include="Utils\SystemContext.cs" />
   </ItemGroup>

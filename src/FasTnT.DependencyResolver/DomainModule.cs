@@ -48,7 +48,7 @@ namespace FasTnT.DependencyInjection
 
             // Logs
             Bind<ICaptureLogInterceptor>().To<CaptureLogInterceptor>();
-            Bind<IQueryLogInterceptor>().To<EmptyQueryLogInterceptor>();
+            Bind<IQueryLogInterceptor>().To<QueryLogInterceptor>();
         }
     }
 }

@@ -74,6 +74,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
+        [QueryLog]
         [AuthenticateUser]
         public virtual Message Poll(Message request)
         {

@@ -16,7 +16,8 @@ namespace FasTnT.Web.Models.Logs
                 Description = x.Description,
                 Status = GetStatus(x.Type),
                 UserId = x.User.Id,
-                UserName = x.User.Name
+                UserName = x.User.Name,
+                ExecutionTimeMs = x.ExecutionTimeMs
             });
         }
 

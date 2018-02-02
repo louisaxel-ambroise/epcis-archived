@@ -147,8 +147,8 @@
   <data name="Format_QueryFailedWithReason" xml:space="preserve">
     <value>Query failed with reason: {0}</value>
   </data>
-  <data name="Format_QuerySucceedTooLong" xml:space="preserve">
-    <value>Query succeed in more than {0} seconds</value>
+  <data name="Format_QuerySucceedTimeLimit" xml:space="preserve">
+    <value>Query succeed in {0:N0}ms</value>
   </data>
   <data name="Format_SubscriptionCallbackFailed" xml:space="preserve">
     <value>Subscription callback failed with HTTP status code {0}</value>
@@ -400,6 +400,12 @@
     <value>Submit</value>
   </data>
   <data name="Format_CaptureSucceed" xml:space="preserve">
-    <value>Capture succeed</value>
+    <value>Capture succeed in {0:N0} ms</value>
+  </data>
+  <data name="Format_QuerySucceed" xml:space="preserve">
+    <value>Query succeed in {0:N0}ms</value>
+  </data>
+  <data name="Format_SubscriptionSucceed" xml:space="preserve">
+    <value>Subscription execution succeed in {0:N0}ms</value>
   </data>
 </root>

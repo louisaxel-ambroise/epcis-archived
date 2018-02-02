@@ -1,5 +1,5 @@
 ﻿@using FasTnT.Web.Helpers
-@model IEnumerable<FasTnT.Web.Models.Logs.AuditLogSummary>
+@model FasTnT.Web.Models.Logs.DashboardSummaryViewModel
 
 @{
     ViewBag.Title = Resources.Menu_Dashboard;
@@ -19,13 +19,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var log in Model)
+        @foreach (var log in Model.Logs)
         {
             <tr>
                 <td>@log.Timestamp.ToString(Resources.DateFormat_Detailed)</td>
                 <td><a href="#!">@log.UserName</a></td>
                 <td>@Html.LocalizeLabel(@log.Action)</td>
-                <td>@Html.LocalizeFormat(@log.Description)</td>
+                <td>@string.Format(Html.LocalizeFormat(log.Description), log.ExecutionTimeMs)</td>
                 <td>
                     @if (!string.IsNullOrEmpty(log.Status))
                     {
@@ -37,4 +37,4 @@
         }
     </tbody>
 </table>
-<p class="right">@string.Format(Resources.Format_DisplayingXOutOfNItems, Model.Count(), Model.Count())</p>
+<p class="right">@string.Format(Resources.Format_DisplayingXOutOfNItems, Model.Logs.Count(), Model.TotalLogs)</p>

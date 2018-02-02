@@ -1,4 +1,7 @@
-﻿using FasTnT.Domain.Utils.Aspects;
+﻿using FasTnT.Domain.Model.Log;
+using FasTnT.Domain.Services.Users;
+using FasTnT.Domain.Utils;
+using FasTnT.Domain.Utils.Aspects;
 using Ninject.Extensions.Interception;
 using System;
 using System.Diagnostics;
@@ -7,11 +10,13 @@ namespace FasTnT.Domain.Log
 {
     public class QueryLogInterceptor : IQueryLogInterceptor
     {
-        private readonly EventLog _eventLog;
+        private readonly ILogStore _logStore;
+        private readonly IUserProvider _userProvider;
 
-        public QueryLogInterceptor(EventLog eventLog)
+        public QueryLogInterceptor(ILogStore logStore, IUserProvider userProvider)
         {
-            _eventLog = eventLog ?? throw new ArgumentException(nameof(eventLog));
+            _logStore = logStore;
+            _userProvider = userProvider;
         }
 
         public void Intercept(IInvocation invocation)
@@ -23,18 +28,36 @@ namespace FasTnT.Domain.Log
                 invocation.Proceed();
                 watch.Stop();
 
-                if(watch.ElapsedMilliseconds > TimeSpan.FromSeconds(10).TotalMilliseconds)
+                var user = _userProvider.GetCurrentUser();
+                var log = new AuditLog { Action = LogAction.Query, Timestamp = SystemContext.Clock.Now, User = user, ExecutionTimeMs = watch.ElapsedMilliseconds };
+
+                if (watch.ElapsedMilliseconds > TimeSpan.FromSeconds(10).TotalMilliseconds)
                 {
-                    _eventLog.WriteEntry("QuerySucceedTooLong", EventLogEntryType.Warning);
+                    log.Description = "QuerySucceedTimeLimit";
+                    log.Type = "Warning";
                 }
                 else
                 {
-                    _eventLog.WriteEntry("QuerySucceed", EventLogEntryType.Information);
+                    log.Description = "QuerySucceed";
+                    log.Type = "Information";
                 }
+
+                _logStore.Store(log);
             }
             catch
             {
-                _eventLog.WriteEntry("QueryFailed", EventLogEntryType.Error);
+                watch.Stop();
+                var user = _userProvider.GetCurrentUser();
+                _logStore.Store(new AuditLog
+                {
+                    Action = LogAction.Capture,
+                    Timestamp = SystemContext.Clock.Now,
+                    User = user,
+                    Description = "QueryFailed",
+                    Type = "Error",
+                    ExecutionTimeMs = watch.ElapsedMilliseconds
+                });
+
                 throw;
             }
         }

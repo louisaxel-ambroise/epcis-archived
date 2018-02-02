@@ -11,5 +11,6 @@ namespace FasTnT.Web.Models.Logs
         public string Action { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+        public long ExecutionTimeMs { get; set; }
     }
 }
