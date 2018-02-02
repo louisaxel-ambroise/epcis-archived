@@ -6,9 +6,9 @@ FasTnT is a C# implementation of GS1 EPCIS 1.2 standard. [https://www.gs1.org/ep
 ## Setup
 
 1. Install PostGreSQL if needed and create a new user/database for FasTnT;
-2. Update the `connectionStrings.shared.config` file with your connection string;
-3. Download, extract and build the source code from Github (using `Debug` configuration);
-4. Run the `.\tools\Up.cmd` utility. It will apply the migrations to the database;
+2. Rename the `connectionStrings.default.config` file to `connectionStrings.shared.config` and edit the `FasTnT.Database` connection string with your PostGreSQL DB connection string;
+3. Build the solution using `Debug` configuration;
+4. Run the `.\tools\Migrations\Up.cmd` script. It will apply the migrations to the database;
 5. Set `FasTnT.Web` project as startup project, and start the solution
 
 That's it. You should now have a full EPCIS repository working on your computer.
@@ -26,7 +26,7 @@ The file `tools\EPCIS_Samples.postman_collection.json` contains sample of HTTP q
 
 **FasTnT** also contains an embedded web dashboard that allows you to manage your server, Master Data and allowed users. The default URL is `http://localhost:12008/`.
 
-The default username/password for the dashboard is `admin`/`p@ssw0rd`.
+The default username/password for the dashboard/services is `admin`/`p@ssw0rd`.
 
 
 \* Note that the base URL or port number may change due to your IIS configuration.
