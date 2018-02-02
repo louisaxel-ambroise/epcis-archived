@@ -132,8 +132,8 @@
   <data name="EpcisRepository" xml:space="preserve">
     <value>EPCIS Repository</value>
   </data>
-  <data name="Format_CaptureEventFailedWithReason" xml:space="preserve">
-    <value>Capture event failed with reason: {0}</value>
+  <data name="Format_CaptureFailed" xml:space="preserve">
+    <value>Capture event failed in {0:N0}ms</value>
   </data>
   <data name="Format_Copyright" xml:space="preserve">
     <value>© {0} Louis-Axel Ambroise, All rights reserved.</value>
@@ -144,8 +144,8 @@
   <data name="Format_DisplayingXOutOfNItems" xml:space="preserve">
     <value>Displaying {0:N0} out of {1:N0} items</value>
   </data>
-  <data name="Format_QueryFailedWithReason" xml:space="preserve">
-    <value>Query failed with reason: {0}</value>
+  <data name="Format_QueryFailed" xml:space="preserve">
+    <value>Query failed in {0:N0}ms</value>
   </data>
   <data name="Format_QuerySucceedTimeLimit" xml:space="preserve">
     <value>Query succeed in {0:N0}ms</value>

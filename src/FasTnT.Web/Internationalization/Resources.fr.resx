@@ -132,8 +132,8 @@
   <data name="EpcisRepository" xml:space="preserve">
     <value>Dépôt EPCIS</value>
   </data>
-  <data name="Format_CaptureEventFailedWithReason" xml:space="preserve">
-    <value>La capture de l'événement a échoué: {0}</value>
+  <data name="Format_CaptureFailed" xml:space="preserve">
+    <value>La capture de l'événement a échoué en {0}ms</value>
   </data>
   <data name="Format_Copyright" xml:space="preserve">
     <value>© {0} Louis-Axel Ambroise, Tous droits réservés.</value>
@@ -144,7 +144,7 @@
   <data name="Format_DisplayingXOutOfNItems" xml:space="preserve">
     <value>{0:N0} éléments sur {1:N0} affichés</value>
   </data>
-  <data name="Format_QueryFailedWithReason" xml:space="preserve">
+  <data name="Format_QueryFailed" xml:space="preserve">
     <value>La requête a échoué. Cause : {0}</value>
   </data>
   <data name="Format_QuerySucceedTimeLimit" xml:space="preserve">

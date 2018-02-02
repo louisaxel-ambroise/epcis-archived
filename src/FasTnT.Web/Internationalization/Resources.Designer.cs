@@ -142,11 +142,11 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Capture event failed with reason: {0}.
+        ///   Recherche une chaîne localisée semblable à Capture event failed in {0:N0}ms.
         /// </summary>
-        public static string Format_CaptureEventFailedWithReason {
+        public static string Format_CaptureFailed {
             get {
-                return ResourceManager.GetString("Format_CaptureEventFailedWithReason", resourceCulture);
+                return ResourceManager.GetString("Format_CaptureFailed", resourceCulture);
             }
         }
         
@@ -187,11 +187,11 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Query failed with reason: {0}.
+        ///   Recherche une chaîne localisée semblable à Query failed in {0:N0}ms.
         /// </summary>
-        public static string Format_QueryFailedWithReason {
+        public static string Format_QueryFailed {
             get {
-                return ResourceManager.GetString("Format_QueryFailedWithReason", resourceCulture);
+                return ResourceManager.GetString("Format_QueryFailed", resourceCulture);
             }
         }
         

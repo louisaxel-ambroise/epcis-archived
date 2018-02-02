@@ -23,7 +23,12 @@
         {
             <tr>
                 <td>@log.Timestamp.ToString(Resources.DateFormat_Detailed)</td>
-                <td><a href="#!">@log.UserName</a></td>
+                <td>
+                    @if (log.UserId != null)
+                    {
+                        <a href="#!">@log.UserName</a>
+                    }
+                </td>
                 <td>@Html.LocalizeLabel(@log.Action)</td>
                 <td>@string.Format(Html.LocalizeFormat(log.Description), log.ExecutionTimeMs)</td>
                 <td>

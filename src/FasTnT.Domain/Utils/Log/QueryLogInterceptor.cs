@@ -50,7 +50,7 @@ namespace FasTnT.Domain.Log
                 var user = _userProvider.GetCurrentUser();
                 _logStore.Store(new AuditLog
                 {
-                    Action = LogAction.Capture,
+                    Action = LogAction.Query,
                     Timestamp = SystemContext.Clock.Now,
                     User = user,
                     Description = "QueryFailed",
