@@ -23,7 +23,7 @@
             <form method="post" action="@Url.Content("~/Account/LogOn")">
                 @Html.AntiForgeryToken()
                 <div class="input">
-                    <label for="username">@Resources.Label_EnterYourEmail</label>
+                    <label for="username">@Resources.Label_EnterYourUsername</label>
                     @Html.TextBoxFor(x => x.UserName, new { id = "username", name="username" })
                 </div>
                 <div class="input">

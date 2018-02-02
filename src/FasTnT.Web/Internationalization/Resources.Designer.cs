@@ -106,11 +106,56 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm New Password:.
+        /// </summary>
+        public static string Form_ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("Form_ConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password:.
+        /// </summary>
+        public static string Form_NewPassword {
+            get {
+                return ResourceManager.GetString("Form_NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous Password:.
+        /// </summary>
+        public static string Form_PreviousPassword {
+            get {
+                return ResourceManager.GetString("Form_PreviousPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Form_Submit {
+            get {
+                return ResourceManager.GetString("Form_Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capture event failed with reason: {0}.
         /// </summary>
         public static string Format_CaptureEventFailedWithReason {
             get {
                 return ResourceManager.GetString("Format_CaptureEventFailedWithReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture succeed.
+        /// </summary>
+        public static string Format_CaptureSucceed {
+            get {
+                return ResourceManager.GetString("Format_CaptureSucceed", resourceCulture);
             }
         }
         
@@ -376,20 +421,20 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your email.
-        /// </summary>
-        public static string Label_EnterYourEmail {
-            get {
-                return ResourceManager.GetString("Label_EnterYourEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enter your password.
         /// </summary>
         public static string Label_EnterYourPassword {
             get {
                 return ResourceManager.GetString("Label_EnterYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter you username.
+        /// </summary>
+        public static string Label_EnterYourUsername {
+            get {
+                return ResourceManager.GetString("Label_EnterYourUsername", resourceCulture);
             }
         }
         

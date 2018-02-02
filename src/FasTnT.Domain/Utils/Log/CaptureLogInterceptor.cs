@@ -2,17 +2,21 @@
 using FasTnT.Domain.Utils.Aspects;
 using Ninject.Extensions.Interception;
 using System.Diagnostics;
+using FasTnT.Domain.Services.Users;
+using FasTnT.Domain.Model.Log;
+using FasTnT.Domain.Utils;
 
 namespace FasTnT.Domain.Log
 {
     public class CaptureLogInterceptor : ICaptureLogInterceptor
     {
-        private readonly EventLog _eventLog;
+        private readonly ILogStore _logStore;
+        private readonly IUserProvider _userProvider;
 
-        public CaptureLogInterceptor(EventLog eventLog, string eventSource)
+        public CaptureLogInterceptor(ILogStore logStore, IUserProvider userProvider)
         {
-            _eventLog = eventLog ?? throw new ArgumentException(nameof(eventLog));
-            _eventLog.Source = eventSource;
+            _logStore = logStore;
+            _userProvider = userProvider;
         }
 
         public void Intercept(IInvocation invocation)
@@ -24,18 +28,33 @@ namespace FasTnT.Domain.Log
                 invocation.Proceed();
                 watch.Stop();
 
+                var user = _userProvider.GetCurrentUser();
+                var log = new AuditLog { Action = LogAction.Capture, Timestamp = SystemContext.Clock.Now, User = user };
+
                 if (watch.ElapsedMilliseconds > TimeSpan.FromSeconds(10).TotalMilliseconds)
                 {
-                    _eventLog.WriteEntry("CaptureSucceedTimeLimit", EventLogEntryType.Warning);
+                    log.Description = "CaptureSucceedTimeLimit";
+                    log.Type = "Warning";
                 }
                 else
                 {
-                    _eventLog.WriteEntry("CaptureSucceed", EventLogEntryType.Information);
+                    log.Description = "CaptureSucceed";
+                    log.Type = "Information";
                 }
+
+                _logStore.Store(log);
             }
             catch 
             {
-                _eventLog.WriteEntry("CaptureFailed", EventLogEntryType.Error);
+                var user = _userProvider.GetCurrentUser();
+                _logStore.Store(new AuditLog
+                {
+                    Action = LogAction.Capture,
+                    Timestamp = SystemContext.Clock.Now,
+                    User = user,
+                    Description = "CaptureFailed",
+                    Type = "Error"
+                });
 
                 throw;
             }

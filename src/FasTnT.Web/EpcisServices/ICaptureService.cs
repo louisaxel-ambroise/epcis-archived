@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FasTnT.Domain.Model.Capture;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -17,6 +16,6 @@ namespace FasTnT.Web.EpcisServices
         /// <returns>ID of captured events if the capture succeed, exception if it failed.</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/")]
-        IEnumerable<Guid> Capture();
+        CaptureResponse Capture();
     }
 }

@@ -1,0 +1,16 @@
+﻿.form-group{
+    padding-left:15px;
+    margin-top: 7px;
+}
+
+.form-group label{
+    display: inline-block;
+    min-width:35%;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.form-group input{
+    display:inline-block;
+    min-width: 150px;
+}

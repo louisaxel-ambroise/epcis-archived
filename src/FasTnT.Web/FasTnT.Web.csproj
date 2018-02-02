@@ -207,6 +207,8 @@
     <Compile Include="Models\Events\EventSummaryViewModel.cs" />
     <Compile Include="Models\Events\LatestEventsViewModel.cs" />
     <Compile Include="Models\Events\Mappings.cs" />
+    <Compile Include="Models\Logs\AuditLogSummary.cs" />
+    <Compile Include="Models\Logs\Mappings.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\UserDetailsViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Helpers\Users\Session\UserSession.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\desktop\forms.css" />
     <Content Include="Content\desktop\main.css" />
     <Content Include="Content\desktop\list.css" />
     <Content Include="Content\desktop\table.css" />

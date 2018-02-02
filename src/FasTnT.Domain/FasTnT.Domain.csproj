@@ -55,8 +55,11 @@
     <Compile Include="Exceptions\QueryParameterException.cs" />
     <Compile Include="Exceptions\QueryTooComplexException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
+    <Compile Include="Model\Capture\CaptureResponse.cs" />
     <Compile Include="Model\Dashboard\UserDetail.cs" />
     <Compile Include="Model\Events\EpcisRequest.cs" />
+    <Compile Include="Model\Log\AuditLog.cs" />
+    <Compile Include="Model\Log\LogAction.cs" />
     <Compile Include="Model\Queries\QueryEventResponse.cs" />
     <Compile Include="Model\Subscriptions\ScheduleEntry.cs" />
     <Compile Include="Model\Subscriptions\Subscription.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Model\Subscriptions\SubscriptionParameter.cs" />
     <Compile Include="Model\Subscriptions\SubscriptionParameterValue.cs" />
     <Compile Include="Model\Subscriptions\SubscriptionSchedule.cs" />
+    <Compile Include="Repositories\IAuditLogRepository.cs" />
     <Compile Include="Repositories\IEpcisRequestRepository.cs" />
     <Compile Include="Repositories\ISubscriptionRepository.cs" />
     <Compile Include="Services\EventCapture\IRequestPersister.cs" />
@@ -86,8 +90,8 @@
     <Compile Include="Services\Queries\SimpleEventQueryParameters.cs" />
     <Compile Include="Services\Validation\XmlDocumentValidator.cs" />
     <Compile Include="Utils\Log\CaptureLogInterceptor.cs" />
-    <Compile Include="Utils\Log\EmptyCaptureLogInterceptor.cs" />
     <Compile Include="Utils\Log\EmptyQueryLogInterceptor.cs" />
+    <Compile Include="Utils\Log\ILogStore.cs" />
     <Compile Include="Utils\Log\QueryLogInterceptor.cs" />
     <Compile Include="Model\Events\CustomField.cs" />
     <Compile Include="Model\Events\Epc.cs" />

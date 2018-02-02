@@ -46,22 +46,9 @@ namespace FasTnT.DependencyInjection
             // Subscriptions
             Bind<ISubscriptionRunner>().To<SubscriptionRunner>();
 
-            // Logging EventLog
-#if EVENT_LOG
-            string appSource = "FasTnT";
-            string appLog = "Application";
-
-            if (!EventLog.SourceExists(appSource))
-            {
-                EventLog.CreateEventSource(appSource, appLog);
-            }
-
-            Bind<ICaptureLogInterceptor>().To<CaptureLogInterceptor>().WithConstructorArgument("eventSource", appSource);
-            Bind<IQueryLogInterceptor>().To<QueryLogInterceptor>().WithConstructorArgument("eventSource", appSource);
-#else
-            Bind<ICaptureLogInterceptor>().To<EmptyCaptureLogInterceptor>();
+            // Logs
+            Bind<ICaptureLogInterceptor>().To<CaptureLogInterceptor>();
             Bind<IQueryLogInterceptor>().To<EmptyQueryLogInterceptor>();
-#endif
         }
     }
 }

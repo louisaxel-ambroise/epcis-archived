@@ -222,8 +222,8 @@
   <data name="Label_ChangePassword" xml:space="preserve">
     <value>Change Password</value>
   </data>
-  <data name="Label_EnterYourEmail" xml:space="preserve">
-    <value>Enter your email</value>
+  <data name="Label_EnterYourUsername" xml:space="preserve">
+    <value>Enter you username</value>
   </data>
   <data name="Label_EnterYourPassword" xml:space="preserve">
     <value>Enter your password</value>
@@ -386,5 +386,20 @@
   </data>
   <data name="Label_Loading" xml:space="preserve">
     <value>Loading...</value>
+  </data>
+  <data name="Form_ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password:</value>
+  </data>
+  <data name="Form_NewPassword" xml:space="preserve">
+    <value>New Password:</value>
+  </data>
+  <data name="Form_PreviousPassword" xml:space="preserve">
+    <value>Previous Password:</value>
+  </data>
+  <data name="Form_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Format_CaptureSucceed" xml:space="preserve">
+    <value>Capture succeed</value>
   </data>
 </root>

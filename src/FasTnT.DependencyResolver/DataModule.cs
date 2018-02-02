@@ -7,6 +7,8 @@ using Ninject;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Data.Interceptors;
 using FasTnT.Domain.Services.Subscriptions;
+using FasTnT.Domain.Log;
+using FasTnT.Data.Log;
 
 namespace FasTnT.DependencyInjection
 {
@@ -33,6 +35,9 @@ namespace FasTnT.DependencyInjection
             Bind<IEventRepository>().To<EventRepository>();
             Bind<ISubscriptionRepository>().To<SubscriptionRepository>();
             Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>();
+            Bind<IAuditLogRepository>().To<AuditLogRepository>();
+
+            Bind<ILogStore>().To<LogStore>();
 
             // NHibernate Session binding
             Bind<ISessionFactory>().ToConstant(SessionProvider.SetupFactory(ConnectionString)).InSingletonScope();
