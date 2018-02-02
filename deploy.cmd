@@ -53,7 +53,7 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 :MsbuildPathDefined
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-xcopy /s "%DEPLOYMENT_SOURCE%\src\connectionStrings.default.config" "%DEPLOYMENT_SOURCE%\src\connectionStrings.shared.config"
+move /Y "%DEPLOYMENT_SOURCE%\src\connectionStrings.default.config" "%DEPLOYMENT_SOURCE%\src\connectionStrings.shared.config"
 
 IF /I "FasTnT.sln" NEQ "" (
   call :ExecuteCmd nuget restore "%DEPLOYMENT_SOURCE%\FasTnT.sln"
