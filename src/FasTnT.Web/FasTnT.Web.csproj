@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,6 +164,7 @@
     <Compile Include="EpcisServices\CaptureService.svc.cs">
       <DependentUpon>CaptureService.svc</DependentUpon>
     </Compile>
+    <Compile Include="EpcisServices\EpcisQueryService.svc.cs" />
     <Compile Include="EpcisServices\Faults\DuplicateSubscriptionError.cs" />
     <Compile Include="EpcisServices\Faults\EpcisFault.cs" />
     <Compile Include="EpcisServices\Faults\ImplementationError.cs" />
@@ -175,10 +177,16 @@
     <Compile Include="EpcisServices\Faults\SubscriptionControlsError.cs" />
     <Compile Include="EpcisServices\Faults\ValidationError.cs" />
     <Compile Include="EpcisServices\ICaptureService.cs" />
+    <Compile Include="EpcisServices\IEpcisQueryService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
     <Compile Include="EpcisServices\Model\MessageResponse.cs" />
     <Compile Include="EpcisServices\Model\PollRequest.cs" />
     <Compile Include="EpcisServices\Model\SubscriptionRequest.cs" />
+    <Compile Include="EpcisServices\PollRequest.cs" />
+    <Compile Include="EpcisServices\PollResponse.cs" />
+    <Compile Include="EpcisServices\QueryNamesRequest.cs" />
+    <Compile Include="EpcisServices\QueryParam.cs" />
+    <Compile Include="EpcisServices\QueryParams.cs" />
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
@@ -236,6 +244,7 @@
     <Content Include="Content\mobile\table.css" />
     <Content Include="EpcisServices\CaptureService.svc" />
     <Content Include="EpcisServices\QueryService.svc" />
+    <Content Include="EpcisServices\EpcisQueryService.svc" />
     <Content Include="Global.asax" />
     <Content Include="..\connectionStrings.shared.config">
       <Link>connectionStrings.shared.config</Link>

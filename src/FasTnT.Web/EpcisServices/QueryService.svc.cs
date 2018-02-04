@@ -11,6 +11,8 @@ using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Queries;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -80,7 +82,7 @@ namespace FasTnT.Web.EpcisServices
         {
             try 
             {
-                var pollRequest = PollRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
+                var pollRequest = Model.PollRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
                 var results = _queryPerformer.ExecutePollQuery(pollRequest.Name, pollRequest.Parameters);
                 var formattedResponse = _responseFormatter.FormatPollResponse(pollRequest.Name, results);
 
@@ -114,5 +116,12 @@ namespace FasTnT.Web.EpcisServices
         {
             return "1.2";
         }
+    }
+
+    [DataContract]
+    public class QueryParameter
+    {
+        [DataMember(IsRequired = true)]
+        public string Message { get; set; }
     }
 }
