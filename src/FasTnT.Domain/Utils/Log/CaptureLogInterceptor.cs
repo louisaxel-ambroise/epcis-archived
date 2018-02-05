@@ -29,7 +29,7 @@ namespace FasTnT.Domain.Log
                 watch.Stop();
 
                 var user = _userProvider.GetCurrentUser();
-                var log = new AuditLog { Action = LogAction.Capture, Timestamp = SystemContext.Clock.Now, User = user };
+                var log = new AuditLog { Action = LogAction.Capture, Timestamp = SystemContext.Clock.Now, User = user, ExecutionTimeMs = watch.ElapsedMilliseconds };
 
                 if (watch.ElapsedMilliseconds > TimeSpan.FromSeconds(10).TotalMilliseconds)
                 {
@@ -46,6 +46,7 @@ namespace FasTnT.Domain.Log
             }
             catch 
             {
+                watch.Stop();
                 var user = _userProvider.GetCurrentUser();
                 _logStore.Store(new AuditLog
                 {
@@ -53,7 +54,8 @@ namespace FasTnT.Domain.Log
                     Timestamp = SystemContext.Clock.Now,
                     User = user,
                     Description = "CaptureFailed",
-                    Type = "Error"
+                    Type = "Error",
+                    ExecutionTimeMs = watch.ElapsedMilliseconds
                 });
 
                 throw;

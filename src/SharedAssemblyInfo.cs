@@ -2,7 +2,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("FasTnT")]
 [assembly: AssemblyProduct("FasTnT")]
-[assembly: AssemblyCopyright("Copyright © FasTnT 2017")]
+[assembly: AssemblyCopyright("Copyright © FasTnT 2018")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.4.*")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyVersion("0.5.*")]
+[assembly: AssemblyFileVersion("0.5.0.0")]

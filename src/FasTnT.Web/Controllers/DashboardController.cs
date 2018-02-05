@@ -1,6 +1,7 @@
 ﻿using FasTnT.Domain.Repositories;
 using FasTnT.Web.Models.Logs;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace FasTnT.Web.Controllers
@@ -15,13 +16,18 @@ namespace FasTnT.Web.Controllers
             _auditLogRepository = auditLogRepository;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var logs = _auditLogRepository.Query()
-                .OrderByDescending(x => x.Timestamp).Take(10)
-                .MapToAuditLogSummary();
+            var count = Task.Run(() => _auditLogRepository.Query().Count());
+            var logs = Task.Run(() => _auditLogRepository.Query()
+                .OrderByDescending(x => x.Timestamp).Take(5)
+                .MapToAuditLogSummary());
 
-            return View(logs);
+            return View(new DashboardSummaryViewModel
+            {
+                Logs = await logs,
+                TotalLogs = await count
+            });
         }
     }
 }

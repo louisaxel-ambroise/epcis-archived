@@ -1,4 +1,5 @@
 ﻿using FasTnT.Domain.Model.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,8 +16,9 @@ namespace FasTnT.Web.Models.Logs
                 Timestamp = x.Timestamp,
                 Description = x.Description,
                 Status = GetStatus(x.Type),
-                UserId = x.User.Id,
-                UserName = x.User.Name
+                UserId = x.User != null ? x.User.Id : default(Guid?),
+                UserName = x.User != null ? x.User.Name : null,
+                ExecutionTimeMs = x.ExecutionTimeMs
             });
         }
 

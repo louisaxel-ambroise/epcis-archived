@@ -208,6 +208,7 @@
     <Compile Include="Models\Events\LatestEventsViewModel.cs" />
     <Compile Include="Models\Events\Mappings.cs" />
     <Compile Include="Models\Logs\AuditLogSummary.cs" />
+    <Compile Include="Models\Logs\DashboardSummaryViewModel.cs" />
     <Compile Include="Models\Logs\Mappings.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\UserDetailsViewModel.cs" />

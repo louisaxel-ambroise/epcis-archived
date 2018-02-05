@@ -10,9 +10,10 @@ namespace FasTnT.Data.Migrations
             Create.Table("log").InSchema("audit")
                 .WithColumn("id").AsGuid().PrimaryKey()
                 .WithColumn("timestamp").AsDateTime().NotNullable()
-                .WithColumn("user_id").AsGuid().ForeignKey("fk_auditlog_user", "users", "application_user", "id").NotNullable()
+                .WithColumn("user_id").AsGuid().ForeignKey("fk_auditlog_user", "users", "application_user", "id").Nullable()
                 .WithColumn("action").AsString().NotNullable()
                 .WithColumn("description").AsString(254).NotNullable()
+                .WithColumn("execution_time").AsInt64().NotNullable()
                 .WithColumn("type").AsString(25).NotNullable();
         }
     }
