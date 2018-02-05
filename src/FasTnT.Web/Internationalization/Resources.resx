@@ -223,7 +223,7 @@
     <value>Change Password</value>
   </data>
   <data name="Label_EnterYourUsername" xml:space="preserve">
-    <value>Enter you username</value>
+    <value>Enter your username</value>
   </data>
   <data name="Label_EnterYourPassword" xml:space="preserve">
     <value>Enter your password</value>

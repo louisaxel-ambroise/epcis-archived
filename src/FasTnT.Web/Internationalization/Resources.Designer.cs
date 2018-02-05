@@ -430,7 +430,7 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter you username.
+        ///   Looks up a localized string similar to Enter your username.
         /// </summary>
         public static string Label_EnterYourUsername {
             get {
