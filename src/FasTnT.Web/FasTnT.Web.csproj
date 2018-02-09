@@ -218,6 +218,7 @@
     <Compile Include="Helpers\Users\Session\UserSession.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\common.css" />
     <Content Include="Content\desktop\forms.css" />
     <Content Include="Content\desktop\main.css" />
     <Content Include="Content\desktop\list.css" />

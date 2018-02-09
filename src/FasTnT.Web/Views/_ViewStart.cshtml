@@ -4,16 +4,27 @@
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var url = window.location.pathname;
+        var url = window.location.pathname.substr(1);
         var links = document.querySelectorAll('aside nav a');
+        var closestWeight = 0; // Weight of the closest value (default = 0, same prefix = 1, full link attribute = 2)
         var closest = 0;
+
 
         for (var i = 0; i < links.length; i++) {
             if (links[i].getAttribute("href") == url) {
                 links[i].classList.add("active");
                 return;
             }
-            if (url.lastIndexOf(links[i].getAttribute("href"), 0) === 0) closest = i;
+             if (url.lastIndexOf(links[i].getAttribute("href"), 0) === 0 && closestWeight < 2)
+            {
+                closestWeight = 2;
+                closest = i;
+            }
+            else if (url.lastIndexOf(links[i].getAttribute("href").split("/")[1], 0) === 0 && closestWeight < 1)
+            {
+                closestWeight = 1;
+                closest = i;
+            }
         }
 
         links[closest].classList.add("active");
