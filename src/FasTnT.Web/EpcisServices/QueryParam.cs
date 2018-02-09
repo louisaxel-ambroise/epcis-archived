@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -7,7 +8,12 @@ namespace FasTnT.Web.EpcisServices
     {
         [DataMember(Name = "name")]
         public string Name { get; set; }
-        [DataMember(Name = "value")]
-        public string Value { get; set; }
+        [DataMember(Name = "values")]
+        public ParamValues Values { get; set; }
+    }
+
+    [CollectionDataContract(Name = "values", ItemName = "value", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+    public class ParamValues : List<string>
+    {
     }
 }

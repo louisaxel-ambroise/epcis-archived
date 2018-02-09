@@ -1,24 +1,51 @@
-﻿using FasTnT.Domain.Services.Queries.Performers;
+﻿using FasTnT.Domain.Services.Queries;
+using FasTnT.Domain.Services.Queries.Performers;
+using System.Linq;
+using System.Reflection;
+using System;
+using System.ServiceModel;
 
 namespace FasTnT.Web.EpcisServices
 {
     public class EpcisQueryService : IEpcisQueryService
     {
         private IQueryPerformer _queryPerformer;
+        private IQueryManager _queryManager;
 
-        public EpcisQueryService(IQueryPerformer queryPerformer)
+        public EpcisQueryService(IQueryPerformer queryPerformer, IQueryManager queryManager)
         {
             _queryPerformer = queryPerformer;
+            _queryManager = queryManager;
         }
 
         public string[] GetQueryNames(EmptyParms request)
         {
-            return new[] { "Test" };
+            return _queryManager.ListQueryNames().ToArray();
         }
 
-        public PollResponse Query(PollRequest pollRequest)
+        public string GetVendorVersion([MessageParameter(Name = "VendorVersionRequest")] EmptyParms request)
         {
-            return new PollResponse { Text = pollRequest.Params == null ? "Params are null" : $"Received {pollRequest.Params.Count} params" };
+            return Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
+        }
+
+        public string GetStandardVersion([MessageParameter(Name = "StandardVersionRequest")] EmptyParms request)
+        {
+            return "1.2";
+        }
+
+        public PollResponse Poll(string queryName, QueryParams parameters)
+        {
+            return new PollResponse { Text = parameters == null ? "Params are null" : $"Received {parameters.Count} params" };
+        }
+
+        public string[] GetSubscriptionIDs([MessageParameter(Name = "SubscriptionIDsRequest")] EmptyParms request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unsubscribe(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }
