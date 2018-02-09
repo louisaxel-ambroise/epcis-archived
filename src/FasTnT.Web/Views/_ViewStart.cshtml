@@ -3,12 +3,13 @@
 }
 
 <script type="text/javascript">
+    // Highlights the menu link corresponding to the page we are currently visiting
+    // If none of the menu links matches, selects the closest one
     document.addEventListener("DOMContentLoaded", function () {
         var url = window.location.pathname.substr(1);
         var links = document.querySelectorAll('aside nav a');
         var closestWeight = 0; // Weight of the closest value (default = 0, same prefix = 1, full link attribute = 2)
         var closest = 0;
-
 
         for (var i = 0; i < links.length; i++) {
             if (links[i].getAttribute("href") == url) {
