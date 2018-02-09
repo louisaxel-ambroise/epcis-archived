@@ -79,6 +79,8 @@
     <Compile Include="Services\Subscriptions\ISubscriptionRunner.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionScheduler.cs" />
     <Compile Include="Services\Subscriptions\SubscriptionRunner.cs" />
+    <Compile Include="Services\Users\Dashboard\ApiUserUpdator.cs" />
+    <Compile Include="Services\Users\Dashboard\IApiUserUpdator.cs" />
     <Compile Include="Services\Users\Dashboard\IUserAuthenticator.cs" />
     <Compile Include="Services\Users\Dashboard\UserAuthenticator.cs" />
     <Compile Include="Services\Users\IUserProvider.cs" />

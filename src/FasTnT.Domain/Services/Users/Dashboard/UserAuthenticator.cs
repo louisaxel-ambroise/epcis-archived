@@ -33,7 +33,7 @@ namespace FasTnT.Domain.Services.Dashboard
             {
                 throw new UserAuthenticationException(UserAuthenticationException.Failure.UnknownUser);
             }
-            if (!user.Roles.Contains(UserType.DashboardUser))
+            if (!user.Role.Equals(UserType.DashboardUser))
             {
                 throw new UserAuthenticationException(UserAuthenticationException.Failure.AccessDenied);
             }

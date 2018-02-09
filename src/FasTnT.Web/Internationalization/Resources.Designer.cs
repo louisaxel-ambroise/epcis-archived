@@ -142,16 +142,16 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture event failed with reason: {0}.
+        ///   Looks up a localized string similar to Capture event failed in {0:N0}ms.
         /// </summary>
-        public static string Format_CaptureEventFailedWithReason {
+        public static string Format_CaptureFailed {
             get {
-                return ResourceManager.GetString("Format_CaptureEventFailedWithReason", resourceCulture);
+                return ResourceManager.GetString("Format_CaptureFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture succeed.
+        ///   Looks up a localized string similar to Capture succeed in {0:N0} ms.
         /// </summary>
         public static string Format_CaptureSucceed {
             get {
@@ -187,20 +187,29 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Query failed with reason: {0}.
+        ///   Looks up a localized string similar to Query failed in {0:N0}ms.
         /// </summary>
-        public static string Format_QueryFailedWithReason {
+        public static string Format_QueryFailed {
             get {
-                return ResourceManager.GetString("Format_QueryFailedWithReason", resourceCulture);
+                return ResourceManager.GetString("Format_QueryFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Query succeed in more than {0} seconds.
+        ///   Looks up a localized string similar to Query succeed in {0:N0}ms.
         /// </summary>
-        public static string Format_QuerySucceedTooLong {
+        public static string Format_QuerySucceed {
             get {
-                return ResourceManager.GetString("Format_QuerySucceedTooLong", resourceCulture);
+                return ResourceManager.GetString("Format_QuerySucceed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Query succeed in {0:N0}ms.
+        /// </summary>
+        public static string Format_QuerySucceedTimeLimit {
+            get {
+                return ResourceManager.GetString("Format_QuerySucceedTimeLimit", resourceCulture);
             }
         }
         
@@ -210,6 +219,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Format_SubscriptionCallbackFailed {
             get {
                 return ResourceManager.GetString("Format_SubscriptionCallbackFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscription execution succeed in {0:N0}ms.
+        /// </summary>
+        public static string Format_SubscriptionSucceed {
+            get {
+                return ResourceManager.GetString("Format_SubscriptionSucceed", resourceCulture);
             }
         }
         
@@ -286,6 +304,24 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ✘.
+        /// </summary>
+        public static string Grid_False {
+            get {
+                return ResourceManager.GetString("Grid_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Active?.
+        /// </summary>
+        public static string Grid_IsActive {
+            get {
+                return ResourceManager.GetString("Grid_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last logon.
         /// </summary>
         public static string Grid_LastLogon {
@@ -331,6 +367,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ✔.
+        /// </summary>
+        public static string Grid_True {
+            get {
+                return ResourceManager.GetString("Grid_True", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string Grid_Type {
@@ -363,6 +408,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_AccessDenied {
             get {
                 return ResourceManager.GetString("Label_AccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Users.
+        /// </summary>
+        public static string Label_ApiUsers {
+            get {
+                return ResourceManager.GetString("Label_ApiUsers", resourceCulture);
             }
         }
         
@@ -417,6 +471,24 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_ChangePassword {
             get {
                 return ResourceManager.GetString("Label_ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password :.
+        /// </summary>
+        public static string Label_ConfirmPassword {
+            get {
+                return ResourceManager.GetString("Label_ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit API user {0}.
+        /// </summary>
+        public static string Label_EditApiUser {
+            get {
+                return ResourceManager.GetString("Label_EditApiUser", resourceCulture);
             }
         }
         
@@ -529,6 +601,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Active?.
+        /// </summary>
+        public static string Label_IsActive {
+            get {
+                return ResourceManager.GetString("Label_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Errors.
         /// </summary>
         public static string Label_LatestErrors {
@@ -579,6 +660,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_MyAccount {
             get {
                 return ResourceManager.GetString("Label_MyAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        public static string Label_Password {
+            get {
+                return ResourceManager.GetString("Label_Password", resourceCulture);
             }
         }
         
@@ -691,11 +781,11 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Users.
+        ///   Looks up a localized string similar to Username:.
         /// </summary>
-        public static string Label_Users {
+        public static string Label_UserName {
             get {
-                return ResourceManager.GetString("Label_Users", resourceCulture);
+                return ResourceManager.GetString("Label_UserName", resourceCulture);
             }
         }
         
@@ -741,6 +831,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Menu_Alerts {
             get {
                 return ResourceManager.GetString("Menu_Alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API User Management.
+        /// </summary>
+        public static string Menu_ApiUserManagement {
+            get {
+                return ResourceManager.GetString("Menu_ApiUserManagement", resourceCulture);
             }
         }
         
@@ -853,38 +952,11 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Statistics.
-        /// </summary>
-        public static string Menu_Statistics {
-            get {
-                return ResourceManager.GetString("Menu_Statistics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Subscriptions.
         /// </summary>
         public static string Menu_Subscriptions {
             get {
                 return ResourceManager.GetString("Menu_Subscriptions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User List.
-        /// </summary>
-        public static string Menu_UserList {
-            get {
-                return ResourceManager.GetString("Menu_UserList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User Management.
-        /// </summary>
-        public static string Menu_UserManagement {
-            get {
-                return ResourceManager.GetString("Menu_UserManagement", resourceCulture);
             }
         }
         

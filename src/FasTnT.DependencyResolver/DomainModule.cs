@@ -6,6 +6,7 @@ using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Subscriptions;
+using FasTnT.Domain.Services.Users.Dashboard;
 using FasTnT.Domain.Services.Validation;
 using FasTnT.Domain.Utils.Aspects;
 using Ninject.Modules;
@@ -28,6 +29,7 @@ namespace FasTnT.DependencyInjection
             // Dashboard Bindings
             Bind<IUserAuthenticator>().To<UserAuthenticator>();
             Bind<IUserService>().To<UserService>();
+            Bind<IApiUserUpdator>().To<ApiUserUpdator>();
 
             // EPCIS Service Bindings
             Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();

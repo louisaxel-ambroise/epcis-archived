@@ -15,12 +15,12 @@ namespace FasTnT.Domain.Model.Users
         public virtual string PreferredLanguage { get; set; }
         public virtual DateTime CreatedOn { get; set; }
         public virtual DateTime? LastLogOn { get; set; }
+        public virtual UserType Role { get; set; }
         public virtual IList<UserLog> Logs { get; set; }
-        public virtual ICollection<UserType> Roles { get; set; }
 
         public virtual bool VerifyPassword(string password)
         {
-            return BCrypt.CheckPassword(password, PasswordHash);
+            return BCrypt.CheckPassword(password, PasswordHash, PasswordSalt);
         }
     }
 }

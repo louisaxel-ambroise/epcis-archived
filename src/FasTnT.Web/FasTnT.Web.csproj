@@ -210,9 +210,9 @@
     <Compile Include="Models\Logs\AuditLogSummary.cs" />
     <Compile Include="Models\Logs\DashboardSummaryViewModel.cs" />
     <Compile Include="Models\Logs\Mappings.cs" />
+    <Compile Include="Models\Users\ApiUserViewModel.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\UserDetailsViewModel.cs" />
-    <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Models\Users\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Users\Session\UserSession.cs" />
@@ -317,6 +317,7 @@
     <Content Include="Views\Events\_LatestEvents.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
