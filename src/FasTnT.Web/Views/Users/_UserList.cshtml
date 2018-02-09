@@ -1,10 +1,11 @@
-﻿@model IEnumerable<FasTnT.Web.Models.Users.UserViewModel>
+﻿@model IEnumerable<FasTnT.Web.Models.Users.ApiUserViewModel>
 
 <table class="data-table">
     <thead>
         <tr>
             <th>@Resources.Grid_UserName</th>
             <th>@Resources.Grid_Role</th>
+            <th>@Resources.Grid_IsActive</th>
             <th>@Resources.Grid_LastLogon</th>
             <th>@Resources.Grid_Details</th>
         </tr>
@@ -15,8 +16,9 @@
             <tr>
                 <td>@user.Name</td>
                 <td>@Html.LocalizeGrid(user.Type)</td>
+                <td class="centered">@Html.LocalizeGrid(user.IsActive.ToString())</td>
                 <td>@(user.LastLogon?.ToString(Resources.DateFormat_Detailed))</td>
-                <td><a href="~/Users/Details/@user.Id"><i class="material-icons">link</i></a></td>
+                <td><a href="~/Users/Edit/@user.Id"><i class="material-icons">link</i></a></td>
             </tr>
         }
     </tbody>

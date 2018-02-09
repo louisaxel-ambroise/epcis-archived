@@ -7,15 +7,27 @@ namespace FasTnT.Web.Models.Users
 {
     public static class Mappings
     {
-        public static IEnumerable<UserViewModel> MapToUserViewModel(this IQueryable<User> userList)
+        public static IEnumerable<ApiUserViewModel> MapToApiUserViewModel(this IQueryable<User> userList)
         {
-            return userList.Select(u => new UserViewModel
+            return userList.Select(u => new ApiUserViewModel
             {
                 Id = u.Id,
                 Name = u.Name,
-                Type = string.Join("_", u.Roles.OrderBy(x => x.Id).Select(r => r.Name)),
-                LastLogon = u.LastLogOn
+                Type = u.Role.Name,
+                LastLogon = u.LastLogOn,
+                IsActive = u.IsActive
             });
+        }
+
+        public static ApiUserViewModel MapToApiUserViewModel(this User user)
+        {
+            return new ApiUserViewModel
+            {
+                Id = user.Id,
+                LastLogon = user.LastLogOn,
+                Name = user.Name,
+                IsActive = user.IsActive
+            };
         }
 
         public static UserDetailsViewModel MapToViewModel(this UserDetail details)

@@ -223,7 +223,7 @@
     <value>Change Password</value>
   </data>
   <data name="Label_EnterYourUsername" xml:space="preserve">
-    <value>Enter you username</value>
+    <value>Enter your username</value>
   </data>
   <data name="Label_EnterYourPassword" xml:space="preserve">
     <value>Enter your password</value>
@@ -309,8 +309,8 @@
   <data name="Label_UnknownUser" xml:space="preserve">
     <value>The username provided is unknown</value>
   </data>
-  <data name="Label_Users" xml:space="preserve">
-    <value>Users</value>
+  <data name="Label_ApiUsers" xml:space="preserve">
+    <value>API Users</value>
   </data>
   <data name="Label_WrongPassword" xml:space="preserve">
     <value>The password provided is incorrect</value>
@@ -363,17 +363,11 @@
   <data name="Menu_Search" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="Menu_Statistics" xml:space="preserve">
-    <value>Statistics</value>
-  </data>
   <data name="Menu_Subscriptions" xml:space="preserve">
     <value>Subscriptions</value>
   </data>
-  <data name="Menu_UserList" xml:space="preserve">
-    <value>User List</value>
-  </data>
-  <data name="Menu_UserManagement" xml:space="preserve">
-    <value>User Management</value>
+  <data name="Menu_ApiUserManagement" xml:space="preserve">
+    <value>API User Management</value>
   </data>
   <data name="Page_About_Author" xml:space="preserve">
     <value>{0} is an EPCIS repository compliant with GS1 EPCIS specification 1.2. It is developped in C# and maintained by Louis-Axel Ambroise since 2016.</value>
@@ -407,5 +401,29 @@
   </data>
   <data name="Format_SubscriptionSucceed" xml:space="preserve">
     <value>Subscription execution succeed in {0:N0}ms</value>
+  </data>
+  <data name="Label_EditApiUser" xml:space="preserve">
+    <value>Edit API user {0}</value>
+  </data>
+  <data name="Grid_False" xml:space="preserve">
+    <value>✘</value>
+  </data>
+  <data name="Grid_True" xml:space="preserve">
+    <value>✔</value>
+  </data>
+  <data name="Grid_IsActive" xml:space="preserve">
+    <value>Is Active?</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Label_ConfirmPassword" xml:space="preserve">
+    <value>Confirm password :</value>
+  </data>
+  <data name="Label_IsActive" xml:space="preserve">
+    <value>Is Active?</value>
+  </data>
+  <data name="Label_UserName" xml:space="preserve">
+    <value>Username:</value>
   </data>
 </root>

@@ -1,0 +1,25 @@
+﻿@model FasTnT.Web.Models.Users.ApiUserViewModel
+@{
+    ViewBag.Title = @Resources.Label_ApiUsers;
+}
+
+<h1>@string.Format(Resources.Label_EditApiUser, Model.Id.ToString().Substring(0,8))</h1>
+
+@using (Html.BeginForm("Edit", "Users", new { id = Model.Id }, FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id);
+
+    <label for="name">@Resources.Label_UserName</label>
+    @Html.TextBoxFor(x => x.Name, new { id = "name" })<br />
+
+    <h3>@Resources.Label_ChangePassword</h3>
+    <label for="password">@Resources.Label_Password</label>
+    @Html.PasswordFor(x => x.Password, new { id = "password" })<br />
+    <label for="password_confirmation">@Resources.Label_ConfirmPassword</label>
+    @Html.PasswordFor(x => x.PasswordConfirmation, new { id = "password_confirmation" })<br />
+
+    <label for="is_active">@Resources.Label_IsActive</label>
+    @Html.CheckBoxFor(x => x.IsActive, new { id = "is_active" })<br />
+
+    <input type="submit" value="@Resources.Form_Submit" />
+}

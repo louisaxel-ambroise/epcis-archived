@@ -92,9 +92,7 @@
     <Compile Include="Migrations\M000_CreateUsersSchema.cs" />
     <Compile Include="Migrations\M001_CreateUserTypeTable.cs" />
     <Compile Include="Migrations\M002_CreateApplicationUserTable.cs" />
-    <Compile Include="Migrations\M003_CreateUserToUserTypeTable.cs" />
-    <Compile Include="Migrations\M004_CreateUserLogTable.cs" />
-    <Compile Include="Migrations\M005_CreateDefaultUser.cs" />
+    <Compile Include="Migrations\M099_CreateDefaultUser.cs" />
     <Compile Include="Migrations\M100_CreateEpcisSchema.cs" />
     <Compile Include="Migrations\M101_CreateEventTypeTable.cs" />
     <Compile Include="Migrations\M102_CreateRequestTable.cs" />

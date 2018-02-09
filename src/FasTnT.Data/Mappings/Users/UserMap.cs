@@ -13,7 +13,7 @@ namespace FasTnT.Data.Mappings.Users
 
             Id(x => x.Id).Column("id");
             Map(x => x.Name).Column("name").Unique().Not.Nullable();
-            Map(x => x.Mail).Column("mail").Unique().Not.Nullable();
+            Map(x => x.Mail).Column("mail").Unique().Nullable();
             Map(x => x.PasswordHash).Column("password_hash").Not.Nullable();
             Map(x => x.PasswordSalt).Column("password_salt").Not.Nullable();
             Map(x => x.LastLogOn).Column("last_logon").Nullable();
@@ -21,11 +21,8 @@ namespace FasTnT.Data.Mappings.Users
             Map(x => x.CreatedOn).Column("created_on").Not.Nullable();
             Map(x => x.PreferredLanguage).Column("preferred_language").Nullable();
 
+            References(x => x.Role).Column("user_type_id");
             HasMany(x => x.Logs).KeyColumn("user_id").Cascade.AllDeleteOrphan();
-            HasManyToMany(x => x.Roles)
-                .Table("user_to_user_type").Schema("users")
-                .ParentKeyColumn("user_id")
-                .ChildKeyColumn("user_type_id"); ;
         }
     }
 }

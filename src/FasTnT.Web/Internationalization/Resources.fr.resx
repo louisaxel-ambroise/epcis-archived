@@ -145,7 +145,7 @@
     <value>{0:N0} éléments sur {1:N0} affichés</value>
   </data>
   <data name="Format_QueryFailed" xml:space="preserve">
-    <value>La requête a échoué. Cause : {0}</value>
+    <value>La requête a échoué en {0:N0}ms</value>
   </data>
   <data name="Format_QuerySucceedTimeLimit" xml:space="preserve">
     <value>La requête a réussi en {0:N0}ms</value>
@@ -309,8 +309,8 @@
   <data name="Label_UnknownUser" xml:space="preserve">
     <value>Le nom d'utilisateur est inconnu</value>
   </data>
-  <data name="Label_Users" xml:space="preserve">
-    <value>Utilisateurs</value>
+  <data name="Label_ApiUsers" xml:space="preserve">
+    <value>Utilisateurs de l'API</value>
   </data>
   <data name="Label_WrongPassword" xml:space="preserve">
     <value>Le mot de passe est incorrect</value>
@@ -363,17 +363,11 @@
   <data name="Menu_Search" xml:space="preserve">
     <value>Rechercher</value>
   </data>
-  <data name="Menu_Statistics" xml:space="preserve">
-    <value>Statistiques</value>
-  </data>
   <data name="Menu_Subscriptions" xml:space="preserve">
     <value>Abonnements</value>
   </data>
-  <data name="Menu_UserList" xml:space="preserve">
-    <value>Liste d'utilisateurs</value>
-  </data>
-  <data name="Menu_UserManagement" xml:space="preserve">
-    <value>Gestion des utilisateurs</value>
+  <data name="Menu_ApiUserManagement" xml:space="preserve">
+    <value>Utilisateurs de l'API</value>
   </data>
   <data name="Page_About_Author" xml:space="preserve">
     <value>{0} est un dépôt EPCIS compatible avec la version 1.2 du standard EPCIS de GS1. Il est développé en C# et maintenu par Louis-Axel Ambroise depuis 2017.</value>
@@ -407,5 +401,29 @@
   </data>
   <data name="Format_SubscriptionSucceed" xml:space="preserve">
     <value>La subscription a été exécutée en {0:N0}ms</value>
+  </data>
+  <data name="Label_EditApiUser" xml:space="preserve">
+    <value>Éditer l'utilisateur de l'API {0}</value>
+  </data>
+  <data name="Grid_False" xml:space="preserve">
+    <value>✘</value>
+  </data>
+  <data name="Grid_IsActive" xml:space="preserve">
+    <value>Activé ?</value>
+  </data>
+  <data name="Grid_True" xml:space="preserve">
+    <value>✔</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Mot de passe :</value>
+  </data>
+  <data name="Label_ConfirmPassword" xml:space="preserve">
+    <value>Confirmez le mot de passe :</value>
+  </data>
+  <data name="Label_IsActive" xml:space="preserve">
+    <value>Actif ?</value>
+  </data>
+  <data name="Label_UserName" xml:space="preserve">
+    <value>Nom d'utilisateur :</value>
   </data>
 </root>

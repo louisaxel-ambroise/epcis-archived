@@ -797,9 +797,9 @@ namespace FasTnT.Domain.Utils.Security
         /// <param name="hashed">The previously hashed password.</param>
         /// <returns><c>true</c> if the passwords, <c>false</c>
         /// otherwise.</returns>
-        public static bool CheckPassword(string plaintext, string hashed)
+        public static bool CheckPassword(string plaintext, string hashed, string salt)
         {
-            return StringComparer.Ordinal.Compare(hashed, HashPassword(plaintext, hashed)) == 0;
+            return StringComparer.Ordinal.Compare(hashed, HashPassword(plaintext, salt)) == 0;
         }
     }
 }
