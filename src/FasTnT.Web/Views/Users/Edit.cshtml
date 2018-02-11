@@ -9,17 +9,25 @@
 {
     @Html.HiddenFor(x => x.Id);
 
-    <label for="name">@Resources.Label_UserName</label>
-    @Html.TextBoxFor(x => x.Name, new { id = "name" })<br />
+    <div class="form-group">
+        <label for="name">@Resources.Label_UserName</label>
+        @Html.TextBoxFor(x => x.Name, new { id = "name" })<br />
+    </div>
 
     <h3>@Resources.Label_ChangePassword</h3>
-    <label for="password">@Resources.Label_Password</label>
-    @Html.PasswordFor(x => x.Password, new { id = "password" })<br />
-    <label for="password_confirmation">@Resources.Label_ConfirmPassword</label>
-    @Html.PasswordFor(x => x.PasswordConfirmation, new { id = "password_confirmation" })<br />
+    <div class="form-group">
+        <label for="password">@Resources.Label_Password</label>
+        @Html.PasswordFor(x => x.Password, new { id = "password" })<br />
+    </div>
+    <div class="form-group">
+        <label for="password_confirmation">@Resources.Label_ConfirmPassword</label>
+        @Html.PasswordFor(x => x.PasswordConfirmation, new { id = "password_confirmation" })<br />
+    </div>
 
-    <label for="is_active">@Resources.Label_IsActive</label>
-    @Html.CheckBoxFor(x => x.IsActive, new { id = "is_active" })<br />
+    <div class="form-group">
+        <label for="is_active">@Resources.Label_IsActive</label>
+        @Html.CheckBoxFor(x => x.IsActive, new { id = "is_active" })<br />
+    </div>
 
     <input type="submit" value="@Resources.Form_Submit" />
 }

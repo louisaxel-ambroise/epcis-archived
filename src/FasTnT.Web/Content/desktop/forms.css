@@ -1,16 +1,47 @@
-﻿.form-group{
-    padding-left:15px;
+﻿form .form-group {
+    padding-left: 15px;
     margin-top: 7px;
 }
 
-.form-group label{
-    display: inline-block;
-    min-width:35%;
-    text-align: right;
-    padding-right: 7px;
+form .form-group label {
+    display: block;
+    padding-bottom: 3px;
 }
 
-.form-group input{
-    display:inline-block;
+form .form-group input {
+    display: inline-block;
+    outline: none;
+    border: 0px;
+    padding: 0 5px;
+    border-bottom: 1px solid #ccc;
     min-width: 150px;
+    margin-left: 10px;
+    height: 22px;
+    background: transparent;
+}
+form .form-group input[type='checkbox'] {
+    height: 18px;
+    width: 18px;
+    min-width: 18px;
+    margin-left: 0;
+}
+
+form .form-group input:focus {
+    border-bottom: 1px solid #0A9;
+}
+
+form h3 {
+    margin-top: 15px;
+}
+
+form input[type='submit']{
+    width:225px;
+    height:22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border:1px solid #333;
+    background:#efefef;
+    font-size: 12px;
+    line-height:22px;
+    margin-top:15px;
 }
