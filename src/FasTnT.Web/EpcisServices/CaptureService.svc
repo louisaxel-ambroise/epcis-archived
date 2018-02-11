@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="FasTnT.Web.Services.CaptureService" CodeBehind="CaptureService.svc.cs" Factory="Ninject.Extensions.Wcf.NinjectServiceHostFactory" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FasTnT.Web.EpcisServices.CaptureService" CodeBehind="CaptureService.svc.cs" Factory="Ninject.Extensions.Wcf.NinjectServiceHostFactory" %>
