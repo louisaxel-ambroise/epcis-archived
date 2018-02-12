@@ -70,24 +70,6 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CPU Free.
-        /// </summary>
-        public static string Chart_CPUFree {
-            get {
-                return ResourceManager.GetString("Chart_CPUFree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Free Space.
-        /// </summary>
-        public static string Chart_FreeSpace {
-            get {
-                return ResourceManager.GetString("Chart_FreeSpace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to dd/MM/yyyy HH:mm.
         /// </summary>
         public static string DateFormat_Detailed {
@@ -259,24 +241,6 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dashboard User.
-        /// </summary>
-        public static string Grid_DashboardUser {
-            get {
-                return ResourceManager.GetString("Grid_DashboardUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to API and Dashboard User.
-        /// </summary>
-        public static string Grid_DashboardUser_ApiUser {
-            get {
-                return ResourceManager.GetString("Grid_DashboardUser_ApiUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Grid_Date {
@@ -444,6 +408,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_Capture {
             get {
                 return ResourceManager.GetString("Label_Capture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture endpoint for EPCIS events:.
+        /// </summary>
+        public static string Label_CaptureEndpoint {
+            get {
+                return ResourceManager.GetString("Label_CaptureEndpoint", resourceCulture);
             }
         }
         
@@ -628,6 +601,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is the API authorization required:.
+        /// </summary>
+        public static string Label_IsAPIAuthorizationRequired {
+            get {
+                return ResourceManager.GetString("Label_IsAPIAuthorizationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Errors.
         /// </summary>
         public static string Label_LatestErrors {
@@ -714,6 +696,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_Query {
             get {
                 return ResourceManager.GetString("Label_Query", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Query endpoint for EPCIS events:.
+        /// </summary>
+        public static string Label_QueryEndpoint {
+            get {
+                return ResourceManager.GetString("Label_QueryEndpoint", resourceCulture);
             }
         }
         
@@ -835,33 +826,6 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
-        /// </summary>
-        public static string Menu_About {
-            get {
-                return ResourceManager.GetString("Menu_About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Access Rights.
-        /// </summary>
-        public static string Menu_AccessRight {
-            get {
-                return ResourceManager.GetString("Menu_AccessRight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alerts.
-        /// </summary>
-        public static string Menu_Alerts {
-            get {
-                return ResourceManager.GetString("Menu_Alerts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to API User Management.
         /// </summary>
         public static string Menu_ApiUserManagement {
@@ -934,29 +898,11 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string Menu_Language {
-            get {
-                return ResourceManager.GetString("Menu_Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Master Data.
         /// </summary>
         public static string Menu_MasterData {
             get {
                 return ResourceManager.GetString("Menu_MasterData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Monitoring.
-        /// </summary>
-        public static string Menu_Monitoring {
-            get {
-                return ResourceManager.GetString("Menu_Monitoring", resourceCulture);
             }
         }
         

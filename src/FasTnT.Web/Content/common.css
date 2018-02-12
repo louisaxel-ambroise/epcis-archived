@@ -1,3 +1,12 @@
 ﻿.centered {
     text-align: center;
 }
+
+.code{
+    font-family: Consolas;
+    font-size:90%;
+    color:#000;
+    background-color: #efefef;
+    border:1px solid #aaa;
+    padding:1px 3px;
+}

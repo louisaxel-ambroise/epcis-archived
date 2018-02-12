@@ -82,20 +82,32 @@
 		border-bottom:2px solid #0A9; 
 	}
 	div#main-section nav ul li.search input:focus + button{
-		height:21px;
+		height:22px;
 		border-bottom:2px solid #0A9; 
 	}
+
 	div#main-section nav ul li.search button{ 
 		outline:none; 
 		border:0px; 
 		border-bottom:1px solid #CCC; 
 		background:#FFF;
-		height:20px;
+		height:21px;
 		line-height:20px;
 		font-weight: bold;
 		font-size:85%;
 	}
-    div#main-section nav ul li.search button:hover { color: #0A9; }	
+    div#main-section nav ul li.search button:hover { color: #0A9; }
+
+    @supports (-ms-ime-align:auto) {
+        div#main-section nav ul li.search button {
+            height: 22px;
+        }
+
+        div#main-section nav ul li.search input:focus + button {
+            height: 20px;
+            border-bottom: 2px solid #0A9;
+        }
+    }
 
     /* PAGE CONTENT */
 	div#main-section section{ margin:5px 10px 5px 30px; }

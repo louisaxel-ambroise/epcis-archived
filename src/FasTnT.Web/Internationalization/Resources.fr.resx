@@ -120,12 +120,6 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>FasT&amp;T</value>
   </data>
-  <data name="Chart_CPUFree" xml:space="preserve">
-    <value>CPU libre</value>
-  </data>
-  <data name="Chart_FreeSpace" xml:space="preserve">
-    <value>Espace Libre</value>
-  </data>
   <data name="DateFormat_Detailed" xml:space="preserve">
     <value>dd/MM/yyyy HH:mm</value>
   </data>
@@ -161,12 +155,6 @@
   </data>
   <data name="Grid_Captured" xml:space="preserve">
     <value>Capturé le</value>
-  </data>
-  <data name="Grid_DashboardUser" xml:space="preserve">
-    <value>Utilisateur du panneau de contrôle</value>
-  </data>
-  <data name="Grid_DashboardUser_ApiUser" xml:space="preserve">
-    <value>Utilisateur de l'API et du panneau de contrôle</value>
   </data>
   <data name="Grid_Date" xml:space="preserve">
     <value>Date</value>
@@ -318,15 +306,6 @@
   <data name="Link_LatestEventsList" xml:space="preserve">
     <value>Aller à la liste des dernier événements</value>
   </data>
-  <data name="Menu_About" xml:space="preserve">
-    <value>À Propos</value>
-  </data>
-  <data name="Menu_AccessRight" xml:space="preserve">
-    <value>Gestion des droits</value>
-  </data>
-  <data name="Menu_Alerts" xml:space="preserve">
-    <value>Alertes</value>
-  </data>
   <data name="Menu_BusinessLocations" xml:space="preserve">
     <value>Lieux d'affaire</value>
   </data>
@@ -348,14 +327,8 @@
   <data name="Menu_Exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
-  <data name="Menu_Language" xml:space="preserve">
-    <value>Langue</value>
-  </data>
   <data name="Menu_MasterData" xml:space="preserve">
     <value>Données de base</value>
-  </data>
-  <data name="Menu_Monitoring" xml:space="preserve">
-    <value>Gestion</value>
   </data>
   <data name="Menu_ReadPoints" xml:space="preserve">
     <value>Points de lecture</value>
@@ -434,5 +407,14 @@
   </data>
   <data name="Label_LatestEventCapture" xml:space="preserve">
     <value>Dernier événement capturé :</value>
+  </data>
+  <data name="Label_CaptureEndpoint" xml:space="preserve">
+    <value>Point de terminaison de capture des événements EPCIS :</value>
+  </data>
+  <data name="Label_IsAPIAuthorizationRequired" xml:space="preserve">
+    <value>Autentification requise pour appeler l'API :</value>
+  </data>
+  <data name="Label_QueryEndpoint" xml:space="preserve">
+    <value>Point de terminaison de requêtage des événements EPCIS :</value>
   </data>
 </root>

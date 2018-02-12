@@ -5,7 +5,7 @@
 
 <h1>@string.Format(Resources.Label_DetailsApiUser, Model.Id.ToString().Substring(0,8))</h1>
 
-<ul>
+<ul class="detail">
     <li><strong>@Resources.Label_UserName</strong> @Model.Name</li>
     <li><strong>@Resources.Label_IsActive</strong> @Model.IsActive</li>
     <li><strong>@Resources.Label_LatestEventCapture</strong> @string.Format(Resources.DateFormat_Detailed, Model.LastLogon)</li>

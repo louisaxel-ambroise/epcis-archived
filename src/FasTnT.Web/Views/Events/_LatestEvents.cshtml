@@ -26,5 +26,9 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Events.Count(), Model.Total)</th>
+        </tr>
+    </tfoot>
 </table>
-<p class="pad-top-10">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Events.Count(), Model.Total)</p>

@@ -18,9 +18,13 @@
                 <td>@Html.LocalizeGrid(user.Type)</td>
                 <td class="centered">@Html.LocalizeGrid(user.IsActive.ToString())</td>
                 <td>@(user.LastLogon?.ToString(Resources.DateFormat_Detailed))</td>
-                <td><a href="~/Users/Edit/@user.Id"><i class="material-icons">link</i></a></td>
+                <td><a href="~/Users/Details/@user.Id"><i class="material-icons">link</i></a></td>
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="5">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Count(), Model.Count())</th>
+        </tr>
+    </tfoot>
 </table>
-<p class="pad-top-10">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.Count(), Model.Count())</p>
