@@ -426,4 +426,13 @@
   <data name="Label_UserName" xml:space="preserve">
     <value>Username:</value>
   </data>
+  <data name="Label_DetailsApiUser" xml:space="preserve">
+    <value>Details of API User {0}</value>
+  </data>
+  <data name="Label_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Label_LatestEventCapture" xml:space="preserve">
+    <value>Latest event capture:</value>
+  </data>
 </root>

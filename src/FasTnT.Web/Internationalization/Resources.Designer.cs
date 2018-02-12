@@ -484,6 +484,24 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details of API User {0}.
+        /// </summary>
+        public static string Label_DetailsApiUser {
+            get {
+                return ResourceManager.GetString("Label_DetailsApiUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Label_Edit {
+            get {
+                return ResourceManager.GetString("Label_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit API user {0}.
         /// </summary>
         public static string Label_EditApiUser {
@@ -615,6 +633,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_LatestErrors {
             get {
                 return ResourceManager.GetString("Label_LatestErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest event capture:.
+        /// </summary>
+        public static string Label_LatestEventCapture {
+            get {
+                return ResourceManager.GetString("Label_LatestEventCapture", resourceCulture);
             }
         }
         

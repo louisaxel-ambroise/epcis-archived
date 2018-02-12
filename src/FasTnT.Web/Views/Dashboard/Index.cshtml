@@ -26,7 +26,7 @@
                 <td>
                     @if (log.UserId != null)
                     {
-                        <a href="#!">@log.UserName</a>
+                        @Html.ActionLink(log.UserName, "Details", "Users", new { id = log.UserId }, null)
                     }
                 </td>
                 <td>@Html.LocalizeLabel(@log.Action)</td>
@@ -41,5 +41,9 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6">@string.Format(Resources.Format_DisplayingXOutOfNItems, Model.Logs.Count(), Model.TotalLogs)</th>
+        </tr>
+    </tfoot>
 </table>
-<p class="right">@string.Format(Resources.Format_DisplayingXOutOfNItems, Model.Logs.Count(), Model.TotalLogs)</p>

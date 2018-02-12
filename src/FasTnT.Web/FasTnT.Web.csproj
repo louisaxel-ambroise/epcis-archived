@@ -319,6 +319,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

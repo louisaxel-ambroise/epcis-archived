@@ -5,6 +5,7 @@
 	    margin:auto;
 	    border-collapse:collapse;
 	    border:1px solid #ddd;
+        border-radius: 3px;
     }
     table.data-table thead tr{
 	    border-bottom:1px solid #ddd;
@@ -22,5 +23,15 @@
     table.data-table .material-icons{
         text-align:center;
         width:100%;
+    }
+    table.data-table tfoot {
+        border-top: 1px solid #ddd;
+        padding-left: 5px;
+    }
+    table.data-table tfoot th {
+        font-weight: 400;
+        text-align: left;
+        font-size: 90%;
+        padding: 3px;
     }
 }

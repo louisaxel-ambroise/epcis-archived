@@ -34,13 +34,19 @@ namespace FasTnT.Web.Controllers
             return PartialView("_UserList", model.ToList());
         }
 
-        public ActionResult Edit(Guid id)
+        public ActionResult Details(Guid id)
         {
-            if(id == null || id == Guid.Empty)
-                return RedirectToAction("List");
+            if (id == null || id == Guid.Empty) return RedirectToAction("List");
 
             var user = _userRepository.Load(id);
+            return View(user.MapToApiUserViewModel());
+        }
 
+        public ActionResult Edit(Guid id)
+        {
+            if(id == null || id == Guid.Empty) return RedirectToAction("List");
+
+            var user = _userRepository.Load(id);
             return View(user.MapToApiUserViewModel());
         }
 
@@ -51,8 +57,7 @@ namespace FasTnT.Web.Controllers
             {
                 if (!string.IsNullOrEmpty(model.Password) && !model.Password.Equals(model.PasswordConfirmation, StringComparison.InvariantCulture))
                 {
-                    // TODO: add password mismatch error
-                    return View(model);
+                    return View(model); // TODO: add password mismatch error
                 }
 
                 _apiUserUpdator.Update(id, model.Name, model.IsActive, model.Password);
