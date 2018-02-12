@@ -2,7 +2,7 @@
 
 namespace FasTnT.Web.EpcisServices
 {
-    [DataContract(Name = "queryResults")]
+    [DataContract(Name = "queryResults", IsReference = false)]
     public class QueryResults
     {
         [DataMember(Name = "queryName", IsRequired = true)]

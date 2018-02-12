@@ -32,7 +32,6 @@ namespace FasTnT.DependencyInjection
             Bind<IApiUserUpdator>().To<ApiUserUpdator>();
 
             // EPCIS Service Bindings
-            Bind<IResponseFormatter>().To<ResponseFormatter>().InSingletonScope();
             Bind<IEventFormatter>().To<EventFormatter>().InSingletonScope();
             Bind<ISubscriptionManager>().To<SubscriptionManager>();
             Bind<IEventCapturer>().To<EventCapturer>();

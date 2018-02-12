@@ -178,13 +178,12 @@
     <Compile Include="EpcisServices\ICaptureService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
     <Compile Include="EpcisServices\Model\EmptyParms.cs" />
-    <Compile Include="EpcisServices\Model\Event.cs" />
     <Compile Include="EpcisServices\Model\EventListType.cs" />
-    <Compile Include="EpcisServices\Model\ObjectEvent.cs" />
+    <Compile Include="EpcisServices\Model\ParamValues.cs" />
     <Compile Include="EpcisServices\Model\QueryNamesResult.cs" />
     <Compile Include="EpcisServices\Model\PollRequest.cs" />
     <Compile Include="EpcisServices\Model\QueryNamesRequest.cs" />
-    <Compile Include="EpcisServices\Model\QueryParam.cs" />
+    <Compile Include="EpcisServices\Model\QueryParameter.cs" />
     <Compile Include="EpcisServices\Model\QueryParams.cs" />
     <Compile Include="EpcisServices\Model\QueryResultBody.cs" />
     <Compile Include="EpcisServices\Model\QueryResults.cs" />
@@ -251,6 +250,7 @@
     <Content Include="..\connectionStrings.shared.config">
       <Link>connectionStrings.shared.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="App_Data\BasicTypes.xsd">
       <SubType>Designer</SubType>

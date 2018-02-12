@@ -6,6 +6,8 @@ using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Queries;
+using FasTnT.Domain.Model.Queries;
+using FasTnT.Domain.Services.Formatting;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -14,11 +16,13 @@ namespace FasTnT.Web.EpcisServices
     /// </summary>
     public class QueryService : IQueryService
     {
+        private readonly IEventFormatter _eventFormatter;
         private readonly IQueryPerformer _queryPerformer;
         private readonly IQueryManager _queryManager;
 
-        public QueryService(IQueryPerformer queryPerformer, IQueryManager queryManager)
+        public QueryService(IQueryPerformer queryPerformer, IQueryManager queryManager, IEventFormatter eventFormatter)
         {
+            _eventFormatter = eventFormatter;
             _queryPerformer = queryPerformer;
             _queryManager = queryManager;
         }
@@ -52,10 +56,11 @@ namespace FasTnT.Web.EpcisServices
         {
             try
             {
-                var results = _queryPerformer.ExecutePollQuery(queryName, null /* parameters */);
-                //var formattedResponse = _responseFormatter.FormatPollResponse(queryName, results);
+                var queryParameters = parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
+                var results = _queryPerformer.ExecutePollQuery(queryName, queryParameters);
+                var formattedResponse = _eventFormatter.Format(results);
 
-                return new QueryResults { QueryName = queryName, ResultBody = new QueryResultBody { EventList = new EventListType() { new ObjectEvent() } } };
+                return new QueryResults { QueryName = queryName };
             }
             catch (EpcisException ex)
             {

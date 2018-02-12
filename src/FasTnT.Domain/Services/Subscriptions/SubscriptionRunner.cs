@@ -1,5 +1,4 @@
 ﻿using FasTnT.Domain.Services.Queries.Performers;
-using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Model.Subscriptions;
 using System.Threading.Tasks;
 using System.Diagnostics;
@@ -15,12 +14,10 @@ namespace FasTnT.Domain.Services.Subscriptions
     public class SubscriptionRunner : ISubscriptionRunner
     {
         private readonly IQueryPerformer _queryPerformer;
-        private readonly IResponseFormatter _responseFormatter;
 
-        public SubscriptionRunner(IQueryPerformer queryPerformer, IResponseFormatter responseFormatter)
+        public SubscriptionRunner(IQueryPerformer queryPerformer)
         {
             _queryPerformer = queryPerformer;
-            _responseFormatter = responseFormatter;
         }
 
         [CommitTransaction]
@@ -33,7 +30,7 @@ namespace FasTnT.Domain.Services.Subscriptions
 
             if (events.Events.Count() > 0 || subscription.Controls.ReportIfEmpty)
             {
-                var response = _responseFormatter.FormatSubscriptionResponse(subscription.QueryName, subscription.Name, events);
+                var response = default(XDocument); // TODO
 
                 await SendResponse(subscription, response);
             }

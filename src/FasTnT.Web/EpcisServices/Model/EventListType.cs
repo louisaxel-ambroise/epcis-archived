@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace FasTnT.Web.EpcisServices
 {
-    [CollectionDataContract(Name = "EventList")]
-    public class EventListType : List<Event>
+    [DataContract(Name = "EventList")]
+    public class EventListType
     {
+        public EventListType()
+        {
+        }
     }
 }

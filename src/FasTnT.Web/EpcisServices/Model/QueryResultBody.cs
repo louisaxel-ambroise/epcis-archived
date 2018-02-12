@@ -6,6 +6,6 @@ namespace FasTnT.Web.EpcisServices
     public class QueryResultBody
     {
         [DataMember(Name = "EventList")]
-        public EventListType EventList { get; set; }
+        public object[] EventList { get; set; }
     }
 }
