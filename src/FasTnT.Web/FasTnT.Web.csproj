@@ -152,7 +152,6 @@
     <Compile Include="App_Start\DependencyInjection\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BackgroundTasks\WebSubscriptionScheduler.cs" />
-    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EpcisServerController.cs" />
@@ -182,14 +181,14 @@
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Filters\AuthenticateUserAttribute.cs" />
-    <Compile Include="Helpers\Filters\IAuthenticateUserInterceptor.cs" />
-    <Compile Include="Helpers\Filters\InternationalizationFilterAttribute.cs" />
+    <Compile Include="Helpers\Attributes\AuthenticateUserAttribute.cs" />
+    <Compile Include="Helpers\Attributes\IAuthenticateUserInterceptor.cs" />
+    <Compile Include="Helpers\Attributes\InternationalizationFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\Filters\UserAuthenticationInterceptor.cs" />
+    <Compile Include="Helpers\Attributes\UserAuthenticationInterceptor.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Users\HttpUserContainer.cs" />
     <Compile Include="Internationalization\Resources.Designer.cs">
@@ -312,7 +311,6 @@
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\_UserList.cshtml" />
     <Content Include="Views\Events\_LatestEvents.cshtml" />

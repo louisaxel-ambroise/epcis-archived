@@ -5,6 +5,7 @@ using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Model.Capture;
+using FasTnT.Web.Helpers.Attributes;
 
 namespace FasTnT.Web.EpcisServices
 {

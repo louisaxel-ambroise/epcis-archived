@@ -3,7 +3,7 @@ using Ninject.Extensions.Interception.Request;
 using Ninject.Extensions.Interception.Attributes;
 using Ninject;
 
-namespace FasTnT.Domain.Utils.Aspects
+namespace FasTnT.Web.Helpers.Attributes
 {
     public class AuthenticateUserAttribute : InterceptAttribute
     {

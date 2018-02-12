@@ -8,7 +8,10 @@
 <ul class="detail">
     <li><strong>@Resources.Label_UserName</strong> @Model.Name</li>
     <li><strong>@Resources.Label_IsActive</strong> @Model.IsActive</li>
-    <li><strong>@Resources.Label_LatestEventCapture</strong> @string.Format(Resources.DateFormat_Detailed, Model.LastLogon)</li>
+    <li><strong>@Resources.Label_LatestActivity</strong> @if (Model.LastLogon.HasValue)
+    {
+        string.Format(Resources.DateFormat_Detailed, Model.LastLogon);
+    }</li>
 </ul>
 
 <div class="links">

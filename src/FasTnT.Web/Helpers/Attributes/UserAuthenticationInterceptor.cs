@@ -8,8 +8,9 @@ using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Services.Users;
 using System.ServiceModel.Web;
 using System.Net;
+using FasTnT.Domain.Utils;
 
-namespace FasTnT.Domain.Utils.Aspects
+namespace FasTnT.Web.Helpers.Attributes
 {
     public class UserAuthenticationInterceptor : IAuthenticateUserInterceptor
     {
@@ -45,6 +46,8 @@ namespace FasTnT.Domain.Utils.Aspects
 
             if (TryGetPrincipal(credentials[0], credentials[1], out User user))
             {
+                user.LastLogOn = SystemContext.Clock.Now;
+
                 _userSetter.SetCurrentUser(user);
                 return true;
             }

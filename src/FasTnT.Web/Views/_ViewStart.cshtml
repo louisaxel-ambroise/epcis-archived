@@ -8,8 +8,10 @@
     document.addEventListener("DOMContentLoaded", function () {
         var url = window.location.pathname.substr(1);
         var links = document.querySelectorAll('aside nav a');
-        var closestWeight = 0; // Weight of the closest value (default = 0, same prefix = 1, full link attribute = 2)
+        var closestWeight = 0; // Weight of the closest value (none = 0, same prefix = 1, full link attribute = 2)
         var closest = 0;
+
+        if (url == "") url = "Dashboard"; // Special case after login
 
         for (var i = 0; i < links.length; i++) {
             if (links[i].getAttribute("href") == url) {
@@ -28,6 +30,8 @@
             }
         }
 
-        links[closest].classList.add("active");
+        if (closestWeight > 0) { // We found a matching link
+            links[closest].classList.add("active");
+        }
     });
 </script>

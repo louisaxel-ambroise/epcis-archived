@@ -610,20 +610,20 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Latest activity:.
+        /// </summary>
+        public static string Label_LatestActivity {
+            get {
+                return ResourceManager.GetString("Label_LatestActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Errors.
         /// </summary>
         public static string Label_LatestErrors {
             get {
                 return ResourceManager.GetString("Label_LatestErrors", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Latest event capture:.
-        /// </summary>
-        public static string Label_LatestEventCapture {
-            get {
-                return ResourceManager.GetString("Label_LatestEventCapture", resourceCulture);
             }
         }
         

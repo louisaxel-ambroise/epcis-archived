@@ -18,7 +18,7 @@
             <tr>
                 <td>@detail.CaptureTime.ToString(Resources.DateFormat_Detailed)</td>
                 <td>@detail.RecordTime.ToString(Resources.DateFormat_Detailed)</td>
-                <td>@detail.UserName</td>
+                <td>@Html.ActionLink(detail.UserName, "Details", "Users", new { id = detail.UserId }, null)</td>
                 <td>@detail.Type</td>
                 <td>@detail.Action</td>
                 <td>@detail.Location</td>

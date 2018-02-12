@@ -17,8 +17,8 @@ namespace FasTnT.Web.Models.Events
                 CaptureTime = e.Request.RecordTime,
                 RecordTime = e.EventTime,
                 Location = e.BusinessLocation,
-                UserId = default(Guid),
-                UserName = null
+                UserId = e.Request.User.Id,
+                UserName = e.Request.User.Name
             });
         }
 

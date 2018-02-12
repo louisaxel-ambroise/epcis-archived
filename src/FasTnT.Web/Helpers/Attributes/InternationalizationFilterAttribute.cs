@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Web.Mvc;
 
-namespace FasTnT.Web.Filters
+namespace FasTnT.Web.Helpers.Attributes
 {
     public class InternationalizationFilterAttribute : ActionFilterAttribute
     {

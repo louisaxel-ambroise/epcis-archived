@@ -1,4 +1,4 @@
-﻿using FasTnT.Web.Filters;
+﻿using FasTnT.Web.Helpers.Attributes;
 using System.Web.Mvc;
 
 namespace FasTnT.Web

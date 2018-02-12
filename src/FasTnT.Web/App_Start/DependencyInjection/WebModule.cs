@@ -1,8 +1,8 @@
 ﻿using FasTnT.DependencyInjection;
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Services.Users;
-using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Web.BackgroundTasks;
+using FasTnT.Web.Helpers.Attributes;
 using FasTnT.Web.Helpers.Users;
 using Ninject.Modules;
 

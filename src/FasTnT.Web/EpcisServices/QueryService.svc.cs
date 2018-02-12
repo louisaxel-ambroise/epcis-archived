@@ -11,6 +11,7 @@ using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Queries;
+using FasTnT.Web.Helpers.Attributes;
 
 namespace FasTnT.Web.EpcisServices
 {

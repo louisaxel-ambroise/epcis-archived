@@ -1,6 +1,6 @@
 ﻿using Ninject.Extensions.Interception;
 
-namespace FasTnT.Domain.Utils.Aspects
+namespace FasTnT.Web.Helpers.Attributes
 {
     public interface IAuthenticateUserInterceptor : IInterceptor
     {

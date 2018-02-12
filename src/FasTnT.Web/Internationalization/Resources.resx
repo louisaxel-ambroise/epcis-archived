@@ -405,8 +405,8 @@
   <data name="Label_Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Label_LatestEventCapture" xml:space="preserve">
-    <value>Latest event capture:</value>
+  <data name="Label_LatestActivity" xml:space="preserve">
+    <value>Latest activity:</value>
   </data>
   <data name="Label_CaptureEndpoint" xml:space="preserve">
     <value>Capture endpoint for EPCIS events:</value>
