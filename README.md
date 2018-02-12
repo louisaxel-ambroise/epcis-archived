@@ -22,11 +22,13 @@ That's it. You should now have a full EPCIS repository working on your computer.
 
 The file `tools\EPCIS_Samples.postman_collection.json` contains sample of HTTP queries that you can perform on FasTnT (import and run in [PostMan](https://www.getpostman.com/))
 
+The default username/password for the API services is `APIUser`/`ApiP@ssw0rd`.
+
 ### Web Dashboard
 
 **FasTnT** also contains an embedded web dashboard that allows you to manage your server, Master Data and allowed users. The default URL is `http://localhost:12008/`.
 
-The default username/password for the dashboard/services is `admin`/`p@ssw0rd`.
+The default username/password for the dashboard is `Admin`/`p@ssw0rd`.
 
 
 \* Note that the base URL or port number may change due to your IIS configuration.
