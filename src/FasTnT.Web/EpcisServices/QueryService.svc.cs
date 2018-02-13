@@ -52,15 +52,15 @@ namespace FasTnT.Web.EpcisServices
 
         [QueryLog]
         [AuthenticateUser]
-        public virtual QueryResults Poll(string queryName, QueryParams parameters)
+        public virtual QueryResults Poll(PollRequest request)
         {
             try
             {
-                var queryParameters = parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
-                var results = _queryPerformer.ExecutePollQuery(queryName, queryParameters);
+                var queryParameters = request.parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
+                var results = _queryPerformer.ExecutePollQuery(request.QueryName, queryParameters);
                 var formattedResponse = _eventFormatter.Format(results);
 
-                return new QueryResults { QueryName = queryName };
+                return new QueryResults { QueryName = request.QueryName };
             }
             catch (EpcisException ex)
             {
@@ -75,7 +75,7 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [AuthenticateUser]
-        public void Subscribe(string queryName, QueryParams parameters, Uri destination, SubscriptionControls controls, string subscriptionId)
+        public void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
         {
             throw new NotImplementedException();
         }

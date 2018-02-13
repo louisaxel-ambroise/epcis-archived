@@ -1,13 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ServiceModel;
 
 namespace FasTnT.Web.EpcisServices
 {
-    [DataContract(Name = "pollRequest", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+    [MessageContract(WrapperName = "poll", WrapperNamespace = "http://schemas.xmlsoap.org/wsdl/")]
     public class PollRequest
     {
-        [DataMember(Name = "queryName", Order = 0)]
+        [MessageBodyMember(Name = "queryName", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         public string QueryName { get; set; }
-        [DataMember(Name = "params", Order = 1)]
-        public QueryParams Params { get; set; }
+
+        [MessageBodyMember(Name = "queryParams", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+        public QueryParams parameters { get; set; }
     }
 }

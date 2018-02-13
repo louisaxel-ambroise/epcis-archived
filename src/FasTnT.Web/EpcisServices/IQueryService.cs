@@ -50,7 +50,7 @@ namespace FasTnT.Web.EpcisServices
         /// <param name="parameters">The parameters of the query</param>
         /// <returns>All the Events or MasterData that matches the request's parameters</returns>
         [OperationContract(Name = "poll")]
-        QueryResults Poll([MessageParameter(Name = "queryName")] string queryName, [MessageParameter(Name = "params")] QueryParams parameters);
+        QueryResults Poll(PollRequest request);
 
         /// <summary>
         /// Gets the list of all existing subscriptions IDs
@@ -78,7 +78,7 @@ namespace FasTnT.Web.EpcisServices
         [FaultContract(typeof(SecurityFault), Name = "SecurityExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ValidationFault), Name = "ValidationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ImplementationFault), Name = "ImplementationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        void Subscribe(string queryName, [MessageParameter(Name = "params")] QueryParams parameters, [MessageParameter(Name = "dest")] Uri destination, [MessageParameter(Name = "controls")] SubscriptionControls controls, [MessageParameter(Name = "subscriptionID")] string subscriptionId);
+        void Subscribe(string queryName/*, [MessageParameter(Name = "params")] QueryParams parameters*/, [MessageParameter(Name = "dest")] Uri destination, [MessageParameter(Name = "controls")] SubscriptionControls controls, [MessageParameter(Name = "subscriptionID")] string subscriptionId);
 
         /// <summary>
         /// Removes the specific subscription from the repository

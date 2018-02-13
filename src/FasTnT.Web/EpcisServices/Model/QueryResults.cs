@@ -1,17 +1,16 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ServiceModel;
 
 namespace FasTnT.Web.EpcisServices
 {
-    [DataContract(Name = "queryResults", IsReference = false)]
+    [MessageContract]
     public class QueryResults
     {
-        [DataMember(Name = "queryName", IsRequired = true)]
+        [MessageBodyMember(Name = "queryName", Order = 0)]
         public string QueryName { get; set; }
 
-        [DataMember(Name = "subscriptionID", IsRequired = false)]
+        [MessageBodyMember(Name = "subscriptionID", Order = 1)]
         public string SubscriptionId { get; set; }
 
-        [DataMember(Name = "resultsBody")]
-        public QueryResultBody ResultBody { get; set; }
+        // TODO: eventList parameter is missing
     }
 }
