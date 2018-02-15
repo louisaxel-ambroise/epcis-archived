@@ -3,6 +3,7 @@ using FasTnT.Domain.Services.Dashboard;
 using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Utils;
 using FasTnT.Web.Helpers;
+using FasTnT.Web.Helpers.Attributes;
 using FasTnT.Web.Models.Account;
 using FasTnT.Web.Models.Users;
 using FasTnT.Web.Session;
@@ -26,21 +27,32 @@ namespace FasTnT.Web.Controllers
             _userService = userService;
         }
 
+        [NoCache]
         [AllowAnonymous]
-        public ActionResult LogOn()
+        public ActionResult LogOn(string returnUrl)
         {
             if (UserSession.IsAuthenticated())
             {
                 return RedirectToAction("Index", "Dashboard");
             }
 
-            return View(new AuthenticationModel());
+            ViewBag.ReturnUrl = returnUrl;
+            var model = new AuthenticationModel();
+            var lockedUser = RetrieveLockedUser();
+
+            if (lockedUser != null)
+            {
+                model.UserName = lockedUser;
+                model.Locked = true;
+            }
+
+            return View(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOn(AuthenticationModel credentials)
+        public ActionResult LogOn(AuthenticationModel credentials, string returnUrl)
         {
             try
             {
@@ -50,7 +62,7 @@ namespace FasTnT.Web.Controllers
                 GenerateAndStoreCookies(webUser);
                 UserSession.Current = webUser;
 
-                return RedirectToAction("Index", "Dashboard");
+                return !string.IsNullOrEmpty(returnUrl) ? (ActionResult) Redirect(returnUrl) : RedirectToAction("Index", "Dashboard");
             }
             catch(UserAuthenticationException authFailure)
             {
@@ -75,11 +87,12 @@ namespace FasTnT.Web.Controllers
             return Redirect(redirectTo);
         }
 
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            DeleteCookie();
+            DeleteCookies();
 
             return RedirectToAction("LogOn");
         }
@@ -91,6 +104,13 @@ namespace FasTnT.Web.Controllers
             var userDetails = _userService.GetDetails(userName);
 
             return View(userDetails.MapToViewModel());
+        }
+
+        private string RetrieveLockedUser()
+        {
+            var cookie = Request.Cookies["fastnt.username"];
+
+            return (cookie != null) ? cookie.Value : null;
         }
 
         private void GenerateAndStoreCookies(WebUser user)
@@ -109,13 +129,16 @@ namespace FasTnT.Web.Controllers
             }
 
             Response.Cookies.Add(authCookie);
+            Response.Cookies.Add(new HttpCookie("fastnt.username", user.Name) { HttpOnly = true, Expires = SystemContext.Clock.Now.AddDays(1) });
         }
 
-        private void DeleteCookie()
+        private void DeleteCookies()
         {
-            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, "") { Expires = DateTime.Now.AddYears(-1) };
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "") { Expires = DateTime.Now.AddYears(-1) };
+            var lockCookie = new HttpCookie("fastnt.username", "") { Expires = DateTime.Now.AddYears(-1) };
 
-            Response.Cookies.Add(cookie);
+            Response.Cookies.Add(authCookie);
+            Response.Cookies.Add(lockCookie);
         }
     }
 }

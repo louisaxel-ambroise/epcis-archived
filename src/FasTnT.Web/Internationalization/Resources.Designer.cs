@@ -214,6 +214,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Welcome back, {0}!.
+        /// </summary>
+        public static string Format_WelcomeBackUser {
+            get {
+                return ResourceManager.GetString("Format_WelcomeBackUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string Grid_Action {
@@ -673,6 +682,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not you?.
+        /// </summary>
+        public static string Label_NotYou {
+            get {
+                return ResourceManager.GetString("Label_NotYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password:.
         /// </summary>
         public static string Label_Password {
@@ -804,6 +822,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_UserName {
             get {
                 return ResourceManager.GetString("Label_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We have locked your session for security reasons..
+        /// </summary>
+        public static string Label_WeLockedYourSession {
+            get {
+                return ResourceManager.GetString("Label_WeLockedYourSession", resourceCulture);
             }
         }
         

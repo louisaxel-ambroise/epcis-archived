@@ -29,11 +29,6 @@ namespace FasTnT.Web.Helpers
             return htmlHelper.Localize($"Format_{key}").ToHtmlString();
         }
 
-        public static string LocalizeChart(this HtmlHelper htmlHelper, string key)
-        {
-            return htmlHelper.Localize($"Chart_{key}").ToHtmlString();
-        }
-
         public static MvcHtmlString Localize(this HtmlHelper htmlHelper, string key)
         {
             var rm = new System.Resources.ResourceManager("FasTnT.Web.Internationalization.Resources", typeof(Resources).Assembly);

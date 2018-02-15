@@ -417,4 +417,13 @@
   <data name="Label_QueryEndpoint" xml:space="preserve">
     <value>Point de terminaison de requêtage des événements EPCIS :</value>
   </data>
+  <data name="Format_WelcomeBackUser" xml:space="preserve">
+    <value>Content de vous revoir, {0} !</value>
+  </data>
+  <data name="Label_NotYou" xml:space="preserve">
+    <value>Ce n'est pas vous ?</value>
+  </data>
+  <data name="Label_WeLockedYourSession" xml:space="preserve">
+    <value>Nous avons verrouillé votre session par sécurité.</value>
+  </data>
 </root>

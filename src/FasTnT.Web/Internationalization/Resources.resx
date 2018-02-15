@@ -417,4 +417,13 @@
   <data name="Label_QueryEndpoint" xml:space="preserve">
     <value>Query endpoint for EPCIS events:</value>
   </data>
+  <data name="Format_WelcomeBackUser" xml:space="preserve">
+    <value>Welcome back, {0}!</value>
+  </data>
+  <data name="Label_NotYou" xml:space="preserve">
+    <value>Not you?</value>
+  </data>
+  <data name="Label_WeLockedYourSession" xml:space="preserve">
+    <value>We have locked your session for security reasons.</value>
+  </data>
 </root>
