@@ -24,12 +24,14 @@
                     <p class="error">@Html.LocalizeLabel(Model.AuthenticationError)</p>
                 }
                 <form method="post" action="@Url.Content("~/Account/LogOn")?returnUrl=@ViewBag.ReturnUrl">
-                    @Html.AntiForgeryToken()
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.UserName, new { id = "username", name = "username" })
                     <div class="input">
                         <p>@Html.Raw(string.Format(Html.LocalizeFormat("WelcomeBackUser"), $"<strong>{Model.UserName}</strong>"))<br />
                         @Resources.Label_WeLockedYourSession<br />
                         @Html.ActionLink(Resources.Label_NotYou, "LogOff")</p>
                     </div>
+                    
                     <div class="input">
                         <label for="password">@Resources.Label_EnterYourPassword</label>
                         @Html.PasswordFor(x => x.Password, new { id = "password", name = "password" })
