@@ -426,4 +426,7 @@
   <data name="Label_WeLockedYourSession" xml:space="preserve">
     <value>We have locked your session for security reasons.</value>
   </data>
+  <data name="Label_DashboardDisabled" xml:space="preserve">
+    <value>The dashboard has been disabled on this repository.</value>
+  </data>
 </root>

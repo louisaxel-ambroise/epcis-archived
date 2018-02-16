@@ -5,6 +5,7 @@ using System.Web;
 using FasTnT.Domain.Services.Subscriptions;
 using FasTnT.Domain.Repositories;
 using System.Linq;
+using FasTnT.Web.Features;
 
 namespace FasTnT.Web
 {
@@ -12,10 +13,17 @@ namespace FasTnT.Web
     {
         protected void Application_Start()
         {
+            var webDashboardFeature = new WebDashboardFeature();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterEpcisRoutes(RouteTable.Routes);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            if (webDashboardFeature.IsOn())
+                RouteConfig.RegisterDashboardRoutes(RouteTable.Routes);
+            else
+                RouteConfig.RegisterDefaultRoutes(RouteTable.Routes);
+
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             StartScheduler();

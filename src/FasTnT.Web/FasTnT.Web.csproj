@@ -131,6 +131,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Toggler, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Toggler.0.3.0.0\lib\net40\Toggler.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -156,6 +159,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EpcisServerController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -181,6 +185,7 @@
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Features\WebDashboardFeature.cs" />
     <Compile Include="Helpers\Attributes\AuthenticateUserAttribute.cs" />
     <Compile Include="Helpers\Attributes\IAuthenticateUserInterceptor.cs" />
     <Compile Include="Helpers\Attributes\InternationalizationFilterAttribute.cs" />
@@ -319,6 +324,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -466,6 +466,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The dashboard has been disabled on this repository..
+        /// </summary>
+        public static string Label_DashboardDisabled {
+            get {
+                return ResourceManager.GetString("Label_DashboardDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details of API User {0}.
         /// </summary>
         public static string Label_DetailsApiUser {

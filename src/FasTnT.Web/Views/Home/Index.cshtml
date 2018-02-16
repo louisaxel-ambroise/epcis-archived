@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Resources.Label_Login - @Resources.ApplicationName</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="~/Content/images/icon.ico" />
+
+    @Styles.Render("~/Content/logon_css")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <h1 class="centered">FasT&amp;T</h1>
+    <h2 class="centered">@Resources.EpcisRepository</h2>
+    <div id="logon">
+        <p class="centered">@Resources.Label_DashboardDisabled</p>
+    </div>
+    <footer>
+        <p>@Resources.ApplicationName v@(Html.AssemblyVersion(2)) - @string.Format(Resources.Format_Copyright, @DateTime.Now.Year)</p>
+        <p>
+            <a class="language" href="~/Home/SetLanguage?language=en&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_EN.jpg" alt="EN" /></a>
+            <a class="language" href="~/Home/SetLanguage?language=fr&redirectTo=@Request.Url.AbsolutePath"><img src="~/Content/images/flag_FR.jpg" alt="FR" /></a>
+        </p>
+    </footer>
+</body>
+</html>

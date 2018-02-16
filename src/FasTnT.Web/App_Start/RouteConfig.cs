@@ -8,7 +8,7 @@ namespace FasTnT.Web
 {
     public class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterDashboardRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -17,6 +17,17 @@ namespace FasTnT.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
+        }
+
+        public static void RegisterDefaultRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "About", 
+                url: "{controller}/{action}", 
+                defaults: new { controller = "Home", action = "Index" },
+                constraints: new { controller = "Home" });
         }
 
         public static void RegisterEpcisRoutes(RouteCollection routes)

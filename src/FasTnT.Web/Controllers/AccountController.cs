@@ -72,21 +72,6 @@ namespace FasTnT.Web.Controllers
             }
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult SetLanguage(string language, string redirectTo)
-        {
-            if (Request.LogonUserIdentity.IsAuthenticated)
-            {
-                _userService.SetPreferredLanguage(UserSession.Current.Id, language);
-            }
-
-            Session[Constants.PreferredLanguage] = language;
-            Response.Cookies.Set(new HttpCookie(Constants.PreferredLanguage, language));
-
-            return Redirect(redirectTo);
-        }
-
         [AllowAnonymous]
         public ActionResult LogOff()
         {

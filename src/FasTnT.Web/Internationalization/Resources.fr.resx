@@ -426,4 +426,7 @@
   <data name="Label_WeLockedYourSession" xml:space="preserve">
     <value>Nous avons verrouillé votre session par sécurité.</value>
   </data>
+  <data name="Label_DashboardDisabled" xml:space="preserve">
+    <value>Le tableau de bord a été désactivé sur ce serveur.</value>
+  </data>
 </root>
