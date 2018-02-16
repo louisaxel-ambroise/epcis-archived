@@ -4,5 +4,5 @@ using System.Reflection;
 [assembly: AssemblyProduct("FasTnT")]
 [assembly: AssemblyCopyright("Copyright © FasTnT 2018")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.5.*")]
-[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyVersion("0.6.*")]
+[assembly: AssemblyFileVersion("0.6.0.0")]
