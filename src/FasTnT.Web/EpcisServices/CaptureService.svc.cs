@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Xml.Linq;
-using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Model.Capture;
@@ -13,14 +12,14 @@ namespace FasTnT.Web.EpcisServices
     {
         private readonly IEventCapturer _eventCapturer;
 
-        public CaptureService(IDocumentParser documentParser, IEventCapturer eventCapturer)
+        public CaptureService(IEventCapturer eventCapturer)
         {
             _eventCapturer = eventCapturer ?? throw new ArgumentNullException(nameof(eventCapturer));
         }
 
         [CaptureLog]
         [AuthenticateUser]
-        public virtual CaptureResponse Capture()
+        public virtual CaptureResponse CaptureEvents()
         {
             try
             {
@@ -30,10 +29,16 @@ namespace FasTnT.Web.EpcisServices
 
                 return response;
             }
-            catch (Exception ex)
+            catch
             {
-                throw EpcisFault.Create(ex);
+                throw new Exception("Capture of events failed");
             }
+        }
+
+        public CaptureResponse CaptureMasterdata()
+        {
+            // TODO: parse and capture the masterdata contained in the body.
+            throw new Exception("Method CaptureMasterdata is not implemented.");
         }
     }
 }

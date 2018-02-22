@@ -16,7 +16,7 @@ namespace FasTnT.Domain.Utils.Aspects
         private readonly IUserRepository _userRepository;
         private readonly IUserSetter _userSetter;
 
-        protected virtual Func<Exception> UnauthorizedException => () => new WebFaultException(HttpStatusCode.Unauthorized);
+        protected virtual Func<Exception> UnauthorizedException => () => new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized.");
 
         public UserAuthenticationInterceptor(IUserRepository userRepository, IUserSetter userSetter)
         {
