@@ -1,136 +1,368 @@
 {
-	"variables": [],
 	"info": {
 		"name": "EPCIS_Samples",
-		"_postman_id": "53d54cbc-8d54-f269-96bf-30709fa9263e",
+		"_postman_id": "364a6465-273f-0d21-9e7b-c3b30c5ea743",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "List all subscription IDs",
 			"request": {
-				"url": "http://localhost:12008/Services/1.2/EpcisQuery/",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "text/xml",
-						"description": ""
+						"value": "text/xml"
 					},
 					{
 						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/getSubscriptionIds",
-						"description": ""
+						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/getSubscriptionIds"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic QVBJVXNlcjpBcGlQQHNzdzByZA=="
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <getSubscriptionIds xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    </getSubscriptionIds>\r\n  </s:Body>\r\n</s:Envelope>"
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Subscribe to a query",
-			"request": {
-				"url": "http://localhost:13592/EpcisQuery/",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"description": ""
-					},
-					{
-						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/subscribe",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <subscribe xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<id>MySub</id>\r\n    \t<queryName>EpcHistoryQuery</queryName>\r\n    \t<destination>http://localhost:14465/api/Reception/Results</destination>\r\n    \t<params>\r\n    \t\t<param>\r\n    \t\t\t<name>epc</name>\r\n    \t\t\t<value>urn:epc:id:sgtin:0057000.123780.7788</value>\r\n    \t\t</param>\r\n    \t</params>\r\n    \t<controls></controls>\r\n    </subscribe>\r\n  </s:Body>\r\n</s:Envelope>"
+				"url": {
+					"raw": "http://localhost:12008/Services/1.2/EpcisQuery/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12008",
+					"path": [
+						"Services",
+						"1.2",
+						"EpcisQuery",
+						""
+					]
 				},
-				"description": "For now, schedule is hardcoded (every minute)\nThis is an update to do soon."
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "Capture an event",
 			"request": {
-				"url": "http://localhost:12008/Services/1.2/EpcisCapture/",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "text/xml",
-						"description": ""
+						"value": "text/xml"
 					},
 					{
 						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/GetSubscriptionIDs",
-						"description": ""
+						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/GetSubscriptionIDs"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic QVBJVXNlcjpBcGlQQHNzdzByZA=="
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<epcis:EPCISDocument xmlns:epcis=\"urn:epcglobal:epcis:xsd:1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" schemaVersion=\"1.0\">\n    <EPCISBody>\n        <EventList>\n\t\t\t<ObjectEvent>\n\t\t\t\t<eventTime>2017-09-14T12:51:17Z</eventTime>\n\t\t\t\t<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\n\t\t\t\t<epcList>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000817</epc>\n\t\t\t\t</epcList>\n\t\t\t\t<action>ADD</action>\n\t\t\t\t<bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\n\t\t\t\t<disposition>urn:epcglobal:cbv:disp:loading</disposition>\n\t\t\t\t<readPoint>\n\t\t\t\t\t<id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\n\t\t\t\t</readPoint>\n\t\t\t\t<bizLocation>\n\t\t\t\t\t<id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\n\t\t\t\t</bizLocation>\n\t\t\t</ObjectEvent>\t\n        </EventList>\n    </EPCISBody>\n</epcis:EPCISDocument>"
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<epcis:EPCISDocument xmlns:epcis=\"urn:epcglobal:epcis:xsd:1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" creationDate=\"2017-09-19T12:57:12Z\" schemaVersion=\"1.0\">\n    <EPCISBody>\n        <EventList>\n\t\t\t<AggregationEvent>\n\t\t\t\t<eventTime>2017-09-14T12:51:17Z</eventTime>\n\t\t\t\t<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\n\t\t\t\t<parentID>urn:epc:id:sscc:4001356.5900000817</parentID>\n\t\t\t\t<childEPCs>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000818</epc>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000819</epc>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000820</epc>\n\t\t\t\t</childEPCs>\n\t\t\t\t<action>ADD</action>\n\t\t\t\t<bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\n\t\t\t\t<disposition>urn:epcglobal:cbv:disp:loading</disposition>\n\t\t\t\t<readPoint>\n\t\t\t\t\t<id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\n\t\t\t\t</readPoint>\n\t\t\t\t<bizLocation>\n\t\t\t\t\t<id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\n\t\t\t\t</bizLocation>\n\t\t\t</AggregationEvent>\t\n        </EventList>\n    </EPCISBody>\n</epcis:EPCISDocument>"
+				},
+				"url": {
+					"raw": "http://localhost:12008/Services/1.2/EpcisCapture/Events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12008",
+					"path": [
+						"Services",
+						"1.2",
+						"EpcisCapture",
+						"Events"
+					]
 				},
 				"description": ""
 			},
-			"response": []
+			"response": [
+				{
+					"id": "6ed9a19b-e11d-49be-921b-e4cf1d6f8b8b",
+					"name": "Capture an event",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"disabled": false
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/GetSubscriptionIDs",
+								"disabled": false
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<epcis:EPCISDocument xmlns:epcis=\"urn:epcglobal:epcis:xsd:1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" creationDate=\"2017-09-19T12:57:12Z\" schemaVersion=\"1.0\">\n    <EPCISBody>\n        <EventList>\n\t\t\t<AggregationEvent>\n\t\t\t\t<eventTime>2017-09-14T12:51:17Z</eventTime>\n\t\t\t\t<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\n\t\t\t\t<parentID>urn:epc:id:sscc:4001356.5900000817</parentID>\n\t\t\t\t<childEPCs>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000818</epc>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000819</epc>\n\t\t\t\t\t<epc>urn:epc:id:sscc:4001356.5900000820</epc>\n\t\t\t\t</childEPCs>\n\t\t\t\t<action>ADD</action>\n\t\t\t\t<bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\n\t\t\t\t<disposition>urn:epcglobal:cbv:disp:loading</disposition>\n\t\t\t\t<readPoint>\n\t\t\t\t\t<id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\n\t\t\t\t</readPoint>\n\t\t\t\t<bizLocation>\n\t\t\t\t\t<id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\n\t\t\t\t</bizLocation>\n\t\t\t</AggregationEvent>\t\n        </EventList>\n    </EPCISBody>\n</epcis:EPCISDocument>"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/{{CaptureEndpoint}}/Events",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{CaptureEndpoint}}",
+								"Events"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Content-Length",
+							"value": "383",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/xml; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 24 Feb 2018 15:25:02 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-AspNet-Version",
+							"value": "4.0.30319",
+							"name": "X-AspNet-Version",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcRGV2ZWxvcHBlbWVudFxHaXRIdWJcZXBjaXNcc3JjXEZhc1RuVC5XZWJcU2VydmljZXNcMS4yXEVwY2lzQ2FwdHVyZVxFdmVudHM=?=",
+							"name": "X-SourceFiles",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (Paris, Madrid)",
+							"httpOnly": true,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "udtlscy4tdt5kocudrbjalnq",
+							"key": "ASP.NET_SessionId"
+						},
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (Paris, Madrid)",
+							"httpOnly": true,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "fx9n2gaF3y3ei8rHTHflUkS0JreDEi-RHLlh08akmp8_TKvlfyQcW3MeJCij6ClkhrEc-2mkVg8RDf0o7J2CnOup4_pcTtYInmDIb1ri6jQ1",
+							"key": "__RequestVerificationToken"
+						}
+					],
+					"responseTime": 1143,
+					"body": "<CaptureEventsResponse><CaptureStart>2018-02-24T15:25:01.2426284Z</CaptureStart><CaptureEnd>2018-02-24T15:25:02.2366971Z</CaptureEnd><EventsCount>1</EventsCount><EventIds xmlns:a=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><a:string>03b137ec-0e2f-44e9-ad09-a891010e8b4a</a:string></EventIds></CaptureEventsResponse>"
+				}
+			]
 		},
 		{
 			"name": "Perform a Poll query",
 			"request": {
-				"url": "http://localhost:13592/EpcisQuery/",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "text/xml",
-						"description": ""
+						"value": "text/xml"
 					},
 					{
 						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/poll",
-						"description": ""
+						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/poll"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic QVBJVXNlcjpBcGlQQHNzdzByZA=="
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <poll xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<name>EpcHistoryQuery</name>\r\n    \t<params>\r\n    \t\t<param>\r\n    \t\t\t<name>epc</name>\r\n    \t\t\t<value>urn:epc:id:sgtin:0057000.123780.7788</value>\r\n    \t\t</param>\r\n    \t</params>\r\n    </poll>\r\n  </s:Body>\r\n</s:Envelope>"
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <poll xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<queryName>SimpleEventQuery</queryName>\r\n    \t<queryParams>\r\n    \t\t<queryParam>\r\n    \t\t\t<name>eventCountLimit</name>\r\n    \t\t\t<values>\r\n    \t\t\t\t<value>15</value>\r\n    \t\t\t</values>\r\n    \t\t</queryParam>\r\n    \t</queryParams>\r\n    </poll>\r\n  </s:Body>\r\n</s:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:12008/Services/1.2/EpcisQuery/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12008",
+					"path": [
+						"Services",
+						"1.2",
+						"EpcisQuery",
+						""
+					]
 				},
 				"description": ""
 			},
-			"response": []
-		},
-		{
-			"name": "Remove subscription",
-			"request": {
-				"url": "http://localhost:13592/EpcisQuery/",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"description": ""
+			"response": [
+				{
+					"id": "1337caf7-a329-4508-81a8-e06f442a8ee9",
+					"name": "Perform a Poll query",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/poll"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <poll xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<queryName>SimpleEventQuery</queryName>\r\n    \t<queryParams>\r\n    \t\t<queryParam>\r\n    \t\t\t<name>eventCountLimit</name>\r\n    \t\t\t<values>\r\n    \t\t\t\t<value>15</value>\r\n    \t\t\t</values>\r\n    \t\t</queryParam>\r\n    \t</queryParams>\r\n    </poll>\r\n  </s:Body>\r\n</s:Envelope>"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/{{QueryEndpoint}}",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"{{QueryEndpoint}}"
+							]
+						}
 					},
-					{
-						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/unsubscribe",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <unsubscribe xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<name>MySub</name>\r\n    </unsubscribe>\r\n  </s:Body>\r\n</s:Envelope>"
-				},
-				"description": ""
-			},
-			"response": []
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Length",
+							"value": "944",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 24 Feb 2018 15:28:45 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding",
+							"name": "Vary",
+							"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+						},
+						{
+							"key": "X-AspNet-Version",
+							"value": "4.0.30319",
+							"name": "X-AspNet-Version",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcRGV2ZWxvcHBlbWVudFxHaXRIdWJcZXBjaXNcc3JjXEZhc1RuVC5XZWJcU2VydmljZXNcMS4yXEVwY2lzUXVlcnlc?=",
+							"name": "X-SourceFiles",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (Paris, Madrid)",
+							"httpOnly": true,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "udtlscy4tdt5kocudrbjalnq",
+							"key": "ASP.NET_SessionId"
+						},
+						{
+							"expires": "Tue Jan 19 2038 04:14:07 GMT+0100 (Paris, Madrid)",
+							"httpOnly": true,
+							"domain": "localhost",
+							"path": "/",
+							"secure": false,
+							"value": "fx9n2gaF3y3ei8rHTHflUkS0JreDEi-RHLlh08akmp8_TKvlfyQcW3MeJCij6ClkhrEc-2mkVg8RDf0o7J2CnOup4_pcTtYInmDIb1ri6jQ1",
+							"key": "__RequestVerificationToken"
+						}
+					],
+					"responseTime": 177,
+					"body": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><QueryResults xmlns=\"http://schemas.xmlsoap.org/wsdl/\"><queryName>SimpleEventQuery</queryName><subscriptionID i:nil=\"true\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"/><eventList><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-12T16:57:20.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:45:48.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:49:36.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:50:29.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><AggregationEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T15:25:01.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <parentID>urn:epc:id:sscc:4001356.5900000817</parentID>\r\n  <childEPCs>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </childEPCs>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n</AggregationEvent></eventList></QueryResults></s:Body></s:Envelope>"
+				}
+			]
 		}
 	]
 }
