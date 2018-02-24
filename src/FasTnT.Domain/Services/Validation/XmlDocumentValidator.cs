@@ -24,9 +24,4 @@ namespace FasTnT.Domain.Services.Validation
             document.Validate(_schema, (e, t) => { if (t.Exception != null) throw t.Exception; });
         }
     }
-
-    public interface IDocumentValidator
-    {
-        void Validate(XDocument document);
-    }
 }

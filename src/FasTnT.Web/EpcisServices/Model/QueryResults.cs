@@ -34,7 +34,7 @@ namespace FasTnT.Web.EpcisServices
 
         public void WriteTo(Stream stream)
         {
-            var ser = Elements.Select(x => x.ToString());
+            var ser = Elements.Select(x => x.ToString(SaveOptions.DisableFormatting));
             var data = Encoding.UTF8.GetBytes(string.Join("", ser));
 
             stream.Write(data, 0, data.Length);

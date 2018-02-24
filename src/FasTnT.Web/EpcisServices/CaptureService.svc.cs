@@ -7,6 +7,7 @@ using FasTnT.Web.EpcisServices.Model;
 using System.Linq;
 using FasTnT.Domain.Utils;
 using FasTnT.Web.Helpers.Attributes;
+using FasTnT.Domain.Services.MasterdataCapture;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -14,10 +15,12 @@ namespace FasTnT.Web.EpcisServices
     public class CaptureService : ICaptureService
     {
         private readonly IEventCapturer _eventCapturer;
+        private readonly IMasterdataCapturer _masterdataCapturer;
 
-        public CaptureService(IEventCapturer eventCapturer)
+        public CaptureService(IEventCapturer eventCapturer, IMasterdataCapturer masterdataCapturer)
         {
             _eventCapturer = eventCapturer ?? throw new ArgumentNullException(nameof(eventCapturer));
+            _masterdataCapturer = masterdataCapturer ?? throw new ArgumentNullException(nameof(masterdataCapturer));
         }
 
         [CaptureLog]
@@ -46,10 +49,30 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        public CaptureMasterDataResponse CaptureMasterdata()
+        [CaptureLog]
+        [AuthenticateUser]
+        public virtual CaptureMasterDataResponse CaptureMasterdata()
         {
-            // TODO: parse and capture the masterdata contained in the body.
-            throw new Exception("Method CaptureMasterdata is not implemented.");
+            var captureStart = SystemContext.Clock.Now;
+
+            try
+            {
+                var request = OperationContext.Current.RequestContext.RequestMessage.ToString() ?? "";
+                var document = XDocument.Parse(request);
+                var masterdataIds = _masterdataCapturer.Capture(document);
+
+                return new CaptureMasterDataResponse
+                {
+                    CaptureStart = captureStart,
+                    CaptureEnd = SystemContext.Clock.Now,
+                    MasterdataCount = masterdataIds.Count(),
+                    MasterdataIds = masterdataIds.ToArray()
+                };
+            }
+            catch
+            {
+                throw new Exception("Capture of master data failed");
+            }
         }
     }
 }

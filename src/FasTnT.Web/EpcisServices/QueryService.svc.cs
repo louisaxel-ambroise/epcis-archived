@@ -9,6 +9,7 @@ using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Model.Queries;
 using FasTnT.Domain.Services.Formatting;
 using FasTnT.Web.Helpers.Attributes;
+using FasTnT.Domain.Services.Subscriptions;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -20,12 +21,14 @@ namespace FasTnT.Web.EpcisServices
         private readonly IEventFormatter _eventFormatter;
         private readonly IQueryPerformer _queryPerformer;
         private readonly IQueryManager _queryManager;
+        private readonly ISubscriptionManager _subscriptionManager;
 
-        public QueryService(IQueryPerformer queryPerformer, IQueryManager queryManager, IEventFormatter eventFormatter)
+        public QueryService(IQueryPerformer queryPerformer, IQueryManager queryManager, IEventFormatter eventFormatter, ISubscriptionManager subscriptionManager)
         {
             _eventFormatter = eventFormatter;
             _queryPerformer = queryPerformer;
             _queryManager = queryManager;
+            _subscriptionManager = subscriptionManager;
         }
 
         [AuthenticateUser]
@@ -72,7 +75,7 @@ namespace FasTnT.Web.EpcisServices
         [AuthenticateUser]
         public string[] GetSubscriptionIDs(EmptyParms request)
         {
-            throw new NotImplementedException();
+            return _subscriptionManager.ListAllSubscriptions().Select(x => x.Id).ToArray();
         }
 
         [AuthenticateUser]

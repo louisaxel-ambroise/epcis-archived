@@ -3,6 +3,7 @@ using FasTnT.Domain.Services.Dashboard;
 using FasTnT.Domain.Services.Dashboard.Users;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Services.Formatting;
+using FasTnT.Domain.Services.MasterdataCapture;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Subscriptions;
@@ -40,6 +41,8 @@ namespace FasTnT.DependencyInjection
             Bind<IRequestPersister>().To<RequestPersister>();
             Bind<IDocumentValidator>().To<XmlDocumentValidator>().WithConstructorArgument("files", _xsdFiles);
             Bind<IDocumentParser>().To<DocumentParser>();
+            Bind<IMasterdataCapturer>().To<MasterdataCapturer>();
+            Bind<IMasterdataParser>().To<MasterdataParser>();
 
             // Queries
             Bind<IQuery>().To<SimpleEventQuery>();

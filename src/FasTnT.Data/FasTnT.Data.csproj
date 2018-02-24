@@ -103,11 +103,8 @@
     <Compile Include="Migrations\M107_CreateSourceDestinationTable.cs" />
     <Compile Include="Migrations\M108_CreateCustomFieldTable.cs" />
     <Compile Include="Migrations\M200_CreateCbvSchema.cs" />
-    <Compile Include="Migrations\M201_CreateBusinessLocationTable.cs" />
-    <Compile Include="Migrations\M202_CreateBusinessTransactionTable.cs" />
-    <Compile Include="Migrations\M203_CreateBusinessStepTable.cs" />
-    <Compile Include="Migrations\M204_CreateDispositionTable.cs" />
-    <Compile Include="Migrations\M205_CreateReadPointTable.cs" />
+    <Compile Include="Migrations\M201_CreateMasterdataTable.cs" />
+    <Compile Include="Migrations\M202_CreateMasterdataAttributeTable.cs" />
     <Compile Include="Migrations\M300_InsertDetaultData.cs" />
     <Compile Include="Migrations\M400_CreateSubscriptionSchema.cs" />
     <Compile Include="Migrations\M401_CreateSubscriptionScheduleTable.cs" />

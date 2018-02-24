@@ -59,6 +59,8 @@
     <Compile Include="Model\Events\EpcisRequest.cs" />
     <Compile Include="Model\Log\AuditLog.cs" />
     <Compile Include="Model\Log\LogAction.cs" />
+    <Compile Include="Model\MasterData\EpcisMasterdata.cs" />
+    <Compile Include="Model\MasterData\MasterdataProperty.cs" />
     <Compile Include="Model\Queries\QueryEventResponse.cs" />
     <Compile Include="Model\Subscriptions\ScheduleEntry.cs" />
     <Compile Include="Model\Subscriptions\Subscription.cs" />
@@ -71,6 +73,10 @@
     <Compile Include="Repositories\ISubscriptionRepository.cs" />
     <Compile Include="Services\EventCapture\IRequestPersister.cs" />
     <Compile Include="Services\EventCapture\RequestPersister.cs" />
+    <Compile Include="Services\MasterdataCapture\IMasterdataCapturer.cs" />
+    <Compile Include="Services\MasterdataCapture\IMasterdataParser.cs" />
+    <Compile Include="Services\MasterdataCapture\MasterdataCapturer.cs" />
+    <Compile Include="Services\MasterdataCapture\MasterdataParser.cs" />
     <Compile Include="Services\Queries\IQueryManager.cs" />
     <Compile Include="Services\Queries\Performers\QueryPerformer.cs" />
     <Compile Include="Services\Queries\QueryManager.cs" />
@@ -88,6 +94,7 @@
     <Compile Include="Services\EventCapture\EventCapturer.cs" />
     <Compile Include="Services\EventCapture\IEventCapturer.cs" />
     <Compile Include="Services\Queries\SimpleEventQueryParameters.cs" />
+    <Compile Include="Services\Validation\IDocumentValidator.cs" />
     <Compile Include="Services\Validation\XmlDocumentValidator.cs" />
     <Compile Include="Utils\Log\CaptureLogInterceptor.cs" />
     <Compile Include="Utils\Log\ILogStore.cs" />
@@ -99,12 +106,12 @@
     <Compile Include="Model\Events\EventAction.cs" />
     <Compile Include="Model\Events\EventType.cs" />
     <Compile Include="Model\Events\FieldType.cs" />
-    <Compile Include="Model\Events\MasterData\BusinessLocation.cs" />
-    <Compile Include="Model\Events\MasterData\BusinessStep.cs" />
+    <Compile Include="Model\MasterData\BusinessLocation.cs" />
+    <Compile Include="Model\MasterData\BusinessStep.cs" />
     <Compile Include="Model\Events\BusinessTransaction.cs" />
-    <Compile Include="Model\Events\MasterData\Disposition.cs" />
-    <Compile Include="Model\Events\MasterData\MasterBusinessTransaction.cs" />
-    <Compile Include="Model\Events\MasterData\ReadPoint.cs" />
+    <Compile Include="Model\MasterData\Disposition.cs" />
+    <Compile Include="Model\MasterData\MasterBusinessTransaction.cs" />
+    <Compile Include="Model\MasterData\ReadPoint.cs" />
     <Compile Include="Model\Events\SourceDestination.cs" />
     <Compile Include="Model\Events\SourceDestinationType.cs" />
     <Compile Include="Model\Events\TimeZoneOffset.cs" />
