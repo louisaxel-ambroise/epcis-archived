@@ -1,6 +1,7 @@
 ﻿using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Services.Users;
 using FasTnT.Domain.Services.Validation;
+using FasTnT.Domain.Utils.Aspects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,8 @@ namespace FasTnT.Domain.Services.Capture.Masterdata
             _masterdataRepository = masterdataRepository ?? throw new ArgumentNullException(nameof(masterdataRepository));
         }
 
-        public IEnumerable<string> Capture(XDocument document)
+        [CommitTransaction]
+        public virtual IEnumerable<string> Capture(XDocument document)
         {
             _validator.Validate(document);
 

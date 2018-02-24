@@ -15,7 +15,7 @@ namespace FasTnT.Data.Mappings.MasterData
                 .KeyProperty(x => x.Type, "type");
 
             Map(x => x.CreatedOn).Column("created_on").Not.Nullable();
-            Map(x => x.LastUpdatedOn).Column("last_updated_on").Not.Nullable();
+            Map(x => x.LastUpdatedOn).Column("last_update").Not.Nullable();
         }
     }
 }

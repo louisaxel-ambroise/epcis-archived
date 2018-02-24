@@ -15,7 +15,7 @@ namespace FasTnT.Data.Repositories
 
         public void Store(EpcisMasterdata masterdata)
         {
-            _session.Save(masterdata);
+            _session.SaveOrUpdate(masterdata);
         }
     }
 }
