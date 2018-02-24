@@ -1,5 +1,4 @@
-﻿using FasTnT.Data.Log;
-using FasTnT.Domain.Model.Log;
+﻿using FasTnT.Domain.Model.Log;
 using FluentNHibernate.Mapping;
 
 namespace FasTnT.Data.Mappings.Log

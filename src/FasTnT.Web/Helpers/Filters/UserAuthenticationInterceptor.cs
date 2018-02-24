@@ -6,7 +6,6 @@ using System.Linq;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Services.Users;
-using System.ServiceModel.Web;
 using System.Net;
 
 namespace FasTnT.Domain.Utils.Aspects
