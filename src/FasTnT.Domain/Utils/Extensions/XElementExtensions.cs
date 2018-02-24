@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using System;
 using FasTnT.Domain.Model.Events;
 using System.Linq;
-using FasTnT.Domain.Services.EventCapture;
+using FasTnT.Domain.Services.Capture.Events;
 using FasTnT.Domain.Model;
 
 namespace FasTnT.Domain.Extensions

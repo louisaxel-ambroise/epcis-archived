@@ -2,7 +2,7 @@
 using FasTnT.Domain.Repositories;
 using System;
 
-namespace FasTnT.Domain.Services.EventCapture
+namespace FasTnT.Domain.Services.Capture.Events
 {
     public class RequestPersister : IRequestPersister
     {

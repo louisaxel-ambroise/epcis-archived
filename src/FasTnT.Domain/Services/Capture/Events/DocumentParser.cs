@@ -6,7 +6,7 @@ using FasTnT.Domain.Exceptions;
 using System.Linq;
 using FasTnT.Domain.Extensions;
 
-namespace FasTnT.Domain.Services.EventCapture
+namespace FasTnT.Domain.Services.Capture.Events
 {
     public class DocumentParser : IDocumentParser
     {

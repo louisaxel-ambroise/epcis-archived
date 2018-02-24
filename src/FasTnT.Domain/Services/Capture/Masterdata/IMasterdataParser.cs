@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace FasTnT.Domain.Services.MasterdataCapture
+namespace FasTnT.Domain.Services.Capture.Masterdata
 {
     public interface IMasterdataParser
     {

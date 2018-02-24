@@ -1,9 +1,9 @@
 ﻿using FasTnT.Domain.Log;
 using FasTnT.Domain.Services.Dashboard;
 using FasTnT.Domain.Services.Dashboard.Users;
-using FasTnT.Domain.Services.EventCapture;
+using FasTnT.Domain.Services.Capture.Events;
 using FasTnT.Domain.Services.Formatting;
-using FasTnT.Domain.Services.MasterdataCapture;
+using FasTnT.Domain.Services.Capture.Masterdata;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Subscriptions;

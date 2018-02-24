@@ -75,12 +75,9 @@
     <Compile Include="Mappings\Events\EpcMap.cs" />
     <Compile Include="Mappings\Events\SourceDestinationMap.cs" />
     <Compile Include="Mappings\Log\SqlLogMap.cs" />
-    <Compile Include="Mappings\MasterData\BusinessLocationMap.cs" />
     <Compile Include="Mappings\Events\EpcisEventMap.cs" />
-    <Compile Include="Mappings\MasterData\BusinessStepMap.cs" />
-    <Compile Include="Mappings\MasterData\DispositionMap.cs" />
-    <Compile Include="Mappings\MasterData\MasterBusinessTransactionMap.cs" />
-    <Compile Include="Mappings\MasterData\ReadPointMap.cs" />
+    <Compile Include="Mappings\MasterData\EpcisMasterdataMapping.cs" />
+    <Compile Include="Mappings\MasterData\MasterdataAttributeMapping.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionControlsMap.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionMap.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionParameterMap.cs" />
@@ -117,6 +114,7 @@
     <Compile Include="Repositories\AuditLogRepository.cs" />
     <Compile Include="Repositories\EpcisRequestRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\MasterdataRepository.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionProvider.cs" />

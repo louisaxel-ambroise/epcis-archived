@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Xml.Linq;
-using FasTnT.Domain.Services.EventCapture;
+using FasTnT.Domain.Services.Capture.Events;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Web.EpcisServices.Model;
 using System.Linq;
 using FasTnT.Domain.Utils;
 using FasTnT.Web.Helpers.Attributes;
-using FasTnT.Domain.Services.MasterdataCapture;
+using FasTnT.Domain.Services.Capture.Masterdata;
 
 namespace FasTnT.Web.EpcisServices
 {

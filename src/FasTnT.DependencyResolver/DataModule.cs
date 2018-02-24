@@ -34,8 +34,9 @@ namespace FasTnT.DependencyInjection
             Bind<IUserRepository>().To<UserRepository>();
             Bind<IEventRepository>().To<EventRepository>();
             Bind<ISubscriptionRepository>().To<SubscriptionRepository>();
-            Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>();
             Bind<IAuditLogRepository>().To<AuditLogRepository>();
+            Bind<IEpcisRequestRepository>().To<EpcisRequestRepository>();
+            Bind<IMasterdataRepository>().To<MasterdataRepository>();
 
             Bind<ILogStore>().To<LogStore>();
 
