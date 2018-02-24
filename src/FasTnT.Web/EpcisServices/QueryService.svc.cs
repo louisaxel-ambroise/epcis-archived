@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel.Channels;
-using System.Xml.Linq;
 using FasTnT.Web.EpcisServices.Faults;
-using FasTnT.Web.EpcisServices.Model;
-using FasTnT.Domain.Services.Subscriptions;
-using FasTnT.Domain.Services.Formatting;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Queries;
+using FasTnT.Domain.Model.Queries;
+using FasTnT.Domain.Services.Formatting;
 using FasTnT.Web.Helpers.Attributes;
 
 namespace FasTnT.Web.EpcisServices
@@ -20,21 +17,19 @@ namespace FasTnT.Web.EpcisServices
     /// </summary>
     public class QueryService : IQueryService
     {
-        private readonly IQueryManager _queryManager;
+        private readonly IEventFormatter _eventFormatter;
         private readonly IQueryPerformer _queryPerformer;
-        private readonly ISubscriptionManager _subscriptionManager;
-        private readonly IResponseFormatter _responseFormatter;
+        private readonly IQueryManager _queryManager;
 
-        public QueryService(ISubscriptionManager subscriptionManager, IQueryManager queryManager, IQueryPerformer queryPerformer, IResponseFormatter responseFormatter)
+        public QueryService(IQueryPerformer queryPerformer, IQueryManager queryManager, IEventFormatter eventFormatter)
         {
-            _subscriptionManager = subscriptionManager ?? throw new ArgumentNullException(nameof(subscriptionManager));
-            _queryManager = queryManager ?? throw new ArgumentNullException(nameof(queryManager));
-            _queryPerformer = queryPerformer ?? throw new ArgumentNullException(nameof(queryPerformer));
-            _responseFormatter = responseFormatter;
+            _eventFormatter = eventFormatter;
+            _queryPerformer = queryPerformer;
+            _queryManager = queryManager;
         }
 
         [AuthenticateUser]
-        public virtual string[] GetQueryNames()
+        public string[] GetQueryNames(EmptyParms request)
         {
             try
             {
@@ -46,74 +41,50 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        [AuthenticateUser]
-        public virtual void Subscribe(Message request)
-        {
-            try
-            {
-                var subscription = SubscriptionRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
-
-                //TODO: store subscription
-                //_subscriptionManager.Subscribe(subscription);
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
-        }
-
-        [AuthenticateUser]
-        public virtual void Unsubscribe(string name)
-        {
-            try
-            {
-                //TODO: remove subscription
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
-        }
-
-        [QueryLog]
-        [AuthenticateUser]
-        public virtual Message Poll(Message request)
-        {
-            try 
-            {
-                var pollRequest = PollRequest.Parse(XElement.Parse(request.GetReaderAtBodyContents().ReadOuterXml()));
-                var results = _queryPerformer.ExecutePollQuery(pollRequest.Name, pollRequest.Parameters);
-                var formattedResponse = _responseFormatter.FormatPollResponse(pollRequest.Name, results);
-
-                return MessageResponse.CreatePollResponse(formattedResponse.Root);
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
-        }
-
-        [AuthenticateUser]
-        public virtual string[] GetSubscriptionIDs()
-        {
-            try
-            {
-                return _subscriptionManager.ListAllSubscriptions().Select(x => x.Name).ToArray();
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
-        }
-
-        public string GetVendorVersion()
+        public string GetVendorVersion(EmptyParms request)
         {
             return Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
         }
 
-        public string GetStandardVersion()
+        public string GetStandardVersion(EmptyParms request)
         {
             return "1.2";
+        }
+
+        [QueryLog]
+        [AuthenticateUser]
+        public virtual QueryResults Poll(PollRequest request)
+        {
+            try
+            {
+                var queryParameters = request.parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
+                var results = _queryPerformer.ExecutePollQuery(request.QueryName, queryParameters);
+                var formattedResponse = _eventFormatter.Format(results);
+
+                return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
+            }
+            catch (EpcisException ex)
+            {
+                throw EpcisFault.Create(ex);
+            }
+        }
+
+        [AuthenticateUser]
+        public string[] GetSubscriptionIDs(EmptyParms request)
+        {
+            throw new NotImplementedException();
+        }
+
+        [AuthenticateUser]
+        public void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [AuthenticateUser]
+        public void Unsubscribe(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

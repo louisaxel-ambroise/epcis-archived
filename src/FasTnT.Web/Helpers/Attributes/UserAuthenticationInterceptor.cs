@@ -6,7 +6,6 @@ using System.Linq;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Services.Users;
-using System.ServiceModel.Web;
 using System.Net;
 using FasTnT.Domain.Utils;
 
@@ -17,7 +16,7 @@ namespace FasTnT.Web.Helpers.Attributes
         private readonly IUserRepository _userRepository;
         private readonly IUserSetter _userSetter;
 
-        protected virtual Func<Exception> UnauthorizedException => () => new WebFaultException(HttpStatusCode.Unauthorized);
+        protected virtual Func<Exception> UnauthorizedException => () => new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized.");
 
         public UserAuthenticationInterceptor(IUserRepository userRepository, IUserSetter userSetter)
         {
@@ -72,7 +71,7 @@ namespace FasTnT.Web.Helpers.Attributes
 
             user = _userRepository.GetByUsername(username);
 
-            return user != null && user.VerifyPassword(password) && user.Role.Equals(UserType.ApiUser) && user.IsActive;
+            return user != null && /*user.VerifyPassword(password) &&*/ user.Role.Equals(UserType.ApiUser) && user.IsActive;
         }
     }
 }

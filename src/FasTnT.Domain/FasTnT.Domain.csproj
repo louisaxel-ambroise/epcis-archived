@@ -55,7 +55,6 @@
     <Compile Include="Exceptions\QueryParameterException.cs" />
     <Compile Include="Exceptions\QueryTooComplexException.cs" />
     <Compile Include="Exceptions\UserAuthenticationException.cs" />
-    <Compile Include="Model\Capture\CaptureResponse.cs" />
     <Compile Include="Model\Dashboard\UserDetail.cs" />
     <Compile Include="Model\Events\EpcisRequest.cs" />
     <Compile Include="Model\Log\AuditLog.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Repositories\ISubscriptionRepository.cs" />
     <Compile Include="Services\EventCapture\IRequestPersister.cs" />
     <Compile Include="Services\EventCapture\RequestPersister.cs" />
-    <Compile Include="Services\Formatting\ResponseFormatter.cs" />
     <Compile Include="Services\Queries\IQueryManager.cs" />
     <Compile Include="Services\Queries\Performers\QueryPerformer.cs" />
     <Compile Include="Services\Queries\QueryManager.cs" />
@@ -126,7 +124,6 @@
     <Compile Include="Services\Queries\SimpleEventQuery.cs" />
     <Compile Include="Services\Formatting\EventFormatter.cs" />
     <Compile Include="Services\Formatting\IEventFormatter.cs" />
-    <Compile Include="Services\Formatting\IResponseFormatter.cs" />
     <Compile Include="Services\Subscriptions\ISubscriptionManager.cs" />
     <Compile Include="Services\Subscriptions\SubscriptionManager.cs" />
     <Compile Include="Utils\Aspects\CaptureLogAttribute.cs" />

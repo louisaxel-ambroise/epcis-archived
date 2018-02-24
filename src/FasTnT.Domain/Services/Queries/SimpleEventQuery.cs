@@ -12,7 +12,7 @@ namespace FasTnT.Domain.Services.Queries
 
         public IQueryable<EpcisEvent> ApplyFilter(IQueryable<EpcisEvent> events, QueryParam[] parameters)
         {
-            if(parameters.Any())
+            if(parameters != null && parameters.Any())
             {
                 ValidateParameters(parameters);
                 foreach (var parameter in parameters) events = SimpleEventQueryParameters.ApplyParameter(events, parameter);
@@ -23,7 +23,7 @@ namespace FasTnT.Domain.Services.Queries
 
         public void PerformValidation(IEnumerable<EpcisEvent> events, QueryParam[] parameters)
         {
-            var maxEventCount = parameters.SingleOrDefault(param => param.Name == "maxEventCount");
+            var maxEventCount = parameters?.SingleOrDefault(param => param.Name == "maxEventCount");
 
             if(maxEventCount != null && events.Count() > int.Parse(maxEventCount.Value))
                 throw new QueryTooComplexException("Number of events greater than maxEventCount");

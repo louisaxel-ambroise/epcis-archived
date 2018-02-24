@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Xml.Linq;
-using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
-using FasTnT.Domain.Model.Capture;
+using FasTnT.Web.EpcisServices.Model;
+using System.Linq;
+using FasTnT.Domain.Utils;
 using FasTnT.Web.Helpers.Attributes;
 
 namespace FasTnT.Web.EpcisServices
@@ -14,27 +15,41 @@ namespace FasTnT.Web.EpcisServices
     {
         private readonly IEventCapturer _eventCapturer;
 
-        public CaptureService(IDocumentParser documentParser, IEventCapturer eventCapturer)
+        public CaptureService(IEventCapturer eventCapturer)
         {
             _eventCapturer = eventCapturer ?? throw new ArgumentNullException(nameof(eventCapturer));
         }
 
         [CaptureLog]
         [AuthenticateUser]
-        public virtual CaptureResponse Capture()
+        public virtual CaptureEventsResponse CaptureEvents()
         {
+            var captureStart = SystemContext.Clock.Now;
+
             try
             {
                 var request = OperationContext.Current.RequestContext.RequestMessage.ToString() ?? "";
                 var document = XDocument.Parse(request);
                 var response = _eventCapturer.Capture(document);
 
-                return response;
+                return new CaptureEventsResponse
+                {
+                    CaptureStart = captureStart,
+                    CaptureEnd = SystemContext.Clock.Now,
+                    EventsCount = response.Count(),
+                    EventIds = response.ToArray()
+                };
             }
-            catch (Exception ex)
+            catch
             {
-                throw EpcisFault.Create(ex);
+                throw new Exception("Capture of events failed");
             }
+        }
+
+        public CaptureMasterDataResponse CaptureMasterdata()
+        {
+            // TODO: parse and capture the masterdata contained in the body.
+            throw new Exception("Method CaptureMasterdata is not implemented.");
         }
     }
 }

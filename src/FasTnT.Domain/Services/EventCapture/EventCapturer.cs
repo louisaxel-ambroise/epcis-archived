@@ -1,5 +1,4 @@
-﻿using FasTnT.Domain.Model.Capture;
-using FasTnT.Domain.Model.Events;
+﻿using FasTnT.Domain.Model.Events;
 using FasTnT.Domain.Services.Users;
 using FasTnT.Domain.Services.Validation;
 using FasTnT.Domain.Utils;
@@ -27,10 +26,8 @@ namespace FasTnT.Domain.Services.EventCapture
         }
 
         [CommitTransaction]
-        public virtual CaptureResponse Capture(XDocument xmlDocument)
+        public virtual IEnumerable<string> Capture(XDocument xmlDocument)
         {
-            var startDate = SystemContext.Clock.Now;
-
             _documentValidator.Validate(xmlDocument);
 
             var events = _documentParser.Parse(xmlDocument.Root);
@@ -47,13 +44,7 @@ namespace FasTnT.Domain.Services.EventCapture
 
             _requestPersister.Persist(request);
 
-            return new CaptureResponse
-            {
-                EventCount = request.Events.Count,
-                CaptureStartDateUtc = startDate,
-                CaptureEndDateUtc = SystemContext.Clock.Now,
-                EventIds = request.Events.Select(e => e.Id.ToString()).ToArray()
-            };
+            return request.Events.Select(e => e.Id.ToString());
         }
     }
 }

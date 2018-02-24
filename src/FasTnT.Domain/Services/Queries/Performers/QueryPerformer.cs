@@ -5,6 +5,7 @@ using FasTnT.Domain.Model.Events;
 using FasTnT.Domain.Exceptions;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace FasTnT.Domain.Services.Queries.Performers
 {
@@ -27,11 +28,11 @@ namespace FasTnT.Domain.Services.Queries.Performers
             return ExecuteInternal(subscription.QueryName, @params, source);
         }
 
-        public QueryEventResponse ExecutePollQuery(string queryName, QueryParam[] parameters)
+        public QueryEventResponse ExecutePollQuery(string queryName, IEnumerable<QueryParam> parameters)
         {
             var source = _eventRepository.Query();
 
-            return ExecuteInternal(queryName, parameters, source);
+            return ExecuteInternal(queryName, parameters?.ToArray(), source);
         }
 
         private QueryEventResponse ExecuteInternal(string queryName, QueryParam[] parameters, IQueryable<EpcisEvent> source)
