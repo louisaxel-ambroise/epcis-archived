@@ -1,4 +1,4 @@
-﻿using FasTnT.Domain.Model.Capture;
+﻿using FasTnT.Web.EpcisServices.Model;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -16,7 +16,7 @@ namespace FasTnT.Web.EpcisServices
         /// <returns>The status of the capture.</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/Events")]
-        CaptureResponse CaptureEvents();
+        CaptureEventsResponse CaptureEvents();
 
         /// <summary>
         /// Captures the EPCISDocument given in the request's body.
@@ -24,6 +24,6 @@ namespace FasTnT.Web.EpcisServices
         /// <returns>ID of captured events if the capture succeed, exception if it failed.</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/Masterdata")]
-        CaptureResponse CaptureMasterdata();
+        CaptureMasterDataResponse CaptureMasterdata();
     }
 }

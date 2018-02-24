@@ -60,7 +60,7 @@ namespace FasTnT.Web.EpcisServices
                 var results = _queryPerformer.ExecutePollQuery(request.QueryName, queryParameters);
                 var formattedResponse = _eventFormatter.Format(results);
 
-                return new QueryResults { QueryName = request.QueryName };
+                return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
             }
             catch (EpcisException ex)
             {

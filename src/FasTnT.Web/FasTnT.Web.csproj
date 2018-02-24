@@ -177,8 +177,13 @@
     <Compile Include="EpcisServices\Faults\ValidationError.cs" />
     <Compile Include="EpcisServices\ICaptureService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
+    <Compile Include="EpcisServices\Model\CaptureEventsResponse.cs" />
+    <Compile Include="EpcisServices\Model\CaptureMasterDataResponse.cs" />
     <Compile Include="EpcisServices\Model\EmptyParms.cs" />
-    <Compile Include="EpcisServices\Model\EventListType.cs" />
+    <Compile Include="EpcisServices\Serialization\ICustomSerializable.cs" />
+    <Compile Include="EpcisServices\Serialization\EpcisSerializeContractBehaviorAttributeAttribute.cs" />
+    <Compile Include="EpcisServices\Serialization\EpcisSerializerOperationBehavior.cs" />
+    <Compile Include="EpcisServices\Serialization\EventListSerializer.cs" />
     <Compile Include="EpcisServices\Model\ParamValues.cs" />
     <Compile Include="EpcisServices\Model\QueryNamesResult.cs" />
     <Compile Include="EpcisServices\Model\PollRequest.cs" />

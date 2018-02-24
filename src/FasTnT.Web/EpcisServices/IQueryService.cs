@@ -8,6 +8,7 @@ namespace FasTnT.Web.EpcisServices
     /// SOAP webservice for implementation of the EPCIS query as described in the EPCGlobal EPCIS 1.2 specification
     /// </summary>
     [ServiceContract(Name = "EpcisQuery", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+    [EpcisSerializeContractBehaviorAttribute]
     public interface IQueryService
     {
         /// <summary>

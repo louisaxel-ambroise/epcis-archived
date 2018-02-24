@@ -3,7 +3,9 @@ using System.ServiceModel;
 using System.Xml.Linq;
 using FasTnT.Domain.Services.EventCapture;
 using FasTnT.Domain.Utils.Aspects;
-using FasTnT.Domain.Model.Capture;
+using FasTnT.Web.EpcisServices.Model;
+using System.Linq;
+using FasTnT.Domain.Utils;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -19,15 +21,23 @@ namespace FasTnT.Web.EpcisServices
 
         [CaptureLog]
         [AuthenticateUser]
-        public virtual CaptureResponse CaptureEvents()
+        public virtual CaptureEventsResponse CaptureEvents()
         {
+            var captureStart = SystemContext.Clock.Now;
+
             try
             {
                 var request = OperationContext.Current.RequestContext.RequestMessage.ToString() ?? "";
                 var document = XDocument.Parse(request);
                 var response = _eventCapturer.Capture(document);
 
-                return response;
+                return new CaptureEventsResponse
+                {
+                    CaptureStart = captureStart,
+                    CaptureEnd = SystemContext.Clock.Now,
+                    EventsCount = response.Count(),
+                    EventIds = response.ToArray()
+                };
             }
             catch
             {
@@ -35,7 +45,7 @@ namespace FasTnT.Web.EpcisServices
             }
         }
 
-        public CaptureResponse CaptureMasterdata()
+        public CaptureMasterDataResponse CaptureMasterdata()
         {
             // TODO: parse and capture the masterdata contained in the body.
             throw new Exception("Method CaptureMasterdata is not implemented.");
