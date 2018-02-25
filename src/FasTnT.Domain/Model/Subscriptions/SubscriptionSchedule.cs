@@ -31,7 +31,7 @@ namespace FasTnT.Domain.Model.Subscriptions
             while (!_dayOfMonthSchedule.HasValue(tentative.Day)) tentative = tentative.AddDays(1);
             while (!_monthSchedule.HasValue(tentative.Month)) tentative = tentative.AddMonths(1);
 
-            if (!_dayOfWeekSchedule.HasValue((int)tentative.DayOfWeek)) return GetNextOccurence(new DateTime(tentative.Year, tentative.Month, tentative.Day, 23, 59, 59));
+            if (!_dayOfWeekSchedule.HasValue(1 + (int)tentative.DayOfWeek)) return GetNextOccurence(new DateTime(tentative.Year, tentative.Month, tentative.Day, 23, 59, 59));
             return tentative;
         }
     }

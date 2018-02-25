@@ -8,31 +8,37 @@ using System.Text;
 using System.Net;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Utils;
+using FasTnT.Domain.Repositories;
 
 namespace FasTnT.Domain.Services.Subscriptions
 {
     public class SubscriptionRunner : ISubscriptionRunner
     {
+        private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IQueryPerformer _queryPerformer;
 
-        public SubscriptionRunner(IQueryPerformer queryPerformer)
+        public SubscriptionRunner(ISubscriptionRepository subscriptionRepository, IQueryPerformer queryPerformer)
         {
+            _subscriptionRepository = subscriptionRepository;
             _queryPerformer = queryPerformer;
         }
 
         [CommitTransaction]
-        public virtual async Task Run(Subscription subscription)
+        public virtual async Task Run(string subscriptionId)
         {
+            var subscription = _subscriptionRepository.LoadById(subscriptionId);
+
             Trace.WriteLine($"Running subscription {subscription.Name}");
             var events = _queryPerformer.ExecuteSubscriptionQuery(subscription);
 
+            subscription.PendingRequests.Clear();
             subscription.LastRunOn = SystemContext.Clock.Now;
 
             if (events.Events.Count() > 0 || subscription.Controls.ReportIfEmpty)
             {
                 var response = default(XDocument); // TODO
 
-                await SendResponse(subscription, response);
+                // await SendResponse(subscription, response);
             }
             Trace.WriteLine($"Finished running subscription {subscription.Name}");
         }

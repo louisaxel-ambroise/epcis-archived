@@ -9,9 +9,14 @@ using System.Linq;
 using Ninject;
 using System.Web.Hosting;
 using FasTnT.Domain.Utils;
+using System.Web;
+using System.IO;
 
 namespace FasTnT.Web.BackgroundTasks
 {
+    // WebSubscriptionScheduler: runs the subscription thread in the Web context.
+    // WARNING: this code is not suitable for any production environment.
+    // For a regular deployment, subscriptions will need to run in another process than the web interface.
     public class WebSubscriptionScheduler : ISubscriptionScheduler, IRegisteredObject
     {
         public bool IsRunning { get; set; }
@@ -72,9 +77,13 @@ namespace FasTnT.Web.BackgroundTasks
 
         private async Task Run(Subscription subscription)
         {
-            var processor = _kernel.Get<ISubscriptionRunner>();
+            // This hack allows to bind the same ISession with Ninject in the rependencies of ISubscriptionRunner.
+            HttpContext.Current = new HttpContext(new HttpRequest("", "http://tempuri.org", ""), new HttpResponse(new StringWriter()));
 
-            await processor.Run(subscription).ConfigureAwait(false);
+            var processor = _kernel.Get<ISubscriptionRunner>();
+            await processor.Run(subscription.Id).ConfigureAwait(false);
+
+            HttpContext.Current = null;
         }
 
         private void WaitTillNextExecutionOrNotification()

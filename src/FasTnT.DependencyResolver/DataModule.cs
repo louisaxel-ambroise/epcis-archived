@@ -45,9 +45,6 @@ namespace FasTnT.DependencyInjection
             Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).UsingScope(Scope);
             Bind<ITransaction>().ToMethod(ctx => ctx.Kernel.Get<ISession>().BeginTransaction()).UsingScope(Scope);
 
-            // Bindings for subscription runners
-            Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession(requestLogger)).WhenInjectedInto<ISubscriptionRunner>();
-
             Bind<ICommitTransactionInterceptor>().To<NHibernateCommitTransactionInterceptor>();
         }
     }
