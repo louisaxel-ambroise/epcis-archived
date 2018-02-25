@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "List all subscription IDs",
+			"name": "Capture MasterData",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,7 +17,7 @@
 					},
 					{
 						"key": "SOAPAction",
-						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/getSubscriptionIds"
+						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/poll"
 					},
 					{
 						"key": "Authorization",
@@ -26,10 +26,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <getSubscriptionIds xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    </getSubscriptionIds>\r\n  </s:Body>\r\n</s:Envelope>"
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n <epcismd:EPCISMasterDataDocument xmlns:epcismd=\"urn:epcglobal:epcis-masterdata:xsd:1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" schemaVersion=\"1\" creationDate=\"2005-07-11T11:30:47.0Z\">\r\n <EPCISBody>\r\n   <VocabularyList>\r\n     <Vocabulary type=\"urn:epcglobal:epcis:vtype:ReadPoint\">\r\n       <VocabularyElementList>\r\n            <VocabularyElement id=\"urn:epc:id:sgln:0614141.00300.3\">\r\n                <attribute id=\"urn:epcglobal:cbv:mda:site\">0614141003006</attribute>\r\n            </VocabularyElement>\r\n            <VocabularyElement id=\"urn:epc:id:sgln:0614141.00300.1\">\r\n                <attribute id=\"urn:epcglobal:cbv:mda:site\">0614141003006</attribute>\r\n                <attribute id=\"urn:epcglobal:cbv:mda:sst\">208</attribute>\r\n                <attribute id=\"urn:epcglobal:cbv:mda:ssa\">4521</attribute>\r\n                <attribute id=\"urn:epcglobal:cbv:mda:ssd\">Line #1 at Manufacturing Plant 1</attribute>\r\n            </VocabularyElement>\r\n            <VocabularyElement id=\"urn:epc:id:sgln:0614141.00300.2\">\r\n                <attribute id=\"urn:epcglobal:cbv:mda:site\">0614141003006</attribute>\r\n                <attribute id=\"urn:epcglobal:cbv:mda:sst\">251</attribute>\r\n                <attribute id=\"urn:epcglobal:cbv:mda:ssa\">416,417</attribute>\r\n            </VocabularyElement>\r\n       </VocabularyElementList> \r\n     </Vocabulary>\r\n   </VocabularyList>\r\n </EPCISBody>\r\n </epcismd:EPCISMasterDataDocument>"
 				},
 				"url": {
-					"raw": "http://localhost:12008/Services/1.2/EpcisQuery/",
+					"raw": "http://localhost:12008/Services/1.2/EpcisCapture/Masterdata",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -38,8 +38,8 @@
 					"path": [
 						"Services",
 						"1.2",
-						"EpcisQuery",
-						""
+						"EpcisCapture",
+						"Masterdata"
 					]
 				},
 				"description": ""
@@ -86,7 +86,7 @@
 			},
 			"response": [
 				{
-					"id": "6ed9a19b-e11d-49be-921b-e4cf1d6f8b8b",
+					"id": "18ea5611-080f-499d-b0e8-d9cae0f93fc7",
 					"name": "Capture an event",
 					"originalRequest": {
 						"method": "POST",
@@ -221,7 +221,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <poll xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<queryName>SimpleEventQuery</queryName>\r\n    \t<queryParams>\r\n    \t\t<queryParam>\r\n    \t\t\t<name>eventCountLimit</name>\r\n    \t\t\t<values>\r\n    \t\t\t\t<value>15</value>\r\n    \t\t\t</values>\r\n    \t\t</queryParam>\r\n    \t</queryParams>\r\n    </poll>\r\n  </s:Body>\r\n</s:Envelope>"
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <poll xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\r\n    \t<queryName>SimpleEventQuery</queryName>\r\n    \t<queryParams>\r\n    \t\t<queryParam>\r\n    \t\t\t<name>EQ_ILMD_http://mns.com/epcis/test#first</name>\r\n    \t\t\t<values>\r\n    \t\t\t\t<value>first</value>\r\n    \t\t\t</values>\r\n    \t\t</queryParam>\r\n    \t\t<queryParam>\r\n    \t\t\t<name>eventCountLimit</name>\r\n    \t\t\t<values>\r\n    \t\t\t\t<value>1</value>\r\n    \t\t\t</values>\r\n    \t\t</queryParam>\r\n    \t</queryParams>\r\n    </poll>\r\n  </s:Body>\r\n</s:Envelope>"
 				},
 				"url": {
 					"raw": "http://localhost:12008/Services/1.2/EpcisQuery/",
@@ -241,7 +241,7 @@
 			},
 			"response": [
 				{
-					"id": "1337caf7-a329-4508-81a8-e06f442a8ee9",
+					"id": "15e06e1c-67d4-4285-8cb4-b40b5a5c7d46",
 					"name": "Perform a Poll query",
 					"originalRequest": {
 						"method": "POST",
@@ -363,6 +363,46 @@
 					"body": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><QueryResults xmlns=\"http://schemas.xmlsoap.org/wsdl/\"><queryName>SimpleEventQuery</queryName><subscriptionID i:nil=\"true\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"/><eventList><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-12T16:57:20.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:45:48.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:49:36.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><ObjectEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T14:50:29.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <epcList>\r\n    <epc>urn:epc:id:sscc:4001356.5900000817</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </epcList>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n  <extension>\r\n    <ilmd>\r\n      <test p4:id=\"test\" xmlns:p4=\"http://mns.com/epcis/test\" xmlns=\"http://mns.com/epcis/test\" />\r\n      <first xmlns=\"http://mns.com/epcis/test\">first</first>\r\n      <second xmlns=\"http://mns.com/epcis/test\">second</second>\r\n    </ilmd>\r\n  </extension>\r\n</ObjectEvent><AggregationEvent>\r\n  <eventTime>2017-09-14T14:51:17.000Z</eventTime>\r\n  <recordTime>2018-02-24T15:25:01.000Z</recordTime>\r\n  <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>\r\n  <parentID>urn:epc:id:sscc:4001356.5900000817</parentID>\r\n  <childEPCs>\r\n    <epc>urn:epc:id:sscc:4001356.5900000818</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000819</epc>\r\n    <epc>urn:epc:id:sscc:4001356.5900000820</epc>\r\n  </childEPCs>\r\n  <action>ADD</action>\r\n  <bizStep>urn:fastnt:demo:bizstep:demo:packing</bizStep>\r\n  <disposition>urn:epcglobal:cbv:disp:loading</disposition>\r\n  <readPoint>\r\n    <id>urn:fastnt:demo:readpoint:0037000.00729.210,432</id>\r\n  </readPoint>\r\n  <bizLocation>\r\n    <id>urn:fastnt:demo:bizloc:0037000.00729.210</id>\r\n  </bizLocation>\r\n</AggregationEvent></eventList></QueryResults></s:Body></s:Envelope>"
 				}
 			]
+		},
+		{
+			"name": "List all subscription IDs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://schemas.xmlsoap.org/wsdl/EpcisQuery/getSubscriptionIds"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic QVBJVXNlcjpBcGlQQHNzdzByZA=="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <s:Header></s:Header>\r\n  <s:Body>\r\n    <getSubscriptionIds>\r\n    \t<SubscriptionIDsRequest></SubscriptionIDsRequest>\r\n    </getSubscriptionIds>\r\n  </s:Body>\r\n</s:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:12008/Services/1.2/EpcisQuery/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12008",
+					"path": [
+						"Services",
+						"1.2",
+						"EpcisQuery",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
