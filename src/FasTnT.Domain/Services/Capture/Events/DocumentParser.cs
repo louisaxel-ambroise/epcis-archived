@@ -11,14 +11,19 @@ namespace FasTnT.Domain.Services.Capture.Events
     public class DocumentParser : IDocumentParser
     {
         const string EpcisNamespace = "urn:epcglobal:epcis:xsd:1";
+        const string EpcisQueryNamespace = "urn:epcglobal:epcis-query:xsd:1";
         static int NextCustomId = 1;
         
-        // TODO: parse Query Response
         public virtual IEnumerable<EpcisEvent> Parse(XElement input)
         {
             if(input.Name.Equals(XName.Get("EPCISDocument", EpcisNamespace)))
             {
                 return ParseEvents(input.Element("EPCISBody").Element("EventList"));
+            }
+
+            if (input.Name.Equals(XName.Get("EPCISQueryDocument", EpcisQueryNamespace)))
+            {
+                return ParseEvents(input.Element("EPCISBody").Element(XName.Get("QueryResults", EpcisQueryNamespace)).Element("resultsBody").Element("EventList"));
             }
 
             throw new EpcisException($"Unexpected XML element : '{input.Name.LocalName}'");
@@ -89,7 +94,7 @@ namespace FasTnT.Domain.Services.Capture.Events
                     case "bizLocation":
                         innerElement.ParseBusinessLocation(epcisEvent); break;
                     case "bizTransactionList":
-                        epcisEvent.BusinessTransactions = innerElement.ToBusinessTransactions(); break;
+                        epcisEvent.BusinessTransactions = innerElement.ToBusinessTransactions(epcisEvent); break;
                     case "readPoint":
                         innerElement.ParseReadPoint(epcisEvent); break;
                     case "sourceList":

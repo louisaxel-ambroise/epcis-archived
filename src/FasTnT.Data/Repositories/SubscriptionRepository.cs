@@ -4,6 +4,7 @@ using System.Linq;
 using FasTnT.Domain.Model.Subscriptions;
 using NHibernate;
 using NHibernate.Linq;
+using System.Collections.Generic;
 
 namespace FasTnT.Data.Repositories
 {
@@ -24,6 +25,14 @@ namespace FasTnT.Data.Repositories
         public IQueryable<Subscription> Query()
         {
             return _session.Query<Subscription>();
+        }
+
+        public void DeletePendingRequests(IEnumerable<SubscriptionPendingRequest> requests)
+        {
+            foreach(var request in requests)
+            {
+                _session.Delete(request);
+            }
         }
     }
 }

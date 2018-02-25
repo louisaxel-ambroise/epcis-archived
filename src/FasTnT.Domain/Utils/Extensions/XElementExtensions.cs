@@ -53,9 +53,9 @@ namespace FasTnT.Domain.Extensions
             foreach (var epc in element.Elements()) destination.Epcs.Add(new Epc { Event = destination, Type = EpcType.ChildEpc, Id = epc.Value });
         }
 
-        public static IList<BusinessTransaction> ToBusinessTransactions(this XElement element)
+        public static IList<BusinessTransaction> ToBusinessTransactions(this XElement element, EpcisEvent epcisEvent)
         {
-            return element.Elements("bizTransaction").Select(child => new BusinessTransaction { Type = child.Attribute("type").Value, Id = child.Value }).ToList();
+            return element.Elements("bizTransaction").Select(child => new BusinessTransaction { Event = epcisEvent, Type = child.Attribute("type").Value, Id = child.Value }).ToList();
         }
 
         public static void ParseReadPoint(this XElement element, EpcisEvent epcisEvent)

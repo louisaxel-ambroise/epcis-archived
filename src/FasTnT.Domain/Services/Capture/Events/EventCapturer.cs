@@ -37,6 +37,7 @@ namespace FasTnT.Domain.Services.Capture.Events
             {
                 RecordTime = SystemContext.Clock.Now,
                 DocumentTime = DateTime.Parse(xmlDocument.Root.Attribute("creationDate").Value),
+                SubscriptionId = TryExtractSubscriptionId(xmlDocument),
                 User = currentUser
             };
 
@@ -45,6 +46,16 @@ namespace FasTnT.Domain.Services.Capture.Events
             _requestPersister.Persist(request);
 
             return request.Events.Select(e => e.Id.ToString());
+        }
+
+        private string TryExtractSubscriptionId(XDocument xmlDocument)
+        {
+            if (xmlDocument.Root.Name.LocalName == "EPCISQueryDocument")
+            {
+                return xmlDocument.Root.Element("EPCISBody").Elements().Single(x => x.Name.LocalName == "QueryResults").Element("subscriptionId")?.Value;
+            }
+
+            return null;
         }
     }
 }

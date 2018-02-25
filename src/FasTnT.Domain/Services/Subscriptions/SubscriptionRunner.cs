@@ -9,6 +9,7 @@ using System.Net;
 using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Utils;
 using FasTnT.Domain.Repositories;
+using FasTnT.Domain.Services.Formatting;
 
 namespace FasTnT.Domain.Services.Subscriptions
 {
@@ -16,44 +17,53 @@ namespace FasTnT.Domain.Services.Subscriptions
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IQueryPerformer _queryPerformer;
+        private readonly IResponseFormatter _responseFormatter;
 
-        public SubscriptionRunner(ISubscriptionRepository subscriptionRepository, IQueryPerformer queryPerformer)
+        public SubscriptionRunner(ISubscriptionRepository subscriptionRepository, IQueryPerformer queryPerformer, IResponseFormatter responseFormatter)
         {
             _subscriptionRepository = subscriptionRepository;
             _queryPerformer = queryPerformer;
+            _responseFormatter = responseFormatter;
         }
 
         [CommitTransaction]
-        public virtual async Task Run(string subscriptionId)
+        public virtual void Run(string subscriptionId)
         {
             var subscription = _subscriptionRepository.LoadById(subscriptionId);
 
             Trace.WriteLine($"Running subscription {subscription.Name}");
             var events = _queryPerformer.ExecuteSubscriptionQuery(subscription);
 
-            subscription.PendingRequests.Clear();
             subscription.LastRunOn = SystemContext.Clock.Now;
+            _subscriptionRepository.DeletePendingRequests(subscription.PendingRequests);
 
             if (events.Events.Count() > 0 || subscription.Controls.ReportIfEmpty)
             {
-                var response = default(XDocument); // TODO
+                var response = _responseFormatter.FormatSubscriptionResponse(subscription, events);
 
-                // await SendResponse(subscription, response);
+                SendResponse(subscription, response);
             }
             Trace.WriteLine($"Finished running subscription {subscription.Name}");
         }
 
-        private async Task SendResponse(Subscription subscription, XDocument response)
+        private void SendResponse(Subscription subscription, string response)
         {
             var client = WebRequest.Create(subscription.DestinationUrl) as HttpWebRequest;
             client.Method = "POST";
+            client.ContentType = "text/xml";
+
+            foreach (var header in subscription.DestinationHeaders.Split(';'))
+            {
+                client.Headers.Add(header.Split(':')[0], header.Split(':')[1]);
+            }
+
             using (var stream = client.GetRequestStream())
             {
-                var bytes = Encoding.UTF8.GetBytes(response.ToString(SaveOptions.DisableFormatting));
+                var bytes = Encoding.UTF8.GetBytes(response);
                 stream.Write(bytes, 0 , bytes.Length);
             }
 
-            var httpResponse = (await client.GetResponseAsync()) as HttpWebResponse;
+            var httpResponse = (client.GetResponseAsync().Result) as HttpWebResponse;
             if (httpResponse.StatusCode != HttpStatusCode.OK)
             {
                 Trace.WriteLine($"Woops.");

@@ -25,7 +25,7 @@ namespace FasTnT.Domain.Services.Queries.Performers
         public QueryEventResponse ExecuteSubscriptionQuery(Subscription subscription)
         {
             var pendingEvents = subscription.PendingRequests;
-            var source = pendingEvents.SelectMany(x => x.Events).AsQueryable();
+            var source = pendingEvents.SelectMany(x => x.Request.Events).AsQueryable();
             var @params = subscription.Parameters.Select(p => new QueryParam { Name = p.ParameterName, Values = p.Values.Select(v => v.Value).ToArray() }).ToArray();
 
             return ExecuteInternal(subscription.QueryName, @params, source);

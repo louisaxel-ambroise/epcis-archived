@@ -18,7 +18,7 @@ namespace FasTnT.Data.Mappings.Subscriptions
 
             References(x => x.Schedule).Column("schedule_id");
             HasMany(x => x.Parameters).KeyColumn("subscription_id").Inverse();
-            HasManyToMany(x => x.PendingRequests).Table("pendingrequest").Schema("subscriptions").ParentKeyColumn("subscription_id").ChildKeyColumn("request_id").Cascade.All();
+            HasMany(x => x.PendingRequests).Table("pendingrequest").Schema("subscriptions").KeyColumn("subscription_id").LazyLoad().Cascade.None();
         }
     }
 }

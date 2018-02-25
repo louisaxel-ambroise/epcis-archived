@@ -82,6 +82,7 @@
     <Compile Include="Mappings\Subscriptions\SubscriptionMap.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionParameterMap.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionParameterValueMap.cs" />
+    <Compile Include="Mappings\Subscriptions\SubscriptionPendingRequest.cs" />
     <Compile Include="Mappings\Subscriptions\SubscriptionScheduleMap.cs" />
     <Compile Include="Mappings\Users\UserLogMap.cs" />
     <Compile Include="Mappings\Users\UserMap.cs" />

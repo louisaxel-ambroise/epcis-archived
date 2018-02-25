@@ -1,5 +1,4 @@
-﻿using FasTnT.Domain.Model.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace FasTnT.Domain.Model.Subscriptions
@@ -16,6 +15,6 @@ namespace FasTnT.Domain.Model.Subscriptions
         public virtual SubscriptionControls Controls { get; set; }
         public virtual DateTime LastRunOn { get; set; }
 
-        public virtual IList<EpcisRequest> PendingRequests { get; set; }
+        public virtual IList<SubscriptionPendingRequest> PendingRequests { get; set; }
     }
 }

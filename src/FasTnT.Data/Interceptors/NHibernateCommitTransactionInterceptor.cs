@@ -20,9 +20,18 @@ namespace FasTnT.Data.Interceptors
         {
             using (_transaction)
             {
-                invocation.Proceed();
+                try
+                {
+                    invocation.Proceed();
 
-                _transaction.Commit();
+                    _transaction.Commit();
+                }
+                catch
+                {
+                    _transaction.Rollback();
+
+                    throw;
+                }
             }
         }
     }
