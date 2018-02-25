@@ -6,6 +6,8 @@
         FOR r_subscription IN c_subscription LOOP
             INSERT INTO subscriptions.pendingrequest (subscription_id, request_id) VALUES (r_subscription.id, NEW.id);
         END LOOP;
+
+		RETURN NULL;
     END;
 $$ LANGUAGE plpgsql;
 
