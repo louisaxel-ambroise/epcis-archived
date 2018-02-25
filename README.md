@@ -1,4 +1,4 @@
-**This project is under active development. The event capture/query may have bugs, and the dashboard is not fully functional.** 
+**This project is under active development. The event capture/query may have bugs, and the dashboard is not fully functional. ** 
 
 # FasTnT
 FasTnT is a C# implementation of GS1 EPCIS 1.2 standard. [https://www.gs1.org/epcis](https://www.gs1.org/epcis)
@@ -17,7 +17,8 @@ That's it. You should now have a full EPCIS repository working on your computer.
 
 ### EPCIS endpoints:
 
-- Event capture: `http://localhost:12008/Services/1.2/EpcisCapture/` 
+- Event capture: `http://localhost:12008/Services/1.2/EpcisCapture/Events` 
+- Master Data capture: `http://localhost:12008/Services/1.2/EpcisCapture/Masterdata` 
 - Queries : `http://localhost:12008/Services/1.2/EpcisQuery/`
 
 The file `tools\EPCIS_Samples.postman_collection.json` contains sample of HTTP queries that you can perform on FasTnT (import and run in [PostMan](https://www.getpostman.com/))
@@ -31,7 +32,7 @@ The default username/password for the API services is `APIUser`/`ApiP@ssw0rd`.
 The default username/password for the dashboard is `Admin`/`p@ssw0rd`.
 
 
-\* Note that the base URL or port number may change due to your IIS configuration.
+\* Note that the base URL or port number might change due to your IIS configuration.
 
 ----------
 
