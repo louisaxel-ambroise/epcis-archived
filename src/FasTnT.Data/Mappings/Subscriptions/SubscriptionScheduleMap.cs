@@ -14,7 +14,7 @@ namespace FasTnT.Data.Mappings.Subscriptions
             Map(x => x.Seconds).Column("seconds");
             Map(x => x.Minutes).Column("minutes");
             Map(x => x.Hours).Column("hours");
-            Map(x => x.DayOfmonth).Column("day_of_month");
+            Map(x => x.DayOfMonth).Column("day_of_month");
             Map(x => x.Month).Column("month");
             Map(x => x.DayOfWeek).Column("day_of_week");
         }

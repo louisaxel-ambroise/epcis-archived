@@ -31,7 +31,7 @@ namespace FasTnT.Domain.Services.Subscriptions
         {
             var subscription = _subscriptionRepository.LoadById(subscriptionId);
 
-            Trace.WriteLine($"Running subscription {subscription.Name}");
+            Trace.WriteLine($"Running subscription {subscription.Id}");
             var events = _queryPerformer.ExecuteSubscriptionQuery(subscription);
 
             subscription.LastRunOn = SystemContext.Clock.Now;
@@ -43,7 +43,7 @@ namespace FasTnT.Domain.Services.Subscriptions
 
                 SendResponse(subscription, response);
             }
-            Trace.WriteLine($"Finished running subscription {subscription.Name}");
+            Trace.WriteLine($"Finished running subscription {subscription.Id}");
         }
 
         private void SendResponse(Subscription subscription, string response)
@@ -51,11 +51,6 @@ namespace FasTnT.Domain.Services.Subscriptions
             var client = WebRequest.Create(subscription.DestinationUrl) as HttpWebRequest;
             client.Method = "POST";
             client.ContentType = "text/xml";
-
-            foreach (var header in subscription.DestinationHeaders.Split(';'))
-            {
-                client.Headers.Add(header.Split(':')[0], header.Split(':')[1]);
-            }
 
             using (var stream = client.GetRequestStream())
             {

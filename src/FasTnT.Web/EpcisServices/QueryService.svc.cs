@@ -73,21 +73,21 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [AuthenticateUser]
-        public string[] GetSubscriptionIDs(EmptyParms request)
+        public virtual string[] GetSubscriptionIDs(EmptyParms request)
         {
             return _subscriptionManager.ListAllSubscriptions().Select(x => x.Id).ToArray();
         }
 
         [AuthenticateUser]
-        public void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
+        public virtual void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
         {
-            throw new NotImplementedException();
+            _subscriptionManager.Subscribe(queryName, null, destination, controls.ReportIfEmpty, subscriptionId);
         }
 
         [AuthenticateUser]
-        public void Unsubscribe(string name)
+        public virtual void Unsubscribe(string subscriptionId)
         {
-            throw new NotImplementedException();
+            _subscriptionManager.Unsubscribe(subscriptionId);
         }
     }
 }

@@ -91,7 +91,7 @@ namespace FasTnT.Web.BackgroundTasks
             catch(Exception ex)
             {
                 // TODO: do something more intelligent
-                Trace.WriteLine($"Subscription {subscription.Name} callback failed: {ex.Message}");
+                Trace.WriteLine($"Subscription {subscription.Id} callback failed: {ex.Message}");
             }
         }
 

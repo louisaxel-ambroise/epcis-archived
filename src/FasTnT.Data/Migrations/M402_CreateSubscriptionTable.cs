@@ -13,9 +13,9 @@ namespace FasTnT.Data.Migrations
                 .WithColumn("controls_initial_record_time").AsDateTime().NotNullable()
                 .WithColumn("controls_report_if_empty").AsBoolean().NotNullable()
                 .WithColumn("destination_url").AsString(128).NotNullable()
-                .WithColumn("destination_headers").AsString(int.MaxValue).Nullable()
                 .WithColumn("query_name").AsString(128).NotNullable()
-                .WithColumn("schedule_id").AsGuid().ForeignKey("fk_subscription_schedule", "subscriptions", "schedule", "id");
+                .WithColumn("schedule_id").AsGuid().ForeignKey("fk_subscription_schedule", "subscriptions", "schedule", "id")
+                .WithColumn("user_id").AsGuid().ForeignKey("fk_subscription_user", "users", "application_user", "id").Nullable();
         }
     }
 }

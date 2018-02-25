@@ -17,9 +17,14 @@ namespace FasTnT.Data.Repositories
             _session = session ?? throw new ArgumentException(nameof(session));
         }
 
+        public void Save(Subscription subscription)
+        {
+            _session.Save(subscription);
+        }
+
         public Subscription LoadById(string id)
         {
-            return _session.Load<Subscription>(id);
+            return _session.Get<Subscription>(id);
         }
 
         public IQueryable<Subscription> Query()
@@ -33,6 +38,11 @@ namespace FasTnT.Data.Repositories
             {
                 _session.Delete(request);
             }
+        }
+
+        public void Delete(Subscription subscription)
+        {
+            _session.Delete(subscription);
         }
     }
 }

@@ -16,6 +16,9 @@ namespace FasTnT.Web.Helpers.Attributes
         private readonly IUserRepository _userRepository;
         private readonly IUserSetter _userSetter;
 
+        const string UrlAuthKey = "token";
+        const string HeaderKey = "Authorization";
+
         protected virtual Func<Exception> UnauthorizedException => () => new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized.");
 
         public UserAuthenticationInterceptor(IUserRepository userRepository, IUserSetter userSetter)
@@ -38,10 +41,22 @@ namespace FasTnT.Web.Helpers.Attributes
 
         private bool Authenticate()
         {
-            if (!HttpContext.Current.Request.Headers.AllKeys.Contains("Authorization")) return false;
+            string[] credentials;
 
-            var authHeader = HttpContext.Current.Request.Headers["Authorization"];
-            var credentials = ParseAuthHeader(authHeader);
+            if (HttpContext.Current.Request.Headers.AllKeys.Contains(HeaderKey))
+            {
+                var authHeader = HttpContext.Current.Request.Headers[HeaderKey];
+                credentials = ParseAuthHeader(authHeader);
+            }
+            else if (HttpContext.Current.Request.QueryString.AllKeys.Contains(UrlAuthKey))
+            {
+                var authQuery = HttpContext.Current.Request.QueryString[UrlAuthKey];
+                credentials = ParseQueryString(authQuery);
+            }
+            else
+            {
+                return false;
+            }
 
             if (TryGetPrincipal(credentials[0], credentials[1], out User user))
             {
@@ -58,8 +73,14 @@ namespace FasTnT.Web.Helpers.Attributes
         {
             if (authHeader == null || authHeader.Length == 0 || !authHeader.StartsWith("Basic")) return null;
 
-            var base64Credentials = authHeader.Substring(6);
-            var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(base64Credentials)).Split(new char[] { ':' });
+            return ParseQueryString(authHeader.Substring(6));
+        }
+
+        private string[] ParseQueryString(string authHeader)
+        {
+            if (authHeader == null || authHeader.Length == 0) return null;
+
+            var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader)).Split(':');
 
             return (credentials.Length != 2 || string.IsNullOrEmpty(credentials[0]) || string.IsNullOrEmpty(credentials[0])) ? null : credentials;
         }
@@ -71,7 +92,7 @@ namespace FasTnT.Web.Helpers.Attributes
 
             user = _userRepository.GetByUsername(username);
 
-            return user != null && /*user.VerifyPassword(password) &&*/ user.Role.Equals(UserType.ApiUser) && user.IsActive;
+            return user != null && user.VerifyPassword(password) && user.Role.Equals(UserType.ApiUser) && user.IsActive;
         }
     }
 }

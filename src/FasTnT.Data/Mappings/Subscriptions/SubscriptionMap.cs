@@ -13,10 +13,10 @@ namespace FasTnT.Data.Mappings.Subscriptions
             Id(x => x.Id).Column("id");
             Map(x => x.QueryName).Column("query_name");
             Map(x => x.DestinationUrl).Column("destination_url");
-            Map(x => x.DestinationHeaders).Column("destination_headers");
             Component(x => x.Controls).ColumnPrefix("controls_");
 
-            References(x => x.Schedule).Column("schedule_id");
+            References(x => x.User).Column("user_id").Nullable();
+            References(x => x.Schedule).Column("schedule_id").Cascade.SaveUpdate();
             HasMany(x => x.Parameters).KeyColumn("subscription_id").Inverse();
             HasMany(x => x.PendingRequests).Table("pendingrequest").Schema("subscriptions").KeyColumn("subscription_id").LazyLoad().Cascade.None();
         }

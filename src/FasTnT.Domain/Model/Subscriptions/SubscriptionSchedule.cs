@@ -17,9 +17,19 @@ namespace FasTnT.Domain.Model.Subscriptions
         public virtual string Seconds { get { return _seconds; } set { _seconds = value; _secondsSchedule = ScheduleEntry.Parse(value, 0, 59); } }
         public virtual string Minutes { get { return _minutes; } set { _minutes = value; _minutesSchedule = ScheduleEntry.Parse(value, 0, 59); } }
         public virtual string Hours { get { return _hours; } set { _hours = value; _hoursSchedule = ScheduleEntry.Parse(value, 0, 23); } }
-        public virtual string DayOfmonth { get { return _dayOfMonth; } set { _dayOfMonth = value; _dayOfMonthSchedule = ScheduleEntry.Parse(value, 1, 31); } }
+        public virtual string DayOfMonth { get { return _dayOfMonth; } set { _dayOfMonth = value; _dayOfMonthSchedule = ScheduleEntry.Parse(value, 1, 31); } }
         public virtual string Month { get { return _month; } set { _month = value; _monthSchedule = ScheduleEntry.Parse(value, 1, 12); } }
         public virtual string DayOfWeek { get { return _dayOfWeek; } set { _dayOfWeek = value; _dayOfWeekSchedule = ScheduleEntry.Parse(value, 1, 7); } }
+
+        public SubscriptionSchedule()
+        {
+            Seconds = "";
+            Minutes = "";
+            Hours = "";
+            DayOfMonth = "";
+            Month = "";
+            DayOfWeek = "";
+        }
 
         public virtual DateTime GetNextOccurence(DateTime startDate)
         {
