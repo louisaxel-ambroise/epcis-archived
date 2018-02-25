@@ -5,6 +5,7 @@ namespace FasTnT.Domain.Repositories
 {
     public interface ISubscriptionRepository
     {
+        Subscription LoadById(string id);
         IQueryable<Subscription> Query();
     }
 }

@@ -16,6 +16,11 @@ namespace FasTnT.Data.Repositories
             _session = session ?? throw new ArgumentException(nameof(session));
         }
 
+        public Subscription LoadById(string id)
+        {
+            return _session.Load<Subscription>(id);
+        }
+
         public IQueryable<Subscription> Query()
         {
             return _session.Query<Subscription>();

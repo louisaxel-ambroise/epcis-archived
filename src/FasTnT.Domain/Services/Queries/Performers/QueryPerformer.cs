@@ -20,9 +20,11 @@ namespace FasTnT.Domain.Services.Queries.Performers
             _queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
+        // We maintain a list of pending events for all Subscriptions, so that we avoid skipping events that would be captured while a subscription is running.
+        // The rinciple is to query for events contained in these "pending" requests.
         public QueryEventResponse ExecuteSubscriptionQuery(Subscription subscription)
         {
-            var source = _eventRepository.Query().Where(e => e.Request.RecordTime >= subscription.LastRunOn);
+            var source = _eventRepository.Query().Where(e => subscription.PendingRequests.Select(x => x.Id).Contains(e.Request.Id));
             var @params = subscription.Parameters.Select(p => new QueryParam { Name = p.ParameterName, Values = p.Values.Select(v => v.Value).ToArray() }).ToArray();
 
             return ExecuteInternal(subscription.QueryName, @params, source);
