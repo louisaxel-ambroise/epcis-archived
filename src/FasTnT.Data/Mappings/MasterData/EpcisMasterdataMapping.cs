@@ -16,6 +16,8 @@ namespace FasTnT.Data.Mappings.MasterData
 
             Map(x => x.CreatedOn).Column("created_on").Not.Nullable();
             Map(x => x.LastUpdatedOn).Column("last_update").Not.Nullable();
+
+            HasMany(x => x.Attributes).KeyColumns.Add("masterdata_id", "masterdata_type").Inverse().Cascade.Persist().LazyLoad();
         }
     }
 }

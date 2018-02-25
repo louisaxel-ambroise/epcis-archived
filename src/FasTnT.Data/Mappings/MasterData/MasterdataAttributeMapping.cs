@@ -12,7 +12,7 @@ namespace FasTnT.Data.Mappings.MasterData
 
             CompositeId()
                 .KeyProperty(x => x.Id, "id")
-                .KeyReference(x => x.MasterData, "id", "type");
+                .KeyReference(x => x.MasterData, "masterdata_id", "masterdata_type");
 
             Map(x => x.Value).Column("value").Not.Nullable();
         }
