@@ -13,7 +13,7 @@ namespace FasTnT.Web.EpcisServices
         public QueryParams Parameters { get; set; }
 
         [MessageBodyMember(Name = "destination", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        public Uri Destination { get; set; }
+        public string Destination { get; set; }
 
         [MessageBodyMember(Name = "controls", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         public SubscriptionControls controls { get; set; }

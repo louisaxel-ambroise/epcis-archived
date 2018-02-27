@@ -30,16 +30,17 @@ namespace FasTnT.Domain.Services.Subscriptions
         }
 
         [CommitTransaction]
-        public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, Uri destination, bool reportIfEmpty, string subscriptionId)
+        public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, string destination, bool reportIfEmpty, string subscriptionId)
         {
             EnsureSubscriptionDoesNotExist(subscriptionId);
             EnsureQueryExistsAndAllowSubscription(queryName);
+            EnsureDestinationIsValid(destination);
 
             var currentUser = _userProvider.GetCurrentUser();
             var subscription = new Subscription
             {
                 Id = subscriptionId,
-                DestinationUrl = destination.ToString(),
+                DestinationUrl = destination?.ToString(),
                 User = currentUser,
                 LastRunOn = SystemContext.Clock.Now,
                 QueryName = queryName,
@@ -76,6 +77,11 @@ namespace FasTnT.Domain.Services.Subscriptions
         {
             var subscription = _subscriptionRepository.LoadById(subscriptionId);
             if (subscription != null) throw new Exception($"Subscription '{subscriptionId} already exist");
+        }
+
+        private void EnsureDestinationIsValid(string destination)
+        {
+            if (destination == null) throw new Exception($"Subscription destination must be specified");
         }
     }
 }

@@ -84,7 +84,7 @@ namespace FasTnT.Web.EpcisServices
         {
             try
             {
-                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.controls.ReportIfEmpty, request.SubscriptionId);
+                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.controls?.ReportIfEmpty ?? false, request.SubscriptionId);
 
                 return new SubscribeResult { SubscriptionId = request.SubscriptionId };
             }
