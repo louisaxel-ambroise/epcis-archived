@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -12,13 +11,13 @@ namespace FasTnT.Web.EpcisServices
         [MessageBodyMember(Name = "parameters", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         public QueryParams Parameters { get; set; }
 
-        [MessageBodyMember(Name = "destination", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        public string Destination { get; set; }
-
         [MessageBodyMember(Name = "controls", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        public SubscriptionControls controls { get; set; }
+        public SubscriptionControls Controls { get; set; }
 
         [MessageBodyMember(Name = "subscriptionId", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         public string SubscriptionId { get; set; }
+
+        [MessageBodyMember(Name = "url", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+        public string Destination { get; set; }
     }
 }

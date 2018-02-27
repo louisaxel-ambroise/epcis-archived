@@ -79,12 +79,11 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [AuthenticateUser]
-        // TODO: get schedule and parameters
         public virtual SubscribeResult Subscribe(SubscribeRequest request)
         {
             try
             {
-                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.controls?.ReportIfEmpty ?? false, request.SubscriptionId);
+                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.Controls?.ReportIfEmpty ?? false, request.SubscriptionId);
 
                 return new SubscribeResult { SubscriptionId = request.SubscriptionId };
             }
