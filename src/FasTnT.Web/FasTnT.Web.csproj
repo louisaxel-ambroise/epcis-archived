@@ -180,21 +180,23 @@
     <Compile Include="EpcisServices\Faults\ValidationError.cs" />
     <Compile Include="EpcisServices\ICaptureService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
-    <Compile Include="EpcisServices\Model\CaptureEventsResponse.cs" />
-    <Compile Include="EpcisServices\Model\CaptureMasterDataResponse.cs" />
-    <Compile Include="EpcisServices\Model\EmptyParms.cs" />
+    <Compile Include="EpcisServices\Model\Capture\CaptureEventsResponse.cs" />
+    <Compile Include="EpcisServices\Model\Capture\CaptureMasterDataResponse.cs" />
+    <Compile Include="EpcisServices\Model\Query\EmptyParms.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscribeRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscribeResult.cs" />
     <Compile Include="EpcisServices\Serialization\ICustomSerializable.cs" />
     <Compile Include="EpcisServices\Serialization\EpcisSerializeContractBehaviorAttributeAttribute.cs" />
     <Compile Include="EpcisServices\Serialization\EpcisSerializerOperationBehavior.cs" />
     <Compile Include="EpcisServices\Serialization\EventListSerializer.cs" />
-    <Compile Include="EpcisServices\Model\ParamValues.cs" />
-    <Compile Include="EpcisServices\Model\QueryNamesResult.cs" />
-    <Compile Include="EpcisServices\Model\PollRequest.cs" />
-    <Compile Include="EpcisServices\Model\QueryNamesRequest.cs" />
-    <Compile Include="EpcisServices\Model\QueryParameter.cs" />
-    <Compile Include="EpcisServices\Model\QueryParams.cs" />
-    <Compile Include="EpcisServices\Model\QueryResultBody.cs" />
-    <Compile Include="EpcisServices\Model\QueryResults.cs" />
+    <Compile Include="EpcisServices\Model\Query\ParamValues.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryNamesResult.cs" />
+    <Compile Include="EpcisServices\Model\Query\PollRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryNamesRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryParameter.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryParams.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryResultBody.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryResults.cs" />
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
@@ -202,7 +204,7 @@
     <Compile Include="Helpers\Attributes\AuthenticateUserAttribute.cs" />
     <Compile Include="Helpers\Attributes\IAuthenticateUserInterceptor.cs" />
     <Compile Include="Helpers\Attributes\InternationalizationFilterAttribute.cs" />
-    <Compile Include="EpcisServices\Model\SubscriptionControls.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscriptionControls.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

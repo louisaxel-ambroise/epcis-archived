@@ -66,7 +66,7 @@ namespace FasTnT.Web.EpcisServices
 
                 return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
             }
-            catch (EpcisException ex)
+            catch (Exception ex)
             {
                 throw EpcisFault.Create(ex);
             }
@@ -80,15 +80,31 @@ namespace FasTnT.Web.EpcisServices
 
         [AuthenticateUser]
         // TODO: get schedule and parameters
-        public virtual void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
+        public virtual SubscribeResult Subscribe(SubscribeRequest request)
         {
-            _subscriptionManager.Subscribe(queryName, null, destination, controls.ReportIfEmpty, subscriptionId);
+            try
+            {
+                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.controls.ReportIfEmpty, request.SubscriptionId);
+
+                return new SubscribeResult { SubscriptionId = request.SubscriptionId };
+            }
+            catch (EpcisException ex)
+            {
+                throw EpcisFault.Create(ex);
+            }
         }
 
         [AuthenticateUser]
         public virtual void Unsubscribe(string subscriptionId)
         {
-            _subscriptionManager.Unsubscribe(subscriptionId);
+            try
+            {
+                _subscriptionManager.Unsubscribe(subscriptionId);
+            }
+            catch(Exception ex)
+            {
+                throw EpcisFault.Create(ex);
+            }
         }
     }
 }
