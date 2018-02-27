@@ -429,4 +429,16 @@
   <data name="Label_DashboardDisabled" xml:space="preserve">
     <value>The dashboard has been disabled on this repository.</value>
   </data>
+  <data name="Grid_CreatedOn" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="Grid_Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Grid_LastUpdatedOn" xml:space="preserve">
+    <value>Last Updated On</value>
+  </data>
+  <data name="Grid_NumberofAttributes" xml:space="preserve">
+    <value>Attributes Count</value>
+  </data>
 </root>

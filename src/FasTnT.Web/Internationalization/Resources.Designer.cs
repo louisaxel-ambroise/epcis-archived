@@ -250,6 +250,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created On.
+        /// </summary>
+        public static string Grid_CreatedOn {
+            get {
+                return ResourceManager.GetString("Grid_CreatedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Grid_Date {
@@ -286,6 +295,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string Grid_Id {
+            get {
+                return ResourceManager.GetString("Grid_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Active?.
         /// </summary>
         public static string Grid_IsActive {
@@ -304,11 +322,29 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Updated On.
+        /// </summary>
+        public static string Grid_LastUpdatedOn {
+            get {
+                return ResourceManager.GetString("Grid_LastUpdatedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
         public static string Grid_Location {
             get {
                 return ResourceManager.GetString("Grid_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attributes Count.
+        /// </summary>
+        public static string Grid_NumberofAttributes {
+            get {
+                return ResourceManager.GetString("Grid_NumberofAttributes", resourceCulture);
             }
         }
         

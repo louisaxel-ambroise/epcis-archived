@@ -1,0 +1,32 @@
+﻿@model FasTnT.Web.Models.Masterdata.MasterdataSummary
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>@Resources.Grid_Type</th>
+            <th>@Resources.Grid_Id</th>
+            <th>@Resources.Grid_CreatedOn</th>
+            <th>@Resources.Grid_LastUpdatedOn</th>
+            <th>@Resources.Grid_NumberofAttributes</th>
+            <th>@Resources.Grid_Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var detail in Model.MasterData)
+        {
+            <tr>
+                <td>@detail.Type</td>
+                <td>@detail.Id</td>
+                <td>@detail.CreatedOn.ToString(Resources.DateFormat_Detailed)</td>
+                <td>@detail.LastUpdatedOn.ToString(Resources.DateFormat_Detailed)</td>
+                <td>@detail.AttributesCount</td>
+                <td><a href="~/Events/Details/@detail.Id"><i class="material-icons">link</i></a></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7">@string.Format(Html.LocalizeFormat("DisplayingXOutOfNItems"), Model.MasterData.Count(), Model.TotalMasterDataCount)</th>
+        </tr>
+    </tfoot>
+</table>
