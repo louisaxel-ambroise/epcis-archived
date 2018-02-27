@@ -71,7 +71,7 @@ namespace FasTnT.Web.Helpers.Attributes
 
             user = _userRepository.GetByUsername(username);
 
-            return user != null && /*user.VerifyPassword(password) &&*/ user.Role.Equals(UserType.ApiUser) && user.IsActive;
+            return user != null && user.VerifyPassword(password) && user.Role.Equals(UserType.ApiUser) && user.IsActive;
         }
     }
 }
