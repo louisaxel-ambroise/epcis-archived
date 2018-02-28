@@ -8,7 +8,7 @@ namespace FasTnT.Domain.Services.Subscriptions
     public interface ISubscriptionManager
     {
         IEnumerable<Subscription> ListAllSubscriptions();
-        void Subscribe(string queryName, IEnumerable<QueryParam> parameters, string destination, bool reportIfEmpty, string subscriptionId);
+        void Subscribe(string queryName, IEnumerable<QueryParam> parameters, Uri destination, bool reportIfEmpty, string subscriptionId);
         void Unsubscribe(string subscriptionId);
     }
 }

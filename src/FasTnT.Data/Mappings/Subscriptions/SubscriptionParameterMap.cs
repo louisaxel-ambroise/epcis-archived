@@ -14,6 +14,7 @@ namespace FasTnT.Data.Mappings.Subscriptions
             Map(x => x.ParameterName).Column("name").Not.Nullable();
 
             References(x => x.Subscription).Column("subscription_id");
+            HasMany(x => x.Values).KeyColumn("parameter_id").Inverse().Cascade.All();
         }
     }
 }

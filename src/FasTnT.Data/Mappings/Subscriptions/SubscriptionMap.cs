@@ -18,7 +18,7 @@ namespace FasTnT.Data.Mappings.Subscriptions
 
             References(x => x.User).Column("user_id").Nullable();
             References(x => x.Schedule).Column("schedule_id").Cascade.SaveUpdate();
-            HasMany(x => x.Parameters).KeyColumn("subscription_id").Inverse();
+            HasMany(x => x.Parameters).KeyColumn("subscription_id").Cascade.All();
             HasMany(x => x.PendingRequests).Table("pendingrequest").Schema("subscriptions").KeyColumn("subscription_id").LazyLoad().Cascade.None();
         }
     }

@@ -33,13 +33,15 @@ namespace FasTnT.Domain.Services.Subscriptions
         }
 
         [CommitTransaction]
-        public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, string destination, bool reportIfEmpty, string subscriptionId)
+        public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, Uri destination, bool reportIfEmpty, string subscriptionId)
         {
             var currentUser = _userProvider.GetCurrentUser();
 
             EnsureSubscriptionDoesNotExistForUser(subscriptionId, currentUser);
             EnsureQueryExistsAndAllowSubscription(queryName);
             EnsureDestinationIsValid(destination);
+
+            var subscriptionParams = parameters.Select(SubscriptionParameter.Parse);
 
             var subscription = new Subscription
             {
@@ -49,9 +51,13 @@ namespace FasTnT.Domain.Services.Subscriptions
                 LastRunOn = SystemContext.Clock.Now,
                 QueryName = queryName,
                 Controls = new SubscriptionControls { ReportIfEmpty = reportIfEmpty },
-                Schedule = new SubscriptionSchedule { Seconds = "0" },
-                Parameters = null
+                Schedule = new SubscriptionSchedule { Seconds = "0" }
             };
+
+            foreach (var parameter in subscriptionParams)
+            {
+                subscription.AddParameter(parameter);
+            }
 
             _subscriptionRepository.Save(subscription);
         }
@@ -79,11 +85,11 @@ namespace FasTnT.Domain.Services.Subscriptions
 
         private void EnsureSubscriptionDoesNotExistForUser(string subscriptionId, User user)
         {
-            var subscription = _subscriptionRepository.Query().Where(x => x.User.Id == user.Id && x.Name == subscriptionId);
+            var subscription = _subscriptionRepository.Query().SingleOrDefault(x => x.User.Id == user.Id && x.Name == subscriptionId);
             if (subscription != null) throw new Exception($"Subscription '{subscriptionId}' already exist");
         }
 
-        private void EnsureDestinationIsValid(string destination)
+        private void EnsureDestinationIsValid(Uri destination)
         {
             if (destination == null) throw new Exception($"Subscription destination must be specified");
         }

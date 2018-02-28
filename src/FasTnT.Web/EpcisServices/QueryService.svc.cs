@@ -81,9 +81,15 @@ namespace FasTnT.Web.EpcisServices
         [AuthenticateUser]
         public virtual SubscribeResult Subscribe(SubscribeRequest request)
         {
+            var @params = request.Parameters.Select(x => new QueryParam
+            {
+                Name = x.Name,
+                Values = x.Values
+            });
+
             try
             {
-                _subscriptionManager.Subscribe(request.QueryName, null, request.Destination, request.Controls?.ReportIfEmpty ?? false, request.SubscriptionId);
+                _subscriptionManager.Subscribe(request.QueryName, @params, request.Destination, request.Controls?.ReportIfEmpty ?? false, request.SubscriptionId);
 
                 return new SubscribeResult { SubscriptionId = request.SubscriptionId };
             }

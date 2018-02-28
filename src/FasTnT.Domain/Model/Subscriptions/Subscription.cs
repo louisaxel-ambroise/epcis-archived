@@ -6,6 +6,11 @@ namespace FasTnT.Domain.Model.Subscriptions
 {
     public class Subscription
     {
+        public Subscription()
+        {
+            Parameters = new List<SubscriptionParameter>();
+        }
+
         public virtual Guid Id { get; set; }
         public virtual string Name { get; set; }
         public virtual SubscriptionSchedule Schedule { get; set; }
@@ -17,5 +22,11 @@ namespace FasTnT.Domain.Model.Subscriptions
         public virtual User User { get; set; }
 
         public virtual IList<SubscriptionPendingRequest> PendingRequests { get; set; }
+
+        public virtual void AddParameter(SubscriptionParameter parameter)
+        {
+            parameter.Subscription = this;
+            Parameters.Add(parameter);
+        }
     }
 }
