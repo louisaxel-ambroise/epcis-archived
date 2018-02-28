@@ -22,7 +22,7 @@ namespace FasTnT.Data.Repositories
             _session.Save(subscription);
         }
 
-        public Subscription LoadById(string id)
+        public Subscription LoadById(Guid id)
         {
             return _session.Get<Subscription>(id);
         }

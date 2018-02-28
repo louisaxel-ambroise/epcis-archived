@@ -10,6 +10,7 @@ using FasTnT.Domain.Utils.Aspects;
 using FasTnT.Domain.Utils;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Services.Formatting;
+using System;
 
 namespace FasTnT.Domain.Services.Subscriptions
 {
@@ -27,7 +28,7 @@ namespace FasTnT.Domain.Services.Subscriptions
         }
 
         [CommitTransaction]
-        public virtual void Run(string subscriptionId)
+        public virtual void Run(Guid subscriptionId)
         {
             var subscription = _subscriptionRepository.LoadById(subscriptionId);
 

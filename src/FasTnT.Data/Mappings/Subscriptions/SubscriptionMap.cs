@@ -11,6 +11,7 @@ namespace FasTnT.Data.Mappings.Subscriptions
             Schema("subscriptions");
 
             Id(x => x.Id).Column("id");
+            Map(x => x.Name).Column("subscription_name");
             Map(x => x.QueryName).Column("query_name");
             Map(x => x.DestinationUrl).Column("destination_url");
             Component(x => x.Controls).ColumnPrefix("controls_");

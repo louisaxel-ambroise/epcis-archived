@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 
 namespace FasTnT.Domain.Services.Subscriptions
 {
 
     public interface ISubscriptionRunner
     {
-        void Run(string subscriptionId);
+        void Run(Guid subscriptionId);
     }
 }

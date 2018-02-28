@@ -75,7 +75,7 @@ namespace FasTnT.Web.EpcisServices
         [AuthenticateUser]
         public virtual string[] GetSubscriptionIDs(EmptyParms request)
         {
-            return _subscriptionManager.ListAllSubscriptions().Select(x => x.Id).ToArray();
+            return _subscriptionManager.ListAllSubscriptions().Select(x => x.Name).ToArray();
         }
 
         [AuthenticateUser]

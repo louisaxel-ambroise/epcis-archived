@@ -6,7 +6,8 @@ namespace FasTnT.Domain.Model.Subscriptions
 {
     public class Subscription
     {
-        public virtual string Id { get; set; }
+        public virtual Guid Id { get; set; }
+        public virtual string Name { get; set; }
         public virtual SubscriptionSchedule Schedule { get; set; }
         public virtual string DestinationUrl { get; set; }
         public virtual string QueryName { get; set; }

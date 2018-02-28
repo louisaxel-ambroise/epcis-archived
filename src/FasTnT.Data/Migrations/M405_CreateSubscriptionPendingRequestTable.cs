@@ -8,7 +8,7 @@ namespace FasTnT.Data.Migrations
         public override void Up()
         {
             Create.Table("pendingrequest").InSchema("subscriptions")
-                .WithColumn("subscription_id").AsString(128).NotNullable().ForeignKey("fk_subscription_pending", "subscriptions", "subscription", "id")
+                .WithColumn("subscription_id").AsGuid().NotNullable().ForeignKey("fk_subscription_pending", "subscriptions", "subscription", "id")
                 .WithColumn("request_id").AsGuid().NotNullable().ForeignKey("fh_pending_request", "epcis", "request", "id");
         }
     }

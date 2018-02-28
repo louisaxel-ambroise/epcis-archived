@@ -9,8 +9,8 @@ namespace FasTnT.Data.Migrations
         {
             Create.Table("parameter").InSchema("subscriptions")
                 .WithColumn("id").AsGuid().PrimaryKey()
-                .WithColumn("name").AsString(1023).Nullable()
-                .WithColumn("subscription_id").AsString(128).NotNullable().ForeignKey("fk_subscription_parameter", "subscriptions", "subscription", "id");
+                .WithColumn("subscription_id").AsGuid().NotNullable().ForeignKey("fk_subscription_parameter", "subscriptions", "subscription", "id")
+                .WithColumn("name").AsString(1023).Nullable();
         }
     }
 }

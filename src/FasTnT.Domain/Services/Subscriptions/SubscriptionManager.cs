@@ -1,5 +1,6 @@
 ﻿using FasTnT.Domain.Model.Queries;
 using FasTnT.Domain.Model.Subscriptions;
+using FasTnT.Domain.Model.Users;
 using FasTnT.Domain.Repositories;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Services.Users;
@@ -26,20 +27,23 @@ namespace FasTnT.Domain.Services.Subscriptions
 
         public IEnumerable<Subscription> ListAllSubscriptions()
         {
-            return _subscriptionRepository.Query();
+            var currentUser = _userProvider.GetCurrentUser();
+
+            return _subscriptionRepository.Query().Where(x => x.User.Id == currentUser.Id);
         }
 
         [CommitTransaction]
         public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, string destination, bool reportIfEmpty, string subscriptionId)
         {
-            EnsureSubscriptionDoesNotExist(subscriptionId);
+            var currentUser = _userProvider.GetCurrentUser();
+
+            EnsureSubscriptionDoesNotExistForUser(subscriptionId, currentUser);
             EnsureQueryExistsAndAllowSubscription(queryName);
             EnsureDestinationIsValid(destination);
 
-            var currentUser = _userProvider.GetCurrentUser();
             var subscription = new Subscription
             {
-                Id = subscriptionId,
+                Name = subscriptionId,
                 DestinationUrl = destination?.ToString(),
                 User = currentUser,
                 LastRunOn = SystemContext.Clock.Now,
@@ -56,11 +60,11 @@ namespace FasTnT.Domain.Services.Subscriptions
         public virtual void Unsubscribe(string subscriptionId)
         {
             var currentUser = _userProvider.GetCurrentUser();
-            var subscription = _subscriptionRepository.LoadById(subscriptionId);
+            var subscription = _subscriptionRepository.Query().SingleOrDefault(x => x.Name == subscriptionId && x.User.Id == currentUser.Id);
 
-            if(subscription.User != null && subscription.User.Id != currentUser.Id)
+            if(subscription == null)
             {
-                throw new Exception($"This subscription is assigned to a different user.");
+                throw new Exception($"Subscription '{subscriptionId}' does not exist");
             }
 
             _subscriptionRepository.Delete(subscription);
@@ -73,10 +77,10 @@ namespace FasTnT.Domain.Services.Subscriptions
             if (!query.AllowsSubscription) throw new Exception($"Query '{queryName}' does not allow subscriptions");
         }
 
-        private void EnsureSubscriptionDoesNotExist(string subscriptionId)
+        private void EnsureSubscriptionDoesNotExistForUser(string subscriptionId, User user)
         {
-            var subscription = _subscriptionRepository.LoadById(subscriptionId);
-            if (subscription != null) throw new Exception($"Subscription '{subscriptionId} already exist");
+            var subscription = _subscriptionRepository.Query().Where(x => x.User.Id == user.Id && x.Name == subscriptionId);
+            if (subscription != null) throw new Exception($"Subscription '{subscriptionId}' already exist");
         }
 
         private void EnsureDestinationIsValid(string destination)
