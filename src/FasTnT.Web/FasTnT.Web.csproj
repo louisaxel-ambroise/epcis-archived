@@ -177,6 +177,7 @@
     <Compile Include="EpcisServices\Model\Capture\CaptureEventsResponse.cs" />
     <Compile Include="EpcisServices\Model\Capture\CaptureMasterDataResponse.cs" />
     <Compile Include="EpcisServices\Model\Query\EmptyParms.cs" />
+    <Compile Include="EpcisServices\Model\Query\QuerySchedule.cs" />
     <Compile Include="EpcisServices\Model\Query\SubscribeRequest.cs" />
     <Compile Include="EpcisServices\Model\Query\SubscribeResult.cs" />
     <Compile Include="EpcisServices\Serialization\ICustomSerializable.cs" />
