@@ -1,4 +1,4 @@
-﻿@model FasTnT.Web.Models.Users.ApiUserViewModel
+﻿@model FasTnT.Web.Models.Users.ApiUserDetailViewModel
 @{
     ViewBag.Title = @Resources.Label_ApiUsers;
 }
@@ -12,6 +12,14 @@
     {
         string.Format(Resources.DateFormat_Detailed, Model.LastLogon);
     }</li>
+    <li><strong>@Resources.Label_Subscriptions</strong> @Model.Subscriptions.Count
+        <ul>
+            @foreach(var subscription in Model.Subscriptions)
+            {
+                <li><strong>@subscription.Name</strong>: @subscription.QueryName</li>
+            }
+        </ul>
+    </li>
 </ul>
 
 <div class="links">

@@ -221,7 +221,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\Account\AccountViewModel.cs" />
     <Compile Include="Models\Account\AuthenticationModel.cs" />
+    <Compile Include="Models\Account\Mappings.cs" />
     <Compile Include="Models\Events\EventDetailViewModel.cs" />
     <Compile Include="Models\Events\EventSummaryViewModel.cs" />
     <Compile Include="Models\Events\LatestEventsViewModel.cs" />
@@ -229,9 +231,9 @@
     <Compile Include="Models\Logs\AuditLogSummary.cs" />
     <Compile Include="Models\Logs\DashboardSummaryViewModel.cs" />
     <Compile Include="Models\Logs\Mappings.cs" />
+    <Compile Include="Models\Users\ApiUserDetailViewModel.cs" />
     <Compile Include="Models\Users\ApiUserViewModel.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
-    <Compile Include="Models\Users\UserDetailsViewModel.cs" />
     <Compile Include="Models\Users\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Users\Session\UserSession.cs" />

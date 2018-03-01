@@ -4,7 +4,6 @@
     <thead>
         <tr>
             <th>@Resources.Grid_UserName</th>
-            <th>@Resources.Grid_Role</th>
             <th>@Resources.Grid_IsActive</th>
             <th>@Resources.Grid_LastLogon</th>
             <th>@Resources.Grid_SubscriptionCount</th>
@@ -16,7 +15,6 @@
         {
             <tr>
                 <td>@user.Name</td>
-                <td>@Html.LocalizeGrid(user.Type)</td>
                 <td class="centered">@Html.LocalizeGrid(user.IsActive.ToString())</td>
                 <td>@(user.LastLogon?.ToString(Resources.DateFormat_Detailed))</td>
                 <td>@user.SubscriptionCount</td>

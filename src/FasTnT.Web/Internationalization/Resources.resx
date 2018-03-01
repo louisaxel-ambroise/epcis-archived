@@ -432,4 +432,10 @@
   <data name="Grid_SubscriptionCount" xml:space="preserve">
     <value># Subscriptions</value>
   </data>
+  <data name="Label_Subscriptions" xml:space="preserve">
+    <value>Subscriptions:</value>
+  </data>
+  <data name="Label_Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
 </root>

@@ -88,7 +88,7 @@ namespace FasTnT.Web.Controllers
             var userName = HttpContext.User.Identity.Name;
             var userDetails = _userService.GetDetails(userName);
 
-            return View(userDetails.MapToViewModel());
+            return View(userDetails.MapToDashboardUserViewModel());
         }
 
         private string RetrieveLockedUser()
