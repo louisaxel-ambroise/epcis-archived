@@ -19,7 +19,16 @@
         load(url, function (data) { domContainer.innerHTML = data; }, function () { domContainer.innerHTML = errorDefault; })
     }
 
+    function onPageLoad(callback) {
+        if (document.readyState !== "loading") {
+            callback();
+        } else {
+            document.addEventListener("DOMContentLoaded", callback);
+        }
+    }
+
     return {
+        onPageLoad: onPageLoad,
         load: load,
         loadPartial: loadPartial
     }

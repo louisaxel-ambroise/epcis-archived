@@ -423,6 +423,18 @@
   <data name="Label_DashboardDisabled" xml:space="preserve">
     <value>Le tableau de bord a été désactivé sur ce serveur.</value>
   </data>
+  <data name="Grid_CapturedOn" xml:space="preserve">
+    <value>Capturé le</value>
+  </data>
+  <data name="Grid_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Grid_LastUpdatedOn" xml:space="preserve">
+    <value>Dernière MàJ le</value>
+  </data>
+  <data name="Grid_NumberofAttributes" xml:space="preserve">
+    <value>Nombre d'attributs</value>
+  </data>
   <data name="Grid_SubscriptionCount" xml:space="preserve">
     <value># Abonnements</value>
   </data>

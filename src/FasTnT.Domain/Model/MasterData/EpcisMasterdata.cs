@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FasTnT.Domain.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace FasTnT.Domain.Model.MasterData
@@ -8,6 +9,8 @@ namespace FasTnT.Domain.Model.MasterData
         public EpcisMasterdata()
         {
             Attributes = new List<MasterdataAttribute>();
+            CreatedOn = SystemContext.Clock.Now;
+            LastUpdatedOn = SystemContext.Clock.Now;
         }
 
         public virtual string Type { get; set; }
