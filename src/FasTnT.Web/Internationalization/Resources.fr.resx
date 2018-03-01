@@ -127,7 +127,7 @@
     <value>Dépôt EPCIS</value>
   </data>
   <data name="Format_CaptureFailed" xml:space="preserve">
-    <value>La capture de l'événement a échoué en {0}ms</value>
+    <value>La capture a échoué en {0}ms</value>
   </data>
   <data name="Format_Copyright" xml:space="preserve">
     <value>© {0} Louis-Axel Ambroise, Tous droits réservés.</value>
@@ -192,17 +192,11 @@
   <data name="Label_AccessDenied" xml:space="preserve">
     <value>L'accès à cette page est interdit</value>
   </data>
-  <data name="Label_BusinessLocations" xml:space="preserve">
-    <value>Lieux d'Affaire</value>
-  </data>
   <data name="Label_BusinessStep" xml:space="preserve">
     <value>Étape</value>
   </data>
   <data name="Label_Capture" xml:space="preserve">
     <value>Capture</value>
-  </data>
-  <data name="Label_CaptureEventFailed" xml:space="preserve">
-    <value>La capture de l'événement a échoué</value>
   </data>
   <data name="Label_CaptureTime" xml:space="preserve">
     <value>Capturé le</value>
@@ -437,5 +431,8 @@
   </data>
   <data name="Label_Unlock" xml:space="preserve">
     <value>Déverrouiller</value>
+  </data>
+  <data name="Label_BusinessLocations" xml:space="preserve">
+    <value>Lieux d'Affaire</value>
   </data>
 </root>

@@ -439,15 +439,6 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture event failed.
-        /// </summary>
-        public static string Label_CaptureEventFailed {
-            get {
-                return ResourceManager.GetString("Label_CaptureEventFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Captured On.
         /// </summary>
         public static string Label_CaptureTime {

@@ -201,9 +201,6 @@
   <data name="Label_Capture" xml:space="preserve">
     <value>Capture</value>
   </data>
-  <data name="Label_CaptureEventFailed" xml:space="preserve">
-    <value>Capture event failed</value>
-  </data>
   <data name="Label_CaptureTime" xml:space="preserve">
     <value>Captured On</value>
   </data>
