@@ -32,7 +32,7 @@ namespace FasTnT.Web.EpcisServices
         public string GetVendorVersion(EmptyParms request) => Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
         public string GetStandardVersion(EmptyParms request) => "1.2";
 
-        [SoapFaultHandlerAttribute]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public string[] GetQueryNames(EmptyParms request)
         {
@@ -40,7 +40,7 @@ namespace FasTnT.Web.EpcisServices
         }
 
         [QueryLog]
-        [SoapFaultHandlerAttribute]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public virtual QueryResults Poll(PollRequest request)
         {
@@ -51,14 +51,14 @@ namespace FasTnT.Web.EpcisServices
             return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
         }
 
-        [SoapFaultHandlerAttribute]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public virtual string[] GetSubscriptionIDs(EmptyParms request)
         {
             return _subscriptionManager.ListAllSubscriptions().Select(x => x.Name).ToArray();
         }
 
-        [SoapFaultHandlerAttribute]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public virtual SubscribeResult Subscribe(SubscribeRequest request)
         {
@@ -71,7 +71,7 @@ namespace FasTnT.Web.EpcisServices
             return new SubscribeResult { SubscriptionId = request.SubscriptionId };
         }
 
-        [SoapFaultHandlerAttribute]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public virtual void Unsubscribe(string subscriptionId)
         {
