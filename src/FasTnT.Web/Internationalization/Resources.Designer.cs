@@ -340,6 +340,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Subscriptions.
+        /// </summary>
+        public static string Grid_SubscriptionCount {
+            get {
+                return ResourceManager.GetString("Grid_SubscriptionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ✔.
         /// </summary>
         public static string Grid_True {

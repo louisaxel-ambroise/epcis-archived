@@ -33,7 +33,7 @@ namespace FasTnT.Domain.Services.Subscriptions
         }
 
         [CommitTransaction]
-        public virtual void Subscribe(string queryName, IEnumerable<QueryParam> parameters, Uri destination, bool reportIfEmpty, string subscriptionId)
+        public virtual void Subscribe(string subscriptionId, string queryName, IEnumerable<QueryParam> parameters, Uri destination, SubscriptionControls controls, SubscriptionSchedule schedule)
         {
             var currentUser = _userProvider.GetCurrentUser();
 
@@ -50,8 +50,8 @@ namespace FasTnT.Domain.Services.Subscriptions
                 User = currentUser,
                 LastRunOn = SystemContext.Clock.Now,
                 QueryName = queryName,
-                Controls = new SubscriptionControls { ReportIfEmpty = reportIfEmpty },
-                Schedule = new SubscriptionSchedule { Seconds = "0" }
+                Controls = controls,
+                Schedule = schedule
             };
 
             foreach (var parameter in subscriptionParams)
@@ -92,6 +92,13 @@ namespace FasTnT.Domain.Services.Subscriptions
         private void EnsureDestinationIsValid(Uri destination)
         {
             if (destination == null) throw new Exception($"Subscription destination must be specified");
+        }
+
+        // As of now, at least the second field must be filled with a single value, to avoid executing the subscription too frequently.
+        private void EnsureScheduleIsValid(SubscriptionSchedule schedule)
+        {
+            if (string.IsNullOrEmpty(schedule.Seconds) || schedule.Seconds.Contains("["))
+                throw new Exception("Subscription schedule must specify at least the 'second' field.");
         }
     }
 }

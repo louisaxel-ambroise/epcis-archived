@@ -23,6 +23,7 @@ namespace FasTnT.Data.Mappings.Users
 
             References(x => x.Role).Column("user_type_id");
             HasMany(x => x.Logs).KeyColumn("user_id").Cascade.AllDeleteOrphan();
+            HasMany(x => x.Subscriptions).KeyColumn("user_id").Cascade.AllDeleteOrphan();
         }
     }
 }

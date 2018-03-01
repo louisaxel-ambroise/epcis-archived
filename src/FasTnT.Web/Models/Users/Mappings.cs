@@ -15,7 +15,8 @@ namespace FasTnT.Web.Models.Users
                 Name = u.Name,
                 Type = u.Role.Name,
                 LastLogon = u.LastLogOn,
-                IsActive = u.IsActive
+                IsActive = u.IsActive,
+                SubscriptionCount = u.Subscriptions.Count()
             });
         }
 

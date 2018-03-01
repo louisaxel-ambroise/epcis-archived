@@ -20,9 +20,12 @@ namespace FasTnT.Web
         public override void Load()
         {
             Bind<IAuthenticateUserInterceptor>().To<UserAuthenticationInterceptor>();
+            Bind<ISoapFaultHandlerInterceptor>().To<SoapFaultHandlerInterceptor>();
+
             Bind<IUserSetter>().To<HttpUserContainer>();
             Bind<IUserProvider>().To<HttpUserContainer>();
 
+            // For simple deployment - Bind the scheduler to WebScheduler, to be run in IIS.
             Bind<ISubscriptionScheduler>().To<WebSubscriptionScheduler>().InSingletonScope();
         }
     }

@@ -2,8 +2,8 @@
 
 namespace FasTnT.Web.EpcisServices
 {
-    [DataContract(Name = "SubscriptionControls", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-    public class SubscriptionControls
+    [DataContract(Name = "controls", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+    public class SubscriptionControlsRequest
     {
         [DataMember(Name = "reportIfEmpty")]
         public bool ReportIfEmpty { get; set; }

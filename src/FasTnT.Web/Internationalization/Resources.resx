@@ -429,4 +429,7 @@
   <data name="Label_DashboardDisabled" xml:space="preserve">
     <value>The dashboard has been disabled on this repository.</value>
   </data>
+  <data name="Grid_SubscriptionCount" xml:space="preserve">
+    <value># Subscriptions</value>
+  </data>
 </root>

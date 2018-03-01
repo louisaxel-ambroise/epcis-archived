@@ -174,6 +174,7 @@
     <Compile Include="EpcisServices\Faults\ValidationError.cs" />
     <Compile Include="EpcisServices\ICaptureService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
+    <Compile Include="EpcisServices\Mappings\Mapper.cs" />
     <Compile Include="EpcisServices\Model\Capture\CaptureEventsResponse.cs" />
     <Compile Include="EpcisServices\Model\Capture\CaptureMasterDataResponse.cs" />
     <Compile Include="EpcisServices\Model\Query\EmptyParms.cs" />
@@ -196,7 +197,8 @@
     </Compile>
     <Compile Include="Features\WebDashboardFeature.cs" />
     <Compile Include="Helpers\Attributes\AuthenticateUserAttribute.cs" />
-    <Compile Include="Helpers\Attributes\IAuthenticateUserInterceptor.cs" />
+    <Compile Include="Helpers\Attributes\SoapFaultHandlerAttribute.cs" />
+    <Compile Include="Helpers\Interceptors\IAuthenticateUserInterceptor.cs" />
     <Compile Include="Helpers\Attributes\InternationalizationFilterAttribute.cs" />
     <Compile Include="EpcisServices\Model\Query\SubscriptionControls.cs" />
     <Compile Include="Global.asax.cs">
@@ -204,7 +206,9 @@
     </Compile>
     <Compile Include="Helpers\Attributes\NoCacheAttribute.cs" />
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\Attributes\UserAuthenticationInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\ISoapFaultHandlerInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\SoapFaultHandlerInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\UserAuthenticationInterceptor.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Users\HttpUserContainer.cs" />
     <Compile Include="Internationalization\Resources.Designer.cs">
