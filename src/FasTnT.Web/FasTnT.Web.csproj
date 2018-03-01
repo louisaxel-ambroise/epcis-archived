@@ -235,6 +235,9 @@
     <Compile Include="Models\Masterdata\MasterdataSummary.cs" />
     <Compile Include="Models\Masterdata\MasterdataViewModel.cs" />
     <Compile Include="Models\Users\ApiUserDetailViewModel.cs" />
+    <Compile Include="Models\Masterdata\Mappings.cs" />
+    <Compile Include="Models\Masterdata\MasterdataSummary.cs" />
+    <Compile Include="Models\Masterdata\MasterdataViewModel.cs" />
     <Compile Include="Models\Users\ApiUserViewModel.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
     <Compile Include="Models\Users\WebUser.cs" />
@@ -345,6 +348,7 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\MasterData\_ListMasterdata.cshtml" />
     <Content Include="Views\MasterData\_ListMasterdata.cshtml" />
   </ItemGroup>
   <ItemGroup />
