@@ -43,6 +43,7 @@ namespace FasTnT.DependencyInjection
             Bind<IDocumentParser>().To<DocumentParser>();
             Bind<IMasterdataCapturer>().To<MasterdataCapturer>();
             Bind<IMasterdataParser>().To<MasterdataParser>();
+            Bind<IResponseFormatter>().To<XmlResponseFormatter>();
 
             // Queries
             Bind<IQuery>().To<SimpleEventQuery>();

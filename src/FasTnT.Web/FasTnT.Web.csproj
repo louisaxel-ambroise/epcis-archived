@@ -81,14 +81,13 @@
     <Reference Include="Npgsql, Version=3.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Npgsql.3.2.5\lib\net451\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data.Services" />
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Services" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
@@ -99,9 +98,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -114,6 +113,8 @@
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
@@ -123,15 +124,8 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Toggler, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Toggler.0.3.0.0\lib\net40\Toggler.dll</HintPath>
     </Reference>
@@ -180,35 +174,41 @@
     <Compile Include="EpcisServices\Faults\ValidationError.cs" />
     <Compile Include="EpcisServices\ICaptureService.cs" />
     <Compile Include="EpcisServices\IQueryService.cs" />
-    <Compile Include="EpcisServices\Model\CaptureEventsResponse.cs" />
-    <Compile Include="EpcisServices\Model\CaptureMasterDataResponse.cs" />
-    <Compile Include="EpcisServices\Model\EmptyParms.cs" />
+    <Compile Include="EpcisServices\Mappings\Mapper.cs" />
+    <Compile Include="EpcisServices\Model\Capture\CaptureEventsResponse.cs" />
+    <Compile Include="EpcisServices\Model\Capture\CaptureMasterDataResponse.cs" />
+    <Compile Include="EpcisServices\Model\Query\EmptyParms.cs" />
+    <Compile Include="EpcisServices\Model\Query\QuerySchedule.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscribeRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscribeResult.cs" />
     <Compile Include="EpcisServices\Serialization\ICustomSerializable.cs" />
     <Compile Include="EpcisServices\Serialization\EpcisSerializeContractBehaviorAttributeAttribute.cs" />
     <Compile Include="EpcisServices\Serialization\EpcisSerializerOperationBehavior.cs" />
     <Compile Include="EpcisServices\Serialization\EventListSerializer.cs" />
-    <Compile Include="EpcisServices\Model\ParamValues.cs" />
-    <Compile Include="EpcisServices\Model\QueryNamesResult.cs" />
-    <Compile Include="EpcisServices\Model\PollRequest.cs" />
-    <Compile Include="EpcisServices\Model\QueryNamesRequest.cs" />
-    <Compile Include="EpcisServices\Model\QueryParameter.cs" />
-    <Compile Include="EpcisServices\Model\QueryParams.cs" />
-    <Compile Include="EpcisServices\Model\QueryResultBody.cs" />
-    <Compile Include="EpcisServices\Model\QueryResults.cs" />
+    <Compile Include="EpcisServices\Model\Query\ParamValues.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryNamesResult.cs" />
+    <Compile Include="EpcisServices\Model\Query\PollRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryNamesRequest.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryParameter.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryParams.cs" />
+    <Compile Include="EpcisServices\Model\Query\QueryResults.cs" />
     <Compile Include="EpcisServices\QueryService.svc.cs">
       <DependentUpon>QueryService.svc</DependentUpon>
     </Compile>
     <Compile Include="Features\WebDashboardFeature.cs" />
     <Compile Include="Helpers\Attributes\AuthenticateUserAttribute.cs" />
-    <Compile Include="Helpers\Attributes\IAuthenticateUserInterceptor.cs" />
+    <Compile Include="Helpers\Attributes\SoapFaultHandlerAttribute.cs" />
+    <Compile Include="Helpers\Interceptors\IAuthenticateUserInterceptor.cs" />
     <Compile Include="Helpers\Attributes\InternationalizationFilterAttribute.cs" />
-    <Compile Include="EpcisServices\Model\SubscriptionControls.cs" />
+    <Compile Include="EpcisServices\Model\Query\SubscriptionControls.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Attributes\NoCacheAttribute.cs" />
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\Attributes\UserAuthenticationInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\ISoapFaultHandlerInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\SoapFaultHandlerInterceptor.cs" />
+    <Compile Include="Helpers\Interceptors\UserAuthenticationInterceptor.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Users\HttpUserContainer.cs" />
     <Compile Include="Internationalization\Resources.Designer.cs">
@@ -221,7 +221,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\Account\AccountViewModel.cs" />
     <Compile Include="Models\Account\AuthenticationModel.cs" />
+    <Compile Include="Models\Account\Mappings.cs" />
     <Compile Include="Models\Events\EventDetailViewModel.cs" />
     <Compile Include="Models\Events\EventSummaryViewModel.cs" />
     <Compile Include="Models\Events\LatestEventsViewModel.cs" />
@@ -232,9 +234,9 @@
     <Compile Include="Models\Masterdata\Mappings.cs" />
     <Compile Include="Models\Masterdata\MasterdataSummary.cs" />
     <Compile Include="Models\Masterdata\MasterdataViewModel.cs" />
+    <Compile Include="Models\Users\ApiUserDetailViewModel.cs" />
     <Compile Include="Models\Users\ApiUserViewModel.cs" />
     <Compile Include="Models\Users\Mappings.cs" />
-    <Compile Include="Models\Users\UserDetailsViewModel.cs" />
     <Compile Include="Models\Users\WebUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Users\Session\UserSession.cs" />
@@ -339,10 +341,11 @@
     <Content Include="Views\Users\_UserList.cshtml" />
     <Content Include="Views\Events\_LatestEvents.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <None Include="packages.config" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Views\MasterData\_ListMasterdata.cshtml" />
     <Content Include="Views\MasterData\_ListMasterdata.cshtml" />
   </ItemGroup>
   <ItemGroup />
@@ -396,7 +399,7 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />

@@ -10,6 +10,7 @@ namespace FasTnT.Domain.Model.Events
         public virtual User User { get; set; }
         public virtual DateTime DocumentTime { get; set; }
         public virtual DateTime RecordTime { get; set; }
+        public virtual string SubscriptionId { get; set; }
         public virtual IList<EpcisEvent> Events { get; set; } = new List<EpcisEvent>();
 
         public virtual void AddEvent(EpcisEvent @event)

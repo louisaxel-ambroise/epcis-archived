@@ -61,7 +61,7 @@ namespace FasTnT.Web.EpcisServices
         [FaultContract(typeof(ImplementationFault), Name = "ImplementationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(SecurityFault), Name = "SecurityExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ValidationFault), Name = "ValidationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        [return: MessageParameter(Name = "QueryNamesResult")]
+        [return: MessageParameter(Name = "SubscriptionIdList")]
         string[] GetSubscriptionIDs([MessageParameter(Name = "SubscriptionIDsRequest")] EmptyParms request);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace FasTnT.Web.EpcisServices
         [FaultContract(typeof(SecurityFault), Name = "SecurityExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ValidationFault), Name = "ValidationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ImplementationFault), Name = "ImplementationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        void Subscribe(string queryName/*, [MessageParameter(Name = "params")] QueryParams parameters*/, [MessageParameter(Name = "dest")] Uri destination, [MessageParameter(Name = "controls")] SubscriptionControls controls, [MessageParameter(Name = "subscriptionID")] string subscriptionId);
+        SubscribeResult Subscribe(SubscribeRequest request);
 
         /// <summary>
         /// Removes the specific subscription from the repository
@@ -89,6 +89,6 @@ namespace FasTnT.Web.EpcisServices
         [FaultContract(typeof(ImplementationFault), Name = "ImplementationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(SecurityFault), Name = "SecurityExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
         [FaultContract(typeof(ValidationFault), Name = "ValidationExceptionFault", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        void Unsubscribe(string name);
+        void Unsubscribe(string subscriptionId);
     }
 }

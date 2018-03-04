@@ -376,6 +376,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Subscriptions.
+        /// </summary>
+        public static string Grid_SubscriptionCount {
+            get {
+                return ResourceManager.GetString("Grid_SubscriptionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ✔.
         /// </summary>
         public static string Grid_True {
@@ -462,15 +471,6 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_CaptureEndpoint {
             get {
                 return ResourceManager.GetString("Label_CaptureEndpoint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Capture event failed.
-        /// </summary>
-        public static string Label_CaptureEventFailed {
-            get {
-                return ResourceManager.GetString("Label_CaptureEventFailed", resourceCulture);
             }
         }
         
@@ -835,6 +835,15 @@ namespace FasTnT.Web.Internationalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscriptions:.
+        /// </summary>
+        public static string Label_Subscriptions {
+            get {
+                return ResourceManager.GetString("Label_Subscriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Events.
         /// </summary>
         public static string Label_TotalEvents {
@@ -858,6 +867,15 @@ namespace FasTnT.Web.Internationalization {
         public static string Label_UnknownUser {
             get {
                 return ResourceManager.GetString("Label_UnknownUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock.
+        /// </summary>
+        public static string Label_Unlock {
+            get {
+                return ResourceManager.GetString("Label_Unlock", resourceCulture);
             }
         }
         

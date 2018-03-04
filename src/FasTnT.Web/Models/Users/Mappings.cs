@@ -1,4 +1,4 @@
-﻿using FasTnT.Domain.Model.Dashboard;
+﻿using FasTnT.Domain.Model.Subscriptions;
 using FasTnT.Domain.Model.Users;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,30 +13,33 @@ namespace FasTnT.Web.Models.Users
             {
                 Id = u.Id,
                 Name = u.Name,
-                Type = u.Role.Name,
                 LastLogon = u.LastLogOn,
-                IsActive = u.IsActive
+                IsActive = u.IsActive,
+                SubscriptionCount = u.Subscriptions.Count()
             });
         }
 
-        public static ApiUserViewModel MapToApiUserViewModel(this User user)
+        public static ApiUserDetailViewModel MapToApiUserViewModel(this User user)
         {
-            return new ApiUserViewModel
+            return new ApiUserDetailViewModel
             {
                 Id = user.Id,
-                LastLogon = user.LastLogOn,
                 Name = user.Name,
-                IsActive = user.IsActive
+                LastLogon = user.LastLogOn,
+                IsActive = user.IsActive,
+                Subscriptions = user.Subscriptions.MapToSubscriptionViewModel().ToList()
             };
         }
 
-        public static UserDetailsViewModel MapToViewModel(this UserDetail details)
+        public static IEnumerable<SubscriptionViewModel> MapToSubscriptionViewModel(this IEnumerable<Subscription> subscriptions)
         {
-            return new UserDetailsViewModel
+            return subscriptions.Select(x => new SubscriptionViewModel
             {
-                Name = details.Name,
-                LastLogOn = details.LastLogOn
-            };
+                Id = x.Id,
+                Name = x.Name,
+                QueryName = x.QueryName,
+                Schedule = "TO DO"
+            });
         }
     }
 }

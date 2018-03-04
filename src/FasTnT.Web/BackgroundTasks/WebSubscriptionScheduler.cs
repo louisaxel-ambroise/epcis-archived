@@ -9,9 +9,15 @@ using System.Linq;
 using Ninject;
 using System.Web.Hosting;
 using FasTnT.Domain.Utils;
+using System.Web;
+using System.IO;
+using System.Diagnostics;
 
 namespace FasTnT.Web.BackgroundTasks
 {
+    // WebSubscriptionScheduler: runs the subscription thread in the Web context.
+    // WARNING: this code is not suitable for any production environment.
+    // For a regular deployment, subscriptions will need to run in another process than the web interface.
     public class WebSubscriptionScheduler : ISubscriptionScheduler, IRegisteredObject
     {
         public bool IsRunning { get; set; }
@@ -37,7 +43,7 @@ namespace FasTnT.Web.BackgroundTasks
         public void Start()
         {
             IsRunning = true;
-            _thread = Task.Run(async () =>
+            _thread = Task.Run(() =>
             {
                 // Compute next executions at startup
                 foreach (var subscription in _subscriptions) _scheduledExecutions.TryAdd(subscription, subscription.Schedule.GetNextOccurence(SystemContext.Clock.Now));
@@ -49,7 +55,7 @@ namespace FasTnT.Web.BackgroundTasks
                     foreach (var entry in _scheduledExecutions.Where(x => x.Value <= SystemContext.Clock.Now))
                     {
                         _scheduledExecutions.TryUpdate(entry.Key, entry.Key.Schedule.GetNextOccurence(SystemContext.Clock.Now), entry.Value);
-                        await Run(entry.Key).ConfigureAwait(false);
+                        Run(entry.Key);
                     }
                 }
             }, _cancellationToken.Token);
@@ -70,11 +76,23 @@ namespace FasTnT.Web.BackgroundTasks
             }
         }
 
-        private async Task Run(Subscription subscription)
+        private void Run(Subscription subscription)
         {
-            var processor = _kernel.Get<ISubscriptionRunner>();
+            try
+            {
+                // This hack allows to bind the same ISession with Ninject in the rependencies of ISubscriptionRunner.
+                HttpContext.Current = new HttpContext(new HttpRequest("", "http://tempuri.org/fastnt", ""), new HttpResponse(new StringWriter()));
 
-            await processor.Run(subscription).ConfigureAwait(false);
+                var processor = _kernel.Get<ISubscriptionRunner>();
+                processor.Run(subscription.Id);
+
+                HttpContext.Current = null;
+            }
+            catch(Exception ex)
+            {
+                // TODO: do something more intelligent
+                Trace.WriteLine($"Subscription {subscription.Id} callback failed: {ex.Message}");
+            }
         }
 
         private void WaitTillNextExecutionOrNotification()

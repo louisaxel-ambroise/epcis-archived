@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using FasTnT.Web.EpcisServices.Faults;
 using FasTnT.Domain.Utils.Aspects;
-using FasTnT.Domain.Exceptions;
 using FasTnT.Domain.Services.Queries.Performers;
 using FasTnT.Domain.Services.Queries;
 using FasTnT.Domain.Model.Queries;
 using FasTnT.Domain.Services.Formatting;
 using FasTnT.Web.Helpers.Attributes;
 using FasTnT.Domain.Services.Subscriptions;
+using FasTnT.Web.EpcisServices.Mappings;
 
 namespace FasTnT.Web.EpcisServices
 {
@@ -31,63 +29,53 @@ namespace FasTnT.Web.EpcisServices
             _subscriptionManager = subscriptionManager;
         }
 
+        public string GetVendorVersion(EmptyParms request) => Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
+        public string GetStandardVersion(EmptyParms request) => "1.2";
+
+        [SoapFaultHandler]
         [AuthenticateUser]
         public string[] GetQueryNames(EmptyParms request)
         {
-            try
-            {
-                return _queryManager.ListQueryNames().ToArray();
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
-        }
-
-        public string GetVendorVersion(EmptyParms request)
-        {
-            return Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
-        }
-
-        public string GetStandardVersion(EmptyParms request)
-        {
-            return "1.2";
+            return _queryManager.ListQueryNames().ToArray();
         }
 
         [QueryLog]
+        [SoapFaultHandler]
         [AuthenticateUser]
         public virtual QueryResults Poll(PollRequest request)
         {
-            try
-            {
-                var queryParameters = request.parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
-                var results = _queryPerformer.ExecutePollQuery(request.QueryName, queryParameters);
-                var formattedResponse = _eventFormatter.Format(results);
+            var queryParameters = request.parameters?.Select(x => new QueryParam { Name = x.Name, Values = x.Values });
+            var results = _queryPerformer.ExecutePollQuery(request.QueryName, queryParameters);
+            var formattedResponse = _eventFormatter.Format(results);
 
-                return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
-            }
-            catch (EpcisException ex)
-            {
-                throw EpcisFault.Create(ex);
-            }
+            return new QueryResults { QueryName = request.QueryName, EventList = new EventList { Elements = formattedResponse } };
         }
 
+        [SoapFaultHandler]
         [AuthenticateUser]
-        public string[] GetSubscriptionIDs(EmptyParms request)
+        public virtual string[] GetSubscriptionIDs(EmptyParms request)
         {
-            return _subscriptionManager.ListAllSubscriptions().Select(x => x.Id).ToArray();
+            return _subscriptionManager.ListAllSubscriptions().Select(x => x.Name).ToArray();
         }
 
+        [SoapFaultHandler]
         [AuthenticateUser]
-        public void Subscribe(string queryName/*, QueryParams parameters*/, Uri destination, SubscriptionControls controls, string subscriptionId)
+        public virtual SubscribeResult Subscribe(SubscribeRequest request)
         {
-            throw new NotImplementedException();
+            var @params = request.Parameters.MapToParameters();
+            var controls = request.Controls.MapToControls();
+            var schedule = request.Controls?.Schedule.MapToSchedule();
+
+            _subscriptionManager.Subscribe(request.SubscriptionId, request.QueryName, @params, request.Destination, controls, schedule);
+
+            return new SubscribeResult { SubscriptionId = request.SubscriptionId };
         }
 
+        [SoapFaultHandler]
         [AuthenticateUser]
-        public void Unsubscribe(string name)
+        public virtual void Unsubscribe(string subscriptionId)
         {
-            throw new NotImplementedException();
+            _subscriptionManager.Unsubscribe(subscriptionId);
         }
     }
 }

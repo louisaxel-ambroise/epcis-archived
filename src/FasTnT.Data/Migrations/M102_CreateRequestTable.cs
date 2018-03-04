@@ -11,7 +11,8 @@ namespace FasTnT.Data.Migrations
                 .WithColumn("id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("document_time").AsDateTime().NotNullable()
                 .WithColumn("record_time").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentUTCDateTime)
-                .WithColumn("user_id").AsGuid().Nullable();
+                .WithColumn("user_id").AsGuid().Nullable()
+                .WithColumn("subscription_id").AsString(128).Nullable();
         }
     }
 }
