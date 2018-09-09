@@ -1,4 +1,4 @@
-**This project is under active development. The event capture/query may have bugs, and the dashboard is not fully functional.** 
+**This project is not anymore under active development. The event capture/query may have bugs, and the dashboard is not fully functional. See the new [FasTnT](https://github.com/louisaxel-ambroise/fastnt) project for an active project** 
 
 # FasTnT
 FasTnT is a C# implementation of GS1 EPCIS 1.2 standard. [https://www.gs1.org/epcis](https://www.gs1.org/epcis)
